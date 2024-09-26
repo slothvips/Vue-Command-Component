@@ -1,0 +1,35 @@
+{
+  "name": "vue3-command-dialog",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "unocss": "^0.62.4",
+    "vue": "^3.4.37",
+    "vue-pdf-embed": "^2.1.0",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^22.5.4",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "@vitejs/plugin-vue-jsx": "^4.0.1",
+    "@vue/tsconfig": "^0.5.1",
+    "element-plus": "^2.8.2",
+    "typescript": "^5.5.3",
+    "unplugin-vue-router": "^0.10.8",
+    "vant": "^4.9.5",
+    "vite": "^5.4.1",
+    "vue-tsc": "^2.0.29"
+  },
+  "peerDependencies": {
+    "element-plus": "^2.8.2",
+    "vant": "^4.9.5"
+  }
+}
