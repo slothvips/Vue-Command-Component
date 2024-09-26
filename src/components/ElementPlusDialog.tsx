@@ -4,6 +4,8 @@ import { getCurrentInstance, h, ref, defineComponent } from "vue";
 import type { ICommandDialogArrtsProviderConfig } from "./Core";
 import { CommandDialogProvider } from "./Core";
 import { busName2EventName, eventName2BusName } from "./utils";
+import { EVENT_NAME } from "./type";
+
 export type IElementPlusConfig = {
   slots?: {
     [key: string]: () => VNode | VNode[];
@@ -11,17 +13,13 @@ export type IElementPlusConfig = {
   attrs?: Partial<DialogProps & Record<string, any>>;
   title?: string;
   width?: string;
-
   onCancel?: (() => void) | boolean;
   onCancelBtnText?: string;
   onConfirm?: (() => void) | boolean;
   onConfirmBtnText?: string;
-} & Record<string, any> & ICommandDialogArrtsProviderConfig;
+} & ICommandDialogArrtsProviderConfig & Record<string, any>;
 
-export enum EVENT_NAME {
-  confirm = 'confirm',
-  cancel = 'cancel',
-}
+
 
 export const createElementPlusDialog = () => {
   const parentInstance = getCurrentInstance();
@@ -29,7 +27,7 @@ export const createElementPlusDialog = () => {
     locale: { t },
   } = useGlobalComponentSettings('message-box')
 
-  return (ContentVNode: VNode, config: IElementPlusConfig = {}) => {
+  const commandDialog = (ContentVNode: VNode, config: IElementPlusConfig = {}) => {
     const visible = ref<boolean>(true);
 
     const consumer = CommandDialogProvider(
@@ -43,6 +41,9 @@ export const createElementPlusDialog = () => {
             before-close={(done: any) => {
               done()
               consumer.destroy();
+            }}
+            onClosed={() => {
+              consumer.emit(EVENT_NAME.destory)
             }}
             onVnodeMounted={() => {
               Promise.resolve().then(() => {
@@ -98,4 +99,6 @@ export const createElementPlusDialog = () => {
 
     return consumer;
   };
+
+  return commandDialog
 };

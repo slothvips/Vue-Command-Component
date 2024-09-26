@@ -2,6 +2,7 @@ import { PromiseWithResolvers } from "@/utils";
 import type { Component, ComponentInternalInstance, InjectionKey, Ref } from "vue";
 import { defineComponent, inject, nextTick, render, provide } from "vue";
 import { ConsumerEventBus } from "./utils";
+import { EVENT_NAME } from "./type";
 export interface ICommandDialogArrtsProviderConfig {
   provideProps?: Record<string, any>;
   appendTo?: string | HTMLElement;
@@ -72,13 +73,16 @@ export function CommandDialogProvider(parentInstance: ComponentInternalInstance 
   const show = () => {
     config.visible.value = true;
   };
+  const unmount = () => {
+    nextTick(() => {
+      render(null, container);
+      container.remove();
+    });
+  }
   const destroy = (external = false) => {
     if (external) {
+      consumer.once(EVENT_NAME.destory, unmount)
       hide();
-      nextTick(() => {
-        render(null, container);
-        container.remove();
-      });
     } else {
       // 销毁下游的所有弹窗
       consumer.stack.splice(consumer.stackIndex).forEach((c) => c.destroy(true))
