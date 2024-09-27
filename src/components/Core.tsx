@@ -3,6 +3,7 @@ import type { Component, ComponentInternalInstance, InjectionKey, Ref } from "vu
 import { defineComponent, inject, nextTick, render, provide } from "vue";
 import { ConsumerEventBus } from "./utils";
 import { EVENT_NAME } from "./type";
+
 export interface ICommandDialogArrtsProviderConfig {
   provideProps?: Record<string, any>;
   appendTo?: string | HTMLElement;
@@ -53,15 +54,13 @@ export const CommandDialogConsumerInjectKey: InjectionKey<IConsumer> = Symbol("C
 // Stack inject key
 export const CommandDialogStackInjectKey: InjectionKey<IConsumer[]> = Symbol("CommandDialogStackInjectKey");
 
-const eventBus = new ConsumerEventBus()
-// 整理并返回provide链
-const getProvidesChain = (ins: ComponentInternalInstance): any => {
-  const provides = (ins as any).provides
-  return {
-    ...ins.parent ? getProvidesChain(ins.parent) : {},
-    ...provides
-  }
-}
+const eventBus = new ConsumerEventBus();
+
+const getProvidesChain = (ins: ComponentInternalInstance): any => ({
+  ...ins.parent ? getProvidesChain(ins.parent) : {},
+  ...(ins as any).provides
+});
+
 export function CommandDialogProvider(parentInstance: ComponentInternalInstance | null, uiComponentVnode: Component, config: ICommandDialogProviderConfig) {
   const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || document.body;
   const container = document.createElement("div");
@@ -81,13 +80,13 @@ export function CommandDialogProvider(parentInstance: ComponentInternalInstance 
   }
   const destroy = (external = false) => {
     if (external) {
-      consumer.once(EVENT_NAME.destory, unmount)
+      consumer.once(EVENT_NAME.destory, unmount);
       hide();
     } else {
-      // 销毁下游的所有弹窗
-      consumer.stack.splice(consumer.stackIndex).forEach((c) => c.destroy(true))
+      consumer.stack.splice(consumer.stackIndex).forEach((c) => c.destroy(true));
     }
   };
+
   const { promise, resolve, reject } = PromiseWithResolvers();
   const destroyWithResolve = (val: any) => {
     resolve(val);
@@ -100,18 +99,10 @@ export function CommandDialogProvider(parentInstance: ComponentInternalInstance 
 
   const consumer: IConsumer = {
     promise, resolve, reject, destroyWithResolve, destroyWithReject, hide, show, destroy, container,
-    on: (name: string | symbol, callback: Function) => {
-      eventBus.on(consumer, name, callback)
-    },
-    once: (name: string | symbol, callback: Function) => {
-      eventBus.on(consumer, name, callback)
-    },
-    emit: (name: string | symbol, ...args: any) => {
-      eventBus.emit(consumer, name, ...args)
-    },
-    off: (name: string | symbol, callback: Function) => {
-      eventBus.off(consumer, name, callback)
-    },
+    on: (name: string | symbol, callback: Function) => eventBus.on(consumer, name, callback),
+    once: (name: string | symbol, callback: Function) => eventBus.once(consumer, name, callback),
+    emit: (name: string | symbol, ...args: any) => eventBus.emit(consumer, name, ...args),
+    off: (name: string | symbol, callback: Function) => eventBus.off(consumer, name, callback),
     stack: [],
     stackIndex: -1
   };
@@ -145,22 +136,17 @@ export function CommandDialogProvider(parentInstance: ComponentInternalInstance 
   return consumer;
 }
 
-// 获取命令弹窗消费者对象
-export function getCommandDialogConsumer(warn: boolean = true): IConsumer {
+export const getCommandDialogConsumer = (warn: boolean = true): IConsumer => {
   const showWarningMessage = () =>
-    warn &&
-    console.warn(`别调用了欧尼酱~,这会儿没啥实际用途;没有根据CommandDialogInjectKey接收到注入数据.原因可能有两个:
+    warn && console.warn(`别调用了欧尼酱~,这会儿没啥实际用途;没有根据CommandDialogInjectKey接收到注入数据.原因可能有两个:
     1.你可能对getCommandDialogConsumer进行了异步调用或条件调用,请在setup中直接调用.
     2.你没有在命令弹窗内展示该组件,这个时候你一般可以忽略该警告消息.`);
 
-  const consumer = inject<IConsumer>(
+  return inject<IConsumer>(
     CommandDialogConsumerInjectKey,
-    // 有一些组件可能不单应用于命令弹窗内,那么他是一定没有被注入Consumer的.但是有关命令弹窗的相关逻辑可能还是存在于这个组件中,这个时候不应该报错终止程序
     new Proxy({} as IConsumer, {
       get: () => showWarningMessage,
       apply: showWarningMessage,
     })
-  );
-
-  return consumer!;
-}
+  )!;
+};

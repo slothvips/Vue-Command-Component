@@ -19,86 +19,86 @@ export type IElementPlusConfig = {
   onConfirmBtnText?: string;
 } & ICommandDialogArrtsProviderConfig & Record<string, any>;
 
-
-
 export const createElementPlusDialog = () => {
   const parentInstance = getCurrentInstance();
-  const {
-    locale: { t },
-  } = useGlobalComponentSettings('message-box')
+  const { locale: { t } } = useGlobalComponentSettings('message-box')
 
   const commandDialog = (ContentVNode: VNode, config: IElementPlusConfig = {}) => {
-    const visible = ref<boolean>(true);
+    const visible = ref(true);
 
     const consumer = CommandDialogProvider(
       parentInstance,
       h(defineComponent({
         setup() {
           const componentRef = ref()
-          return () => <ElDialog
-            ref={componentRef}
-            modelValue={visible.value}
-            before-close={(done: any) => {
-              done()
-              consumer.destroy();
-            }}
-            onClosed={() => {
-              consumer.emit(EVENT_NAME.destory)
-            }}
-            onVnodeMounted={() => {
-              Promise.resolve().then(() => {
-                consumer.componentRef = componentRef
-              })
-            }}
-            {...{
-              ...(config.title ? { title: config.title } : {}),
-              ...(config.width ? { width: config.width } : {}),
-              ...config.attrs,
-            }}
-          >
-            {{
-              default: () => ContentVNode,
-              footer: () => (
-                <div>
-                  {
-                    config[busName2EventName(EVENT_NAME.cancel)] && <el-button onClick={() => consumer.emit(EVENT_NAME.cancel)}>{config.onCancelBtnText || t('el.messagebox.cancel')}</el-button>
-                  }
-                  {
-                    config[busName2EventName(EVENT_NAME.confirm)] && <el-button type="primary" onClick={() => consumer.emit(EVENT_NAME.confirm)}>
-                      {config.onConfirmBtnText || t('el.messagebox.confirm')}
-                    </el-button>
-                  }
-                </div>
-              ),
-              ...config.slots,
-            }}
-          </ElDialog >
+
+          const handleClose = (done: () => void) => {
+            done();
+            consumer.destroy();
+          };
+
+          const handleClosed = () => {
+            consumer.emit(EVENT_NAME.destory);
+          };
+
+          const handleMounted = () => {
+            Promise.resolve().then(() => {
+              consumer.componentRef = componentRef;
+            });
+          };
+
+          return () => (
+            <ElDialog
+              ref={componentRef}
+              modelValue={visible.value}
+              beforeClose={handleClose}
+              onClosed={handleClosed}
+              onVnodeMounted={handleMounted}
+              {...{
+                title: config.title,
+                width: config.width,
+                ...config.attrs,
+              }}
+            >
+              {{
+                default: () => ContentVNode,
+                footer: () => (
+                  <div>
+                    {config[busName2EventName(EVENT_NAME.cancel)] && (
+                      <el-button onClick={() => consumer.emit(EVENT_NAME.cancel)}>
+                        {config.onCancelBtnText || t('el.messagebox.cancel')}
+                      </el-button>
+                    )}
+                    {config[busName2EventName(EVENT_NAME.confirm)] && (
+                      <el-button type="primary" onClick={() => consumer.emit(EVENT_NAME.confirm)}>
+                        {config.onConfirmBtnText || t('el.messagebox.confirm')}
+                      </el-button>
+                    )}
+                  </div>
+                ),
+                ...config.slots,
+              }}
+            </ElDialog>
+          )
         }
       })),
       {
-        provideProps: {
-          ...(config.provideProps || {}),
-        },
+        provideProps: config.provideProps || {},
         appendTo: config.appendTo,
         visible,
       }
     );
 
-    // 增值功能
-    const onEvents = Object.entries(config).reduce<[string, any][]>((acc, [key, fn]) => {
-      if (key.startsWith('on')) {
-        const bindKeyName = eventName2BusName(key)
-        return [
-          ...acc,
-          [bindKeyName, fn]
-        ]
-      }
-      return acc
-    }, [])
-    onEvents.forEach(([key, fn]) => typeof fn === 'function' && consumer.on(key, fn))
+    // 处理事件绑定
+    Object.entries(config)
+      .filter(([key, fn]) => key.startsWith('on') && typeof fn === 'function')
+      .forEach(([key, fn]) => {
+        const bindKeyName = eventName2BusName(key);
+        consumer.on(bindKeyName, fn as Function);
+      });
 
     return consumer;
   };
 
-  return commandDialog
+  return commandDialog;
 };
