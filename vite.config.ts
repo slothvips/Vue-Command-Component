@@ -3,10 +3,17 @@ import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import VueRouter from "unplugin-vue-router/vite";
+import dts from "vite-plugin-dts";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueJsx(), VueRouter()],
+  plugins: [
+    vue(),
+    vueJsx(),
+    VueRouter(),
+    dts({
+      tsconfigPath: "./tsconfig.types.json",
+    }),
+  ],
   server: {
     port: 7263,
   },
@@ -23,11 +30,12 @@ export default defineConfig({
     },
     minify: "esbuild",
     rollupOptions: {
-      external: ["vue", "element-plus", "vant"],
-
+      external: Object.keys(require("./package.json").peerDependencies || {}),
       output: {
         globals: {
           vue: "Vue",
+          "element-plus": "ElementPlus",
+          vant: "Vant",
         },
       },
     },

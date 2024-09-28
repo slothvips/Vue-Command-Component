@@ -40,7 +40,7 @@ export class ConsumerEventBus {
     if (events.size === 0) {
       console.warn(`${consumer}未注册${String(name)}事件`);
     }
-    events.forEach(callback => callback(...args));
+    events.forEach((callback) => callback(...args));
   }
 
   off(consumer: IConsumer, name: string | symbol, callback: Function): void {
@@ -50,5 +50,14 @@ export class ConsumerEventBus {
 
 export const eventName2BusName = (name = ""): string => name.slice(2).toLowerCase();
 
-export const busName2EventName = (name = ""): string => 
-  `on${name.charAt(0).toUpperCase()}${name.slice(1)}`;
+export const busName2EventName = (name = ""): string => `on${name.charAt(0).toUpperCase()}${name.slice(1)}`;
+
+export const PromiseWithResolvers = () => {
+  let resolve: (value: unknown) => void = () => void 0;
+  let reject: (reason?: any) => void = () => void 0;
+  const promise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+  return { promise, resolve, reject };
+};

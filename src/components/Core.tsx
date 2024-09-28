@@ -1,7 +1,6 @@
-import { PromiseWithResolvers } from "@/utils";
 import type { Component, ComponentInternalInstance, InjectionKey, Ref } from "vue";
 import { defineComponent, inject, nextTick, render, provide } from "vue";
-import { ConsumerEventBus } from "./utils";
+import { ConsumerEventBus, PromiseWithResolvers } from "./utils";
 import { EVENT_NAME } from "./type";
 
 export interface ICommandDialogArrtsProviderConfig {
