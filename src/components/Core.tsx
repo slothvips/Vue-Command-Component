@@ -39,8 +39,8 @@ export interface IConsumer {
   once: (name: string | symbol, callback: Function) => void;
   /** 发布 */
   emit: (name: string | symbol, ...args: any) => void;
-  /** 一般是ui库的弹窗实例,但是具体是什么要看你的实现 */
-  componentRef?: Ref<any>;
+  /** 一般建议赋值为UI库的弹窗实例实例Ref */
+  componentRef?: Ref<any> | undefined;
   /** 弹窗挂载的html元素 */
   container: HTMLDivElement
   /** 弹窗嵌套堆栈 */
@@ -104,7 +104,8 @@ export function CommandDialogProvider(parentInstance: ComponentInternalInstance 
     emit: (name: string | symbol, ...args: any) => eventBus.emit(consumer, name, ...args),
     off: (name: string | symbol, callback: Function) => eventBus.off(consumer, name, callback),
     stack: [],
-    stackIndex: -1
+    stackIndex: -1,
+    componentRef: void 0
   };
 
   const CommandDialogProviderComponent = defineComponent({
