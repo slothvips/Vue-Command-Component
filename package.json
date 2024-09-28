@@ -1,20 +1,21 @@
 {
   "name": "vue3-command-dialog",
-  "private": false,
-  "version": "0.0.1",
+  "private": true,
+  "version": "0.0.2",
   "type": "module",
+  "main": "dist/index.umd.cjs",
+  "module": "dist/index.js",
+  "types": "dist/src/components/index.d.ts",
   "files": [
     "dist"
   ],
-  "main": "./dist/index.umd.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/components/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "preview": "vite preview",
-    "build": "vue-tsc -b && vite build"
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
     "@types/node": "^22.5.4",
     "@vitejs/plugin-vue": "^5.1.2",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
@@ -26,6 +27,7 @@
     "vant": "^4.9.5",
     "vite": "^5.4.1",
     "vite-plugin-dts": "^4.2.2",
+    "vue": "^3.4.37",
     "vue-router": "^4.4.5",
     "vue-tsc": "^2.0.29"
   },
