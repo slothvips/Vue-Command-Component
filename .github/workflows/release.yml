@@ -16,10 +16,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release && npm run deploy
+        run: pnpm semantic-release && pnpm run deploy
