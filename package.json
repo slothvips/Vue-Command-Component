@@ -1,6 +1,6 @@
 {
   "name": "vue3-command-dialog",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "type": "module",
   "main": "dist/index.umd.cjs",
   "module": "dist/index.js",
