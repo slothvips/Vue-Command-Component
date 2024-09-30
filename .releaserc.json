@@ -13,6 +13,5 @@
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]
-  ],
-  "repositoryUrl": "https://github.com/pandavips/Vue3-Command-Dialog.git"
+  ]
 }
