@@ -11,7 +11,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "publish:npm": "npm run build && npm publish && npm run deploy",
+    "build-example-page": "vue-tsc -b && vite build -c vite.config.example-page.ts",
+    "deploy": "npm run build-example-page && bash deploy.sh",
+    "preview": "vite preview",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
@@ -28,7 +32,10 @@
     "vite-plugin-dts": "^4.2.2",
     "vue": "^3.4.37",
     "vue-router": "^4.4.5",
-    "vue-tsc": "^2.0.29"
+    "vue-tsc": "^2.0.29",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^21.0.1"
   },
   "peerDependencies": {
     "element-plus": "^2.8.2",

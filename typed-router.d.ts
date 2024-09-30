@@ -23,5 +23,6 @@ declare module 'vue-router/auto-routes' {
     '/example/base/': RouteRecordInfo<'/example/base/', '/example/base', Record<never, never>, Record<never, never>>,
     '/example/base/compatible-native-attributes': RouteRecordInfo<'/example/base/compatible-native-attributes', '/example/base/compatible-native-attributes', Record<never, never>, Record<never, never>>,
     '/example/base/components/Content': RouteRecordInfo<'/example/base/components/Content', '/example/base/components/Content', Record<never, never>, Record<never, never>>,
+    '/example/base/confirm': RouteRecordInfo<'/example/base/confirm', '/example/base/confirm', Record<never, never>, Record<never, never>>,
   }
 }
