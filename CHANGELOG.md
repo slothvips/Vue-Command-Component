@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.0.4...v1.0.5) (2024-10-01)
+
+
+### Bug Fixes
+
+* readme install shell ([e50cab6](https://github.com/pandavips/Vue3-Command-Dialog/commit/e50cab6e5c8022fd0cc9864bd27be51bb4ecf295))
+
 ## [1.0.4](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.0.3...v1.0.4) (2024-10-01)
 
 
