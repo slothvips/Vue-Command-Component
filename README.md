@@ -16,7 +16,7 @@
 
 您可以通过以下链接查看在线示例(以 element-plus Dialog 为例)：
 
-[Example](https://pandavips.github.io/Vue3-Command-Dialog/#/Vue3-Command-Dialog/base)
+[Example](https://pandavips.github.io/Vue3-Command-Dialog/#/example/base)
 
 ## 你如何适配自己 UI 库组件
 
