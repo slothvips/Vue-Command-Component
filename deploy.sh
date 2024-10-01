@@ -11,7 +11,7 @@ cd dist-example-page
 git init
 
 # 添加所有文件到暂存区
-git config user.name "panda"
+git config user.name "pandavips"
 git config user.email "18512857416@163.com"
 git add -A
 
@@ -19,7 +19,8 @@ git add -A
 git commit -m "部署更新 $(date)"
 
 # 添加远程仓库
-git remote add origin https://github.com/pandavips/Vue3-Command-Dialog.git
+git remote add origin git@github.com:pandavips/Vue3-Command-Dialog.git
+
 
 # 强制推送到 gh-pages 分支
 git push -f origin master:gh-pages
