@@ -88,15 +88,19 @@ CommandDialogProvider 同时也会返回一个`consumer`对象,以供弹窗外�
 
 弹窗内部组件获取 `consumer` 对象的方式为调用`getCommandDialogConsumer`, 该函数会返回一个 consumer 对象,它一样只能在 setup 顶部直接调用,不可条件调用或者异步调用.
 
-2.剩余的就是传递参数的介绍了,
+2.剩余的就是`CommandDialogProvider`函数参数的介绍了,
 
 ```ts
+parentInstance: ComponentInternalInstance | null,
+uiComponentVnode: Component,
+config: {
   // 你大可直接使用provide注入,内部一样能接收到,但是你想实现更私有的作用域,可以将需要注入的数据放置在这个对象下
   provideProps?: Record<string, any>;
   // 挂载点,默认body
   appendTo?: string | HTMLElement;
   // 内部维护的响应式变量,你需要完整的将其传递进去,不要将响应式变量解包
   visible: Ref<boolean>;
+}
 ```
 
 其余并不复杂,更多查看 element-plus 适配代码:/src/components/ElementPlusDialog.tsx

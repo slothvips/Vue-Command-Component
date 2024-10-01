@@ -1,5 +1,11 @@
 # Vue 3 Universal Imperative Dialog Solution
 
+## Chinese Documentation
+
+You can view the Chinese documentation through the following link:
+
+[中文文档](./README.md)
+
 Frontend developers have long suffered from dialog development. The development experience of dialogs has always been poor, especially with issues like nested dialogs, state management, destruction and reconstruction, which are extremely frustrating. Therefore, I decided to implement a universal imperative dialog solution to address these pain points. This is a universal imperative dialog solution designed specifically for Vue 3. It provides a flexible and extensible way to manage and control dialogs in applications. Although it's called a dialog, it's not limited to dialogs; theoretically, any component can be adapted.
 
 We won't compare the pros and cons of declarative dialogs and imperative dialogs here. If you've already explored imperative dialogs and come across this, you may have already experienced the tedium and pain of declarative dialog development firsthand. So why not try this library? It might bring you a different experience.
@@ -82,15 +88,19 @@ CommandDialogProvider also returns a `consumer` object for external use of the d
 
 The internal dialog component obtains the `consumer` object by calling `getCommandDialogConsumer`. This function will return a consumer object, and it can only be called directly at the top of setup, not conditionally or asynchronously.
 
-2. The rest is the introduction of parameter passing,
+2. The rest is the introduction of parameter passing for the `CommandDialogProvider` function:
 
 ```ts
+parentInstance: ComponentInternalInstance | null,
+uiComponentVnode: Component,
+config: {
   // You can directly use provide for injection, it can be received internally the same way, but if you want to implement a more private scope, you can place the data to be injected under this object
   provideProps?: Record<string, any>;
   // Mount point, default is body
   appendTo?: string | HTMLElement;
   // Internally maintained reactive variable, you need to pass it in completely, don't unpack the reactive variable
   visible: Ref<boolean>;
+}
 ```
 
 The rest is not complicated. For more details, check the element-plus adaptation code: /src/components/ElementPlusDialog.tsx
