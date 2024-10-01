@@ -1,34 +1,36 @@
-name: Release
+name: 发布和部署
 on:
   push:
     branches:
       - main
 jobs:
-  release:
-    name: Release
+  release-and-deploy:
+    name: 发布和部署
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 检出代码
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Setup Node.js
+      - name: 设置 Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-      - name: Setup pnpm
+      - name: 设置 pnpm
         uses: pnpm/action-setup@v2
         with:
           version: latest
-      - name: Install dependencies
+      - name: 安装依赖
         run: pnpm install --frozen-lockfile
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
+      - name: 构建静态页面并部署
+        run: pnpm run build-example-page
+      - name: 部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-      - name: Release
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist-example-page
+      - name: 发布
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm semantic-release && pnpm run deploy
+        run: pnpm semantic-release
