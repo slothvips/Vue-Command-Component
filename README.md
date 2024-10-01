@@ -12,6 +12,16 @@
 - 开箱即用,已实现与 Element Plus 的 Dialog 组件以及 vant 的 Popup 组件的适配,也可以自行拓展以便更贴切你的实际业务.
 - 命令式组件核心逻辑解耦,可自行适配不同的 UI 库目标组件
 
+## 安装
+
+```shell
+npm i vue3-command-dialog
+# 或者
+pnpm i vue3-command-dialog
+# 或者
+yarn add vue3-command-dialog
+```
+
 ## 在线示例
 
 您可以通过以下链接查看在线示例(以 element-plus Dialog 为例)：
