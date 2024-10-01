@@ -1,6 +1,6 @@
 import type { Component, ComponentInternalInstance, InjectionKey, Ref } from "vue";
 import { defineComponent, inject, nextTick, render, provide } from "vue";
-import { ConsumerEventBus, PromiseWithResolvers } from "./utils";
+import { ConsumerEventBus, PromiseWithResolvers, type IOnConfig } from "./utils";
 import { EVENT_NAME } from "./type";
 
 export interface ICommandDialogArrtsProviderConfig {
@@ -24,8 +24,10 @@ export interface IConsumer {
   destroyWithResolve: (val?: any) => void;
   /** 弹窗销毁,并拒绝promise */
   destroyWithReject: (reason?: any) => void;
-  /** 弹窗销毁,不处理promise */
+  /** 弹窗销毁,但是不继续推进promise的状态改变 */
   destroy: (external?: boolean) => void;
+  /** 弹窗是否可见响应式变量,虽然已经提供了hide以及show方法不需要通过该属性来控制弹窗的显示与隐藏,但是为了方便一些特殊场景,还是提供了该属性,比如你需要watch这个属性来做一些事情 */
+  visible: Ref<boolean>,
   /** 隐藏 */
   hide: () => void;
   /** 显示 */
@@ -33,7 +35,7 @@ export interface IConsumer {
   /** 订阅取消 */
   off: (name: string | symbol, callback: Function) => void;
   /** 订阅 */
-  on: (name: string | symbol, callback: Function) => void;
+  on: (name: string | symbol, callback: Function, config?: IOnConfig) => void;
   /** 单次订阅 */
   once: (name: string | symbol, callback: Function) => void;
   /** 发布 */
@@ -60,7 +62,7 @@ const getProvidesChain = (ins: ComponentInternalInstance): any => ({
   ...(ins as any).provides
 });
 
-export function CommandDialogProvider(parentInstance: ComponentInternalInstance | null, uiComponentVnode: Component, config: ICommandDialogProviderConfig) {
+export function CommandDialogProvider(parentInstance: ComponentInternalInstance | null, uiComponentVnode: Component, config: ICommandDialogProviderConfig): IConsumer {
   const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || document.body;
   const container = document.createElement("div");
   appendToElement.appendChild(container);
@@ -79,7 +81,8 @@ export function CommandDialogProvider(parentInstance: ComponentInternalInstance 
   }
   const destroy = (external = false) => {
     if (external) {
-      consumer.once(EVENT_NAME.destory, unmount);
+      // 这里的事件是为了完整的关闭动画展示,如果关闭时没有触发该事件,那么将永远不会执行卸载操作,所以加入延时立即调用,保证最终一定会执行卸载操作
+      consumer.on(EVENT_NAME.destory, unmount, { once: true, callAfterDelay: 3000 });
       hide();
     } else {
       consumer.stack.splice(consumer.stackIndex).forEach((c) => c.destroy(true));
@@ -98,7 +101,8 @@ export function CommandDialogProvider(parentInstance: ComponentInternalInstance 
 
   const consumer: IConsumer = {
     promise, resolve, reject, destroyWithResolve, destroyWithReject, hide, show, destroy, container,
-    on: (name: string | symbol, callback: Function) => eventBus.on(consumer, name, callback),
+    visible: config.visible,
+    on: (name: string | symbol, callback: Function, config: IOnConfig = {}) => eventBus.on(consumer, name, callback, config),
     once: (name: string | symbol, callback: Function) => eventBus.once(consumer, name, callback),
     emit: (name: string | symbol, ...args: any) => eventBus.emit(consumer, name, ...args),
     off: (name: string | symbol, callback: Function) => eventBus.off(consumer, name, callback),

@@ -1,5 +1,11 @@
 import type { IConsumer } from "./Core";
 
+export interface IOnConfig {
+  once?: boolean;
+  // 延迟执行时间后,即使事件没有触发也立即调用
+  callAfterDelay?: number;
+}
+
 // 基于命令弹窗消费对象的事件注册中心
 export class ConsumerEventBus {
   private map = new WeakMap<IConsumer, Map<string | symbol, Set<Function>>>();
@@ -23,23 +29,31 @@ export class ConsumerEventBus {
     return events;
   }
 
-  on(consumer: IConsumer, name: string | symbol, callback: Function): void {
-    this.getEventsByConsumer(consumer, name).add(callback);
+  on(consumer: IConsumer, name: string | symbol, callback: Function, config: IOnConfig = {}): void {
+    const events = this.getEventsByConsumer(consumer, name);
+    let finalCallback = callback;
+    if (config.once) {
+      finalCallback = (...args: any[]) => {
+        callback(...args);
+        this.off(consumer, name, finalCallback);
+      };
+    }
+    events.add(finalCallback);
+    config.callAfterDelay !== void 0 &&
+      setTimeout(() => {
+        finalCallback();
+      }, config.callAfterDelay || 0);
   }
 
   once(consumer: IConsumer, name: string | symbol, callback: Function): void {
-    const onceCallback = (...args: any[]) => {
-      callback(...args);
-      this.off(consumer, name, onceCallback);
-    };
-    this.on(consumer, name, onceCallback);
+    this.on(consumer, name, callback, { once: true });
   }
 
   emit(consumer: IConsumer, name: string | symbol, ...args: any[]): void {
     const events = this.getEventsByConsumer(consumer, name);
-    if (events.size === 0) {
-      console.warn(`${consumer}未注册${String(name)}事件`);
-    }
+    // if (events.size === 0) {
+    // console.warn(`${consumer}未注册${String(name)}事件`);
+    // }
     events.forEach((callback) => callback(...args));
   }
 

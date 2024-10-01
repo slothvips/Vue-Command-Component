@@ -1,9 +1,8 @@
 <script lang="tsx" setup>
-import { provide } from "vue";
-import { RouterView } from "vue-router";
+import { provide, computed } from "vue";
+import { RouterView, useRoute } from "vue-router";
 provide("Layout", "来自Layout的🩷");
 
-// 基础用法
 const baseExampleRoutes = [
   {
     path: "/example/base",
@@ -17,32 +16,43 @@ const baseExampleRoutes = [
     path: "/example/base/compatible-native-attributes",
     text: "完美兼容组件库属性",
   },
+  {
+    path: "/example/base/confirm",
+    text: "确认/取消弹窗",
+  },
 ];
 
-// 基础用法
 const advanceExampleRoutes = [
   {
     path: "/example/advance/promise",
     text: "利用promise特性",
   },
+  {
+    path: "/example/advance/communication",
+    text: "promise方式通知外部组件",
+  },
 ];
+
+const $route = useRoute();
+
+const activeExampleTitle = computed(() => {
+  return baseExampleRoutes.find((e) => e.path === $route.fullPath)?.text || advanceExampleRoutes.find((e) => e.path === $route.fullPath)?.text;
+  });
 </script>
 
 <template>
-  <h3>基础用法</h3>
-  <el-row>
-    <el-col v-for="e in baseExampleRoutes" :span="24 / baseExampleRoutes.length">
-      <el-button type="primary" @click="$router.push(e.path)">{{ e.text }}</el-button>
-    </el-col>
-  </el-row>
+  <h3>
+    点击这里查看👉
+    <el-link href="https://github.com/pandavips/Vue3-Command-Dialog/tree/main/src/pages/example"> 示例代码 </el-link>
+  </h3>
+
   <el-divider />
-  <h3>进阶用法</h3>
-  <el-row>
-    <el-col v-for="e in advanceExampleRoutes" :span="24 / advanceExampleRoutes.length">
-      <el-button type="primary" @click="$router.push(e.path)">{{ e.text }}</el-button>
-    </el-col>
-  </el-row>
+  <el-button v-for="e in baseExampleRoutes" type="primary" @click="$router.push(e.path)">{{ e.text }}</el-button>
   <el-divider />
+  <el-button v-for="e in advanceExampleRoutes" type="primary" @click="$router.push(e.path)">{{ e.text }}</el-button>
+  <el-divider />
+  <h3>当前示例: {{ activeExampleTitle }}</h3>
+
   <RouterView />
 </template>
 

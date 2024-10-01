@@ -27,28 +27,22 @@ const openDialog2 = () => {
   });
 };
 
+const CommandDialog2 = createElementPlusDialog(false);
 const openDialog3 = () => {
-  const { destroyWithResolve, destroyWithReject } = CommandDialog(<Content />, {
-    title: "confirm dialog",
-    // onCancel: true,
-    onCancel: () => {
-      destroyWithReject("cancel");
-      ElMessage.error("cancel");
-    },
-    // onConfirm: true,
-    onConfirm: () => {
-      destroyWithResolve("confirm");
-      ElMessage.success("confirm");
-    },
+  const { show } = CommandDialog2(<Content />, {
+    title: "三秒后打开",
   });
+  setTimeout(() => {
+    show();
+  }, 3000);
 };
 </script>
 
 <template>
   <div>
     <el-button type="primary" @click="openDialog">打开弹窗</el-button>
-    <el-button type="success" @click="openDialog2">弹窗外部控制</el-button>
-    <el-button type="success" @click="openDialog3">打开确认弹窗</el-button>
+    <el-button type="success" @click="openDialog2">弹窗外部控制显示/隐藏/销毁</el-button>
+    <el-button type="success" @click="openDialog3">三秒后打开</el-button>
   </div>
 </template>
 
