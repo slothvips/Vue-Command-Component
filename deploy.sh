@@ -6,10 +6,13 @@ npm run build-example-page
 # 进入 dist 目录
 cd dist-example-page
 
+
 # 初始化 git 仓库
 git init
 
 # 添加所有文件到暂存区
+git config user.name "panda"
+git config user.email "18512857416@163.com"
 git add -A
 
 # 提交更改
