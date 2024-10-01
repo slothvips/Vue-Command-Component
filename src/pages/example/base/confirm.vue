@@ -23,7 +23,7 @@ const Content = defineComponent({
   },
 });
 
-const openDialog = (config) => {
+const openDialog = () => {
   CommandDialog(<Content />, {
     title: "请确认",
     onConfirm: true,
@@ -33,7 +33,7 @@ const openDialog = (config) => {
   });
 };
 
-const openDialog2 = (config) => {
+const openDialog2 = () => {
   const consumer = CommandDialog(<Content no-bind />, {
     title: "请确认",
     onConfirm: () => {

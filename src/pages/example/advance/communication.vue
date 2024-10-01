@@ -11,7 +11,7 @@ const Content = defineComponent({
     },
   },
   setup(props) {
-    const { destroyWithResolve } = getCommandDialogConsumer();
+    const { destroyWithResolve, destroyWithReject } = getCommandDialogConsumer();
     const form = reactive({
       name: "",
       region: "",

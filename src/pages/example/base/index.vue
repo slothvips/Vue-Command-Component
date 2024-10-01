@@ -2,7 +2,6 @@
 import { createElementPlusDialog } from "@/components/index";
 import Content from "./components/Content.vue";
 import { provide } from "vue";
-import { ElMessage } from "element-plus";
 
 provide("base", "来自base的🩷");
 
@@ -41,7 +40,7 @@ const openDialog3 = () => {
 <template>
   <div>
     <el-button type="primary" @click="openDialog">打开弹窗</el-button>
-    <el-button type="success" @click="openDialog2">弹窗外部控制显示/隐藏/销毁</el-button>
+    <el-button type="success" @click="openDialog2">弹窗外部控制显示/隐藏/销毁(过程中弹窗会自动显示关闭)</el-button>
     <el-button type="success" @click="openDialog3">三秒后打开</el-button>
   </div>
 </template>
