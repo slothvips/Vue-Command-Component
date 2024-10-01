@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.0.5...v1.0.6) (2024-10-01)
+
+
+### Bug Fixes
+
+* 指定项目仓库地址 ([3be28f5](https://github.com/pandavips/Vue3-Command-Dialog/commit/3be28f5bbe2f02c9e92e718023aeb197d8343231))
+
 ## [1.0.5](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.0.4...v1.0.5) (2024-10-01)
 
 
