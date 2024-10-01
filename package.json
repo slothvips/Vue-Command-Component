@@ -5,9 +5,6 @@
   "main": "dist/index.umd.cjs",
   "module": "dist/index.js",
   "types": "dist/src/components/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/pandavips/Vue3-Command-Dialog"
@@ -22,12 +19,15 @@
     "semantic-release": "semantic-release"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^22.5.4",
     "@vitejs/plugin-vue": "^5.1.2",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "@vue/tsconfig": "^0.5.1",
     "element-plus": "^2.8.2",
+    "semantic-release": "^21.0.1",
     "typescript": "^5.5.3",
     "unocss": "^0.62.4",
     "unplugin-vue-router": "^0.10.8",
@@ -36,14 +36,14 @@
     "vite-plugin-dts": "^4.2.2",
     "vue": "^3.4.37",
     "vue-router": "^4.4.5",
-    "vue-tsc": "^2.0.29",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "semantic-release": "^21.0.1"
+    "vue-tsc": "^2.0.29"
   },
   "peerDependencies": {
     "element-plus": "^2.8.2",
     "vant": "^4.9.5",
     "vue": "^3.4.37"
+  },
+  "dependencies": {
+    "vue3-command-dialog": "^1.0.7"
   }
 }
