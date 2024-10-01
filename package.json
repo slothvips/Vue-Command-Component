@@ -26,22 +26,22 @@
     "@vitejs/plugin-vue": "^5.1.2",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "@vue/tsconfig": "^0.5.1",
-    "element-plus": "*",
+    "element-plus": "~2",
     "semantic-release": "^21.0.1",
     "typescript": "^5.5.3",
     "unocss": "^0.62.4",
     "unplugin-vue-router": "^0.10.8",
-    "vant": "*",
+    "vant": "~4",
     "vite": "^5.4.1",
     "vite-plugin-dts": "^4.2.2",
-    "vue": "*",
+    "vue": "~3",
     "vue-router": "^4.4.5",
     "vue-tsc": "^2.0.29"
   },
   "peerDependencies": {
-    "element-plus": "*",
-    "vant": "*",
-    "vue": "*"
+    "element-plus": "~2",
+    "vant": "~4",
+    "vue": "~3"
   },
   "dependencies": {
     "vue3-command-dialog": "^1.0.8"
