@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { getCommandDialogConsumer } from "@/components";
+import { getCommandDialogConsumer } from "vue3-command-dialog";
 import Base from "../index.vue";
 import { getCurrentInstance, inject, provide, ref } from "vue";
 import { useRoute } from "vue-router";

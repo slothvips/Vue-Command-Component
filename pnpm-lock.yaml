@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       vue3-command-dialog:
-        specifier: ^1.0.7
-        version: 1.0.7(element-plus@2.8.2(vue@3.5.3(typescript@5.5.4)))(vant@4.9.5(vue@3.5.3(typescript@5.5.4)))(vue@3.5.3(typescript@5.5.4))
+        specifier: ^1.0.8
+        version: 1.0.8(element-plus@2.8.2(vue@3.5.3(typescript@5.5.4)))(vant@4.9.5(vue@3.5.3(typescript@5.5.4)))(vue@3.5.3(typescript@5.5.4))
     devDependencies:
       '@semantic-release/changelog':
         specifier: ^6.0.3
@@ -2726,8 +2726,8 @@ packages:
     peerDependencies:
       typescript: '>=5.0.0'
 
-  vue3-command-dialog@1.0.7:
-    resolution: {integrity: sha512-v6MkoR+krrJ65054Ar23zQ2cxGW0dJrd01AoxhKM3jiQyXqzfGCUtz3JYQRVky+XTrI76Scq1Q6CwRTlpdpgEA==}
+  vue3-command-dialog@1.0.8:
+    resolution: {integrity: sha512-/JzjFUsVfUuGVjDxvZAZlNh4aSNmL9AA1FnfUgYp9BrOFV0o/ELvHhtiNqPMFTwTUec4W35/xpsTrekIE78nWA==}
     peerDependencies:
       element-plus: ^2.8.2
       vant: ^4.9.5
@@ -5489,7 +5489,7 @@ snapshots:
       semver: 7.6.3
       typescript: 5.5.4
 
-  vue3-command-dialog@1.0.7(element-plus@2.8.2(vue@3.5.3(typescript@5.5.4)))(vant@4.9.5(vue@3.5.3(typescript@5.5.4)))(vue@3.5.3(typescript@5.5.4)):
+  vue3-command-dialog@1.0.8(element-plus@2.8.2(vue@3.5.3(typescript@5.5.4)))(vant@4.9.5(vue@3.5.3(typescript@5.5.4)))(vue@3.5.3(typescript@5.5.4)):
     dependencies:
       element-plus: 2.8.2(vue@3.5.3(typescript@5.5.4))
       vant: 4.9.5(vue@3.5.3(typescript@5.5.4))

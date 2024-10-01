@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { createElementPlusDialog } from "@/components/index";
+import { createElementPlusDialog } from "vue3-command-dialog";
 import Content from "./components/Content.vue";
 import { provide } from "vue";
 

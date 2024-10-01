@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { createElementPlusDialog } from "@/components/index";
+import { createElementPlusDialog } from "vue3-command-dialog";
 import { ref, h, defineComponent } from "vue";
 const CommandDialog = createElementPlusDialog();
 

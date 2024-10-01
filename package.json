@@ -44,6 +44,6 @@
     "vue": "^3.4.37"
   },
   "dependencies": {
-    "vue3-command-dialog": "^1.0.7"
+    "vue3-command-dialog": "^1.0.8"
   }
 }

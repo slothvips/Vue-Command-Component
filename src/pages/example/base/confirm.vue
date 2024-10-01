@@ -1,7 +1,6 @@
 <script lang="tsx" setup>
-import { createElementPlusDialog, getCommandDialogConsumer, EVENT_NAME } from "@/components/index";
-import { defineComponent, ref, reactive } from "vue";
-import { ElMessage } from "element-plus";
+import { createElementPlusDialog, getCommandDialogConsumer, EVENT_NAME } from "vue3-command-dialog";
+import { defineComponent } from "vue";
 
 const CommandDialog = createElementPlusDialog();
 
