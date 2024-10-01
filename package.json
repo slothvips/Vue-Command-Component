@@ -8,6 +8,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pandavips/Vue3-Command-Dialog"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
