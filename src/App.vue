@@ -4,7 +4,7 @@ import en from "element-plus/es/locale/lang/en";
 import { provide, ref, computed } from "vue";
 import Layout from "./Layout.vue";
 
-provide("App", "来自App的🩷");
+provide("App", "来自App的🩷~");
 
 const language = ref("zh-cn");
 const locale = computed(() => (language.value === "zh-cn" ? zhCn : en));
