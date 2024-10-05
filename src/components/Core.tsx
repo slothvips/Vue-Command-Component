@@ -148,9 +148,9 @@ export const getCommandDialogConsumer = (warn: boolean = true): IConsumer => {
 
   return inject<IConsumer>(
     CommandDialogConsumerInjectKey,
-    new Proxy({} as IConsumer, {
+    () => new Proxy({} as IConsumer, {
       get: () => showWarningMessage,
       apply: showWarningMessage,
-    })
+    }), true
   )!;
 };
