@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.0.11...v1.1.0) (2024-10-09)
+
+
+### Bug Fixes
+
+* ~ ([81f4242](https://github.com/pandavips/Vue3-Command-Dialog/commit/81f4242487a61215ab8a719537f86a4d3715b3a7))
+
+
+### Features
+
+* 增加vant popup的适配 ([ed3fa0c](https://github.com/pandavips/Vue3-Command-Dialog/commit/ed3fa0c2848b07c5d058b2b910408fdce90cd624))
+
 ## [1.0.11](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.0.10...v1.0.11) (2024-10-01)
 
 
