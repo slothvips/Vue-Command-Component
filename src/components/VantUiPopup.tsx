@@ -6,6 +6,7 @@ import { getCurrentInstance, h, ref, defineComponent } from "vue";
 import type { ICommandDialogArrtsProviderConfig } from "./Core";
 import { CommandDialogProvider } from "./Core";
 import { EVENT_NAME } from "./type";
+import { merge } from "lodash-es";
 
 export type IVantUiConfig = {
   // 目标ui库目标组件的插槽
@@ -94,17 +95,14 @@ export const createVantUiPopup = (immediately = true) => {
 export const createVantUiPopupOnBottom = (immediately = true) => {
   const CommandPopup = createVantUiPopup(immediately)
   return (ContentVNode: VNode, config: IVantUiConfig = {}) => {
-    if (!config.attrs) {
-      config.attrs = {
-
+    merge(config, {
+      attrs: {
+        position: 'bottom',
+        style: {
+          width: '100vw'
+        }
       }
-    }
-    if (!config.attrs.style) {
-      config.attrs.style = {}
-    }
-
-    config.attrs.position = 'bottom'
-    config.attrs.style.width = '100vw'
+    })
     return CommandPopup(ContentVNode, config)
   }
 }
@@ -128,18 +126,16 @@ export const createVantUiTitlePopup = (immediately = true) => {
 // 标题+底部
 export const createVantUiTitlePopupOnBottom = (immediately = true) => {
   const CommandPopup = createVantUiTitlePopup(immediately)
+
   return (ContentVNode: VNode, config: IVantUiConfig = {}) => {
-    if (!config.attrs) {
-      config.attrs = {
-
+    merge(config, {
+      attrs: {
+        position: 'bottom',
+        style: {
+          width: '100vw'
+        }
       }
-    }
-    if (!config.attrs.style) {
-      config.attrs.style = {}
-    }
-
-    config.attrs.position = 'bottom'
-    config.attrs.style.width = '100vw'
+    })
     return CommandPopup(ContentVNode, config)
   }
 }
