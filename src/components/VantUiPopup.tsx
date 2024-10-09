@@ -95,7 +95,9 @@ export const createVantUiPopupOnBottom = (immediately = true) => {
   const CommandPopup = createVantUiPopup(immediately)
   return (ContentVNode: VNode, config: IVantUiConfig = {}) => {
     if (!config.attrs) {
-      config.attrs = {}
+      config.attrs = {
+        width: '100vw'
+      }
     }
     config.attrs.position = 'bottom'
     config.attrs.style.width = '100vw'
@@ -124,7 +126,9 @@ export const createVantUiTitlePopupOnBottom = (immediately = true) => {
   const CommandPopup = createVantUiTitlePopup(immediately)
   return (ContentVNode: VNode, config: IVantUiConfig = {}) => {
     if (!config.attrs) {
-      config.attrs = {}
+      config.attrs = {
+        width: '100vw'
+      }
     }
     config.attrs.position = 'bottom'
     config.attrs.style.width = '100vw'
