@@ -75,3 +75,18 @@ export const PromiseWithResolvers = () => {
   });
   return { promise, resolve, reject };
 };
+
+// 在同级dom节点中获取最大的z-index
+export const getMaxZIndex = (domNode: HTMLElement) => {
+  const siblings = domNode.parentElement?.children || [];
+  let maxZIndex = 0;
+  Array.from(siblings).forEach((sibling) => {
+    if (sibling !== domNode) {
+      const zIndex = parseInt(window.getComputedStyle(sibling).zIndex);
+      if (!isNaN(zIndex) && zIndex > maxZIndex) {
+        maxZIndex = zIndex;
+      }
+    }
+  });
+  return maxZIndex;
+};

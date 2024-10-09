@@ -1,6 +1,6 @@
 import type { Component, ComponentInternalInstance, InjectionKey, Ref } from "vue";
 import { defineComponent, inject, nextTick, render, provide } from "vue";
-import { ConsumerEventBus, PromiseWithResolvers, type IOnConfig } from "./utils";
+import { ConsumerEventBus, getMaxZIndex, PromiseWithResolvers, type IOnConfig } from "./utils";
 import { EVENT_NAME } from "./type";
 
 export interface ICommandDialogArrtsProviderConfig {
@@ -68,6 +68,9 @@ export function CommandDialogProvider(parentInstance: ComponentInternalInstance 
   container.className = "command-commponent-container"
 
   appendToElement.appendChild(container);
+  const zIndex = getMaxZIndex(container);
+  container.style.position = 'relative';
+  container.style.zIndex = String(zIndex + 1);
 
   const hide = () => {
     config.visible.value = false;

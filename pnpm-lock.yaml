@@ -70,8 +70,8 @@ importers:
         specifier: ^2.0.29
         version: 2.1.6(typescript@5.5.4)
       vue3-command-dialog:
-        specifier: ~1.0.8
-        version: 1.0.8(element-plus@2.8.2(vue@3.5.3(typescript@5.5.4)))(vant@4.9.7(vue@3.5.3(typescript@5.5.4)))(vue@3.5.3(typescript@5.5.4))
+        specifier: ~1.1.5
+        version: 1.1.5(element-plus@2.8.2(vue@3.5.3(typescript@5.5.4)))(vant@4.9.7(vue@3.5.3(typescript@5.5.4)))(vue@3.5.3(typescript@5.5.4))
 
 packages:
 
@@ -2383,12 +2383,12 @@ packages:
     peerDependencies:
       typescript: '>=5.0.0'
 
-  vue3-command-dialog@1.0.8:
-    resolution: {integrity: sha512-/JzjFUsVfUuGVjDxvZAZlNh4aSNmL9AA1FnfUgYp9BrOFV0o/ELvHhtiNqPMFTwTUec4W35/xpsTrekIE78nWA==}
+  vue3-command-dialog@1.1.5:
+    resolution: {integrity: sha512-6+oGMJiJsOdvRF3FXz0CIntTxMECjuD8VqqsBR1gQJ2JQDTHKEbgCj83iQmmrAMs/dMmHT6Up28rmN3EYDp4Uw==}
     peerDependencies:
-      element-plus: ^2.8.2
-      vant: ^4.9.5
-      vue: ^3.4.37
+      element-plus: 2.x
+      vant: 4.x
+      vue: 3.x
 
   vue@3.5.3:
     resolution: {integrity: sha512-xvRbd0HpuLovYbOHXRHlSBsSvmUJbo0pzbkKTApWnQGf3/cu5Z39mQeA5cZdLRVIoNf3zI6MSoOgHUT5i2jO+Q==}
@@ -4765,9 +4765,10 @@ snapshots:
       semver: 7.6.3
       typescript: 5.5.4
 
-  vue3-command-dialog@1.0.8(element-plus@2.8.2(vue@3.5.3(typescript@5.5.4)))(vant@4.9.7(vue@3.5.3(typescript@5.5.4)))(vue@3.5.3(typescript@5.5.4)):
+  vue3-command-dialog@1.1.5(element-plus@2.8.2(vue@3.5.3(typescript@5.5.4)))(vant@4.9.7(vue@3.5.3(typescript@5.5.4)))(vue@3.5.3(typescript@5.5.4)):
     dependencies:
       element-plus: 2.8.2(vue@3.5.3(typescript@5.5.4))
+      lodash-es: 4.17.21
       vant: 4.9.7(vue@3.5.3(typescript@5.5.4))
       vue: 3.5.3(typescript@5.5.4)
 
