@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.3...v1.1.4) (2024-10-09)
+
+
+### Bug Fixes
+
+* busy is error ([ffb6212](https://github.com/pandavips/Vue3-Command-Dialog/commit/ffb621255f514593cbdc70993a1ac1942e1d179a))
+
 ## [1.1.3](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.2...v1.1.3) (2024-10-09)
 
 
