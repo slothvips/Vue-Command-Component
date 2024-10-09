@@ -1,176 +1,245 @@
-var M = Object.defineProperty;
-var S = (t, o, e) => o in t ? M(t, o, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[o] = e;
-var D = (t, o, e) => S(t, typeof o != "symbol" ? o + "" : o, e);
-import { createVNode as y, render as x, inject as B, defineComponent as E, provide as b, nextTick as K, getCurrentInstance as I, ref as k, h as A, mergeProps as N, resolveComponent as P } from "vue";
-import { useGlobalComponentSettings as $, ElDialog as q } from "element-plus";
-class G {
+var O = Object.defineProperty;
+var U = (t, o, e) => o in t ? O(t, o, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[o] = e;
+var w = (t, o, e) => U(t, typeof o != "symbol" ? o + "" : o, e);
+import { createVNode as u, render as x, inject as M, defineComponent as D, provide as b, nextTick as N, getCurrentInstance as R, ref as P, h as E, mergeProps as W, resolveComponent as T } from "vue";
+import { useGlobalComponentSettings as A, ElDialog as L } from "element-plus";
+import { Popup as $ } from "vant";
+class q {
   constructor() {
-    D(this, "map", /* @__PURE__ */ new WeakMap());
+    w(this, "map", /* @__PURE__ */ new WeakMap());
   }
   getEventsMapByConsumer(o) {
     let e = this.map.get(o);
     return e || (e = /* @__PURE__ */ new Map(), this.map.set(o, e)), e;
   }
   getEventsByConsumer(o, e) {
-    const a = this.getEventsMapByConsumer(o);
-    let n = a.get(e);
-    return n || (n = /* @__PURE__ */ new Set(), a.set(e, n)), n;
+    const n = this.getEventsMapByConsumer(o);
+    let s = n.get(e);
+    return s || (s = /* @__PURE__ */ new Set(), n.set(e, s)), s;
   }
-  on(o, e, a, n = {}) {
-    const s = this.getEventsByConsumer(o, e);
-    let d = a;
-    n.once && (d = (...i) => {
-      a(...i), this.off(o, e, d);
-    }), s.add(d), n.callAfterDelay !== void 0 && setTimeout(() => {
-      d();
-    }, n.callAfterDelay || 0);
+  on(o, e, n, s = {}) {
+    const r = this.getEventsByConsumer(o, e);
+    let l = n;
+    s.once && (l = (...c) => {
+      n(...c), this.off(o, e, l);
+    }), r.add(l), s.callAfterDelay !== void 0 && setTimeout(() => {
+      l();
+    }, s.callAfterDelay || 0);
   }
-  once(o, e, a) {
-    this.on(o, e, a, { once: !0 });
+  once(o, e, n) {
+    this.on(o, e, n, { once: !0 });
   }
-  emit(o, e, ...a) {
-    this.getEventsByConsumer(o, e).forEach((s) => s(...a));
+  emit(o, e, ...n) {
+    this.getEventsByConsumer(o, e).forEach((r) => r(...n));
   }
-  off(o, e, a) {
-    this.getEventsByConsumer(o, e).delete(a);
+  off(o, e, n) {
+    this.getEventsByConsumer(o, e).delete(n);
   }
 }
-const L = (t = "") => t.slice(2).toLowerCase(), w = (t = "") => `on${t.charAt(0).toUpperCase()}${t.slice(1)}`, O = () => {
+const G = (t = "") => t.slice(2).toLowerCase(), B = (t = "") => `on${t.charAt(0).toUpperCase()}${t.slice(1)}`, H = () => {
   let t = () => {
   }, o = () => {
   };
-  return { promise: new Promise((a, n) => {
-    t = a, o = n;
+  return { promise: new Promise((n, s) => {
+    t = n, o = s;
   }), resolve: t, reject: o };
 };
-var u = /* @__PURE__ */ ((t) => (t.confirm = "confirm", t.cancel = "cancel", t.destory = "destory", t))(u || {});
-const R = Symbol("CommandDialogConsumerInjectKey"), j = Symbol("CommandDialogStackInjectKey"), f = new G(), T = (t) => ({
-  ...t.parent ? T(t.parent) : {},
+var C = /* @__PURE__ */ ((t) => (t.confirm = "confirm", t.cancel = "cancel", t.destory = "destory", t))(C || {});
+const S = Symbol("CommandDialogConsumerInjectKey"), j = Symbol("CommandDialogStackInjectKey"), f = new q(), g = (t) => ({
+  ...t.parent ? g(t.parent) : {},
   ...t.provides
 });
-function U(t, o, e) {
-  const a = (typeof e.appendTo == "string" ? document.querySelector(e.appendTo) : e.appendTo) || document.body, n = document.createElement("div");
-  a.appendChild(n);
-  const s = () => {
+function I(t, o, e) {
+  const n = (typeof e.appendTo == "string" ? document.querySelector(e.appendTo) : e.appendTo) || document.body, s = document.createElement("div");
+  s.className = "command-commponent-container", n.appendChild(s);
+  const r = () => {
     e.visible.value = !1;
-  }, d = () => {
+  }, l = () => {
     e.visible.value = !0;
-  }, i = () => {
-    K(() => {
-      x(null, n), n.remove();
+  }, c = () => {
+    N(() => {
+      x(null, s), s.remove();
     });
-  }, m = (r = !1) => {
-    r ? (l.on(u.destory, i, {
+  }, m = (a = !1) => {
+    a ? (i.on(C.destory, c, {
       once: !0,
       callAfterDelay: 3e3
-    }), s()) : l.stack.splice(l.stackIndex).forEach((c) => c.destroy(!0));
+    }), r()) : i.stack.splice(i.stackIndex).forEach((p) => p.destroy(!0));
   }, {
-    promise: p,
+    promise: d,
     resolve: v,
     reject: h
-  } = O(), l = {
-    promise: p,
+  } = H(), i = {
+    promise: d,
     resolve: v,
     reject: h,
-    destroyWithResolve: (r) => {
-      v(r), m();
+    destroyWithResolve: (a) => {
+      v(a), m();
     },
-    destroyWithReject: (r) => {
-      h(r), m();
+    destroyWithReject: (a) => {
+      h(a), m();
     },
-    hide: s,
-    show: d,
+    hide: r,
+    show: l,
     destroy: m,
-    container: n,
+    container: s,
     visible: e.visible,
-    on: (r, c, W = {}) => f.on(l, r, c, W),
-    once: (r, c) => f.once(l, r, c),
-    emit: (r, ...c) => f.emit(l, r, ...c),
-    off: (r, c) => f.off(l, r, c),
+    on: (a, p, K = {}) => f.on(i, a, p, K),
+    once: (a, p) => f.once(i, a, p),
+    emit: (a, ...p) => f.emit(i, a, ...p),
+    off: (a, p) => f.off(i, a, p),
     stack: [],
     stackIndex: -1,
     componentRef: void 0
-  }, C = y(/* @__PURE__ */ E({
+  }, y = u(/* @__PURE__ */ D({
     setup() {
-      for (const c in e.provideProps)
-        b(c, e.provideProps[c]);
-      b(R, l);
-      const r = B(j, []);
-      return l.stackIndex = r.length, r.push(l), b(j, r), l.stack = r, () => o;
+      for (const p in e.provideProps)
+        b(p, e.provideProps[p]);
+      b(S, i);
+      const a = M(j, []);
+      return i.stackIndex = a.length, a.push(i), b(j, a), i.stack = a, () => o;
     }
   }), null, null);
-  return C.appContext = (t == null ? void 0 : t.appContext) || C.appContext, C.appContext.provides = {
-    ...C.appContext.provides,
-    ...T(t)
-  }, x(C, n), l;
+  return y.appContext = (t == null ? void 0 : t.appContext) || y.appContext, y.appContext.provides = {
+    ...y.appContext.provides,
+    ...g(t)
+  }, x(y, s), i;
 }
-const Q = (t = !0) => {
+const ee = (t = !0) => {
   const o = () => t && console.warn(`别调用了欧尼酱~,这会儿没啥实际用途;没有根据CommandDialogInjectKey接收到注入数据.原因可能有两个:
     1.你可能对getCommandDialogConsumer进行了异步调用或条件调用,请在setup中直接调用.
     2.你没有在命令弹窗内展示该组件,这个时候你一般可以忽略该警告消息.`);
-  return B(R, new Proxy({}, {
+  return M(S, () => new Proxy({}, {
     get: () => o,
     apply: o
-  }));
-}, X = (t = !0) => {
-  const o = I(), {
+  }), !0);
+}, te = (t = !0) => {
+  const o = R(), {
     locale: {
       t: e
     }
-  } = $("message-box");
-  return (n, s = {}) => {
-    const d = k(t), i = U(o, A(/* @__PURE__ */ E({
+  } = A("message-box");
+  return (s, r = {}) => {
+    const l = P(t), c = I(o, E(/* @__PURE__ */ D({
       setup() {
-        const m = k(), p = (g) => {
-          g(), i.destroy();
+        const m = P(), d = (k) => {
+          k(), c.destroy();
         }, v = () => {
-          i.emit(u.destory);
+          c.emit(C.destory);
         }, h = () => {
           Promise.resolve().then(() => {
-            i.componentRef = m;
+            c.componentRef = m;
           });
         };
-        return () => y(q, N({
+        return () => u(L, W({
           ref: m,
-          modelValue: d.value,
-          beforeClose: p,
+          modelValue: l.value,
+          beforeClose: d,
           onClosed: v,
           onVnodeMounted: h
         }, {
-          title: s.title,
-          width: s.width,
+          title: r.title,
+          width: r.width,
+          ...r.attrs
+        }), {
+          default: () => s,
+          footer: () => u("div", null, [r[B(C.cancel)] && u(T("el-button"), {
+            onClick: () => c.emit(C.cancel)
+          }, {
+            default: () => [r.cancelBtnText || e("el.messagebox.cancel")]
+          }), r[B(C.confirm)] && u(T("el-button"), {
+            type: "primary",
+            onClick: () => c.emit(C.confirm)
+          }, {
+            default: () => [r.confirmBtnText || e("el.messagebox.confirm")]
+          })]),
+          ...r.slots
+        });
+      }
+    })), {
+      provideProps: r.provideProps || {},
+      appendTo: r.appendTo,
+      visible: l
+    });
+    return Object.entries(r).filter(([m, d]) => m.startsWith("on") && typeof d == "function").forEach(([m, d]) => {
+      const v = G(m);
+      c.on(v, d);
+    }), c;
+  };
+}, z = {
+  overlay: !0,
+  round: !0,
+  lockScroll: !0,
+  closeable: !0,
+  closeOnClickOverlay: !1,
+  style: {
+    backgroundColor: "#fff",
+    color: "#000"
+  }
+}, V = (t = !0) => {
+  const o = R();
+  return (n, s = {}) => {
+    const r = P(t), l = I(o, E(/* @__PURE__ */ D({
+      setup() {
+        const c = P(), m = () => {
+          l.destroy();
+        }, d = () => {
+          l.emit(C.destory);
+        }, v = () => {
+          Promise.resolve().then(() => {
+            l.componentRef = c;
+          });
+        };
+        return () => u($, W({
+          ref: c,
+          show: r.value,
+          onClickCloseIcon: m,
+          onClosed: d,
+          onVnodeMounted: v
+        }, {
+          ...z,
           ...s.attrs
         }), {
           default: () => n,
-          footer: () => y("div", null, [s[w(u.cancel)] && y(P("el-button"), {
-            onClick: () => i.emit(u.cancel)
-          }, {
-            default: () => [s.cancelBtnText || e("el.messagebox.cancel")]
-          }), s[w(u.confirm)] && y(P("el-button"), {
-            type: "primary",
-            onClick: () => i.emit(u.confirm)
-          }, {
-            default: () => [s.confirmBtnText || e("el.messagebox.confirm")]
-          })]),
           ...s.slots
         });
       }
     })), {
       provideProps: s.provideProps || {},
       appendTo: s.appendTo,
-      visible: d
+      visible: r
     });
-    return Object.entries(s).filter(([m, p]) => m.startsWith("on") && typeof p == "function").forEach(([m, p]) => {
-      const v = L(m);
-      i.on(v, p);
-    }), i;
+    return l;
   };
+}, oe = (t = !0) => {
+  const o = V(t);
+  return (e, n = {}) => (n.attrs || (n.attrs = {}), n.attrs.position = "bottom", n.attrs.style.width = "100vw", o(e, n));
+}, F = (t = !0) => {
+  const o = V(t);
+  return (e, n = {}) => {
+    const s = u("div", {
+      class: "w-full h-full"
+    }, [n.title && u("div", {
+      class: "vant-popup-title"
+    }, [u("div", {
+      class: "vant-popup-title-text",
+      innerHTML: n.title
+    }, null)]), e]);
+    return o(s, n);
+  };
+}, ne = (t = !0) => {
+  const o = F(t);
+  return (e, n = {}) => (n.attrs || (n.attrs = {}), n.attrs.position = "bottom", n.attrs.style.width = "100vw", o(e, n));
 };
 export {
-  R as CommandDialogConsumerInjectKey,
-  U as CommandDialogProvider,
+  S as CommandDialogConsumerInjectKey,
+  I as CommandDialogProvider,
   j as CommandDialogStackInjectKey,
-  u as EVENT_NAME,
-  X as createElementPlusDialog,
-  Q as getCommandDialogConsumer
+  C as EVENT_NAME,
+  te as createElementPlusDialog,
+  V as createVantUiPopup,
+  oe as createVantUiPopupOnBottom,
+  F as createVantUiTitlePopup,
+  ne as createVantUiTitlePopupOnBottom,
+  ee as getCommandDialogConsumer
 };

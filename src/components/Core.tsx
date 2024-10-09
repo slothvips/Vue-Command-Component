@@ -65,6 +65,8 @@ const getProvidesChain = (ins: ComponentInternalInstance): any => ({
 export function CommandDialogProvider(parentInstance: ComponentInternalInstance | null, uiComponentVnode: Component, config: ICommandDialogProviderConfig): IConsumer {
   const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || document.body;
   const container = document.createElement("div");
+  container.className = "command-commponent-container"
+
   appendToElement.appendChild(container);
 
   const hide = () => {

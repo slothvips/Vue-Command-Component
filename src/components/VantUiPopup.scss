@@ -1,0 +1,13 @@
+.command-commponent-container {
+  .vant-popup-title {
+    min-height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .vant-popup-title-text {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+}
