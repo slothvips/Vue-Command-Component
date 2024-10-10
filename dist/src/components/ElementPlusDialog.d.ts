@@ -13,4 +13,5 @@ export type IElementPlusConfig = {
     onConfirm?: (() => void) | boolean;
     confirmBtnText?: string;
 } & ICommandDialogArrtsProviderConfig & Record<string, any>;
+export declare const setElementPlusDialogMountNode: (node: HTMLElement | undefined) => void;
 export declare const createElementPlusDialog: (immediately?: boolean) => (ContentVNode: VNode, config?: IElementPlusConfig) => import('./Core').IConsumer;
