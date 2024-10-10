@@ -1,3 +1,11 @@
+## [1.1.7](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.6...v1.1.7) (2024-10-10)
+
+
+### Bug Fixes
+
+* 修复层级显示问题,并提供全局挂载点 ([cdb617f](https://github.com/pandavips/Vue3-Command-Dialog/commit/cdb617fc873f1e6c9de1c8ac46afa7a00146193d))
+* 命令冲突 ([1897ab9](https://github.com/pandavips/Vue3-Command-Dialog/commit/1897ab98527932d12da2f4fec815ef5dfb0db5bd))
+
 ## [1.1.6](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.5...v1.1.6) (2024-10-09)
 
 
