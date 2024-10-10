@@ -1,3 +1,10 @@
+## [1.1.9](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.8...v1.1.9) (2024-10-10)
+
+
+### Bug Fixes
+
+* 细节更新 ([fb792fc](https://github.com/pandavips/Vue3-Command-Dialog/commit/fb792fcb8ee7f11d17d284d9e8534572d3553242))
+
 ## [1.1.8](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.7...v1.1.8) (2024-10-10)
 
 
