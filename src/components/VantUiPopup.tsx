@@ -22,7 +22,7 @@ export type IVantUiConfig = {
 
 // VantUiPopup全局挂载点
 let mountNode: HTMLElement | undefined = void 0
-export const setMountNode = (node: HTMLElement | undefined) => {
+export const setVantUiPopupMountNode = (node: HTMLElement | undefined) => {
   mountNode = node
 }
 
