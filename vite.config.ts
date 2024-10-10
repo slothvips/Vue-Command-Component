@@ -4,6 +4,8 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import VueRouter from "unplugin-vue-router/vite";
 import dts from "vite-plugin-dts";
+import Components from "unplugin-vue-components/vite";
+import { VantResolver, ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
 export default defineConfig({
   plugins: [
@@ -12,6 +14,10 @@ export default defineConfig({
     VueRouter(),
     dts({
       tsconfigPath: "./tsconfig.types.json",
+    }),
+    // vant 组件自动按需引入
+    Components({
+      resolvers: [VantResolver(), ElementPlusResolver()],
     }),
   ],
   server: {

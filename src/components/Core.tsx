@@ -68,9 +68,10 @@ export function CommandDialogProvider(parentInstance: ComponentInternalInstance 
   container.className = "command-commponent-container"
 
   appendToElement.appendChild(container);
-  const zIndex = getMaxZIndex(container);
+  const MaxZIndex = getMaxZIndex(container);
+  // 设置节点层级,尽量让其显示出来
   container.style.position = 'relative';
-  container.style.zIndex = String(zIndex + 1);
+  container.style.zIndex = String(Math.max(MaxZIndex + 1, 9999));
 
   const hide = () => {
     config.visible.value = false;

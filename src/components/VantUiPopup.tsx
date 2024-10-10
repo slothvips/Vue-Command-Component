@@ -7,6 +7,8 @@ import type { ICommandDialogArrtsProviderConfig } from "./Core";
 import { CommandDialogProvider } from "./Core";
 import { EVENT_NAME } from "./type";
 import { merge } from "lodash-es";
+// 引入vant Popup组件的样式
+import "vant/es/popup/style";
 
 export type IVantUiConfig = {
   // 目标ui库目标组件的插槽
@@ -17,6 +19,12 @@ export type IVantUiConfig = {
   attrs?: Partial<PopupProps & Record<string, any>>;
 
 } & ICommandDialogArrtsProviderConfig & Record<string, any>;
+
+// VantUiPopup全局挂载点
+let mountNode: HTMLElement | undefined = void 0
+export const setMountNode = (node: HTMLElement | undefined) => {
+  mountNode = node
+}
 
 // 默认属性
 const defaultProps: IVantUiConfig = {
@@ -78,7 +86,7 @@ export const createVantUiPopup = (immediately = true) => {
       })),
       {
         provideProps: config.provideProps || {},
-        appendTo: config.appendTo,
+        appendTo: mountNode || config.appendTo,
         visible,
       }
     );

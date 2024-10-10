@@ -1,6 +1,5 @@
 <script lang="tsx" setup>
-// 实际应该书写为:
-import { createElementPlusDialog, createVantUiPopup, createVantUiTitlePopupOnBottom } from "vue3-command-dialog";
+import { createElementPlusDialog, createVantUiPopup, createVantUiTitlePopupOnBottom } from "../../../components";
 import Content from "./components/Content.vue";
 import { provide } from "vue";
 

@@ -1,8 +1,9 @@
 <script lang="tsx" setup>
-import { getCommandDialogConsumer } from "vue3-command-dialog";
-import Base from "../index.vue";
+import { getCommandDialogConsumer } from "../../../../components";
+
 import { getCurrentInstance, inject, provide, ref } from "vue";
 import { useRoute } from "vue-router";
+import Base from "../index.vue";
 
 const nested = useRoute().query.nested === "true";
 
