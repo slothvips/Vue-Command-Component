@@ -34,6 +34,25 @@ yarn add vue3-command-dialog
 
 [Example](https://pandavips.github.io/Vue3-Command-Dialog/#/example/base)
 
+### 常见问题
+
+#### 弹窗没有正确的显示
+
+这种原因是对应组件的`css`没有被成功引入,导致页面显示异常.这很可能是你使用了按需导入或者自动导入等手段,那么如果你在使用命令弹窗之前没有使用过这些组件,那么就可能会出现类似情况.一般建议手动在 main 的地方导入一下,比如下面这样:
+
+```ts
+import { createApp } from "vue";
+import App from "./App.vue";
+
+// 导入vant-popup弹窗样式
+import("vant/es/popup/style");
+// 导入element-plus dialog弹窗样式
+import("element-plus/es/components/dialog/style/css");
+
+const app = createApp(App);
+app.mount("#app");
+```
+
 ## 你如何适配自己 UI 库组件
 
 除了已经适配的 Element Plus 的 Dialog 组件以及 vant 的 Popup 组件, 您也可以自行适配您自己的 UI 库组件, 具体可以参考以下步骤:
@@ -110,7 +129,3 @@ config: {
 - 强烈建议你的项目配置 jsx!如果你能忍受一味的使用`h`函数,那么你可以忽略这个建议.
 
 - 尽管 consumer 对象实现了一个订阅模式,但是你应该避免通过它来进行内部和外部的通信,它的出现是为了实现对命令弹窗的组件的增强,不建议用于业务开发.所以,情非得已之下,请尽量使用`destroyWithReject`和`destroyWithResolve`来借助 promise 的特性进行数据交互.当然,也可以使用很常规的`props`和`emit`等手段进行通信.
-
-## TODO
-
-- 适配 vantui 的 popup 组件

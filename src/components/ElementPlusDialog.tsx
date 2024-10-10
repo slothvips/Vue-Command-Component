@@ -5,9 +5,6 @@ import type { ICommandDialogArrtsProviderConfig } from "./Core";
 import { CommandDialogProvider } from "./Core";
 import { busName2EventName, eventName2BusName } from "./utils";
 import { EVENT_NAME } from "./type";
-// 引入dialog组件的样式
-import "element-plus/es/components/dialog/style/css";
-
 
 export type IElementPlusConfig = {
   // 目标ui库目标组件的插槽
@@ -37,6 +34,7 @@ export const setElementPlusDialogMountNode = (node: HTMLElement | undefined) => 
 }
 
 export const createElementPlusDialog = (immediately = true) => {
+
   // 我们需要捕获使用命令式组件的的组件实例,我们会用它来获取上下文
   const parentInstance = getCurrentInstance();
   // 可忽略,只是为了获取语言包

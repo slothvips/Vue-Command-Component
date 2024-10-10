@@ -34,6 +34,25 @@ You can view the online example (using Element Plus Dialog as an example) throug
 
 [Example](https://pandavips.github.io/Vue3-Command-Dialog/#/example/base)
 
+### Common Issues
+
+#### Dialog Not Displaying Correctly
+
+This issue is caused by the corresponding component's CSS not being successfully imported, resulting in abnormal page display. This is likely because you're using on-demand import or auto-import methods. If you haven't used these components before using the command dialog, such situations may occur. It's generally recommended to manually import them in the main file, like this:
+
+```ts
+import { createApp } from "vue";
+import App from "./App.vue";
+
+// Import vant-popup dialog styles
+import("vant/es/popup/style");
+// Import element-plus dialog styles
+import("element-plus/es/components/dialog/style/css");
+
+const app = createApp(App);
+app.mount("#app");
+```
+
 ## How to Adapt Your Own UI Library Components
 
 In addition to the already adapted Element Plus Dialog component and Vant Popup component, you can also adapt your own UI library components. You can refer to the following steps:
@@ -110,7 +129,3 @@ The rest is not complicated. For more details, check the element-plus adaptation
 - It's strongly recommended that your project configures jsx! If you can tolerate using the `h` function all the time, you can ignore this suggestion.
 
 - Although the consumer object implements a subscription pattern, you should avoid using it for internal and external communication. Its appearance is to enhance the components of the command dialog, and is not recommended for business development. So, unless absolutely necessary, please try to use `destroyWithReject` and `destroyWithResolve` to interact with data using the features of promises. Of course, you can also use very conventional means like `props` and `emit` for communication.
-
-## TODO
-
-- Adapt vantui's popup component

@@ -1,4 +1,3 @@
-import "./VantUiPopup.scss"
 import type { PopupProps } from 'vant'
 import { Popup } from 'vant'
 import type { VNode } from "vue";
@@ -7,8 +6,6 @@ import type { ICommandDialogArrtsProviderConfig } from "./Core";
 import { CommandDialogProvider } from "./Core";
 import { EVENT_NAME } from "./type";
 import { merge } from "lodash-es";
-// 引入vant Popup组件的样式
-import "vant/es/popup/style";
 
 export type IVantUiConfig = {
   // 目标ui库目标组件的插槽
@@ -28,11 +25,9 @@ export const setVantUiPopupMountNode = (node: HTMLElement | undefined) => {
 
 // 默认属性
 const defaultProps: IVantUiConfig = {
-  overlay: true,
   round: true,
   lockScroll: true,
   closeable: true,
-  closeOnClickOverlay: false,
   style: {
     backgroundColor: '#fff',
     color: '#000',
@@ -41,7 +36,6 @@ const defaultProps: IVantUiConfig = {
 
 export const createVantUiPopup = (immediately = true) => {
   const parentInstance = getCurrentInstance();
-
   const commandDialog = (ContentVNode: VNode, config: IVantUiConfig = {}) => {
     const visible = ref(immediately);
     const consumer = CommandDialogProvider(
@@ -93,48 +87,13 @@ export const createVantUiPopup = (immediately = true) => {
 
     return consumer;
   };
-
   return commandDialog;
 };
 
-
-// ---拓展功能---
+// ---拓展功能示例---
 // 在底部弹出
 export const createVantUiPopupOnBottom = (immediately = true) => {
   const CommandPopup = createVantUiPopup(immediately)
-  return (ContentVNode: VNode, config: IVantUiConfig = {}) => {
-    merge(config, {
-      attrs: {
-        position: 'bottom',
-        style: {
-          width: '100vw'
-        }
-      }
-    })
-    return CommandPopup(ContentVNode, config)
-  }
-}
-
-// 标题
-export const createVantUiTitlePopup = (immediately = true) => {
-  const CommandPopup = createVantUiPopup(immediately)
-  return (ContentVNode: VNode, config: IVantUiConfig = {}) => {
-    const ContentWithTitleVNode = <div class="w-full h-full">
-      {config.title && (
-        <div class="vant-popup-title">
-          <div class="vant-popup-title-text" v-html={config.title} />
-        </div>
-      )}
-      {ContentVNode}
-    </div>
-    return CommandPopup(ContentWithTitleVNode, config)
-  }
-}
-
-// 标题+底部
-export const createVantUiTitlePopupOnBottom = (immediately = true) => {
-  const CommandPopup = createVantUiTitlePopup(immediately)
-
   return (ContentVNode: VNode, config: IVantUiConfig = {}) => {
     merge(config, {
       attrs: {
