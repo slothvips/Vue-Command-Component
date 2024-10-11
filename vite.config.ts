@@ -15,7 +15,6 @@ export default defineConfig({
     dts({
       tsconfigPath: "./tsconfig.types.json",
     }),
-    // vant 组件自动按需引入
     Components({
       resolvers: [VantResolver(), ElementPlusResolver()],
     }),
