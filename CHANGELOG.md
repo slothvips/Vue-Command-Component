@@ -1,3 +1,10 @@
+## [1.1.10](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.9...v1.1.10) (2024-10-11)
+
+
+### Bug Fixes
+
+* example page style ([07f3891](https://github.com/pandavips/Vue3-Command-Dialog/commit/07f3891fa8fb3850c7b252150eea6b809e250a9c))
+
 ## [1.1.9](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.8...v1.1.9) (2024-10-10)
 
 
