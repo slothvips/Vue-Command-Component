@@ -53,13 +53,23 @@ const app = createApp(App);
 app.mount("#app");
 ```
 
+如果你对打包体积等没有要求,更简单粗暴的方法是直接全量导入组件库的 CSS:
+
+```ts
+// 导入vant全量样式
+import "vant/lib/index.css";
+
+// 导入element-plus全量样式
+import "element-plus/dist/index.css";
+```
+
 ## 你如何适配自己 UI 库组件
 
 除了已经适配的 Element Plus 的 Dialog 组件以及 vant 的 Popup 组件, 您也可以自行适配您自己的 UI 库组件, 具体可以参考以下步骤:
 
 具体可以借鉴示例代码中对 element-plus 以及 vantui 的实现,这里只说一下核心逻辑;
 
-1.我们需要 CommandDialogProvider 函数来对我们的目标组件进行包装, 它的最主要的作用是对被包裹的组件注入`Consumer`对象,那么我们的弹窗内部组件就可以接收到这个对象,它是我们对弹窗进行控制的主要手段.这个对象上有下列属性和方法:
+1.我们需要 CommandProvider 函数来对我们的目标组件进行包装, 它的最主要的作用是对被包裹的组件注入`Consumer`对象,那么我们的弹窗内部组件就可以接收到这个对象,它是我们对弹窗进行控制的主要手段.这个对象上有下列属性和方法:
 
 ```ts
 /** 弹窗消费者对象,或者也可理解为弹窗实例实例~ */
@@ -103,11 +113,11 @@ export interface IConsumer {
 
 你不用关心这个对象的创建销毁等逻辑,只需要知道有这么一个对象,以及它身上有哪些属性和方法即可.你还可以注意到,这个对象上还有`on` `once` `emit` `off`等方法,通过这些 api 注册的事件函数都会严格限制在 `consumer` 对象下,所以不同的`consumer`对象的事件注册发布均不互相影响;同时你也不用关心事件的解绑等逻辑,这些内部已经帮你处理好了.
 
-CommandDialogProvider 同时也会返回一个`consumer`对象,以供弹窗外部使用,弹窗内部和外部拿到的 consumer 是同一个对象,所以他们是全等(===)的.
+CommandProvider 同时也会返回一个`consumer`对象,以供弹窗外部使用,弹窗内部和外部拿到的 consumer 是同一个对象,所以他们是全等(===)的.
 
-弹窗内部组件获取 `consumer` 对象的方式为调用`getCommandDialogConsumer`, 该函数会返回一个 consumer 对象,它一样只能在 setup 顶部直接调用,不可条件调用或者异步调用.
+弹窗内部组件获取 `consumer` 对象的方式为调用`getConsumer`, 该函数会返回一个 consumer 对象,它一样只能在 setup 顶部直接调用,不可条件调用或者异步调用.
 
-2.剩余的就是`CommandDialogProvider`函数参数的介绍了,
+2.剩余的就是`CommandProvider`函数参数的介绍了,
 
 ```ts
 parentInstance: ComponentInternalInstance | null,

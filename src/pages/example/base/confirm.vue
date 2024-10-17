@@ -1,12 +1,12 @@
 <script lang="tsx" setup>
-import { createElementPlusDialog, EVENT_NAME, getCommandDialogConsumer } from "../../../components";
+import { createElementPlusDialog, EVENT_NAME, getConsumer } from "../../../components";
 import { defineComponent } from "vue";
 
 const CommandDialog = createElementPlusDialog();
 
 const Content = defineComponent({
   setup(_, { attrs }) {
-    const consumer = getCommandDialogConsumer();
+    const consumer = getConsumer();
     !attrs["no-bind"] &&
       consumer.on(EVENT_NAME.confirm, () => {
         console.log("约定事件~confirm");

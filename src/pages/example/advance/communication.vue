@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { createElementPlusDialog, getCommandDialogConsumer } from "vue3-command-dialog";
+import { createElementPlusDialog, getConsumer } from "../../../components";
 import { defineComponent, ref, reactive } from "vue";
 const CommandDialog = createElementPlusDialog();
 
@@ -11,7 +11,7 @@ const Content = defineComponent({
     },
   },
   setup(props) {
-    const { destroyWithResolve, destroyWithReject } = getCommandDialogConsumer();
+    const { destroyWithResolve, destroyWithReject } = getConsumer();
     const form = reactive({
       name: "",
       region: "",

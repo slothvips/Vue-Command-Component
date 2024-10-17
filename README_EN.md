@@ -59,7 +59,7 @@ In addition to the already adapted Element Plus Dialog component and Vant Popup 
 
 You can refer to the implementation for element-plus and vantui in the example code. Here, we'll just discuss the core logic:
 
-1. We need the CommandDialogProvider function to wrap our target component. Its main purpose is to inject the `Consumer` object into the wrapped component, so our internal dialog component can receive this object, which is our main means of controlling the dialog. This object has the following properties and methods:
+1. We need the CommandProvider function to wrap our target component. Its main purpose is to inject the `Consumer` object into the wrapped component, so our internal dialog component can receive this object, which is our main means of controlling the dialog. This object has the following properties and methods:
 
 ```ts
 /** Dialog consumer object, or can be understood as the dialog instance~ */
@@ -103,11 +103,11 @@ export interface IConsumer {
 
 You don't need to worry about the creation and destruction of this object, you just need to know that there is such an object and what properties and methods it has. You may also notice that this object has methods like `on`, `once`, `emit`, `off`, etc. The event functions registered through these APIs are strictly limited to the `consumer` object, so the event registration and publishing of different `consumer` objects do not affect each other. At the same time, you don't need to worry about event unbinding and other logic, these have been handled internally for you.
 
-CommandDialogProvider also returns a `consumer` object for external use of the dialog. The consumer objects obtained internally and externally of the dialog are the same object, so they are strictly equal (===).
+CommandProvider also returns a `consumer` object for external use of the dialog. The consumer objects obtained internally and externally of the dialog are the same object, so they are strictly equal (===).
 
-The internal dialog component obtains the `consumer` object by calling `getCommandDialogConsumer`. This function will return a consumer object, and it can only be called directly at the top of setup, not conditionally or asynchronously.
+The internal dialog component obtains the `consumer` object by calling `getConsumer`. This function will return a consumer object, and it can only be called directly at the top of setup, not conditionally or asynchronously.
 
-2. The rest is the introduction of parameter passing for the `CommandDialogProvider` function:
+2. The rest is the introduction of parameter passing for the `CommandProvider` function:
 
 ```ts
 parentInstance: ComponentInternalInstance | null,

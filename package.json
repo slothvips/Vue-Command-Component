@@ -48,5 +48,15 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.21"
-  }
+  },
+  "keywords": [
+    "vue3",
+    "command",
+    "command-dialog",
+    "command-palette",
+    "vue-component",
+    "ui-component",
+    "element-plus",
+    "vant"
+  ]
 }

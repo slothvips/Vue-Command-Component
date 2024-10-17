@@ -1,12 +1,12 @@
 <script lang="tsx" setup>
-import { createElementPlusDialog, getCommandDialogConsumer } from "vue3-command-dialog";
+import { createElementPlusDialog, getConsumer } from "../../../components/index";
 import { defineComponent, ref } from "vue";
 
 const CommandDialog = createElementPlusDialog();
 
 const Content = defineComponent({
   setup() {
-    const { destroyWithResolve } = getCommandDialogConsumer();
+    const { destroyWithResolve } = getConsumer();
     const loading = ref(false);
 
     return () => (

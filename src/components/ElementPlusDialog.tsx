@@ -1,8 +1,8 @@
-import { ElDialog, useGlobalComponentSettings, type DialogProps } from "element-plus";
+import { ElDialog, useGlobalComponentSettings, ElButton, type DialogProps } from "element-plus";
 import type { VNode } from "vue";
 import { getCurrentInstance, h, ref, defineComponent } from "vue";
 import type { ICommandDialogArrtsProviderConfig } from "./Core";
-import { CommandDialogProvider } from "./Core";
+import { CommandProvider } from "./Core";
 import { busName2EventName, eventName2BusName } from "./utils";
 import { EVENT_NAME } from "./type";
 
@@ -45,7 +45,7 @@ export const createElementPlusDialog = (immediately = true) => {
     // 我们不再依赖外部的visible变量来控制弹窗的显示与隐藏,这免去了外部手动控制弹窗显示与隐藏的麻烦,而是通过consumer对象来进行控制
     const visible = ref(immediately);
     // 这里的consumer和弹窗内部通过`inject`接收到的`consumer`是同一个对象
-    const consumer = CommandDialogProvider(
+    const consumer = CommandProvider(
       parentInstance,
       h(defineComponent({
         setup() {
@@ -84,14 +84,14 @@ export const createElementPlusDialog = (immediately = true) => {
                 footer: () => (
                   <div>
                     {config[busName2EventName(EVENT_NAME.cancel)] && (
-                      <el-button onClick={() => consumer.emit(EVENT_NAME.cancel)}>
+                      <ElButton onClick={() => consumer.emit(EVENT_NAME.cancel)}>
                         {config.cancelBtnText || t('el.messagebox.cancel')}
-                      </el-button>
+                      </ElButton>
                     )}
                     {config[busName2EventName(EVENT_NAME.confirm)] && (
-                      <el-button type="primary" onClick={() => consumer.emit(EVENT_NAME.confirm)}>
+                      <ElButton type="primary" onClick={() => consumer.emit(EVENT_NAME.confirm)}>
                         {config.confirmBtnText || t('el.messagebox.confirm')}
-                      </el-button>
+                      </ElButton>
                     )}
                   </div>
                 ),

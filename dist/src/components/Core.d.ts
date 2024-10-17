@@ -46,5 +46,6 @@ export interface IConsumer {
 }
 export declare const CommandDialogConsumerInjectKey: InjectionKey<IConsumer>;
 export declare const CommandDialogStackInjectKey: InjectionKey<IConsumer[]>;
-export declare function CommandDialogProvider(parentInstance: ComponentInternalInstance | null, uiComponentVnode: Component, config: ICommandDialogProviderConfig): IConsumer;
-export declare const getCommandDialogConsumer: (warn?: boolean) => IConsumer;
+export declare function CommandProvider(parentInstance: ComponentInternalInstance | null, uiComponentVnode: Component, config: ICommandDialogProviderConfig): IConsumer;
+export declare const getConsumer: (warn?: boolean) => IConsumer;
+export declare const getCommandDialogConsumer: (...args: any) => IConsumer;

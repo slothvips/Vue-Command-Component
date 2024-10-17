@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { getCommandDialogConsumer } from "../../../../components";
+import { getConsumer } from "../../../../components";
 
 import { getCurrentInstance, inject, provide, ref } from "vue";
 import { useRoute } from "vue-router";
@@ -11,7 +11,7 @@ provide("content", "来自Content的🩷~");
 const depth = inject("depth", 0);
 provide("depth", depth + 1);
 
-const consumer = getCommandDialogConsumer();
+const consumer = getConsumer();
 
 (window as any).dialogStack = consumer.stack;
 

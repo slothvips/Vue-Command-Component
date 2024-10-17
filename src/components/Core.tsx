@@ -62,7 +62,7 @@ const getProvidesChain = (ins: ComponentInternalInstance): any => ({
   ...(ins as any).provides
 });
 
-export function CommandDialogProvider(parentInstance: ComponentInternalInstance | null, uiComponentVnode: Component, config: ICommandDialogProviderConfig): IConsumer {
+export function CommandProvider(parentInstance: ComponentInternalInstance | null, uiComponentVnode: Component, config: ICommandDialogProviderConfig): IConsumer {
   const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || document.body;
   const container = document.createElement("div");
   container.className = "command-commponent-container"
@@ -146,10 +146,10 @@ export function CommandDialogProvider(parentInstance: ComponentInternalInstance 
   return consumer;
 }
 
-export const getCommandDialogConsumer = (warn: boolean = true): IConsumer => {
+export const getConsumer = (warn: boolean = true): IConsumer => {
   const showWarningMessage = () =>
     warn && console.warn(`别调用了欧尼酱~,这会儿没啥实际用途;没有根据CommandDialogInjectKey接收到注入数据.原因可能有两个:
-    1.你可能对getCommandDialogConsumer进行了异步调用或条件调用,请在setup中直接调用.
+    1.你可能对getConsumer进行了异步调用或条件调用,请在setup中直接调用.
     2.你没有在命令弹窗内展示该组件,这个时候你一般可以忽略该警告消息.`);
 
   return inject<IConsumer>(
@@ -159,4 +159,9 @@ export const getCommandDialogConsumer = (warn: boolean = true): IConsumer => {
       apply: showWarningMessage,
     }), true
   )!;
+};
+
+export const getCommandDialogConsumer = (...args: any) => {
+  console.warn("Warning: This API will be deprecated in the future, please use `getConsumer` instead.");
+  return getConsumer(...args);
 };

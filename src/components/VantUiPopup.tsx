@@ -3,7 +3,7 @@ import { Popup } from 'vant'
 import type { VNode } from "vue";
 import { getCurrentInstance, h, ref, defineComponent } from "vue";
 import type { ICommandDialogArrtsProviderConfig } from "./Core";
-import { CommandDialogProvider } from "./Core";
+import { CommandProvider } from "./Core";
 import { EVENT_NAME } from "./type";
 import { merge } from "lodash-es";
 
@@ -38,7 +38,7 @@ export const createVantUiPopup = (immediately = true) => {
   const parentInstance = getCurrentInstance();
   const commandDialog = (ContentVNode: VNode, config: IVantUiConfig = {}) => {
     const visible = ref(immediately);
-    const consumer = CommandDialogProvider(
+    const consumer = CommandProvider(
       parentInstance,
       h(defineComponent({
         setup() {
