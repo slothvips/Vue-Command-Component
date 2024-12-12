@@ -3,12 +3,12 @@ import { defineComponent, inject, nextTick, render, provide } from "vue";
 import { ConsumerEventBus, getMaxZIndex, PromiseWithResolvers, type IOnConfig } from "./utils";
 import { EVENT_NAME } from "./type";
 
-export interface ICommandDialogArrtsProviderConfig {
+export interface ICommandComponentArrtsProviderConfig {
   provideProps?: Record<string, any>;
   appendTo?: string | HTMLElement;
 }
 
-export type ICommandDialogProviderConfig = ICommandDialogArrtsProviderConfig & {
+export type ICommandDialogProviderConfig = ICommandComponentArrtsProviderConfig & {
   visible: Ref<boolean>;
 };
 

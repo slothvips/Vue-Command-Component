@@ -2,7 +2,7 @@ import type { PopupProps } from 'vant'
 import { Popup } from 'vant'
 import type { VNode } from "vue";
 import { getCurrentInstance, h, ref, defineComponent } from "vue";
-import type { ICommandDialogArrtsProviderConfig } from "./Core";
+import type { ICommandComponentArrtsProviderConfig } from "./Core";
 import { CommandProvider } from "./Core";
 import { EVENT_NAME } from "./type";
 import { merge } from "lodash-es";
@@ -15,7 +15,7 @@ export type IVantUiConfig = {
   // 目标ui库目标组件的属性
   attrs?: Partial<PopupProps & Record<string, any>>;
 
-} & ICommandDialogArrtsProviderConfig & Record<string, any>;
+} & ICommandComponentArrtsProviderConfig & Record<string, any>;
 
 // VantUiPopup全局挂载点
 let mountNode: HTMLElement | undefined = void 0
