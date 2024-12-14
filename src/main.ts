@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import { router } from "./router";
 import App from "./App.vue";
-import 'virtual:uno.css'
+// import 'virtual:uno.css'
 
 // 导入vant-popup弹窗样式
 import("vant/es/popup/style");
