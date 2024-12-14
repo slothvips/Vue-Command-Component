@@ -3,6 +3,7 @@ import { IOnConfig } from './utils';
 export interface ICommandComponentArrtsProviderConfig {
     provideProps?: Record<string, any>;
     appendTo?: string | HTMLElement;
+    customClassName?: string;
 }
 export type ICommandDialogProviderConfig = ICommandComponentArrtsProviderConfig & {
     visible: Ref<boolean>;
