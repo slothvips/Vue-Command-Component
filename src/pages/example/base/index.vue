@@ -45,7 +45,7 @@ const openVantUiPopup = () => {
 const CommandDrawer = createElementPlusDrawer();
 const openDrawer = () => {
   CommandDrawer(<Content />, {
-    title: "三秒后打开",
+    title: "基础抽屉",
   });
 };
 </script>
@@ -55,8 +55,10 @@ const openDrawer = () => {
     <el-button type="primary" @click="openDialog">打开弹窗</el-button>
     <el-button type="success" @click="openDialog2">弹窗外部控制显示/隐藏/销毁(过程中弹窗会自动显示关闭)</el-button>
     <el-button type="success" @click="openDialog3">三秒后打开</el-button>
+    
     <el-divider>抽屉</el-divider>
     <el-button type="primary" @click="openDrawer">打开抽屉</el-button>
+    
     <el-divider>VantUiのdemo</el-divider>
     <el-button type="success" @click="openVantUiPopup">打开VantUi弹窗</el-button>
   </div>

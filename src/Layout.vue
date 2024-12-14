@@ -20,6 +20,10 @@ const baseExampleRoutes = [
     path: "/example/base/confirm",
     text: "确认/取消弹窗",
   },
+  {
+    path: "/example/base/drawer",
+    text: "抽屉",
+  },
 ];
 
 const advanceExampleRoutes = [
