@@ -1,10 +1,10 @@
 import { Component, ComponentInternalInstance, InjectionKey, Ref } from 'vue';
 import { IOnConfig } from './utils';
-export interface ICommandDialogArrtsProviderConfig {
+export interface ICommandComponentArrtsProviderConfig {
     provideProps?: Record<string, any>;
     appendTo?: string | HTMLElement;
 }
-export type ICommandDialogProviderConfig = ICommandDialogArrtsProviderConfig & {
+export type ICommandDialogProviderConfig = ICommandComponentArrtsProviderConfig & {
     visible: Ref<boolean>;
 };
 /** 弹窗消费者对象,或者也可理解为弹窗实例实例~ */
