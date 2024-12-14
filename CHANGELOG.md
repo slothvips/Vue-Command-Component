@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.3.2...v1.3.3) (2024-12-14)
+
+
+### Bug Fixes
+
+* 自定义class类名 ([a72cd95](https://github.com/pandavips/Vue3-Command-Dialog/commit/a72cd95366e3e2f84ce9a9236edc8131144c7c7a))
+
 ## [1.3.2](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.3.1...v1.3.2) (2024-12-14)
 
 
