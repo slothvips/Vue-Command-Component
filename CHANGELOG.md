@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.11...v1.2.0) (2024-12-12)
+
+
+### Features
+
+* 适配ElementPlus Drawer 组件 ([96e07be](https://github.com/pandavips/Vue3-Command-Dialog/commit/96e07be996ccf6b8ee32d191de58f8d5dee33c85))
+
 ## [1.1.11](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.10...v1.1.11) (2024-10-17)
 
 
