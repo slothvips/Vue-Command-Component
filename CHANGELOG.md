@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.2.0...v1.3.0) (2024-12-14)
+
+
+### Features
+
+* el-drawer ([c86c815](https://github.com/pandavips/Vue3-Command-Dialog/commit/c86c815a7dc7fdd4cd3bbbf40b5ba8614153e1e1))
+
 # [1.2.0](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.1.11...v1.2.0) (2024-12-12)
 
 
