@@ -11,7 +11,7 @@ export type IElementPlusDrawerConfig = {
   };
   attrs?: Partial<DrawerProps & Record<string, any>>;
   title?: string;
-  width?: string;
+  size?: string;
 } & ICommandComponentArrtsProviderConfig &
   Record<string, any>;
 
@@ -54,7 +54,7 @@ export const createElementPlusDrawer = (immediately = true) => {
                 onVnodeMounted={handleMounted}
                 {...{
                   title: config.title,
-                  width: config.width,
+                  size: config.size,
                   ...config.attrs,
                 }}
               >
