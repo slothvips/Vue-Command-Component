@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.4.0...v1.4.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* forget build,sorry ([2c7952f](https://github.com/pandavips/Vue3-Command-Dialog/commit/2c7952f67059ff2e3b66d6b927610302eb678840))
+
 # [1.4.0](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.3.5...v1.4.0) (2025-02-12)
 
 
