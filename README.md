@@ -32,7 +32,7 @@ yarn add vue3-command-dialog
 
 您可以通过以下链接查看在线示例(以 element-plus Dialog 为例)：
 
-[Example](https://pandavips.github.io/Vue3-Command-Dialog/#/example/base)
+[Example](https://pandavips.github.io/Vue3-Command-Component/#/example/base)
 
 ### 常见问题
 
