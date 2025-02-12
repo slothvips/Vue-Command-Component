@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.3.5...v1.4.0) (2025-02-12)
+
+
+### Features
+
+* 导出这个有用的hooks ([648fddf](https://github.com/pandavips/Vue3-Command-Dialog/commit/648fddf97e6a734bb9901f8d6058fe210cf4543b))
+
 ## [1.3.5](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.3.4...v1.3.5) (2025-02-12)
 
 
