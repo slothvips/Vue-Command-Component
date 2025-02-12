@@ -1,0 +1,6 @@
+import{a2 as r,a9 as f,au as d,ag as e,an as a,bn as p,a8 as C,ar as l,bw as g,by as i}from"./index-Bska7HCq.js";import{c as _}from"./ElementPlusDialog-CrqoZd9h.js";const E=r({__name:"confirm",setup(b){const c=_(),s=r({setup(t,{attrs:n}){const o=g();return!n["no-bind"]&&o.on(i.confirm,()=>{console.log("约定事件~confirm"),o.destroyWithResolve("confirm")}),!n["no-bind"]&&o.on(i.cancel,()=>{console.log("约定事件~cancel"),o.destroyWithReject("cancel")}),()=>e("div",null,[l("你确认吗?")])}}),u=()=>{c(e(s,null,null),{title:"请确认",onConfirm:!0,confirmBtnText:"我已确认",onCancel:!0,cancelBtnText:"我要取消"})},m=()=>{const t=c(e(s,{"no-bind":!0},null),{title:"请确认",onConfirm:()=>{console.log("指定函数~confirm"),t.destroyWithResolve("confirm")},onCancel:()=>{console.log("指定函数~cancel"),t.destroyWithReject("cancel")}})};return(t,n)=>{const o=p;return C(),f("div",null,[n[2]||(n[2]=d("pre",null,`      弹窗的确认和取消场景太常见,所以这里提供了一些便利来简化操作;提供两种方式:
+      1.指定函数,直接指定点击时触发的函数,这个时候不需要注册指定的事件
+      2.约定事件,按钮点击式会触发通过约定的事件名称来触发注册的函数,这需要你通过consumer对象注册约定的事件(\`confirm\`, \`cancel\`);提供这种方式,主要是为了让你将弹窗的整个逻辑可以都封装在内部,不会将逻辑散落四处.
+      
+      按钮通过footer插槽实现,所以会占用此插槽,需要留意~
+      `,-1)),e(o,{type:"success",onClick:u},{default:a(()=>n[0]||(n[0]=[l("打开确认/取消弹窗(约定事件)")])),_:1}),e(o,{type:"success",onClick:m},{default:a(()=>n[1]||(n[1]=[l("打开确认/取消弹窗(指定函数)")])),_:1})])}}});export{E as default};
