@@ -1,9 +1,10 @@
 import { ElDrawer, type DrawerProps } from "element-plus";
 import type { VNode } from "vue";
 import { getCurrentInstance, h, ref, defineComponent } from "vue";
-import type { ICommandComponentArrtsProviderConfig } from "./Core";
+import type { ICommandComponentArrtsProviderConfig, ICreateCommandComponentConfig } from "./Core";
 import { CommandProvider } from "./Core";
 import { EVENT_NAME } from "./type";
+import { isNull } from ".";
 
 export type IElementPlusDrawerConfig = {
   slots?: {
@@ -20,31 +21,28 @@ export const setElementPlusDrawerMountNode = (node: HTMLElement | undefined) => 
   mountNode = node;
 };
 
-export const createElementPlusDrawer = (immediately = true) => {
+export const createElementPlusDrawer = (createConfig: ICreateCommandComponentConfig = {}) => {
   const parentInstance = getCurrentInstance();
   const commandDrawer = (ContentVNode: VNode, config: IElementPlusDrawerConfig = {}) => {
-    const visible = ref(immediately);
+    const visible = ref(isNull(createConfig.immediately) ? true : !!createConfig.immediately);
     const consumer = CommandProvider(
       parentInstance,
       h(
         defineComponent({
           setup() {
-            const componentRef = ref();
             const handleClose = (done: () => void) => {
               done();
               consumer.destroy();
             };
-
             const handleClosed = () => {
               consumer.emit(EVENT_NAME.destory);
             };
-
+            const componentRef = ref();
             const handleMounted = () => {
               Promise.resolve().then(() => {
                 consumer.componentRef = componentRef;
               });
             };
-
             return () => (
               <ElDrawer
                 ref={componentRef}
@@ -71,11 +69,15 @@ export const createElementPlusDrawer = (immediately = true) => {
         provideProps: config.provideProps || {},
         appendTo: mountNode || config.appendTo,
         visible,
+        meta: {
+          ...(createConfig?.meta || {
+            name: "command-element-plus-drawer",
+          }),
+          ...(config?.meta || {}),
+        },
       }
     );
-
     return consumer;
   };
-
   return commandDrawer;
 };

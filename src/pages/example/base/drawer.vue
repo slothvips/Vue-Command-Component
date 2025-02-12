@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { createElementPlusDialog, createVantUiPopup, createElementPlusDrawer } from "../../../components";
+import {  createElementPlusDrawer } from "../../../components";
 import Content from "./components/Content.vue";
 import { provide } from "vue";
 

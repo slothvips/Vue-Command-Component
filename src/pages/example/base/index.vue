@@ -26,7 +26,9 @@ const openDialog2 = () => {
   });
 };
 
-const CommandDialog2 = createElementPlusDialog(false);
+const CommandDialog2 = createElementPlusDialog({
+  immediately: false,
+});
 const openDialog3 = () => {
   const { show } = CommandDialog2(<Content />, {
     title: "三秒后打开",

@@ -1,6 +1,5 @@
 <script lang="tsx" setup>
 import { getConsumer } from "../../../../components";
-
 import { getCurrentInstance, inject, provide, ref } from "vue";
 import { useRoute } from "vue-router";
 import Base from "../index.vue";

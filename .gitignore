@@ -21,3 +21,6 @@ dist-example-page
 *.njsproj
 *.sln
 *.sw?
+
+# VitePress cache
+**/.vitepress/cache/**

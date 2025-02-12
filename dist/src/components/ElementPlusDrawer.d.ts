@@ -1,6 +1,6 @@
 import { DrawerProps } from 'element-plus';
 import { VNode } from 'vue';
-import { ICommandComponentArrtsProviderConfig } from './Core';
+import { ICommandComponentArrtsProviderConfig, ICreateCommandComponentConfig } from './Core';
 export type IElementPlusDrawerConfig = {
     slots?: {
         [key: string]: () => VNode | VNode[];
@@ -10,4 +10,4 @@ export type IElementPlusDrawerConfig = {
     size?: string;
 } & ICommandComponentArrtsProviderConfig & Record<string, any>;
 export declare const setElementPlusDrawerMountNode: (node: HTMLElement | undefined) => void;
-export declare const createElementPlusDrawer: (immediately?: boolean) => (ContentVNode: VNode, config?: IElementPlusDrawerConfig) => import('./Core').IConsumer;
+export declare const createElementPlusDrawer: (createConfig?: ICreateCommandComponentConfig) => (ContentVNode: VNode, config?: IElementPlusDrawerConfig) => import('./Core').IConsumer;

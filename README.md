@@ -15,7 +15,7 @@
 - 命令式 API，弹窗开发变更为编程式,解放弹窗生产力!
 - 支持弹窗嵌套,链式管理,并提供完整上下文支持(状态管理,路由,国际化等).
 - 灵活的配置, 支持自定义属性,插槽,事件处理器等.
-- 开箱即用,已实现与 Element Plus 的 Dialog 组件以及 vant 的 Popup 组件的适配,也可以自行拓展以便更贴切你的实际业务.
+- 开箱即用,已实现与 Element Plus 的 Dialog/Drawer 组件以及 vant 的 Popup 组件的适配,也可以自行拓展以便更贴切你的实际业务.
 - 命令式组件核心逻辑解耦,可自行适配不同的 UI 库目标组件
 
 ## 安装
@@ -63,17 +63,33 @@ import "vant/lib/index.css";
 import "element-plus/dist/index.css";
 ```
 
-## 你如何适配自己 UI 库组件
+####  其他问题
 
-除了已经适配的 Element Plus 的 Dialog 组件以及 vant 的 Popup 组件, 您也可以自行适配您自己的 UI 库组件, 具体可以参考以下步骤:
+- 默认挂载点是body内的div,如果你没有更改过此项,可能会出现路由变化之后,弹窗依然存在的问题,可以在项目中`useAfterRouteChangeCloseAllCommandComponent`使用这个`hooks`来解决;你可以在App.vue中使用.
+- 开发工具在组件树内审查不到弹窗内的组件,你可以开发dev-tools中的这个按钮来选中组件进行审查(如下图).
+![dev-tools](./assets/images/vue-dev-tools.png)
+
+## 如何适配[自己/其他] UI 库组件
+
+您可以自行适配任何其他目标 UI 库组件, 具体可以参考以下步骤:
 
 具体可以借鉴示例代码中对 element-plus 以及 vantui 的实现,这里只说一下核心逻辑;
 
 1.我们需要 CommandProvider 函数来对我们的目标组件进行包装, 它的最主要的作用是对被包裹的组件注入`Consumer`对象,那么我们的弹窗内部组件就可以接收到这个对象,它是我们对弹窗进行控制的主要手段.这个对象上有下列属性和方法:
 
 ```ts
-/** 弹窗消费者对象,或者也可理解为弹窗实例实例~ */
+/** 弹窗消费者对象,理解为弹窗控制器也可以*/
 export interface IConsumer {
+  /** 弹窗实例的元数据,比如弹窗的类型,弹窗的名称等,以及你自己拓展的任何数据 */
+  meta?: Meta;
+  /** 弹窗是否可见响应式变量,虽然已经提供了hide以及show方法不需要通过该属性来控制弹窗的显示与隐藏,但是为了方便一些特殊场景,还是提供了该属性,比如你需要watch这个属性来做一些事情 */
+  visible: Ref<boolean>;
+  /** 隐藏 */
+  hide: () => void;
+  /** 显示 */
+  show: () => void;
+  /** 弹窗销毁,但是不继续推进promise的状态改变 */
+  destroy: (external?: boolean) => void;
   /** 弹窗promise */
   promise: Promise<any>;
   /** 弹窗promise执行器参数resolve */
@@ -84,18 +100,10 @@ export interface IConsumer {
   destroyWithResolve: (val?: any) => void;
   /** 弹窗销毁,并拒绝promise */
   destroyWithReject: (reason?: any) => void;
-  /** 弹窗销毁,但是不继续推进promise的状态改变 */
-  destroy: (external?: boolean) => void;
-  /** 弹窗是否可见响应式变量,虽然已经提供了hide以及show方法不需要通过该属性来控制弹窗的显示与隐藏,但是为了方便一些特殊场景,还是提供了该属性,比如你需要watch这个属性来做一些事情 */
-  visible: Ref<boolean>;
-  /** 隐藏 */
-  hide: () => void;
-  /** 显示 */
-  show: () => void;
   /** 订阅取消 */
   off: (name: string | symbol, callback: Function) => void;
   /** 订阅 */
-  on: (name: string | symbol, callback: Function) => void;
+  on: (name: string | symbol, callback: Function, config?: IOnConfig) => void;
   /** 单次订阅 */
   once: (name: string | symbol, callback: Function) => void;
   /** 发布 */
@@ -129,13 +137,14 @@ config: {
   appendTo?: string | HTMLElement;
   // 内部维护的响应式变量,你需要完整的将其传递进去,不要将响应式变量解包
   visible: Ref<boolean>;
+  meta?:Meta;
 }
 ```
-
-其余并不复杂,更多查看 element-plus 适配代码:/src/components/ElementPlusDialog.tsx
+更多查看 element-plus 适配代码:[element-plus dialog组件适配代码](https://github.com/pandavips/Vue3-Command-Component/blob/main/src/components/ElementPlusDialog.tsx)
 
 ## 一些建议
 
 - 强烈建议你的项目配置 jsx!如果你能忍受一味的使用`h`函数,那么你可以忽略这个建议.
 
-- 尽管 consumer 对象实现了一个订阅模式,但是你应该避免通过它来进行内部和外部的通信,它的出现是为了实现对命令弹窗的组件的增强,不建议用于业务开发.所以,情非得已之下,请尽量使用`destroyWithReject`和`destroyWithResolve`来借助 promise 的特性进行数据交互.当然,也可以使用很常规的`props`和`emit`等手段进行通信.
+- 请不要使用Consumer的订阅系统来实现你的业务!它只应该用来增强弹窗的功能,如果你使用了这种方式,那么一定是你的设计出现了问题,一定还有更好的方案.
+

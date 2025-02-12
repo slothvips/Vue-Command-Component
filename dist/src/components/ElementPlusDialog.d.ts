@@ -1,6 +1,6 @@
 import { DialogProps } from 'element-plus';
 import { VNode } from 'vue';
-import { ICommandComponentArrtsProviderConfig } from './Core';
+import { ICommandComponentArrtsProviderConfig, ICreateCommandComponentConfig } from './Core';
 export type IElementPlusDialogConfig = {
     slots?: {
         [key: string]: () => VNode | VNode[];
@@ -14,4 +14,4 @@ export type IElementPlusDialogConfig = {
     confirmBtnText?: string;
 } & ICommandComponentArrtsProviderConfig & Record<string, any>;
 export declare const setElementPlusDialogMountNode: (node: HTMLElement | undefined) => void;
-export declare const createElementPlusDialog: (immediately?: boolean) => (ContentVNode: VNode, config?: IElementPlusDialogConfig) => import('./Core').IConsumer;
+export declare const createElementPlusDialog: (createConfig?: ICreateCommandComponentConfig) => (ContentVNode: VNode, config?: IElementPlusDialogConfig) => import('./Core').IConsumer;

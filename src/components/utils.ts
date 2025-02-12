@@ -90,3 +90,6 @@ export const getMaxZIndex = (domNode: HTMLElement) => {
   });
   return maxZIndex;
 };
+
+// 检查一个值是否为空
+export const isNull = (val: any) => val === null || val === void 0;

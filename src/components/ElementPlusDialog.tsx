@@ -1,9 +1,9 @@
 import { ElDialog, useGlobalComponentSettings, ElButton, type DialogProps } from "element-plus";
 import type { VNode } from "vue";
 import { getCurrentInstance, h, ref, defineComponent } from "vue";
-import type { ICommandComponentArrtsProviderConfig } from "./Core";
+import type { ICommandComponentArrtsProviderConfig, ICreateCommandComponentConfig } from "./Core";
 import { CommandProvider } from "./Core";
-import { busName2EventName, eventName2BusName } from "./utils";
+import { busName2EventName, eventName2BusName, isNull } from "./utils";
 import { EVENT_NAME } from "./type";
 
 export type IElementPlusDialogConfig = {
@@ -23,95 +23,104 @@ export type IElementPlusDialogConfig = {
   cancelBtnText?: string;
   onConfirm?: (() => void) | boolean;
   confirmBtnText?: string;
-
-} & ICommandComponentArrtsProviderConfig & Record<string, any>;
-
+} & ICommandComponentArrtsProviderConfig &
+  Record<string, any>;
 
 // ElementPlusDialog全局挂载点
-let mountNode: HTMLElement | undefined = void 0
+let mountNode: HTMLElement | undefined = void 0;
 export const setElementPlusDialogMountNode = (node: HTMLElement | undefined) => {
-  mountNode = node
-}
+  mountNode = node;
+};
 
-export const createElementPlusDialog = (immediately = true) => {
-
+export const createElementPlusDialog = (createConfig: ICreateCommandComponentConfig = {}) => {
   // 我们需要捕获使用命令式组件的的组件实例,我们会用它来获取上下文
   const parentInstance = getCurrentInstance();
   // 可忽略,只是为了获取语言包
-  const { locale: { t } } = useGlobalComponentSettings('message-box')
+  const {
+    locale: { t },
+  } = useGlobalComponentSettings("message-box");
 
   // 返回一个函数,这个函数接收一个组件节点,以及配置项,返回一个consumer对象
   const commandDialog = (ContentVNode: VNode, config: IElementPlusDialogConfig = {}) => {
-    // 我们不再依赖外部的visible变量来控制弹窗的显示与隐藏,这免去了外部手动控制弹窗显示与隐藏的麻烦,而是通过consumer对象来进行控制
-    const visible = ref(immediately);
-    // 这里的consumer和弹窗内部通过`inject`接收到的`consumer`是同一个对象
+    // 初始显隐状态
+    const visible = ref<boolean>(isNull(createConfig.immediately) ? true : !!createConfig.immediately);
+
+    // 这里的consumer和弹窗内部通过`getConsumer`接收到的`consumer`是同一个对象
     const consumer = CommandProvider(
       parentInstance,
-      h(defineComponent({
-        setup() {
-          // 这里一般建议你在后续赋值为UI库的弹窗组件的ref,以便将来使用它暴露的属性和方法
-          const componentRef = ref()
-          const handleClose = (done: () => void) => {
-            done();
-            consumer.destroy();
-          };
+      h(
+        defineComponent({
+          setup() {
+            // 这里一般建议你在后续赋值为UI库的弹窗组件的ref,以便将来使用它暴露的属性和方法
+            const componentRef = ref();
+            const handleMounted = () => {
+              Promise.resolve().then(() => {
+                // 设置ref,以便将来使用第三方组件暴露的属性和方法
+                consumer.componentRef = componentRef;
+              });
+            };
 
-          const handleClosed = () => {
-            consumer.emit(EVENT_NAME.destory);
-          };
+            const handleClose = (done: () => void) => {
+              done();
+              consumer.destroy();
+            };
 
-          const handleMounted = () => {
-            Promise.resolve().then(() => {
-              consumer.componentRef = componentRef;
-            });
-          };
+            // 包装外部监听的onClosed事件,并触发销毁事件
+            const handleClosed = (...args: any[]) => {
+              consumer.emit(EVENT_NAME.destory);
+              return config.attrs?.onClosed?.(...args);
+            };
 
-          return () => (
-            <ElDialog
-              ref={componentRef}
-              modelValue={visible.value}
-              beforeClose={handleClose}
-              onClosed={handleClosed}
-              onVnodeMounted={handleMounted}
-              {...{
-                title: config.title,
-                width: config.width,
-                ...config.attrs,
-              }}
-            >
-              {{
-                default: () => ContentVNode,
-                footer: () => (
-                  <div>
-                    {config[busName2EventName(EVENT_NAME.cancel)] && (
-                      <ElButton onClick={() => consumer.emit(EVENT_NAME.cancel)}>
-                        {config.cancelBtnText || t('el.messagebox.cancel')}
-                      </ElButton>
-                    )}
-                    {config[busName2EventName(EVENT_NAME.confirm)] && (
-                      <ElButton type="primary" onClick={() => consumer.emit(EVENT_NAME.confirm)}>
-                        {config.confirmBtnText || t('el.messagebox.confirm')}
-                      </ElButton>
-                    )}
-                  </div>
-                ),
-                ...config.slots,
-              }}
-            </ElDialog>
-          )
-        }
-      })),
+            return () => (
+              <ElDialog
+                ref={componentRef}
+                modelValue={visible.value}
+                beforeClose={handleClose}
+                onVnodeMounted={handleMounted}
+                {...{
+                  title: config.title,
+                  width: config.width,
+                  ...config.attrs,
+                }}
+                onClosed={handleClosed}
+              >
+                {{
+                  default: () => ContentVNode,
+                  footer: () => (
+                    <div>
+                      {config[busName2EventName(EVENT_NAME.cancel)] && <ElButton onClick={() => consumer.emit(EVENT_NAME.cancel)}>{config.cancelBtnText || t("el.messagebox.cancel")}</ElButton>}
+                      {config[busName2EventName(EVENT_NAME.confirm)] && (
+                        <ElButton type="primary" onClick={() => consumer.emit(EVENT_NAME.confirm)}>
+                          {config.confirmBtnText || t("el.messagebox.confirm")}
+                        </ElButton>
+                      )}
+                    </div>
+                  ),
+                  ...config.slots,
+                }}
+              </ElDialog>
+            );
+          },
+        })
+      ),
       {
         provideProps: config.provideProps || {},
         appendTo: mountNode || config.appendTo,
         visible,
+        // 优先使用执行动作的meta,其次使用创建时的meta
+        meta: {
+          ...(createConfig?.meta || {
+            name: "command-element-plus-dialog",
+          }),
+          ...(config?.meta || {}),
+        },
       }
     );
 
     // --------------便利性功能----------------
     // 处理事件绑定
     Object.entries(config)
-      .filter(([key, fn]) => key.startsWith('on') && typeof fn === 'function')
+      .filter(([key, fn]) => key.startsWith("on") && typeof fn === "function")
       .forEach(([key, fn]) => {
         const bindKeyName = eventName2BusName(key);
         consumer.on(bindKeyName, fn as Function);

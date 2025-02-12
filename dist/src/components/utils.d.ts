@@ -20,3 +20,4 @@ export declare const PromiseWithResolvers: () => {
     reject: (reason?: any) => void;
 };
 export declare const getMaxZIndex: (domNode: HTMLElement) => number;
+export declare const isNull: (val: any) => boolean;
