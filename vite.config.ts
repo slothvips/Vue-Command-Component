@@ -5,6 +5,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import VueRouter from "unplugin-vue-router/vite";
 import dts from "vite-plugin-dts";
 import Components from "unplugin-vue-components/vite";
+import UnoCSS from 'unocss/vite'
 import { VantResolver, ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
 export default defineConfig({
@@ -18,6 +19,7 @@ export default defineConfig({
     Components({
       resolvers: [VantResolver(), ElementPlusResolver()],
     }),
+    UnoCSS(),
   ],
   server: {
     port: 7263,
