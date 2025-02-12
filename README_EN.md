@@ -129,3 +129,5 @@ The rest is not complicated. For more details, check the element-plus adaptation
 - It's strongly recommended that your project configures jsx! If you can tolerate using the `h` function all the time, you can ignore this suggestion.
 
 - Although the consumer object implements a subscription pattern, you should avoid using it for internal and external communication. Its appearance is to enhance the components of the command dialog, and is not recommended for business development. So, unless absolutely necessary, please try to use `destroyWithReject` and `destroyWithResolve` to interact with data using the features of promises. Of course, you can also use very conventional means like `props` and `emit` for communication.
+
+
