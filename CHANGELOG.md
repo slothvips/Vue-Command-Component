@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.4.1...v1.4.2) (2025-02-12)
+
+
+### Bug Fixes
+
+* unocss entry module ([820e927](https://github.com/pandavips/Vue3-Command-Dialog/commit/820e9275586e1a4ade14414bd4627cd0d1cc1b29))
+
 ## [1.4.1](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.4.0...v1.4.1) (2025-02-12)
 
 
