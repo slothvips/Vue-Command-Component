@@ -45,7 +45,8 @@
   "peerDependencies": {
     "element-plus": "2.x",
     "vant": "4.x",
-    "vue": "3.x"
+    "vue": "3.x",
+    "vue-router": "*"
   },
   "dependencies": {
     "lodash-es": "^4.17.21"

@@ -42,6 +42,7 @@ export default defineConfig({
         globals: {
           vue: "Vue",
           "element-plus": "ElementPlus",
+          "vue-router": "VueRouter",
           vant: "Vant",
         },
       },
