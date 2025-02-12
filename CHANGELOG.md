@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.4.2...v1.4.3) (2025-02-12)
+
+
+### Bug Fixes
+
+* UnoCSS plugin ([7f8f9d1](https://github.com/pandavips/Vue3-Command-Dialog/commit/7f8f9d112dad72f4c2f65b26529aae43cc4ef229))
+
 ## [1.4.2](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.4.1...v1.4.2) (2025-02-12)
 
 
