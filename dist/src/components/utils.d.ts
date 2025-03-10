@@ -21,3 +21,4 @@ export declare const PromiseWithResolvers: () => {
 };
 export declare const getMaxZIndex: (domNode: HTMLElement) => number;
 export declare const isNull: (val: any) => boolean;
+export declare const deepMerge: (target: any, source: any, ...args: any[]) => any;

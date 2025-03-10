@@ -93,3 +93,25 @@ export const getMaxZIndex = (domNode: HTMLElement) => {
 
 // 检查一个值是否为空
 export const isNull = (val: any) => val === null || val === void 0;
+
+// 深度合并多个对象,后续的属性会覆盖前面的属性
+export const deepMerge = (target: any, source: any, ...args: any[]) => {
+  const result = { ...target };
+  for (const key in source) {
+    if (source[key] && typeof source[key] === "object") {
+      // 确保target[key]存在且是一个对象，否则使用空对象
+      const targetValue = target[key] && typeof target[key] === "object" ? target[key] : {};
+      result[key] = deepMerge(targetValue, source[key]);
+    } else {
+      result[key] = source[key];
+    }
+  }
+
+  if (args.length > 0) {
+    for (const arg of args) {
+      Object.assign(result, deepMerge(result, arg));
+    }
+  }
+
+  return result;
+};

@@ -3,6 +3,7 @@
   "include": [
     "env.d.ts",
     "src/**/*",
+    "config/**/*",
     "dist/**/*",
     "./typed-router.d.ts",
     "vite.config.*"
@@ -26,8 +27,9 @@
     },
     "jsx": "preserve",
     "types": [
+      "vite/client",
       "unplugin-vue-router/client",
-      "node"
+      "node",
     ],
   }
 }
