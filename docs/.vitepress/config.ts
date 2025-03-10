@@ -1,6 +1,9 @@
 import { defineConfig } from "vitepress";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 import { transformerTwoslash } from "@shikijs/vitepress-twoslash";
 import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-icons";
+import { containerPreview, componentPreview } from "@vitepress-demo-preview/plugin";
+
 export default defineConfig({
   title: `vue3命令组件`,
   description: "带给你不一样的开发体验",
@@ -15,9 +18,6 @@ export default defineConfig({
     ],
     ["meta", { name: "theme-color", content: "#646cff" }],
   ],
-  // locales: {
-  //   root: { label: "English" },
-  // },
   themeConfig: {
     logo: "/logo.svg",
     socialLinks: [{ icon: "github", link: "todo" }],
@@ -101,11 +101,14 @@ export default defineConfig({
   markdown: {
     codeTransformers: [transformerTwoslash() as any],
     config(md) {
+      md.use(containerPreview, { clientOnly: true });
+      md.use(componentPreview, { clientOnly: true });
       md.use(groupIconMdPlugin);
     },
   },
   vite: {
     plugins: [
+      vueJsx(),
       groupIconVitePlugin({
         customIcon: {
           firebase: "vscode-icons:file-type-firebase",

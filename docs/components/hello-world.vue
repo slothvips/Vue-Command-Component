@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup lang="tsx">
+<script setup name="hello-world" lang="tsx">
 import { createElementPlusDialog } from "vue3-command-dialog";
 import DialogContent from "./dialog-content.vue";
 const CommandDialog = createElementPlusDialog();

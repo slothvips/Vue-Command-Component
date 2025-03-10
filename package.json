@@ -30,6 +30,8 @@
     "@types/node": "^22.5.4",
     "@vitejs/plugin-vue": "^5.1.2",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
+    "@vitepress-demo-preview/component": "^2.3.2",
+    "@vitepress-demo-preview/plugin": "^1.4.0",
     "@vue/tsconfig": "^0.5.1",
     "element-plus": "~2.8.2",
     "sass": "^1.79.4",
@@ -55,8 +57,6 @@
     "vue-router": "*"
   },
   "dependencies": {
-    "@vitepress-demo-preview/component": "^2.3.2",
-    "@vitepress-demo-preview/plugin": "^1.4.0",
     "lodash-es": "^4.17.21"
   },
   "pnpm": {
