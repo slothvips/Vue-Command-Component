@@ -1,9 +1,8 @@
 import { defineConfig } from "vitepress";
-import vueJsx from "@vitejs/plugin-vue-jsx";
 import { transformerTwoslash } from "@shikijs/vitepress-twoslash";
 import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-icons";
 import { containerPreview, componentPreview } from "@vitepress-demo-preview/plugin";
-
+import { plugins } from "../../config/base";
 export default defineConfig({
   title: `vue3命令组件`,
   description: "带给你不一样的开发体验",
@@ -38,12 +37,12 @@ export default defineConfig({
           text: "介绍",
           items: [
             {
-              text: "快速开始",
-              link: "/guide/quick-start",
+              text: "什么是命令式组件?",
+              link: "/guide/what",
             },
             {
-              text: "why use it?",
-              link: "/guide/why-use-it",
+              text: "快速开始",
+              link: "/guide/quick-start",
             },
           ],
         },
@@ -51,12 +50,16 @@ export default defineConfig({
           text: "指南",
           items: [
             {
-              text: "安装",
-              link: "/guide/install",
+              text: "实现原理",
+              link: "/guide/principle",
             },
             {
-              text: "引入",
-              link: "/guide/use",
+              text: "适配其他ui库组件",
+              link: "/guide/adapter",
+            },
+            {
+              text: "常见问题",
+              link: "/guide/faq",
             },
           ],
         },
@@ -108,7 +111,7 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      vueJsx(),
+      ...plugins,
       groupIconVitePlugin({
         customIcon: {
           firebase: "vscode-icons:file-type-firebase",

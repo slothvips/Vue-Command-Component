@@ -14,11 +14,11 @@ const baseExampleRoutes = [
   },
   {
     path: "/example/base/compatible-native-attributes",
-    text: "完美兼容组件库属性",
+    text: "组件库原生属性",
   },
   {
     path: "/example/base/confirm",
-    text: "确认/取消弹窗",
+    text: "确认/取消 弹窗",
   },
   {
     path: "/example/base/drawer",
@@ -41,7 +41,7 @@ const $route = useRoute();
 
 const activeExampleTitle = computed(() => {
   return baseExampleRoutes.find((e) => e.path === $route.fullPath)?.text || advanceExampleRoutes.find((e) => e.path === $route.fullPath)?.text;
-  });
+});
 </script>
 
 <template>

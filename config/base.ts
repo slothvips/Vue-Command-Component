@@ -5,15 +5,16 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import UnoCSS from "unocss/vite";
 import { resolve } from "path";
 
+export const plugins = [
+  vueJsx(),
+  Components({
+    resolvers: [VantResolver(), ElementPlusResolver()],
+  }),
+  UnoCSS(),
+];
+
 export default {
-  plugins: [
-    vue(),
-    vueJsx(),
-    Components({
-      resolvers: [VantResolver(), ElementPlusResolver()],
-    }),
-    UnoCSS(),
-  ],
+  plugins: [vue(), ...plugins],
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),

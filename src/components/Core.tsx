@@ -203,7 +203,7 @@ export const getConsumer = (warn: boolean = true): IConsumer => {
     warn &&
     console.warn(`别调用了欧尼酱~,这会儿没啥实际用途;没有根据CommandComponentConsumerInjectKey接收到注入数据.原因可能有两个:
     1.你可能对getConsumer进行了异步调用或条件调用,请在setup中直接调用.
-    2.你没有在命令弹窗内展示该组件,这个时候你一般可以忽略该警告消息.`);
+    2.你没有(或者你根本不需要)在命令弹窗内展示该组件,这个时候你一般可以通过warn参数忽略该警告消息.`);
 
   return inject<IConsumer>(
     CommandComponentConsumerInjectKey,
