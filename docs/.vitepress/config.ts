@@ -4,7 +4,7 @@ import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-i
 import { containerPreview, componentPreview } from "@vitepress-demo-preview/plugin";
 import { plugins } from "../../config/base";
 export default defineConfig({
-  title: `vue3命令组件`,
+  title: `Vue3命令组件`,
   description: "带给你不一样的开发体验",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/logo.svg" }],
@@ -19,7 +19,7 @@ export default defineConfig({
   ],
   themeConfig: {
     logo: "/logo.svg",
-    socialLinks: [{ icon: "github", link: "todo" }],
+    socialLinks: [{ icon: "github", link: "https://github.com/pandavips/Vue3-Command-Component" }],
     footer: {
       message: `Released under the MIT License.`,
       copyright: "Copyright © 2019-present pandavips",
@@ -27,7 +27,7 @@ export default defineConfig({
 
     nav: [
       { text: "指南", link: "/guide/quick-start", activeMatch: "/guide/" },
-      { text: "示例", link: "/example/base", activeMatch: "/example/" },
+      { text: "示例", link: "/example/", activeMatch: "/example/" },
       { text: "API", link: "/api/", activeMatch: "/api/" },
     ],
 
@@ -66,32 +66,18 @@ export default defineConfig({
       ],
       "/example/": [
         {
-          text: "基础",
           items: [
             {
-              text: "hello-world",
-              link: "/example/base/hello-world",
+              text: "基础实例",
+              link: "/example/base",
             },
             {
               text: "显隐控制",
-              link: "/example/base/visible-control",
+              link: "/example/visible-control",
             },
             {
               text: "消费对象介绍",
-              link: "/example/base/consumer-object",
-            },
-          ],
-        },
-        {
-          text: "高阶",
-          items: [
-            {
-              text: "promise弹窗",
-              link: "/example/advanced/promise",
-            },
-            {
-              text: "一些花活儿",
-              link: "/example/advanced/some-tricks",
+              link: "/example/consumer-object",
             },
           ],
         },

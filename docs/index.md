@@ -11,7 +11,7 @@ hero:
       link: /guide/what
     - theme: brand
       text: 快速开始
-      link: /guide/quick_start
+      link: /guide/quick-start
 
 features:
   - title: 命令式组件

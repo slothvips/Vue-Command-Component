@@ -3,6 +3,7 @@ import { VantResolver, ElementPlusResolver } from "unplugin-vue-components/resol
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import UnoCSS from "unocss/vite";
+import VueRouter from "unplugin-vue-router/vite";
 import { resolve } from "path";
 
 export const plugins = [
@@ -11,6 +12,7 @@ export const plugins = [
     resolvers: [VantResolver(), ElementPlusResolver()],
   }),
   UnoCSS(),
+  VueRouter(),
 ];
 
 export default {

@@ -5,6 +5,7 @@
     "src/**/*",
     "config/**/*",
     "dist/**/*",
+    "docs/**/*",
     "./typed-router.d.ts",
     "vite.config.*"
   ],
@@ -26,6 +27,8 @@
       ]
     },
     "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "types": [
       "vite/client",
       "unplugin-vue-router/client",

@@ -1,10 +1,9 @@
 import { ElDialog, useGlobalComponentSettings, ElButton, type DialogProps } from "element-plus";
 import type { VNode } from "vue";
 import { getCurrentInstance, h, ref, defineComponent } from "vue";
-import type { ICommandComponentArrtsProviderConfig, ICreateCommandComponentConfig } from "./Core";
 import { CommandProvider } from "./Core";
 import { busName2EventName, eventName2BusName, isNull } from "./utils";
-import { EVENT_NAME } from "./type";
+import { EVENT_NAME, type ICommandComponentArrtsProviderConfig, type ICreateCommandComponentConfig } from "./type";
 
 export type IElementPlusDialogConfig = {
   // 目标ui库目标组件的插槽

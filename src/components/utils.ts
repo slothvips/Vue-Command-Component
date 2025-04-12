@@ -1,10 +1,4 @@
-import type { IConsumer } from "./Core";
-
-export interface IOnConfig {
-  once?: boolean;
-  // 延迟执行时间后,即使事件没有触发也立即调用
-  callAfterDelay?: number;
-}
+import type { IConsumer, IOnConfig } from "./type";
 
 // 基于命令弹窗消费对象的事件注册中心
 export class ConsumerEventBus {
@@ -91,10 +85,20 @@ export const getMaxZIndex = (domNode: HTMLElement) => {
   return maxZIndex;
 };
 
-// 检查一个值是否为空
-export const isNull = (val: any) => val === null || val === void 0;
+/**
+ * Checks if a value is null or undefined
+ * @param val - The value to check
+ * @returns true if the value is null or undefined
+ */
+export const isNull = (val: unknown): val is null | undefined => val === null || val === void 0;
 
-// 深度合并多个对象,后续的属性会覆盖前面的属性
+/**
+ * Deeply merges multiple objects, with later properties overriding earlier ones
+ * @param target - The target object to merge into (won't be modified)
+ * @param source - The source object to merge from
+ * @param args - Additional objects to merge (later objects take precedence)
+ * @returns A new object containing the merged properties
+ */
 export const deepMerge = (target: any, source: any, ...args: any[]) => {
   const result = { ...target };
   for (const key in source) {

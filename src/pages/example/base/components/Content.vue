@@ -22,6 +22,8 @@ Promise.resolve().then(() => {
     ...(ins as any).provides,
   };
 });
+
+console.log("来自vue 实例的全局属性", (getCurrentInstance()! as any).appContext.config.globalProperties.$panda);
 </script>
 
 <template>
