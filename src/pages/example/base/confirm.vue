@@ -1,22 +1,12 @@
 <script lang="tsx" setup>
-import { createElementPlusDialog, EVENT_NAME, getConsumer } from "../../../components";
+import { useElementPlusDialog, EVENT_NAME, getConsumer } from "../../../components";
 import { defineComponent } from "vue";
 
-const CommandDialog = createElementPlusDialog();
+const CommandDialog = useElementPlusDialog();
 
 const Content = defineComponent({
   setup(_, { attrs }) {
     const consumer = getConsumer();
-    !attrs["no-bind"] &&
-      consumer.on(EVENT_NAME.confirm, () => {
-        console.log("约定事件~confirm");
-        consumer.destroyWithResolve("confirm");
-      });
-    !attrs["no-bind"] &&
-      consumer.on(EVENT_NAME.cancel, () => {
-        console.log("约定事件~cancel");
-        consumer.destroyWithReject("cancel");
-      });
 
     return () => <div>你确认吗?</div>;
   },
@@ -25,24 +15,12 @@ const Content = defineComponent({
 const openDialog = () => {
   CommandDialog(<Content />, {
     title: "请确认",
-    onConfirm: true,
-    confirmBtnText: "我已确认",
-    onCancel: true,
-    cancelBtnText: "我要取消",
   });
 };
 
 const openDialog2 = () => {
   const consumer = CommandDialog(<Content no-bind />, {
     title: "请确认",
-    onConfirm: () => {
-      console.log("指定函数~confirm");
-      consumer.destroyWithResolve("confirm");
-    },
-    onCancel: () => {
-      console.log("指定函数~cancel");
-      consumer.destroyWithReject("cancel");
-    },
   });
 };
 </script>

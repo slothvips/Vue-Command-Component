@@ -11,10 +11,10 @@
 </template>
 
 <script setup name="base-example" lang="tsx">
-import { createElementPlusDialog } from "vue3-command-dialog";
+import { useElementPlusDialog } from "vue3-command-dialog";
 import DialogContent from "./dialog-content.vue";
 
-const CommandDialog = createElementPlusDialog();
+const CommandDialog = useElementPlusDialog();
 const openDialog = () =>
   CommandDialog(<DialogContent />, {
     title: "hello world",

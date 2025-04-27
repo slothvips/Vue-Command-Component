@@ -22,5 +22,6 @@ export default {
       "@": resolve(__dirname, "src"),
     },
   },
+  server: { port: 3721 },
   base: "./",
 };

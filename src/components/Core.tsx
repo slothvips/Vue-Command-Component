@@ -1,37 +1,43 @@
 import type { Component, ComponentInternalInstance, InjectionKey } from "vue";
-import { defineComponent, inject, nextTick, provide, render } from "vue";
-import { EVENT_NAME, type ICommandComponentProviderConfig, type IConsumer, type IOnConfig } from "./type";
+import { defineComponent, h, inject, nextTick, provide, render } from "vue";
+import { EVENT_NAME, type ICommandComponentProviderConfig, type IConsumer, type IOnConfig, type EventCallback } from "./type";
 import { ConsumerEventBus, PromiseWithResolvers } from "./utils";
 
-// Consumer inject key
 export const CommandComponentConsumerInjectKey: InjectionKey<IConsumer> = Symbol("CommandComponentConsumerInjectKey");
-// Stack inject key
 export const CommandComponentStackInjectKey: InjectionKey<IConsumer[]> = Symbol("CommandComponentStackInjectKey");
 
-const eventBus = new ConsumerEventBus();
+const EB = new ConsumerEventBus();
 
-// 所有未被内存销毁的命令式组件Consumer集合
-// 其用途是为了提供一个接触不到Consumer的地方去操作Consumer
-export const activeCommandComponentConsumers = new Set<IConsumer>();
-// 销毁所有命令式组件
-export const destroyAllCommandComponentConsumer = () => {
-  console.log("destroyAllCommandComponentConsumer");
-  activeCommandComponentConsumers.forEach((consumer) => {
+export const activeConsumers = new Set<IConsumer>();
+
+export const destroyAllConsumer = (): void => {
+  activeConsumers.forEach((consumer) => {
     consumer.destroy();
   });
 };
 
-// 获取上游所有provides链
-const getProvidesChain = (ins: ComponentInternalInstance): any => ({
+/**
+ * 获取自身以及所有祖先provides链
+ * @param ins - 组件实例
+ * @returns provides链上的所有注入内容
+ */
+const getProvidesChain = (ins: ComponentInternalInstance): Record<string | symbol, unknown> => ({
   ...(ins.parent ? getProvidesChain(ins.parent) : {}),
   ...(ins as any).provides,
 });
-export function CommandProvider(parentInstance: ComponentInternalInstance | null, uiComponentVnode: Component, config: ICommandComponentProviderConfig): IConsumer {
-  const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || document.body;
-  const container = document.createElement("div");
-  container.className = config.customClassName || "command-commponent-container";
 
-  appendToElement.appendChild(container);
+// 注入+渲染
+export function CommandProviderWithRender(parentInstance: ComponentInternalInstance | null, uiComponent: Component, config: ICommandComponentProviderConfig): IConsumer {
+  const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || (parentInstance as any).vnode.el.parentElement || document.body;
+  const degradationAppendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || document.body;
+  const containerEl = document.createElement("div");
+  containerEl.className = config.customClassName || "command-component-container";
+  try {
+    appendToElement.appendChild(containerEl);
+  } catch (error) {
+    console.warn(`function appendChild call error. Fallback to  maybe document.body.`);
+    degradationAppendToElement.appendChild(containerEl);
+  }
 
   const hide = () => {
     config.visible.value = false;
@@ -41,31 +47,34 @@ export function CommandProvider(parentInstance: ComponentInternalInstance | null
   };
   const unmount = () => {
     nextTick(() => {
-      render(null, container);
-      container.remove();
+      render(null, containerEl);
+      containerEl.remove();
     });
   };
-  const destroy = (external = false) => {
+
+  const { promise, resolve, reject } = PromiseWithResolvers<unknown>();
+  const DEFAULT_ANIMATION_TIMEOUT = 3000;
+  const destroy = (external = false): void => {
     if (external) {
-      // 这里的事件是为了完整的关闭动画展示
-      // 如果关闭时没有触发该事件,那么将永远不会执行卸载操作所以加入延时立即调用,保证最终一定会执行卸载操作
-      // 没有一个弹窗动画会超过三秒吧 =.=
-      consumer.on(EVENT_NAME.destory, unmount, { once: true, callAfterDelay: 3000 });
       hide();
+      // Delay destruction to ensure component animation completion (3s is enough.)
+      consumer.on(EVENT_NAME.destroy, unmount, {
+        once: true,
+        callImmediatelyAfterDelay: DEFAULT_ANIMATION_TIMEOUT,
+      });
     } else {
-      // 从集合中删除掉consumer
-      activeCommandComponentConsumers.delete(consumer);
-      // 当前弹窗关闭,需要销毁所有下游的弹窗
-      consumer.stack.splice(consumer.stackIndex).forEach((c) => c.destroy(true));
+      activeConsumers.delete(consumer);
+      // Destroy all downstream dialogs
+      const stack = consumer.stack.splice(consumer.stackIndex);
+      stack.forEach((c: IConsumer) => c.destroy(true));
     }
   };
 
-  const { promise, resolve, reject } = PromiseWithResolvers();
-  const destroyWithResolve = (val: any) => {
+  const destroyWithResolve = (val: unknown): void => {
     resolve(val);
     destroy();
   };
-  const destroyWithReject = (reason: any) => {
+  const destroyWithReject = (reason: unknown): void => {
     reject(reason);
     destroy();
   };
@@ -80,13 +89,13 @@ export function CommandProvider(parentInstance: ComponentInternalInstance | null
     hide,
     show,
     destroy,
-    container,
+    container: containerEl,
     visible: config.visible,
-    on: (name: string | symbol, callback: Function, config: IOnConfig = {}) => eventBus.on(consumer, name, callback, config),
-    once: (name: string | symbol, callback: Function) => eventBus.once(consumer, name, callback),
-    emit: (name: string | symbol, ...args: any) => eventBus.emit(consumer, name, ...args),
-    off: (name: string | symbol, callback: Function) => eventBus.off(consumer, name, callback),
-    stack: [],
+    on: (name: string | symbol, callback: EventCallback, config: IOnConfig = {}) => EB.on(consumer, name, callback, config),
+    once: (name: string | symbol, callback: EventCallback) => EB.once(consumer, name, callback),
+    emit: (name: string | symbol, ...args: unknown[]) => EB.emit(consumer, name, ...args),
+    off: (name: string | symbol, callback: EventCallback) => EB.off(consumer, name, callback),
+    stack: [] as IConsumer[],
     stackIndex: -1,
     componentRef: void 0,
   };
@@ -97,43 +106,46 @@ export function CommandProvider(parentInstance: ComponentInternalInstance | null
       for (const key in config.provideProps) {
         provide(key, config.provideProps[key]);
       }
+
+      // 上游注入
+      const upStreamProvides = {
+        // ...vnode.appContext!.provides,
+        ...getProvidesChain(parentInstance!),
+      };
+      for (const key in upStreamProvides) {
+        provide(key, upStreamProvides[key]);
+      }
+
       // 注入consumer
       provide(CommandComponentConsumerInjectKey, consumer);
 
-      // 嵌套弹窗的堆栈,最终你可以在任何一个consumer中获取到所有嵌套的consumer
+      // 处理嵌套弹窗
       const stack = inject(CommandComponentStackInjectKey, []);
-      // 标记当前弹窗的index
       consumer.stackIndex = stack.length;
       stack.push(consumer);
-      // 继续注入给子组件
       provide(CommandComponentStackInjectKey, stack);
       consumer.stack = stack;
 
-      return () => uiComponentVnode;
+      return () => h(uiComponent);
     },
   });
   const vnode = <CommandComponentProviderComponent />;
 
-  // 应用上下文继承处理
   vnode.appContext = parentInstance?.appContext || vnode.appContext;
-  vnode.appContext!.provides = {
-    ...vnode.appContext!.provides,
-    ...getProvidesChain(parentInstance!),
-  };
 
-  render(vnode, container);
+  render(vnode, containerEl);
 
-  activeCommandComponentConsumers.add(consumer);
+  activeConsumers.add(consumer);
+
   return consumer;
 }
 
 export const getConsumer = (warn: boolean = true): IConsumer => {
   const showWarningMessage = () =>
     warn &&
-    console.warn(`没有根据CommandComponentConsumerInjectKey接收到注入数据.原因可能有两个:
-    1.你可能对getConsumer进行了异步调用或条件调用,请在setup顶层中直接调用.
-    2.你没有(或者你根本不需要)在命令弹窗内展示该组件,这个时候你一般可以通过warn参数忽略该警告消息.`);
-
+    console.warn(`Failed to get Consumer instance. Please note:
+    1. This function needs to be called directly in the setup top level.
+    2. Make sure to display this component inside a command dialog, or you can ignore this warning message by using warn parameter: getConsumer(false)`);
   return inject<IConsumer>(
     CommandComponentConsumerInjectKey,
     () =>
@@ -143,13 +155,4 @@ export const getConsumer = (warn: boolean = true): IConsumer => {
       }),
     true
   )!;
-};
-
-// ---------------------------------
-/**
- * @deprecated This API will be deprecated in the future, please use `getConsumer` instead.
- */
-export const getCommandDialogConsumer = (...args: any) => {
-  console.warn("Warning: This API will be deprecated in the future, please use `getConsumer` instead.");
-  return getConsumer(...args);
 };

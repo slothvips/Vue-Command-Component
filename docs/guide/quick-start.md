@@ -50,9 +50,9 @@ ni vue3-command-component
 现在你可以直接使用了。
 
 ```jsx
-import { createElementPlusDialog } from "vue3-command-component";
+import { useElementPlusDialog } from "vue3-command-component";
 
-const CommandDialog=createElementPlusDialog()
+const CommandDialog=useElementPlusDialog()
 
 const Content=defineComponent({
   render(){

@@ -1,8 +1,8 @@
 <script lang="tsx" setup>
-import { createElementPlusDialog } from "../../../components";
+import { useElementPlusDialog } from "../../../components";
 import { ref, h, defineComponent } from "vue";
 
-const CommandDialog = createElementPlusDialog();
+const CommandDialog = useElementPlusDialog();
 
 const count = ref(0);
 setInterval(() => {

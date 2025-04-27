@@ -1,10 +1,12 @@
-import type { IConsumer, IOnConfig } from "./type";
+import type { IConsumer, IOnConfig, EventCallback, EventMap, EventBusMap, IPromiseWithResolvers, DeepMergeable } from "./type";
 
-// 基于命令弹窗消费对象的事件注册中心
+/**
+ * 基于命令弹窗消费对象的事件注册中心
+ */
 export class ConsumerEventBus {
-  private map = new WeakMap<IConsumer, Map<string | symbol, Set<Function>>>();
+  private map: EventBusMap = new WeakMap();
 
-  private getEventsMapByConsumer(consumer: IConsumer): Map<string | symbol, Set<Function>> {
+  private getEventsMapByConsumer(consumer: IConsumer): EventMap {
     let eventsMap = this.map.get(consumer);
     if (!eventsMap) {
       eventsMap = new Map();
@@ -13,7 +15,7 @@ export class ConsumerEventBus {
     return eventsMap;
   }
 
-  private getEventsByConsumer(consumer: IConsumer, name: string | symbol): Set<Function> {
+  private getEventsByConsumer(consumer: IConsumer, name: string | symbol): Set<EventCallback> {
     const eventsMap = this.getEventsMapByConsumer(consumer);
     let events = eventsMap.get(name);
     if (!events) {
@@ -23,55 +25,63 @@ export class ConsumerEventBus {
     return events;
   }
 
-  on(consumer: IConsumer, name: string | symbol, callback: Function, config: IOnConfig = {}): void {
+  on(consumer: IConsumer, name: string | symbol, callback: EventCallback, config: IOnConfig = {}): void {
     const events = this.getEventsByConsumer(consumer, name);
     let finalCallback = callback;
     if (config.once) {
-      finalCallback = (...args: any[]) => {
+      finalCallback = (...args: unknown[]) => {
         callback(...args);
         this.off(consumer, name, finalCallback);
       };
     }
     events.add(finalCallback);
-    config.callAfterDelay !== void 0 &&
+    config.callImmediatelyAfterDelay !== void 0 &&
       setTimeout(() => {
         finalCallback();
-      }, config.callAfterDelay || 0);
+      }, config.callImmediatelyAfterDelay || 0);
   }
 
-  once(consumer: IConsumer, name: string | symbol, callback: Function): void {
+  once(consumer: IConsumer, name: string | symbol, callback: EventCallback): void {
     this.on(consumer, name, callback, { once: true });
   }
 
-  emit(consumer: IConsumer, name: string | symbol, ...args: any[]): void {
+  emit(consumer: IConsumer, name: string | symbol, ...args: unknown[]): void {
     const events = this.getEventsByConsumer(consumer, name);
-    // if (events.size === 0) {
-    // console.warn(`${consumer}未注册${String(name)}事件`);
-    // }
     events.forEach((callback) => callback(...args));
   }
 
-  off(consumer: IConsumer, name: string | symbol, callback: Function): void {
+  off(consumer: IConsumer, name: string | symbol, callback: EventCallback): void {
     this.getEventsByConsumer(consumer, name).delete(callback);
   }
 }
 
+/**
+ * 将事件名转换为总线名称
+ */
 export const eventName2BusName = (name = ""): string => name.slice(2).toLowerCase();
 
+/**
+ * 将总线名称转换为事件名
+ */
 export const busName2EventName = (name = ""): string => `on${name.charAt(0).toUpperCase()}${name.slice(1)}`;
 
-export const PromiseWithResolvers = () => {
-  let resolve: (value: unknown) => void = () => void 0;
-  let reject: (reason?: any) => void = () => void 0;
-  const promise = new Promise((res, rej) => {
+/**
+ * 创建一个Promise和它的处理器
+ */
+export const PromiseWithResolvers = <T = unknown>(): IPromiseWithResolvers<T> => {
+  let resolve: (value: T) => void = () => void 0;
+  let reject: (reason?: unknown) => void = () => void 0;
+  const promise = new Promise<T>((res, rej) => {
     resolve = res;
     reject = rej;
   });
   return { promise, resolve, reject };
 };
 
-// 在同级dom节点中获取最大的z-index
-export const getMaxZIndex = (domNode: HTMLElement) => {
+/**
+ * 在同级dom节点中获取最大的z-index
+ */
+export const getMaxZIndex = (domNode: HTMLElement): number => {
   const siblings = domNode.parentElement?.children || [];
   let maxZIndex = 0;
   Array.from(siblings).forEach((sibling) => {
@@ -82,7 +92,7 @@ export const getMaxZIndex = (domNode: HTMLElement) => {
       }
     }
   });
-  return maxZIndex;
+  return +maxZIndex;
 };
 
 /**
@@ -93,29 +103,25 @@ export const getMaxZIndex = (domNode: HTMLElement) => {
 export const isNull = (val: unknown): val is null | undefined => val === null || val === void 0;
 
 /**
- * Deeply merges multiple objects, with later properties overriding earlier ones
- * @param target - The target object to merge into (won't be modified)
- * @param source - The source object to merge from
- * @param args - Additional objects to merge (later objects take precedence)
- * @returns A new object containing the merged properties
+ * 深度合并多个对象
+ * @param target - 目标对象
+ * @param source - 源对象
+ * @param args - 额外的合并对象
+ * @returns 合并后的新对象
  */
-export const deepMerge = (target: any, source: any, ...args: any[]) => {
+export const deepMerge = (target: Record<string | symbol, unknown>, source: Record<string | symbol, unknown>, ...args: Record<string, unknown>[]): Record<string, unknown> => {
   const result = { ...target };
-  for (const key in source) {
-    if (source[key] && typeof source[key] === "object") {
-      // 确保target[key]存在且是一个对象，否则使用空对象
-      const targetValue = target[key] && typeof target[key] === "object" ? target[key] : {};
-      result[key] = deepMerge(targetValue, source[key]);
-    } else {
-      result[key] = source[key];
+  const merge = (obj: Record<string | symbol, unknown>) => {
+    for (const key in obj) {
+      if (obj[key] && typeof obj[key] === "object") {
+        const targetValue = result[key] && typeof result[key] === "object" ? (result[key] as Record<string | symbol, unknown>) : {};
+        result[key] = deepMerge(targetValue, obj[key] as Record<string | symbol, unknown>);
+      } else {
+        result[key] = obj[key];
+      }
     }
-  }
-
-  if (args.length > 0) {
-    for (const arg of args) {
-      Object.assign(result, deepMerge(result, arg));
-    }
-  }
-
+  };
+  merge(source);
+  args.forEach(merge);
   return result;
 };

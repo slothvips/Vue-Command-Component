@@ -1,17 +1,24 @@
 <script lang="tsx" setup>
-import {  createElementPlusDrawer } from "../../../components";
+import { useElementPlusDrawer } from "../../../components";
 import Content from "./components/Content.vue";
-import { provide } from "vue";
+import { getCurrentInstance, onMounted, provide } from "vue";
 
 provide("base", "来自base的🩷");
 
 // 抽屉示例
-const CommandDrawer = createElementPlusDrawer();
+const CommandDrawer = useElementPlusDrawer();
 const openDrawer = () => {
   CommandDrawer(<Content />, {
-    title: "三秒后打开",
+    title: "给👴打开",
   });
 };
+
+const ctx = getCurrentInstance();
+
+onMounted(() => {
+  console.log("drawer mounted", ctx?.vnode.el);
+  // console.log('drawer mounted', ctx?.vnode.el.innerText);
+});
 </script>
 
 <template>

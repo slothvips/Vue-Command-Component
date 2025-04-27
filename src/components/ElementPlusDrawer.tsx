@@ -1,83 +1,52 @@
-import { ElDrawer, type DrawerProps } from "element-plus";
+import { ElDrawer } from "element-plus";
 import type { VNode } from "vue";
-import { getCurrentInstance, h, ref, defineComponent } from "vue";
-import type { ICommandComponentArrtsProviderConfig, ICreateCommandComponentConfig } from "./Core";
-import { CommandProvider } from "./Core";
-import { EVENT_NAME } from "./type";
-import { isNull } from ".";
+import { UIComponentAdapter } from "./adapter";
+import { EVENT_NAME, type ICommandComponentConfig, type ICreateCommandComponentConfig, type IRenderComponentOptions } from "./type";
 
-export type IElementPlusDrawerConfig = {
-  slots?: {
-    [key: string]: () => VNode | VNode[];
-  };
-  attrs?: Partial<DrawerProps & Record<string, any>>;
-  title?: string;
-  size?: string;
-} & ICommandComponentArrtsProviderConfig &
-  Record<string, any>;
-
-let mountNode: HTMLElement | undefined = void 0;
-export const setElementPlusDrawerMountNode = (node: HTMLElement | undefined) => {
-  mountNode = node;
+// 自行拓展属性
+export type IElementPlusDrawerConfig = ICommandComponentConfig & {
+  title: string;
+  width?: string;
 };
 
-export const createElementPlusDrawer = (createConfig: ICreateCommandComponentConfig = {}) => {
-  const parentInstance = getCurrentInstance();
-  const commandDrawer = (ContentVNode: VNode, config: IElementPlusDrawerConfig = {}) => {
-    const visible = ref(isNull(createConfig.immediately) ? true : !!createConfig.immediately);
-    const consumer = CommandProvider(
-      parentInstance,
-      h(
-        defineComponent({
-          setup() {
-            const handleClose = (done: () => void) => {
-              done();
-              consumer.destroy();
-            };
-            const handleClosed = () => {
-              consumer.emit(EVENT_NAME.destory);
-            };
-            const componentRef = ref();
-            const handleMounted = () => {
-              Promise.resolve().then(() => {
-                consumer.componentRef = componentRef;
-              });
-            };
-            return () => (
-              <ElDrawer
-                ref={componentRef}
-                modelValue={visible.value}
-                beforeClose={handleClose}
-                onClosed={handleClosed}
-                onVnodeMounted={handleMounted}
-                {...{
-                  title: config.title,
-                  size: config.size,
-                  ...config.attrs,
-                }}
-              >
-                {{
-                  default: () => ContentVNode,
-                  ...config.slots,
-                }}
-              </ElDrawer>
-            );
-          },
-        })
-      ),
-      {
-        provideProps: config.provideProps || {},
-        appendTo: mountNode || config.appendTo,
-        visible,
-        meta: {
-          ...(createConfig?.meta || {
-            name: "command-element-plus-drawer",
-          }),
-          ...(config?.meta || {}),
-        },
-      }
+class ElementPlusDrawerAdapter extends UIComponentAdapter<IElementPlusDrawerConfig> {
+  protected renderComponent(ContentVNode: VNode, options: IRenderComponentOptions<IElementPlusDrawerConfig>): VNode {
+    const { componentRef, visible, onMounted, config, consumer } = options;
+    const handleClose = (done: () => void) => {
+      done();
+      consumer.value!.destroy();
+    };
+
+    const handleClosed = (...args: unknown[]) => {
+      consumer.value!.emit(EVENT_NAME.destroy);
+      return config.attrs?.onClosed?.(...args);
+    };
+
+    return (
+      <ElDrawer
+        ref={componentRef}
+        modelValue={visible}
+        beforeClose={handleClose}
+        onVnodeMounted={onMounted}
+        {...{
+          title: config.title,
+          ...config.attrs,
+        }}
+        onClosed={handleClosed}
+      >
+        {{
+          default: () => ContentVNode,
+          ...config.slots,
+        }}
+      </ElDrawer>
     );
-    return consumer;
-  };
-  return commandDrawer;
+  }
+}
+
+export const useElementPlusDrawer = (createConfig: ICreateCommandComponentConfig = {}) => {
+  const adapter = new ElementPlusDrawerAdapter();
+
+  adapter.setMountNode(createConfig.appendTo);
+
+  return adapter.createCommand(createConfig);
 };

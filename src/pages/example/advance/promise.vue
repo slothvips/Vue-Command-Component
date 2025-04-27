@@ -1,8 +1,8 @@
 <script lang="tsx" setup>
-import { createElementPlusDialog, getConsumer } from "../../../components/index";
+import { useElementPlusDialog, getConsumer } from "../../../components/index";
 import { defineComponent, ref } from "vue";
 
-const CommandDialog = createElementPlusDialog();
+const CommandDialog = useElementPlusDialog();
 
 const Content = defineComponent({
   setup() {
