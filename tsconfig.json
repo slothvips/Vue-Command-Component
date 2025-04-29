@@ -1,17 +1,5 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": [
-    "env.d.ts",
-    "src/**/*",
-    "config/**/*",
-    "dist/**/*",
-    "docs/**/*",
-    "./typed-router.d.ts",
-    "vite.config.*"
-  ],
-  "exclude": [
-    "src/**/__tests__/*"
-  ],
   "compilerOptions": {
     "target": "ES2016",
     "skipLibCheck": true,
@@ -21,18 +9,20 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
     "moduleResolution": "Bundler",
     "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
-    "jsx": "preserve",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "Fragment",
+    "paths": {},
     "types": [
-      "vite/client",
-      "unplugin-vue-router/client",
       "node",
+      "vite/client",
+      "vue"
     ],
-  }
+  },
+  "include": [
+    "env.d.ts",
+    "./typed-router.d.ts",
+    "vite.config.*",
+    "packages/core/src/**/*",
+  ],
+  "exclude": [
+    "src/**/__tests__/*"
+  ],
 }
