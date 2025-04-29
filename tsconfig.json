@@ -21,6 +21,7 @@
     "./typed-router.d.ts",
     "vite.config.*",
     "packages/core/src/**/*",
+    "packages/docs/**/*",
   ],
   "exclude": [
     "src/**/__tests__/*"

@@ -78,7 +78,7 @@ export interface IConsumer {
   /** 发布 */
   emit: (name: string | symbol, ...args: unknown[]) => void;
   /** UI库的弹窗实例引用 */
-  componentRef?: Ref<Element | ComponentPublicInstance | null>;
+  componentRef?: Ref<any>;
   /** 弹窗挂载的html元素 */
   container: HTMLDivElement;
   /** 弹窗嵌套堆栈 */
