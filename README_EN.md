@@ -105,7 +105,7 @@ You don't need to worry about the creation and destruction of this object, you j
 
 CommandProvider also returns a `consumer` object for external use of the dialog. The consumer objects obtained internally and externally of the dialog are the same object, so they are strictly equal (===).
 
-The internal dialog component obtains the `consumer` object by calling `getConsumer`. This function will return a consumer object, and it can only be called directly at the top of setup, not conditionally or asynchronously.
+The internal dialog component obtains the `consumer` object by calling `useConsumer`. This function will return a consumer object, and it can only be called directly at the top of setup, not conditionally or asynchronously.
 
 2. The rest is the introduction of parameter passing for the `CommandProvider` function:
 

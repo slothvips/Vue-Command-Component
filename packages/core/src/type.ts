@@ -47,7 +47,6 @@ export type ICommandComponentProviderConfig = ICommandComponentConfig & {
   visible: Ref<boolean>;
 };
 
-/** 弹窗消费者对象,理解为弹窗控制器也可以*/
 export interface IConsumer {
   /** 弹窗实例的元数据 */
   meta?: Meta;
@@ -85,6 +84,10 @@ export interface IConsumer {
   stack: IConsumer[];
   /** 当前在弹窗嵌套堆栈中的索引 */
   stackIndex: number;
+  /** 已挂载 */
+  mounted: boolean;
+  /** 已销毁 */
+  destroyed: boolean;
 }
 
 export interface IOnConfig {

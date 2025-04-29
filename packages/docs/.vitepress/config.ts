@@ -6,6 +6,7 @@ import Components from "unplugin-vue-components/vite";
 import { defineConfig } from "vitepress";
 import { vitepressDemoPlugin } from "vitepress-demo-plugin";
 import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-icons";
+
 export default defineConfig({
   title: `Vue3命令组件`,
   description: "带给你不一样的开发体验",
@@ -31,7 +32,7 @@ export default defineConfig({
     nav: [
       { text: "指南", link: "/guide/quick-start", activeMatch: "/guide/" },
       { text: "示例", link: "/example/", activeMatch: "/example/" },
-      { text: "API", link: "/api/", activeMatch: "/api/" },
+      // { text: "API", link: "/api/", activeMatch: "/api/" },
     ],
 
     sidebar: {

@@ -66,7 +66,7 @@ dialog.hide()
 ```jsx
 const dialog=CmdDialog({
     setup(){
-        const consumer=getConsumer()
+        const consumer=useConsumer()
         const close=()=>  consumer.destroyWithResolve('it\'s ok')
         return ()=>{
             return <button onClick={close}>关闭</button>
@@ -75,7 +75,7 @@ const dialog=CmdDialog({
 })
 ```
 
-getConsumer函数实际是我们的封装,他的本质功能等同于`inject(CommandComponentConsumerInjectKey)`,我们只是做了一些边界处理.
+useConsumer函数实际是我们的封装,他的本质功能等同于`inject(CommandComponentConsumerInjectKey)`,我们只是做了一些边界处理.
 
 ## 嵌套管理
 
@@ -101,7 +101,7 @@ dialog.stackIndex
 ```jsx
 const dialog=CmdDialog({
     setup(){
-        const coumser=getConsumer()
+        const coumser=useConsumer()
         return ()=>{
             return <el-button onClick={
                 ()=>coumser.destroyWithResolve('it\'s ok')

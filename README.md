@@ -123,7 +123,7 @@ export interface IConsumer {
 
 CommandProvider 同时也会返回一个`consumer`对象,以供弹窗外部使用,弹窗内部和外部拿到的 consumer 是同一个对象,所以他们是全等(===)的.
 
-弹窗内部组件获取 `consumer` 对象的方式为调用`getConsumer`, 该函数会返回一个 consumer 对象,它一样只能在 setup 顶部直接调用,不可条件调用或者异步调用.
+弹窗内部组件获取 `consumer` 对象的方式为调用`useConsumer`, 该函数会返回一个 consumer 对象,它一样只能在 setup 顶部直接调用,不可条件调用或者异步调用.
 
 2.剩余的就是`CommandProvider`函数参数的介绍了,
 

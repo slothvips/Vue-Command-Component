@@ -28,21 +28,18 @@ const getProvidesChain = (ins: ComponentInternalInstance): Record<string | symbo
 
 // 注入+渲染
 export function CommandProviderWithRender(parentInstance: ComponentInternalInstance | null, uiComponent: Component, config: ICommandComponentProviderConfig): IConsumer {
-  const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || (parentInstance as any).vnode.el.parentElement || document.body;
-  const degradationAppendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || document.body;
+  const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || (parentInstance as any).vnode.el?.parentElement || document.body;
+
   const containerEl = document.createElement("div");
   containerEl.className = config.customClassName || "command-component-container";
-  try {
-    appendToElement.appendChild(containerEl);
-  } catch (error) {
-    console.warn(`function appendChild call error. Fallback to  maybe document.body.`);
-    degradationAppendToElement.appendChild(containerEl);
-  }
+  appendToElement.appendChild(containerEl);
 
   const hide = () => {
+    if (consumer.destroyed) throw new Error("Consumer has been destroyed");
     config.visible.value = false;
   };
   const show = () => {
+    if (consumer.destroyed) throw new Error("Consumer has been destroyed");
     config.visible.value = true;
   };
   const unmount = () => {
@@ -67,6 +64,7 @@ export function CommandProviderWithRender(parentInstance: ComponentInternalInsta
       // Destroy all downstream dialogs
       const stack = consumer.stack.splice(consumer.stackIndex);
       stack.forEach((c: IConsumer) => c.destroy(true));
+      consumer.destroyed = true;
     }
   };
 
@@ -98,6 +96,8 @@ export function CommandProviderWithRender(parentInstance: ComponentInternalInsta
     stack: [] as IConsumer[],
     stackIndex: -1,
     componentRef: void 0,
+    mounted: false,
+    destroyed: false,
   };
 
   const CommandComponentProviderComponent = defineComponent({
@@ -134,18 +134,19 @@ export function CommandProviderWithRender(parentInstance: ComponentInternalInsta
   vnode.appContext = parentInstance?.appContext || vnode.appContext;
 
   render(vnode, containerEl);
+  consumer.mounted = true;
 
   activeConsumers.add(consumer);
 
   return consumer;
 }
 
-export const getConsumer = (warn: boolean = true): IConsumer => {
+export const useConsumer = (warn: boolean = true): IConsumer => {
   const showWarningMessage = () =>
     warn &&
     console.warn(`Failed to get Consumer instance. Please note:
     1. This function needs to be called directly in the setup top level.
-    2. Make sure to display this component inside a command dialog, or you can ignore this warning message by using warn parameter: getConsumer(false)`);
+    2. Make sure to display this component inside a command dialog, or you can ignore this warning message by using warn parameter: useConsumer(false)`);
   return inject<IConsumer>(
     CommandComponentConsumerInjectKey,
     () =>
