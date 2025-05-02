@@ -8,7 +8,7 @@ importers:
 
   .:
     dependencies:
-      vue-command-component:
+      vue3-command-component:
         specifier: workspace:*
         version: link:packages/core
     devDependencies:

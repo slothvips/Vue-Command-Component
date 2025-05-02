@@ -7,14 +7,14 @@
     "docs:dev": "vitepress dev packages/docs --port 3000",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs --port 3000",
-    "build:lib": "pnpm --filter vue-command-component build"
+    "build:lib": "pnpm --filter vue3-command-component build"
   },
   "engines": {
     "node": ">=16",
     "pnpm": ">=8"
   },
   "dependencies": {
-    "vue-command-component": "workspace:*"
+    "vue3-command-component": "workspace:*"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",

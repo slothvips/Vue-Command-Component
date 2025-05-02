@@ -5,7 +5,7 @@
 </template>
 
 <script setup name="base-example" lang="tsx">
-import { useConsumer, useElementPlusDialog } from "vue-command-component";
+import { useConsumer, useElementPlusDialog } from "vue3-command-component";
 import { defineComponent, ref } from "vue";
 
 const CommandDialog = useElementPlusDialog();

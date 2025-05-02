@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { useElementPlusDialog, useConsumer } from "vue-command-component";
+import { useElementPlusDialog, useConsumer } from "vue3-command-component";
 import { defineComponent } from "vue";
 
 const CommandDialog = useElementPlusDialog();

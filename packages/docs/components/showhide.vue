@@ -8,7 +8,7 @@
 </template>
 
 <script setup name="base-example" lang="tsx">
-import { useElementPlusDialog, type IConsumer } from "vue-command-component";
+import { useElementPlusDialog, type IConsumer } from "vue3-command-component";
 import DialogContent from "./dialog-content.vue";
 
 const CommandDialog = useElementPlusDialog();

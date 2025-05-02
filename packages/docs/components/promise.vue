@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { useElementPlusDialog } from "vue-command-component";
+import { useElementPlusDialog } from "vue3-command-component";
 import EditRow from "./edit-row.vue";
 import { ref } from "vue";
 const CommandDialog = useElementPlusDialog();

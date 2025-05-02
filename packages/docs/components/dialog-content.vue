@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { useConsumer } from "vue-command-component";
+import { useConsumer } from "vue3-command-component";
 import { getCurrentInstance, inject, onUnmounted, provide, ref, useAttrs } from "vue";
 import NestedCom from "./nested.vue";
 
