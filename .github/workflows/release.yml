@@ -22,14 +22,21 @@ jobs:
           version: latest
       - name: 安装依赖
         run: pnpm install --frozen-lockfile
-      - name: 构建静态页面并部署
-        run: pnpm run build-example-page
+      - name: 构建所有包
+        run: pnpm run build
+      - name: 构建文档站点
+        run: pnpm run doc:build
       - name: 部署到 GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist-example-page
-      - name: 发布
+          publish_dir: ./docs/.vitepress/dist
+      - name: 发布包
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm -r publish --access public --no-git-checks
+      - name: 语义化版本发布
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

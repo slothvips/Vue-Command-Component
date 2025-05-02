@@ -7,7 +7,8 @@
     "docs:dev": "vitepress dev packages/docs --port 3000",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs --port 3000",
-    "build:lib": "pnpm --filter vue3-command-component build"
+    "build:lib": "pnpm --filter vue3-command-component build",
+    "semantic-release": "semantic-release"
   },
   "engines": {
     "node": ">=16",
