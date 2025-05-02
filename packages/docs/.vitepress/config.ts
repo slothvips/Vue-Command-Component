@@ -19,7 +19,7 @@ export default defineConfig({
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600&family=IBM+Plex+Mono:wght@400&display=swap",
       },
     ],
-    ["meta", { name: "theme-color", content: "#646cff" }],
+    // ["meta", { name: "theme-color", content: "#41B883" }],
   ],
   themeConfig: {
     logo: "/logo.svg",
