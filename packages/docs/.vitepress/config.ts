@@ -9,7 +9,7 @@ import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-i
 
 export default defineConfig({
   title: `Vue3命令组件`,
-  description: "带给你不一样的开发体验",
+  description: "轻松实现Vue3组件的命令式调用",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/logo.svg" }],
     [

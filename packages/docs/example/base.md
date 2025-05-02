@@ -10,7 +10,7 @@
 
 销毁主要使用`destroy`和`destroyWithResolve`、`destroyWithReject`来进行销毁操作。
 
-`destroyWithResolve`和`destroyWithReject`会将promise的状态推进到resolve和reject,而`destroy`只是销毁弹窗,不会推进promise的状态.
+`destroyWithResolve`和`destroyWithReject`会将promise的状态推进到resolve和reject,而`destroy`只是销毁弹窗,不会推进promise的状态(你可能会担心一个永远不会被推进到终态的promise会不会内存泄漏,那么你可以参见这篇文章:[一个永远不会完成的 Promise 是否会造成存储泄漏](https://juejin.cn/post/7419297143788470282?searchId=20250502235657363591F19D1773229FA7).
 
 <demo vue="../components/base.vue"></demo>
 

@@ -1,16 +1,18 @@
 # 适配其他组件
 
 尽管已经提供一些开箱即用的组件,但很有可能没有适配你喜欢的组件.接下来我将告诉你怎么接入适配自己的组件.总得来说可以分为两种方式:
-- 使用`CommandProviderWithRender`,适配工作量将会大大减少
-- 使用适配器类`UIComponentAdapter`,他基于`CommandProviderWithRender`,灵活度最大,但是适配工作量也会上升
+- 使用`CommandProviderWithRender`,灵活度最大,但是适配工作量也会上升
+- 使用适配器类`UIComponentAdapter`,他基于`CommandProviderWithRender`,已经完成绝大多数工作,所以需要适配的工作量会小一些,但可能失去了一定的灵活度.
 
 ## 适配器类`UIComponentAdapter`
 
-使用这个类最主要做的几件事是:
+使用这个类最主要做的几个步骤:
 - 继承`UIComponentAdapter`类
-- 在合适的时机调用销毁函数
-- 赋值componentRef
-- 传递插槽
+- 实现`renderComponent`方法,这个方法会在`CommandProviderWithRender`中被调用,你需要在这个方法中返回一个虚拟节点,这个节点就是你要渲染的组件,而`renderComponent`中你需要做:
+  -  在合适的时机调用销毁函数
+  - 传递插槽
+  - 赋值componentRef以便于你可以调用原生组件的属性或者方法
+
 
 可以参见对`ElementPlusDialog`的实现:
 
@@ -72,8 +74,7 @@ export const useElementPlusDialog = (createConfig: ICreateCommandComponentConfig
 
 ## 使用`CommandProviderWithRender`
 
-提供最大的灵活度,但是适配工作相对较为繁琐,但核心思想依然是上边那几件事
-
+提供最大的灵活度,但是适配工作相对较为繁琐,但核心思想依然是使用`UIComponentAdapter`那几件事
 
 如果不使用`UIComponentAdapter`,`ElementPlusDialog`的适配代码可能是下边这个样子的
 ```tsx
