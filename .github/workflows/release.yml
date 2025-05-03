@@ -30,7 +30,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/.vitepress/dist
+          publish_dir: ./packages/docs/.vitepress/dist
       - name: 发布包
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
