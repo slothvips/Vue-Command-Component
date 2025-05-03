@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build:watch": "pnpm --filter vue3-command-component build --watch",
     "build": "pnpm --filter vue3-command-component build",
+    "doc:build": "vitepress build packages/docs",
     "doc:dev": "vitepress dev packages/docs --port 3000",
-    "doc:build": "vitepress build docs",
-    "doc:preview": "vitepress preview docs --port 3000",
+    "doc:preview": "vitepress preview packages/docs --port 3000",
     "semantic-release": "semantic-release"
   },
   "engines": {
@@ -27,12 +28,12 @@
     "@vitejs/plugin-vue": "^5.1.2",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "@vue/tsconfig": "^0.5.1",
-    "element-plus": "~2.8.2",
+    "element-plus": "~2.9.9",
     "sass": "^1.79.4",
     "semantic-release": "^21.0.1",
     "typescript": "^5.5.3",
     "unocss": "^0.65.1",
-    "unplugin-vue-components": "^0.27.4",
+    "unplugin-vue-components": "^28.5.0",
     "vant": "~4.9.7",
     "vite": "^5.4.1",
     "vite-plugin-dts": "^4.2.2",

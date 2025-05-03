@@ -10,6 +10,7 @@ import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-i
 export default defineConfig({
   title: `Vue3命令组件`,
   base: "/Vue3-Command-Component/",
+  assetsDir: "/Vue3-Command-Component/assets",
   description: "轻松实现Vue3组件的命令式调用",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/logo.svg" }],
@@ -96,9 +97,19 @@ export default defineConfig({
     },
   },
   vite: {
+    // .vitepress/config.mts
+    ssr: {
+      noExternal: ["element-plus"],
+    },
+
     plugins: [
       Components({
-        resolvers: [VantResolver(), ElementPlusResolver()],
+        resolvers: [
+          VantResolver({}),
+          ElementPlusResolver({
+            ssr: false,
+          }),
+        ],
       }),
       vueJsx(),
       UnoCSS(),
@@ -107,7 +118,7 @@ export default defineConfig({
           firebase: "vscode-icons:file-type-firebase",
           ".gitlab-ci.yml": "vscode-icons:file-type-gitlab",
         },
-      }) as any,
+      }),
     ],
   },
 });

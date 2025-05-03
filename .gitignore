@@ -20,8 +20,7 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
-dist/**/*
-dist-example-page/
+dist
 
 # VitePress cache
 **/.vitepress/cache/**

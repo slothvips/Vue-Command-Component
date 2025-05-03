@@ -12,7 +12,12 @@ export default defineConfig({
     vue(),
     vueJsx(),
     Components({
-      resolvers: [VantResolver(), ElementPlusResolver()],
+      resolvers: [
+        VantResolver(),
+        ElementPlusResolver({
+          // ssr: true,
+        }),
+      ],
     }),
     dts({
       // root: resolve(__dirname, "src"),
