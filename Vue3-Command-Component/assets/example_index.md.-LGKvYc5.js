@@ -1,4 +1,4 @@
-import{p as i,C as d,c as p,o as u,j as n,am as c,G as t,a as o,an as m,k as s,w as r}from"./chunks/framework.Dy8d1JIq.js";import{_ as v}from"./chunks/dialog-content.vue_vue_type_script_setup_true_lang.DrjTY4lX.js";import{aE as b,aF as f}from"./chunks/index.CLNZE_Wr.js";const h=`<script lang="tsx" setup>
+import{p as i,C as d,c as p,o as u,j as n,am as c,G as t,a as o,an as m,k as s,w as r}from"./chunks/framework.Dy8d1JIq.js";import{_ as v}from"./chunks/dialog-content.vue_vue_type_script_setup_true_lang.BPYeugrp.js";import{aE as b,aF as f}from"./chunks/index.DeUEKb4O.js";const h=`<script lang="tsx" setup>
 import { useConsumer } from "vue3-command-component";
 import { getCurrentInstance, inject, onUnmounted, provide, ref, useAttrs } from "vue";
 import NestedCom from "./nested.vue";
