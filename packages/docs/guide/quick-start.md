@@ -62,4 +62,4 @@ const Content=defineComponent({
 
 CommandDialog(<Content />)
 ```
-更多示例请参见[示例](../example//index.md)
+更多示例请参见[示例](../example/index.md)
