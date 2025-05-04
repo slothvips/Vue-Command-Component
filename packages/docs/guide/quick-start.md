@@ -4,7 +4,7 @@
 
 ## 兼容性
 
-仅支持vue3项目.vue2是不能正常工作的.由于组件节点内部构造已经改变,即使使用`vue-demi`也是不能正常工作的,抱歉.
+仅支持`Vue3`,请留意你的vue版本.
 
 建议你为你的项目配置`jsx`支持,这会极大的改善你的开发体验,否则你就需要一路`h`函数了.关于如何为你的项目配置`jsx`支持,`vite`用户参见[@vitejs/plugin-vue-jsx](https://www.npmjs.com/package/@vitejs/plugin-vue-jsx).
 
@@ -39,7 +39,7 @@ $ bun add vue3-command-component
 npm i -g @antfu/ni
 ```
 
-然后你就可以无视包管理器了
+然后你就可以无视包管理器差异了
 ```bash
 ni vue3-command-component
 ```
