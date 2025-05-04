@@ -1,8 +1,14 @@
 import DefaultTheme from "vitepress/theme";
 // import { ElMessage } from "element-plus";
+import 'vant/lib/index.css';
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/dark/css-vars.css";
 import "virtual:uno.css";
+
+import "viewerjs/dist/viewer.min.css";
+import imageViewer from "vitepress-plugin-image-viewer";
+import vImageViewer from "vitepress-plugin-image-viewer/lib/vImageViewer.vue";
+import { useRoute } from "vitepress";
 
 // const rawConsoelLog = console.log;
 // console.log = (...args) => {
@@ -24,5 +30,10 @@ export default {
 
   async enhanceApp({ Vue, app }) {
     // app.config.globalProperties.$panda = "Vue3-Command-Component";
+  },
+  setup() {
+    const route = useRoute();
+    // 启用插件
+    imageViewer(route);
   },
 };

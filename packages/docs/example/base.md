@@ -32,6 +32,13 @@
 
 <demo vue="../components/native-attributes.vue"></demo>
 
+
+## 原生组件插槽
+
+支持原生组件所有的属性和事件,方法.
+
+<demo vue="../components/native-slots.vue"></demo>
+
 ## 通信
 
 你可以像往常一样,使用传统的emit来进行单项数据流来进行通信.
@@ -42,4 +49,21 @@
 
 ## provide和inject
 
-这一块和vue3的provide和inject是一样的,没有任何区别.
+这一块和vue3的provide和inject是一样的,没有任何区别.不过你可以用`provideProps`来实现私有的注入,这样做的好处是,注入会被限制在命令组件内部接受,命令组件之外的不会被污染注入域.
+
+它的使用很简单.
+```ts
+const CommandDialog = useElementPlusDialog();
+CommandDialog(<div>1</div>,{
+  provideProps: {
+    a: 1,
+    b: 2,
+  },
+})
+```
+## 其他UI库组件示例
+
+目前另外的适配:
+
+<demo vue="../components/other-ui.vue"></demo>
+

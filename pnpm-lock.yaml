@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      viewerjs:
+        specifier: ^1.11.7
+        version: 1.11.7
+      vitepress-plugin-image-viewer:
+        specifier: ^1.1.6
+        version: 1.1.6
       vue3-command-component:
         specifier: workspace:*
         version: link:packages/core
@@ -3219,6 +3225,9 @@ packages:
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
 
+  viewerjs@1.11.7:
+    resolution: {integrity: sha512-0JuVqOmL5v1jmEAlG5EBDR3XquxY8DWFQbFMprOXgaBB0F7Q/X9xWdEaQc59D8xzwkdUgXEMSSknTpriq95igg==}
+
   vite-plugin-dts@4.5.3:
     resolution: {integrity: sha512-P64VnD00dR+e8S26ESoFELqc17+w7pKkwlBpgXteOljFyT0zDwD8hH4zXp49M/kciy//7ZbVXIwQCekBJjfWzA==}
     peerDependencies:
@@ -3268,6 +3277,9 @@ packages:
 
   vitepress-plugin-group-icons@1.5.2:
     resolution: {integrity: sha512-zen07KxZ83y3eecou4EraaEgwIriwHaB5Q0cHAmS4yO1UZEQvbljTylHPqiJ7LNkV39U8VehfcyquAJXg/26LA==}
+
+  vitepress-plugin-image-viewer@1.1.6:
+    resolution: {integrity: sha512-ZfYy1s/bXju6vGVsE/5gPXT449+KaXZ6ZIPAvcmPM07VmC7Bv57bCvFar2II7C2EjexxfPQsxUh70vSBbe14kQ==}
 
   vitepress@1.6.3:
     resolution: {integrity: sha512-fCkfdOk8yRZT8GD9BFqusW3+GggWYZ/rYncOfmgcDtP3ualNHCAg+Robxp2/6xfH1WwPHtGpPwv7mbA3qomtBw==}
@@ -6788,6 +6800,8 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
+  viewerjs@1.11.7: {}
+
   vite-plugin-dts@4.5.3(@types/node@22.5.4)(rollup@4.40.1)(typescript@5.8.2)(vite@5.4.18(@types/node@22.5.4)(sass@1.79.4)(terser@5.33.0)):
     dependencies:
       '@microsoft/api-extractor': 7.52.5(@types/node@22.5.4)
@@ -6831,6 +6845,10 @@ snapshots:
       '@iconify/utils': 2.3.0
     transitivePeerDependencies:
       - supports-color
+
+  vitepress-plugin-image-viewer@1.1.6:
+    dependencies:
+      viewerjs: 1.11.7
 
   vitepress@1.6.3(@algolia/client-search@5.23.4)(@types/node@22.5.4)(async-validator@4.2.5)(postcss@8.5.2)(sass@1.79.4)(search-insights@2.17.3)(terser@5.33.0)(typescript@5.8.2):
     dependencies:
