@@ -1,3 +1,29 @@
+# [1.5.0](https://github.com/pandavips/Vue3-Command-Component/compare/v1.4.4...v1.5.0) (2025-05-06)
+
+
+### Bug Fixes
+
+* ~ ([40794ba](https://github.com/pandavips/Vue3-Command-Component/commit/40794ba52acf0763cd55220069553f9dbee9ad8e))
+* 修正快速开始文档中的兼容性说明和包管理器使用提示 ([59fe8d6](https://github.com/pandavips/Vue3-Command-Component/commit/59fe8d6dc7e6d28a475255383c8082afafd1a12b))
+* 修正快速开始文档中的示例链接路径 ([3d4ab9a](https://github.com/pandavips/Vue3-Command-Component/commit/3d4ab9a93db5859e43e7678695c76776232a70a0))
+* 修正文档脚本命名，统一为 doc 前缀 ([6797720](https://github.com/pandavips/Vue3-Command-Component/commit/67977200a66c90e2176e5e821bd9dfb9b2a44216))
+* 更新 componentRef 类型为 Ref<any>，简化类型定义 ([763d74d](https://github.com/pandavips/Vue3-Command-Component/commit/763d74d2ad5678332fffd7206989c2b0e280e655))
+* 更新 VitePress 配置基础路径为绝对路径 ([db2dd9d](https://github.com/pandavips/Vue3-Command-Component/commit/db2dd9da32562a39aeba7519bc3d1e1d1ea1f65b))
+* 更新文档，添加主页和仓库信息，移除未使用的导入 ([20f3661](https://github.com/pandavips/Vue3-Command-Component/commit/20f36611c39c6a5d94a77b155b16c15bfb9b1037))
+* 更新版本号至 1.0.1 ([96c40a3](https://github.com/pandavips/Vue3-Command-Component/commit/96c40a3b741bb3b0f83a58a1044755aaf924d77c))
+
+
+### Features
+
+* Refactor CommandProvider and Consumer API ([e2de809](https://github.com/pandavips/Vue3-Command-Component/commit/e2de8094a1ec774bedf5ccc4b074375ba8f6bc0d))
+* restructure project by removing unused components and files, add pnpm workspace configuration ([ad519c6](https://github.com/pandavips/Vue3-Command-Component/commit/ad519c63e176ee7f05960d66712b9b34f7b222e1))
+* 更新主题颜色为 [#41](https://github.com/pandavips/Vue3-Command-Component/issues/41)B883，并添加 Vue 标志 SVG 文件 ([5af0ab0](https://github.com/pandavips/Vue3-Command-Component/commit/5af0ab03ac47f2d339e6d4e06ca813153d7ef135)), closes [#41B883](https://github.com/pandavips/Vue3-Command-Component/issues/41B883)
+* 更新发布工作流，构建文档站点并调整发布目录 ([3621105](https://github.com/pandavips/Vue3-Command-Component/commit/36211056999a11703bc09c2aa4e3e742a0ba3419))
+* 更新文档内容和描述，提升用户体验 ([70e9f83](https://github.com/pandavips/Vue3-Command-Component/commit/70e9f8383a1a2b9d59b4570f6a9a815be2fcd34c))
+* 添加 MIT 许可证，更新依赖，增加文档示例和常见问题解答 ([521e724](https://github.com/pandavips/Vue3-Command-Component/commit/521e72424ef4c836043e344514e6895f050dbfb0))
+* 移除冗余的构建脚本，简化 package.json ([d66c978](https://github.com/pandavips/Vue3-Command-Component/commit/d66c9786bac9039ac37205da7afb870a10b08f01))
+* 移除文档预览脚本并更新 VitePress 配置基础路径 ([0428db7](https://github.com/pandavips/Vue3-Command-Component/commit/0428db7aed03228682cd46cd292ba699b8dbcef3))
+
 ## [1.4.4](https://github.com/pandavips/Vue3-Command-Dialog/compare/v1.4.3...v1.4.4) (2025-02-12)
 
 
