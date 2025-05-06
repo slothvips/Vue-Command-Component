@@ -13,6 +13,7 @@
     "command",
     "component"
   ],
+  "license": "MIT",
   "author": "pandavips",
   "main": "dist/index.js",
   "module": "dist/index.js",
