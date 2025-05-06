@@ -48,25 +48,25 @@ export type ICommandComponentProviderConfig = ICommandComponentConfig & {
 };
 
 export interface IConsumer {
-  /** 弹窗实例的元数据 */
+  /** 组件实例的元数据 */
   meta?: Meta;
-  /** 弹窗是否可见响应式变量,虽然已经提供了hide以及show方法不需要通过该属性来控制弹窗的显示与隐藏,但是为了方便一些特殊场景,还是提供了该属性,比如你需要watch这个属性来做一些事情 */
+  /** 是否可见响应式变量,虽然已经提供了hide以及show方法不需要通过该属性来控制弹窗的显示与隐藏,但是为了方便一些特殊场景,还是提供了该属性,比如你需要watch这个属性来做一些事情 */
   visible: Ref<boolean>;
   /** 隐藏 */
   hide: () => void;
   /** 显示 */
   show: () => void;
-  /** 弹窗销毁,但是不继续推进promise的状态改变 */
+  /** 销毁,但是不继续推进promise的状态改变 */
   destroy: (external?: boolean) => void;
-  /** 弹窗promise */
+  /** promise */
   promise: Promise<unknown>;
-  /** 弹窗promise执行器参数resolve */
+  /** promise执行器参数resolve */
   resolve: (val?: unknown) => void;
-  /** 弹窗promise执行器参数reject */
+  /** promise执行器参数reject */
   reject: (reason?: unknown) => void;
-  /** 弹窗销毁,并解决promise */
+  /** 销毁,并解决promise */
   destroyWithResolve: (val?: unknown) => void;
-  /** 弹窗销毁,并拒绝promise */
+  /** 销毁,并拒绝promise */
   destroyWithReject: (reason?: unknown) => void;
   /** 订阅取消 */
   off: (name: string | symbol, callback: (...args: unknown[]) => void) => void;
@@ -76,13 +76,13 @@ export interface IConsumer {
   once: (name: string | symbol, callback: (...args: unknown[]) => void) => void;
   /** 发布 */
   emit: (name: string | symbol, ...args: unknown[]) => void;
-  /** UI库的弹窗实例引用 */
+  /** UI库的组件实例引用 */
   componentRef?: Ref<any>;
-  /** 弹窗挂载的html元素 */
+  /** 组件挂载的html元素 */
   container: HTMLDivElement;
-  /** 弹窗嵌套堆栈 */
+  /** 组件嵌套堆栈 */
   stack: IConsumer[];
-  /** 当前在弹窗嵌套堆栈中的索引 */
+  /** 当前在组件嵌套堆栈中的索引 */
   stackIndex: number;
   /** 已挂载 */
   mounted: boolean;
