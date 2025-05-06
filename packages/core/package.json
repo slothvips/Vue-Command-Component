@@ -25,7 +25,8 @@
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build && vue-tsc --emitDeclarationOnly",
-    "test": "vitest"
+    "test": "vitest",
+    "publish": "pnpm build && pnpm publish --access public --no-git-checks"
   },
   "dependencies": {
     "lodash-es": "^4.17.21"
