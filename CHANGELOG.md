@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/pandavips/Vue3-Command-Component/compare/v1.5.3...v1.5.4) (2025-05-06)
+
+
+### Bug Fixes
+
+* 添加发布脚本到 package.json,测试自动发包 ([cfdab74](https://github.com/pandavips/Vue3-Command-Component/commit/cfdab743de71a0d3815e04f5294ceac8f61842f9))
+
 ## [1.5.3](https://github.com/pandavips/Vue3-Command-Component/compare/v1.5.2...v1.5.3) (2025-05-06)
 
 
