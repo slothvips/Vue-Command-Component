@@ -1,3 +1,11 @@
+## [1.5.1](https://github.com/pandavips/Vue3-Command-Component/compare/v1.5.0...v1.5.1) (2025-05-06)
+
+
+### Bug Fixes
+
+* 在 package.json 中添加许可证信息 ([429e3bb](https://github.com/pandavips/Vue3-Command-Component/commit/429e3bb5dc4f2e2328395fa1ffafea526ef42c6f))
+* 更新版本号至 1.0.2 ([908f865](https://github.com/pandavips/Vue3-Command-Component/commit/908f8658b191a82388c1180d5e16439d08d9f8f3))
+
 # [1.5.0](https://github.com/pandavips/Vue3-Command-Component/compare/v1.4.4...v1.5.0) (2025-05-06)
 
 
