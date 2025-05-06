@@ -1,3 +1,11 @@
+## [1.5.2](https://github.com/pandavips/Vue3-Command-Component/compare/v1.5.1...v1.5.2) (2025-05-06)
+
+
+### Bug Fixes
+
+* 更新 README.md，添加安装和使用说明 ([98fe432](https://github.com/pandavips/Vue3-Command-Component/commit/98fe432b77d7972dbac686554c1b5117174b6ded))
+* 更新版本号至 1.0.3 ([bf5e958](https://github.com/pandavips/Vue3-Command-Component/commit/bf5e95844fe9ab0df696f80453f305b4962ff0d1))
+
 ## [1.5.1](https://github.com/pandavips/Vue3-Command-Component/compare/v1.5.0...v1.5.1) (2025-05-06)
 
 
