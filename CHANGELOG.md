@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/pandavips/Vue3-Command-Component/compare/v1.5.2...v1.5.3) (2025-05-06)
+
+
+### Bug Fixes
+
+* 更新 IConsumer 接口文档，修改弹窗相关描述为组件相关描述 ([96366e7](https://github.com/pandavips/Vue3-Command-Component/commit/96366e72b2f999e0a11be294c73be0661b8f4497))
+
 ## [1.5.2](https://github.com/pandavips/Vue3-Command-Component/compare/v1.5.1...v1.5.2) (2025-05-06)
 
 
