@@ -1,11 +1,11 @@
-name: 发布和部署
+name: 部署doc站点
 on:
   push:
     branches:
       - main
 jobs:
   release-and-deploy:
-    name: 发布和部署
+    name: 部署doc站点
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
@@ -31,13 +31,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./packages/docs/.vitepress/dist
-      - name: 发布包
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm -r publish --access public --no-git-checks
-      - name: 语义化版本发布
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm semantic-release

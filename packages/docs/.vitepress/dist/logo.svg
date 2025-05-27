@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Vue标志 -->
+  <path d="M64,10 L12,100 H32 L64,45 L96,100 H116 L64,10 Z" fill="#41B883"/>
+  <path d="M64,30 L36,80 H48 L64,52 L80,80 H92 L64,30 Z" fill="#35495E"/>
+  
+  <!-- 命令行终端框 -->
+  <rect x="39" y="60" width="50" height="34" rx="4" fill="#35495E" stroke="#41B883" stroke-width="1.5"/>
+  
+  <!-- 命令提示符和命令文本 -->
+  <text x="44" y="80" font-family="monospace" font-size="13" font-weight="bold" fill="#FFD700">$</text>
+  <text x="54" y="80" font-family="monospace" font-size="12" fill="#FFFFFF">vue</text>
+  
+  <!-- 闪烁的光标 -->
+  <rect x="78" y="72" width="2" height="12" fill="#41B883">
+    <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
+  </rect>
+</svg>

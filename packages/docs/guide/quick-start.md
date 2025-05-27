@@ -50,6 +50,7 @@ ni vue3-command-component
 现在你可以直接使用了。
 
 ```jsx
+import { defineComponent, h } from "vue";
 import { useElementPlusDialog } from "vue3-command-component";
 
 const CommandDialog=useElementPlusDialog()
@@ -61,5 +62,12 @@ const Content=defineComponent({
 })
 
 CommandDialog(<Content />)
+
+// 如果你没有使用jsx,你可以这样写,关于jsx和h函数的资料请参见[渲染函数 & JSX](https://vuejs.org/guide/extras/render-function.html#the-h-function)
+
+CommandDialog(h(Content))
 ```
-更多示例请参见[示例](../example/index.md)
+
+值得说明一下，`useElementPlusDialog`之类的适配层hooks,必须在setup顶部调用,因为内部依赖`getCurrentInstance`这个api来捕获当前组件实例。
+
+更多示例请参见[示例](../example/base.md)

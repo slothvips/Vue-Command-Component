@@ -33,8 +33,6 @@ const resetOption = () => {
 </script>
 
 <template>
-  <h3>接收到的注入数据:</h3>
-  <el-divider />
   <div class="flex gap-20px flex-wrap">
     <el-button @click="consumer.destroy()">destroy</el-button>
     <el-button @click="consumer.destroyWithReject()">destroyWithReject</el-button>

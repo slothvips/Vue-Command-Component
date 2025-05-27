@@ -1,6 +1,6 @@
 {
   "name": "vue3-command-component-monorepo",
-  "version": "1.5.4",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,8 +8,7 @@
     "build": "pnpm --filter vue3-command-component build",
     "doc:build": "vitepress build packages/docs",
     "doc:dev": "vitepress dev packages/docs --port 3000",
-    "doc:preview": "vitepress preview packages/docs --port 3000",
-    "semantic-release": "semantic-release"
+    "doc:preview": "vitepress preview packages/docs --port 3000"
   },
   "engines": {
     "node": ">=16",

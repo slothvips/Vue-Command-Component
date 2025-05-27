@@ -33,7 +33,7 @@ export default defineConfig({
 
     nav: [
       { text: "指南", link: "/guide/quick-start", activeMatch: "/guide/" },
-      { text: "示例", link: "/example/", activeMatch: "/example/" },
+      { text: "示例", link: "/example/base", activeMatch: "/example/" },
       // { text: "API", link: "/api/", activeMatch: "/api/" },
     ],
 
