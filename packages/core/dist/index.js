@@ -135,7 +135,7 @@ function et(e, t, n) {
       const v = be(ae, []);
       return d.stackIndex = v.length, v.push(d), I(ae, v), d.stack = v, () => _e(t);
     }
-  }), null, {});
+  }), null, null);
   return V.appContext = (e == null ? void 0 : e.appContext) || V.appContext, re(V, o), d.mounted = !0, L.add(d), d;
 }
 const Gr = (e = !0) => {
