@@ -5,3 +5,4 @@ export * from "./utils";
 export * from "./type";
 export * from "./VantUiPopup";
 export * from "./hooks";
+export * from "./adapter";
