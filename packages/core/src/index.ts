@@ -1,3 +1,4 @@
+import "virtual:uno.css";
 export * from "./Core";
 export * from "./ElementPlusDialog";
 export * from "./ElementPlusDrawer";

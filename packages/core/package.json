@@ -1,6 +1,6 @@
 {
   "name": "vue3-command-component",
-  "version": "1.0.5",
+  "version": "1.1.1",
   "type": "module",
   "description": "Vue3 Command Component Library",
   "homepage": "https://pandavips.github.io/Vue3-Command-Component/",
@@ -31,7 +31,9 @@
   "dependencies": {
     "lodash-es": "^4.17.21"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "vite-plugin-libcss": "^1.1.1"
+  },
   "peerDependencies": {
     "element-plus": "2.x",
     "vant": "4.x",
