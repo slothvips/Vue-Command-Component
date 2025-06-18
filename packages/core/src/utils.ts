@@ -1,3 +1,4 @@
+import { defineComponent, h, type VNode } from "vue";
 import type { IConsumer, IOnConfig, EventCallback, EventMap, EventBusMap, IPromiseWithResolvers, DeepMergeable } from "./type";
 
 /**
@@ -124,4 +125,13 @@ export const deepMerge = (target: Record<string | symbol, unknown>, source: Reco
   merge(source);
   args.forEach(merge);
   return result;
+};
+
+// 将一个jsx绑定方式的组件变更为响应式组件
+export const JSXReactive = (render: () => VNode) => {
+  return h(defineComponent({
+    setup() {
+      return render;
+    }
+  }))
 };

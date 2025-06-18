@@ -1,3 +1,4 @@
+import { VNode } from 'vue';
 import { IConsumer, IOnConfig, EventCallback, IPromiseWithResolvers } from './type';
 /**
  * 基于命令弹窗消费对象的事件注册中心
@@ -41,3 +42,6 @@ export declare const isNull: (val: unknown) => val is null | undefined;
  * @returns 合并后的新对象
  */
 export declare const deepMerge: (target: Record<string | symbol, unknown>, source: Record<string | symbol, unknown>, ...args: Record<string, unknown>[]) => Record<string, unknown>;
+export declare const JSXReactive: (render: () => VNode) => VNode<import('vue').RendererNode, import('vue').RendererElement, {
+    [key: string]: any;
+}>;

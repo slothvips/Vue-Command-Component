@@ -43,7 +43,7 @@ export abstract class UIComponentAdapter<Config extends ICommandComponentConfig 
         return () =>
           this.renderComponent(ContentVNode, {
             componentRef: componentRef,
-            visible: visible.value,
+            visible,
             onMounted: handleMounted,
             config,
             consumer: consumerRef!,

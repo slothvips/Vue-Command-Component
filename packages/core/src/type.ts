@@ -103,7 +103,7 @@ export interface IRenderComponentOptions<Config> {
   /** 组件引用 */
   componentRef: Ref;
   /** 是否可见 */
-  visible: boolean;
+  visible: Ref<boolean>;
   /** 挂载回调 */
   onMounted: () => void;
   /** 组件配置 */

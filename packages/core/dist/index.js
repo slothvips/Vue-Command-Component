@@ -2,8 +2,8 @@ import './index.css';
 var We = Object.defineProperty;
 var qe = (e, t, n) => t in e ? We(e, t, { enumerable: !0, configurable: !0, writable: !0, value: n }) : e[t] = n;
 var N = (e, t, n) => qe(e, typeof t != "symbol" ? t + "" : t, n);
-import { createVNode as v, defineComponent as I, render as ae, inject as be, provide as D, h as Ce, nextTick as Ze, getCurrentInstance as Xe, ref as Z, createElementBlock as we, openBlock as Te, createElementVNode as xe, mergeProps as V, watch as Je } from "vue";
-import { ElDialog as Pe, ElIcon as se, ElDrawer as Ye } from "element-plus";
+import { h as ee, defineComponent as P, createVNode as v, render as se, inject as Ce, provide as D, nextTick as Xe, getCurrentInstance as Ze, ref as X, createElementBlock as we, openBlock as Te, createElementVNode as xe, mergeProps as V, watch as Je } from "vue";
+import { ElDialog as Pe, ElIcon as ie, ElDrawer as Ye } from "element-plus";
 import { Popup as Qe } from "vant";
 import { useRoute as ke } from "vue-router";
 var M = /* @__PURE__ */ ((e) => (e.destroy = "destroy", e))(M || {});
@@ -39,7 +39,7 @@ class et {
     this.getEventsByConsumer(t, n).delete(r);
   }
 }
-const Zr = (e = "") => e.slice(2).toLowerCase(), Xr = (e = "") => `on${e.charAt(0).toUpperCase()}${e.slice(1)}`, tt = () => {
+const Xr = (e = "") => e.slice(2).toLowerCase(), Zr = (e = "") => `on${e.charAt(0).toUpperCase()}${e.slice(1)}`, tt = () => {
   let e = () => {
   }, t = () => {
   };
@@ -66,8 +66,12 @@ const Zr = (e = "") => e.slice(2).toLowerCase(), Xr = (e = "") => `on${e.charAt(
         r[a] = s[a];
   };
   return o(t), n.forEach(o), r;
-}, Oe = Symbol("CommandComponentConsumerInjectKey"), ie = Symbol("CommandComponentStackInjectKey"), R = new et(), X = /* @__PURE__ */ new Set(), ot = () => {
-  X.forEach((e) => {
+}, Yr = (e) => ee(P({
+  setup() {
+    return e;
+  }
+})), Oe = Symbol("CommandComponentConsumerInjectKey"), ue = Symbol("CommandComponentStackInjectKey"), R = new et(), Z = /* @__PURE__ */ new Set(), ot = () => {
+  Z.forEach((e) => {
     e.destroy();
   });
 }, je = (e) => ({
@@ -75,8 +79,8 @@ const Zr = (e = "") => e.slice(2).toLowerCase(), Xr = (e = "") => `on${e.charAt(
   ...e.provides
 });
 function at(e, t, n) {
-  var oe;
-  const r = (typeof n.appendTo == "string" ? document.querySelector(n.appendTo) : n.appendTo) || ((oe = e.vnode.el) == null ? void 0 : oe.parentElement) || document.body, o = document.createElement("div");
+  var ae;
+  const r = (typeof n.appendTo == "string" ? document.querySelector(n.appendTo) : n.appendTo) || ((ae = e.vnode.el) == null ? void 0 : ae.parentElement) || document.body, o = document.createElement("div");
   o.className = n.customClassName || "command-component-container", r.appendChild(o);
   const s = () => {
     if (h.destroyed) throw new Error("Consumer has been destroyed");
@@ -85,26 +89,26 @@ function at(e, t, n) {
     if (h.destroyed) throw new Error("Consumer has been destroyed");
     n.visible.value = !0;
   }, i = () => {
-    Ze(() => {
-      ae(null, o), o.remove();
+    Xe(() => {
+      se(null, o), o.remove();
     });
   }, {
     promise: u,
-    resolve: f,
+    resolve: c,
     reject: l
-  } = tt(), c = 3e3, p = (m = !1) => {
+  } = tt(), d = 3e3, p = (m = !1) => {
     m ? (s(), h.on(M.destroy, i, {
       once: !0,
-      callImmediatelyAfterDelay: c
-    })) : (X.delete(h), h.stack.splice(h.stackIndex).forEach((_) => _.destroy(!0)), h.destroyed = !0);
+      callImmediatelyAfterDelay: d
+    })) : (Z.delete(h), h.stack.splice(h.stackIndex).forEach((_) => _.destroy(!0)), h.destroyed = !0);
   }, y = (m) => {
-    f(m), p();
+    c(m), p();
   }, T = (m) => {
     l(m), p();
   }, h = {
     meta: n.meta || {},
     promise: u,
-    resolve: f,
+    resolve: c,
     reject: l,
     destroyWithResolve: y,
     destroyWithReject: T,
@@ -122,7 +126,7 @@ function at(e, t, n) {
     componentRef: void 0,
     mounted: !1,
     destroyed: !1
-  }, x = v(/* @__PURE__ */ I({
+  }, x = v(/* @__PURE__ */ P({
     setup() {
       for (const _ in n.provideProps)
         D(_, n.provideProps[_]);
@@ -133,39 +137,39 @@ function at(e, t, n) {
       for (const _ in m)
         D(_, m[_]);
       D(Oe, h);
-      const g = be(ie, []);
-      return h.stackIndex = g.length, g.push(h), D(ie, g), h.stack = g, () => Ce(t);
+      const g = Ce(ue, []);
+      return h.stackIndex = g.length, g.push(h), D(ue, g), h.stack = g, () => ee(t);
     }
   }), null, null);
-  return x.appContext = (e == null ? void 0 : e.appContext) || x.appContext, ae(x, o), h.mounted = !0, X.add(h), h;
+  return x.appContext = (e == null ? void 0 : e.appContext) || x.appContext, se(x, o), h.mounted = !0, Z.add(h), h;
 }
-const Yr = (e = !0) => {
+const Qr = (e = !0) => {
   const t = () => e && console.warn(`Failed to get Consumer instance. Please note:
     1. This function needs to be called directly in the setup top level.
     2. Make sure to display this component inside a command dialog, or you can ignore this warning message by using warn parameter: useConsumer(false)`);
-  return be(Oe, () => new Proxy({}, {
+  return Ce(Oe, () => new Proxy({}, {
     get: () => t,
     apply: t
   }), !0);
 };
-var Ee = typeof global == "object" && global && global.Object === Object && global, st = typeof self == "object" && self && self.Object === Object && self, P = Ee || st || Function("return this")(), z = P.Symbol, Ae = Object.prototype, it = Ae.hasOwnProperty, ut = Ae.toString, E = z ? z.toStringTag : void 0;
+var Ee = typeof global == "object" && global && global.Object === Object && global, st = typeof self == "object" && self && self.Object === Object && self, O = Ee || st || Function("return this")(), z = O.Symbol, Ae = Object.prototype, it = Ae.hasOwnProperty, ut = Ae.toString, A = z ? z.toStringTag : void 0;
 function lt(e) {
-  var t = it.call(e, E), n = e[E];
+  var t = it.call(e, A), n = e[A];
   try {
-    e[E] = void 0;
+    e[A] = void 0;
     var r = !0;
   } catch {
   }
   var o = ut.call(e);
-  return r && (t ? e[E] = n : delete e[E]), o;
+  return r && (t ? e[A] = n : delete e[A]), o;
 }
 var ct = Object.prototype, dt = ct.toString;
 function ft(e) {
   return dt.call(e);
 }
-var pt = "[object Null]", ht = "[object Undefined]", ue = z ? z.toStringTag : void 0;
+var pt = "[object Null]", ht = "[object Undefined]", le = z ? z.toStringTag : void 0;
 function F(e) {
-  return e == null ? e === void 0 ? ht : pt : ue && ue in Object(e) ? lt(e) : ft(e);
+  return e == null ? e === void 0 ? ht : pt : le && le in Object(e) ? lt(e) : ft(e);
 }
 function $(e) {
   return e != null && typeof e == "object";
@@ -179,18 +183,18 @@ function Se(e) {
   return e;
 }
 var mt = "[object AsyncFunction]", vt = "[object Function]", gt = "[object GeneratorFunction]", yt = "[object Proxy]";
-function ee(e) {
+function te(e) {
   if (!w(e))
     return !1;
   var t = F(e);
   return t == vt || t == gt || t == mt || t == yt;
 }
-var W = P["__core-js_shared__"], le = function() {
+var W = O["__core-js_shared__"], ce = function() {
   var e = /[^.]+$/.exec(W && W.keys && W.keys.IE_PROTO || "");
   return e ? "Symbol(src)_1." + e : "";
 }();
 function _t(e) {
-  return !!le && le in e;
+  return !!ce && ce in e;
 }
 var bt = Function.prototype, Ct = bt.toString;
 function wt(e) {
@@ -212,24 +216,24 @@ var Tt = /[\\^$.*+?()[\]{}|]/g, xt = /^\[object .+?Constructor\]$/, Pt = Functio
 function St(e) {
   if (!w(e) || _t(e))
     return !1;
-  var t = ee(e) ? At : xt;
+  var t = te(e) ? At : xt;
   return t.test(wt(e));
 }
 function It(e, t) {
   return e == null ? void 0 : e[t];
 }
-function te(e, t) {
+function ne(e, t) {
   var n = It(e, t);
   return St(n) ? n : void 0;
 }
-var ce = Object.create, Mt = /* @__PURE__ */ function() {
+var de = Object.create, Mt = /* @__PURE__ */ function() {
   function e() {
   }
   return function(t) {
     if (!w(t))
       return {};
-    if (ce)
-      return ce(t);
+    if (de)
+      return de(t);
     e.prototype = t;
     var n = new e();
     return e.prototype = void 0, n;
@@ -274,7 +278,7 @@ function Vt(e) {
 }
 var B = function() {
   try {
-    var e = te(Object, "defineProperty");
+    var e = ne(Object, "defineProperty");
     return e({}, "", {}), e;
   } catch {
   }
@@ -290,7 +294,7 @@ function Ie(e, t) {
   var n = typeof e;
   return t = t ?? Lt, !!t && (n == "number" || n != "symbol" && Ht.test(e)) && e > -1 && e % 1 == 0 && e < t;
 }
-function ne(e, t, n) {
+function re(e, t, n) {
   t == "__proto__" && B ? B(e, t, {
     configurable: !0,
     enumerable: !0,
@@ -304,21 +308,21 @@ function U(e, t) {
 var Gt = Object.prototype, Kt = Gt.hasOwnProperty;
 function Wt(e, t, n) {
   var r = e[t];
-  (!(Kt.call(e, t) && U(r, n)) || n === void 0 && !(t in e)) && ne(e, t, n);
+  (!(Kt.call(e, t) && U(r, n)) || n === void 0 && !(t in e)) && re(e, t, n);
 }
 function qt(e, t, n, r) {
   var o = !n;
   n || (n = {});
   for (var s = -1, a = t.length; ++s < a; ) {
     var i = t[s], u = void 0;
-    u === void 0 && (u = e[i]), o ? ne(n, i, u) : Wt(n, i, u);
+    u === void 0 && (u = e[i]), o ? re(n, i, u) : Wt(n, i, u);
   }
   return n;
 }
-var de = Math.max;
-function Zt(e, t, n) {
-  return t = de(t === void 0 ? e.length - 1 : t, 0), function() {
-    for (var r = arguments, o = -1, s = de(r.length - t, 0), a = Array(s); ++o < s; )
+var fe = Math.max;
+function Xt(e, t, n) {
+  return t = fe(t === void 0 ? e.length - 1 : t, 0), function() {
+    for (var r = arguments, o = -1, s = fe(r.length - t, 0), a = Array(s); ++o < s; )
       a[o] = r[t + o];
     o = -1;
     for (var i = Array(t + 1); ++o < t; )
@@ -326,24 +330,24 @@ function Zt(e, t, n) {
     return i[t] = n(a), $t(e, this, i);
   };
 }
-function Xt(e, t) {
-  return Ut(Zt(e, t, Se), e + "");
+function Zt(e, t) {
+  return Ut(Xt(e, t, Se), e + "");
 }
 var Jt = 9007199254740991;
 function Me(e) {
   return typeof e == "number" && e > -1 && e % 1 == 0 && e <= Jt;
 }
-function re(e) {
-  return e != null && Me(e.length) && !ee(e);
+function oe(e) {
+  return e != null && Me(e.length) && !te(e);
 }
 function Yt(e, t, n) {
   if (!w(n))
     return !1;
   var r = typeof t;
-  return (r == "number" ? re(n) && Ie(t, n.length) : r == "string" && t in n) ? U(n[t], e) : !1;
+  return (r == "number" ? oe(n) && Ie(t, n.length) : r == "string" && t in n) ? U(n[t], e) : !1;
 }
 function Qt(e) {
-  return Xt(function(t, n) {
+  return Zt(function(t, n) {
     var r = -1, o = n.length, s = o > 1 ? n[o - 1] : void 0, a = o > 2 ? n[2] : void 0;
     for (s = e.length > 3 && typeof s == "function" ? (o--, s) : void 0, a && Yt(n[0], n[1], a) && (s = o < 3 ? void 0 : s, o = 1), t = Object(t); ++r < o; ) {
       var i = n[r];
@@ -363,43 +367,43 @@ function en(e, t) {
   return r;
 }
 var tn = "[object Arguments]";
-function fe(e) {
+function pe(e) {
   return $(e) && F(e) == tn;
 }
-var Ne = Object.prototype, nn = Ne.hasOwnProperty, rn = Ne.propertyIsEnumerable, Y = fe(/* @__PURE__ */ function() {
+var Ne = Object.prototype, nn = Ne.hasOwnProperty, rn = Ne.propertyIsEnumerable, Y = pe(/* @__PURE__ */ function() {
   return arguments;
-}()) ? fe : function(e) {
+}()) ? pe : function(e) {
   return $(e) && nn.call(e, "callee") && !rn.call(e, "callee");
 };
 function on() {
   return !1;
 }
-var De = typeof exports == "object" && exports && !exports.nodeType && exports, pe = De && typeof module == "object" && module && !module.nodeType && module, an = pe && pe.exports === De, he = an ? P.Buffer : void 0, sn = he ? he.isBuffer : void 0, Re = sn || on, un = "[object Arguments]", ln = "[object Array]", cn = "[object Boolean]", dn = "[object Date]", fn = "[object Error]", pn = "[object Function]", hn = "[object Map]", mn = "[object Number]", vn = "[object Object]", gn = "[object RegExp]", yn = "[object Set]", _n = "[object String]", bn = "[object WeakMap]", Cn = "[object ArrayBuffer]", wn = "[object DataView]", Tn = "[object Float32Array]", xn = "[object Float64Array]", Pn = "[object Int8Array]", On = "[object Int16Array]", jn = "[object Int32Array]", En = "[object Uint8Array]", An = "[object Uint8ClampedArray]", Sn = "[object Uint16Array]", In = "[object Uint32Array]", d = {};
-d[Tn] = d[xn] = d[Pn] = d[On] = d[jn] = d[En] = d[An] = d[Sn] = d[In] = !0;
-d[un] = d[ln] = d[Cn] = d[cn] = d[wn] = d[dn] = d[fn] = d[pn] = d[hn] = d[mn] = d[vn] = d[gn] = d[yn] = d[_n] = d[bn] = !1;
+var De = typeof exports == "object" && exports && !exports.nodeType && exports, he = De && typeof module == "object" && module && !module.nodeType && module, an = he && he.exports === De, me = an ? O.Buffer : void 0, sn = me ? me.isBuffer : void 0, Re = sn || on, un = "[object Arguments]", ln = "[object Array]", cn = "[object Boolean]", dn = "[object Date]", fn = "[object Error]", pn = "[object Function]", hn = "[object Map]", mn = "[object Number]", vn = "[object Object]", gn = "[object RegExp]", yn = "[object Set]", _n = "[object String]", bn = "[object WeakMap]", Cn = "[object ArrayBuffer]", wn = "[object DataView]", Tn = "[object Float32Array]", xn = "[object Float64Array]", Pn = "[object Int8Array]", On = "[object Int16Array]", jn = "[object Int32Array]", En = "[object Uint8Array]", An = "[object Uint8ClampedArray]", Sn = "[object Uint16Array]", In = "[object Uint32Array]", f = {};
+f[Tn] = f[xn] = f[Pn] = f[On] = f[jn] = f[En] = f[An] = f[Sn] = f[In] = !0;
+f[un] = f[ln] = f[Cn] = f[cn] = f[wn] = f[dn] = f[fn] = f[pn] = f[hn] = f[mn] = f[vn] = f[gn] = f[yn] = f[_n] = f[bn] = !1;
 function Mn(e) {
-  return $(e) && Me(e.length) && !!d[F(e)];
+  return $(e) && Me(e.length) && !!f[F(e)];
 }
 function $n(e) {
   return function(t) {
     return e(t);
   };
 }
-var ze = typeof exports == "object" && exports && !exports.nodeType && exports, A = ze && typeof module == "object" && module && !module.nodeType && module, Nn = A && A.exports === ze, q = Nn && Ee.process, me = function() {
+var ze = typeof exports == "object" && exports && !exports.nodeType && exports, S = ze && typeof module == "object" && module && !module.nodeType && module, Nn = S && S.exports === ze, q = Nn && Ee.process, ve = function() {
   try {
-    var e = A && A.require && A.require("util").types;
+    var e = S && S.require && S.require("util").types;
     return e || q && q.binding && q.binding("util");
   } catch {
   }
-}(), ve = me && me.isTypedArray, Be = ve ? $n(ve) : Mn;
+}(), ge = ve && ve.isTypedArray, Be = ge ? $n(ge) : Mn;
 function Dn(e, t) {
   var n = J(e), r = !n && Y(e), o = !n && !r && Re(e), s = !n && !r && !o && Be(e), a = n || r || o || s, i = a ? en(e.length, String) : [], u = i.length;
-  for (var f in e)
+  for (var c in e)
     a && // Safari 9 has enumerable `arguments.length` in strict mode.
-    (f == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
-    o && (f == "offset" || f == "parent") || // PhantomJS 2 has enumerable non-index properties on typed arrays.
-    s && (f == "buffer" || f == "byteLength" || f == "byteOffset") || // Skip index properties.
-    Ie(f, u)) || i.push(f);
+    (c == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
+    o && (c == "offset" || c == "parent") || // PhantomJS 2 has enumerable non-index properties on typed arrays.
+    s && (c == "buffer" || c == "byteLength" || c == "byteOffset") || // Skip index properties.
+    Ie(c, u)) || i.push(c);
   return i;
 }
 function Rn(e, t) {
@@ -424,11 +428,11 @@ function Fn(e) {
   return n;
 }
 function Ve(e) {
-  return re(e) ? Dn(e) : Fn(e);
+  return oe(e) ? Dn(e) : Fn(e);
 }
-var S = te(Object, "create");
+var I = ne(Object, "create");
 function Un() {
-  this.__data__ = S ? S(null) : {}, this.size = 0;
+  this.__data__ = I ? I(null) : {}, this.size = 0;
 }
 function Ln(e) {
   var t = this.has(e) && delete this.__data__[e];
@@ -437,21 +441,21 @@ function Ln(e) {
 var Hn = "__lodash_hash_undefined__", Gn = Object.prototype, Kn = Gn.hasOwnProperty;
 function Wn(e) {
   var t = this.__data__;
-  if (S) {
+  if (I) {
     var n = t[e];
     return n === Hn ? void 0 : n;
   }
   return Kn.call(t, e) ? t[e] : void 0;
 }
-var qn = Object.prototype, Zn = qn.hasOwnProperty;
-function Xn(e) {
+var qn = Object.prototype, Xn = qn.hasOwnProperty;
+function Zn(e) {
   var t = this.__data__;
-  return S ? t[e] !== void 0 : Zn.call(t, e);
+  return I ? t[e] !== void 0 : Xn.call(t, e);
 }
 var Jn = "__lodash_hash_undefined__";
 function Yn(e, t) {
   var n = this.__data__;
-  return this.size += this.has(e) ? 0 : 1, n[e] = S && t === void 0 ? Jn : t, this;
+  return this.size += this.has(e) ? 0 : 1, n[e] = I && t === void 0 ? Jn : t, this;
 }
 function C(e) {
   var t = -1, n = e == null ? 0 : e.length;
@@ -463,7 +467,7 @@ function C(e) {
 C.prototype.clear = Un;
 C.prototype.delete = Ln;
 C.prototype.get = Wn;
-C.prototype.has = Xn;
+C.prototype.has = Zn;
 C.prototype.set = Yn;
 function Qn() {
   this.__data__ = [], this.size = 0;
@@ -505,7 +509,7 @@ b.prototype.delete = tr;
 b.prototype.get = nr;
 b.prototype.has = rr;
 b.prototype.set = or;
-var Fe = te(P, "Map");
+var Fe = ne(O, "Map");
 function ar() {
   this.size = 0, this.__data__ = {
     hash: new C(),
@@ -535,18 +539,18 @@ function cr(e, t) {
   var n = H(this, e), r = n.size;
   return n.set(e, t), this.size += n.size == r ? 0 : 1, this;
 }
-function O(e) {
+function j(e) {
   var t = -1, n = e == null ? 0 : e.length;
   for (this.clear(); ++t < n; ) {
     var r = e[t];
     this.set(r[0], r[1]);
   }
 }
-O.prototype.clear = ar;
-O.prototype.delete = ir;
-O.prototype.get = ur;
-O.prototype.has = lr;
-O.prototype.set = cr;
+j.prototype.clear = ar;
+j.prototype.delete = ir;
+j.prototype.get = ur;
+j.prototype.has = lr;
+j.prototype.set = cr;
 var Ue = Rn(Object.getPrototypeOf, Object), dr = "[object Object]", fr = Function.prototype, pr = Object.prototype, Le = fr.toString, hr = pr.hasOwnProperty, mr = Le.call(Object);
 function vr(e) {
   if (!$(e) || F(e) != dr)
@@ -577,28 +581,28 @@ function wr(e, t) {
     var r = n.__data__;
     if (!Fe || r.length < Cr - 1)
       return r.push([e, t]), this.size = ++n.size, this;
-    n = this.__data__ = new O(r);
+    n = this.__data__ = new j(r);
   }
   return n.set(e, t), this.size = n.size, this;
 }
-function j(e) {
+function E(e) {
   var t = this.__data__ = new b(e);
   this.size = t.size;
 }
-j.prototype.clear = gr;
-j.prototype.delete = yr;
-j.prototype.get = _r;
-j.prototype.has = br;
-j.prototype.set = wr;
-var He = typeof exports == "object" && exports && !exports.nodeType && exports, ge = He && typeof module == "object" && module && !module.nodeType && module, Tr = ge && ge.exports === He, ye = Tr ? P.Buffer : void 0;
-ye && ye.allocUnsafe;
+E.prototype.clear = gr;
+E.prototype.delete = yr;
+E.prototype.get = _r;
+E.prototype.has = br;
+E.prototype.set = wr;
+var He = typeof exports == "object" && exports && !exports.nodeType && exports, ye = He && typeof module == "object" && module && !module.nodeType && module, Tr = ye && ye.exports === He, _e = Tr ? O.Buffer : void 0;
+_e && _e.allocUnsafe;
 function xr(e, t) {
   return e.slice();
 }
-var _e = P.Uint8Array;
+var be = O.Uint8Array;
 function Pr(e) {
   var t = new e.constructor(e.byteLength);
-  return new _e(t).set(new _e(e)), t;
+  return new be(t).set(new be(e)), t;
 }
 function Or(e, t) {
   var n = Pr(e.buffer);
@@ -619,10 +623,10 @@ function Er(e) {
 }
 var Ar = Er();
 function Q(e, t, n) {
-  (n !== void 0 && !U(e[t], n) || n === void 0 && !(t in e)) && ne(e, t, n);
+  (n !== void 0 && !U(e[t], n) || n === void 0 && !(t in e)) && re(e, t, n);
 }
 function Sr(e) {
-  return $(e) && re(e);
+  return $(e) && oe(e);
 }
 function k(e, t) {
   if (!(t === "constructor" && typeof e[t] == "function") && t != "__proto__")
@@ -632,21 +636,21 @@ function Ir(e) {
   return qt(e, Ve(e));
 }
 function Mr(e, t, n, r, o, s, a) {
-  var i = k(e, n), u = k(t, n), f = a.get(u);
-  if (f) {
-    Q(e, n, f);
+  var i = k(e, n), u = k(t, n), c = a.get(u);
+  if (c) {
+    Q(e, n, c);
     return;
   }
-  var l = s ? s(i, u, n + "", e, t, a) : void 0, c = l === void 0;
-  if (c) {
+  var l = s ? s(i, u, n + "", e, t, a) : void 0, d = l === void 0;
+  if (d) {
     var p = J(u), y = !p && Re(u), T = !p && !y && Be(u);
-    l = u, p || y || T ? J(i) ? l = i : Sr(i) ? l = Nt(i) : y ? (c = !1, l = xr(u)) : T ? (c = !1, l = Or(u)) : l = [] : vr(u) || Y(u) ? (l = i, Y(i) ? l = Ir(i) : (!w(i) || ee(i)) && (l = jr(u))) : c = !1;
+    l = u, p || y || T ? J(i) ? l = i : Sr(i) ? l = Nt(i) : y ? (d = !1, l = xr(u)) : T ? (d = !1, l = Or(u)) : l = [] : vr(u) || Y(u) ? (l = i, Y(i) ? l = Ir(i) : (!w(i) || te(i)) && (l = jr(u))) : d = !1;
   }
-  c && (a.set(u, l), o(l, u, r, s, a), a.delete(u)), Q(e, n, l);
+  d && (a.set(u, l), o(l, u, r, s, a), a.delete(u)), Q(e, n, l);
 }
 function Ge(e, t, n, r, o) {
   e !== t && Ar(t, function(s, a) {
-    if (o || (o = new j()), w(s))
+    if (o || (o = new E()), w(s))
       Mr(e, t, a, n, Ge, r, o);
     else {
       var i = r ? r(k(e, a), s, a + "", e, t, o) : void 0;
@@ -661,30 +665,30 @@ class G {
   constructor() {
     N(this, "mountNode");
     N(this, "parentInstance");
-    this.parentInstance = Xe();
+    this.parentInstance = Ze();
   }
   setMountNode(t) {
     this.mountNode = t;
   }
   createCommand(t) {
     return (n, r = {}) => {
-      const o = Z(nt(t.visible) ? !0 : !!t.visible);
+      const o = X(nt(t.visible) ? !0 : !!t.visible);
       return this.createConsumer(n, o, r, t);
     };
   }
   createConsumer(t, n, r, o) {
     const s = {
       value: null
-    }, a = I({
+    }, a = P({
       setup: () => {
-        const f = Z(), l = () => {
+        const c = X(), l = () => {
           Promise.resolve().then(() => {
-            s.value.componentRef = f;
+            s.value.componentRef = c;
           });
         };
         return () => this.renderComponent(t, {
-          componentRef: f,
-          visible: n.value,
+          componentRef: c,
+          visible: n,
           onMounted: l,
           config: r,
           consumer: s
@@ -694,11 +698,11 @@ class G {
       ...Ke(o, r),
       visible: n
     };
-    return s.value = at(this.parentInstance, Ce(a), u), s.value;
+    return s.value = at(this.parentInstance, ee(a), u), s.value;
   }
 }
 /*! Element Plus Icons Vue v2.3.1 */
-var $r = /* @__PURE__ */ I({
+var $r = /* @__PURE__ */ P({
   name: "Close",
   __name: "close",
   setup(e) {
@@ -712,7 +716,7 @@ var $r = /* @__PURE__ */ I({
       })
     ]));
   }
-}), Nr = $r, Dr = /* @__PURE__ */ I({
+}), Nr = $r, Dr = /* @__PURE__ */ P({
   name: "FullScreen",
   __name: "full-screen",
   setup(e) {
@@ -737,13 +741,13 @@ class zr extends G {
       consumer: i
     } = n, u = (l) => {
       l(), i.value.destroy();
-    }, f = (...l) => {
-      var c, p;
-      return i.value.emit(M.destroy), (p = (c = a.attrs) == null ? void 0 : c.onClosed) == null ? void 0 : p.call(c, ...l);
+    }, c = (...l) => {
+      var d, p;
+      return i.value.emit(M.destroy), (p = (d = a.attrs) == null ? void 0 : d.onClosed) == null ? void 0 : p.call(d, ...l);
     };
     return v(Pe, V({
       ref: r,
-      modelValue: o,
+      modelValue: o.value,
       beforeClose: u,
       onVnodeMounted: s,
       title: a.title,
@@ -751,14 +755,14 @@ class zr extends G {
     }, {
       ...a.attrs
     }, {
-      onClosed: f
+      onClosed: c
     }), {
       default: () => t,
       ...a.slots
     });
   }
 }
-const Qr = (e = {}) => {
+const kr = (e = {}) => {
   const t = new zr();
   return t.setMountNode(e.appendTo), t.createCommand(e);
 };
@@ -770,20 +774,20 @@ class Br extends G {
       onMounted: s,
       config: a,
       consumer: i
-    } = n, u = (c) => {
-      c(), i.value.destroy();
-    }, f = (...c) => {
+    } = n, u = (d) => {
+      d(), i.value.destroy();
+    }, c = (...d) => {
       var p, y;
-      return i.value.emit(M.destroy), (y = (p = a.attrs) == null ? void 0 : p.onClosed) == null ? void 0 : y.call(p, ...c);
+      return i.value.emit(M.destroy), (y = (p = a.attrs) == null ? void 0 : p.onClosed) == null ? void 0 : y.call(p, ...d);
     };
-    return v(/* @__PURE__ */ I({
+    return v(/* @__PURE__ */ P({
       setup() {
-        const c = Z(!1);
+        const d = X(!1);
         return () => {
           var p;
           return v(Pe, V({
             ref: r,
-            modelValue: o,
+            modelValue: o.value,
             beforeClose: u,
             onVnodeMounted: s,
             title: a.title,
@@ -791,9 +795,9 @@ class Br extends G {
           }, {
             ...a.attrs
           }, {
-            fullscreen: c.value,
+            fullscreen: d.value,
             showClose: !1,
-            onClosed: f,
+            onClosed: c,
             draggable: ((p = a.attrs) == null ? void 0 : p.draggable) === void 0 ? !0 : a.attrs.draggable
           }), {
             header: ({
@@ -815,15 +819,15 @@ class Br extends G {
                 class: "flex items-center gap-2.5"
               }, [v("div", {
                 class: "cursor-pointer hover:text-[color:var(--el-color-primary)]",
-                onClick: () => c.value = !c.value
-              }, [v(se, {
+                onClick: () => d.value = !d.value
+              }, [v(ie, {
                 class: "el-icon--left"
               }, {
                 default: () => [v(Rr, null, null)]
               })]), ((x = a.attrs) == null ? void 0 : x.showClose) !== !1 && v("div", {
                 class: "cursor-pointer hover:text-[color:var(--el-color-primary)]",
                 onClick: h
-              }, [v(se, {
+              }, [v(ie, {
                 class: "el-icon--left"
               }, {
                 default: () => [v(Nr, null, null)]
@@ -837,7 +841,7 @@ class Br extends G {
     }), null, null);
   }
 }
-const kr = (e = {}) => {
+const eo = (e = {}) => {
   const t = new Br();
   return t.setMountNode(e.appendTo), t.createCommand(e);
 };
@@ -851,27 +855,27 @@ class Vr extends G {
       consumer: i
     } = n, u = (l) => {
       l(), i.value.destroy();
-    }, f = (...l) => {
-      var c, p;
-      return i.value.emit(M.destroy), (p = (c = a.attrs) == null ? void 0 : c.onClosed) == null ? void 0 : p.call(c, ...l);
+    }, c = (...l) => {
+      var d, p;
+      return i.value.emit(M.destroy), (p = (d = a.attrs) == null ? void 0 : d.onClosed) == null ? void 0 : p.call(d, ...l);
     };
     return v(Ye, V({
       ref: r,
-      modelValue: o,
+      modelValue: o.value,
       beforeClose: u,
       onVnodeMounted: s
     }, {
       title: a.title,
       ...a.attrs
     }, {
-      onClosed: f
+      onClosed: c
     }), {
       default: () => t,
       ...a.slots
     });
   }
 }
-const eo = (e = {}) => {
+const to = (e = {}) => {
   const t = new Vr();
   return t.setMountNode(e.appendTo), t.createCommand(e);
 }, Fr = {
@@ -891,13 +895,14 @@ class Ur extends G {
       onMounted: s,
       config: a,
       consumer: i
-    } = n;
+    } = n, u = () => {
+      i.value.destroy();
+    };
     return v(Qe, V({
       ref: r,
-      show: o,
-      onClickCloseIcon: () => {
-        i.value.destroy();
-      },
+      show: o.value,
+      "onUpdate:show": (c) => o.value = c,
+      onClickCloseIcon: u,
       onVnodeMounted: s
     }, {
       ...Fr,
@@ -911,7 +916,7 @@ class Ur extends G {
 const Lr = (e = {}) => {
   const t = new Ur();
   return t.setMountNode(e.appendTo), t.createCommand(e);
-}, to = (e = {}) => {
+}, no = (e = {}) => {
   const t = Lr(e);
   return (n, r = {}) => {
     const o = Ke({}, r, {
@@ -924,7 +929,7 @@ const Lr = (e = {}) => {
     });
     return t(n, o);
   };
-}, no = () => {
+}, ro = () => {
   const e = ke();
   Je(
     () => e.path,
@@ -935,24 +940,25 @@ const Lr = (e = {}) => {
 };
 export {
   Oe as CommandComponentConsumerInjectKey,
-  ie as CommandComponentStackInjectKey,
+  ue as CommandComponentStackInjectKey,
   at as CommandProviderWithRender,
   et as ConsumerEventBus,
   M as EVENT_NAME,
+  Yr as JSXReactive,
   tt as PromiseWithResolvers,
   G as UIComponentAdapter,
-  X as activeConsumers,
-  Xr as busName2EventName,
+  Z as activeConsumers,
+  Zr as busName2EventName,
   rt as deepMerge,
   ot as destroyAllConsumer,
-  Zr as eventName2BusName,
+  Xr as eventName2BusName,
   Jr as getMaxZIndex,
   nt as isNull,
-  no as useCloseAllOnRouteChange,
-  Yr as useConsumer,
-  Qr as useElementPlusDialog,
-  kr as useElementPlusDialogPro,
-  eo as useElementPlusDrawer,
+  ro as useCloseAllOnRouteChange,
+  Qr as useConsumer,
+  kr as useElementPlusDialog,
+  eo as useElementPlusDialogPro,
+  to as useElementPlusDrawer,
   Lr as useVantUiPopup,
-  to as useVantUiPopupOnBottom
+  no as useVantUiPopupOnBottom
 };

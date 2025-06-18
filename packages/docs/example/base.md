@@ -79,3 +79,9 @@ CommandDialog(<div>1</div>,{
 
 <demo vue="../components/other-ui.vue"></demo>
 
+## 响应式组件
+
+由于jsx的书写方式,上述所有示例都有一个严重的缺陷,就是`DialogContent`组件的视图是无法根据props数据的变化进行更新的,这个时候你就需要JSXReactive来包裹你的jsx
+<demo vue="../components/reactive-component.vue"></demo>
+
+

@@ -26,7 +26,7 @@ class ElementPlusDialogAdapter extends UIComponentAdapter<IElementPlusDialogConf
     return (
       <ElDialog
         ref={componentRef}
-        modelValue={visible}
+        modelValue={visible.value}
         beforeClose={handleClose}
         onVnodeMounted={onMounted}
         title={config.title}
@@ -72,7 +72,7 @@ class ElementPlusDialogProAdapter extends UIComponentAdapter<IElementPlusDialogC
         return () => {
           return <ElDialog
             ref={componentRef}
-            modelValue={visible}
+            modelValue={visible.value}
             beforeClose={handleClose}
             onVnodeMounted={onMounted}
             title={config.title}

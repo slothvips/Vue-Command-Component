@@ -28,7 +28,7 @@ class VantUiPopupAdapter extends UIComponentAdapter<ICommandComponentConfig> {
     return (
       <Popup
         ref={componentRef}
-        show={visible}
+        v-model:show={visible.value}
         onClickCloseIcon={handleClose}
         onVnodeMounted={onMounted}
         {...{

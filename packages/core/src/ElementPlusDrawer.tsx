@@ -25,7 +25,7 @@ class ElementPlusDrawerAdapter extends UIComponentAdapter<IElementPlusDrawerConf
     return (
       <ElDrawer
         ref={componentRef}
-        modelValue={visible}
+        modelValue={visible.value}
         beforeClose={handleClose}
         onVnodeMounted={onMounted}
         {...{
