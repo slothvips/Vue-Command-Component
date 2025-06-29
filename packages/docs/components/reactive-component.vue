@@ -13,26 +13,27 @@
 </template>
 
 <script setup name="base-example" lang="tsx">
-import { JSXReactive, useElementPlusDialog } from "vue3-command-component";
+import { RxRender } from "@vue-cmd/core";
+import { useElementPlusDialog } from "@vue-cmd/element-plus";
 import DialogContent from "./dialog-content.vue";
-import { ref ,reactive} from "vue";
+import { ref, reactive } from "vue";
 
-const count=ref(0)
-setInterval(()=>{
+const count = ref(0)
+setInterval(() => {
   count.value++
-},1000)
+}, 1000)
 
 const CommandDialog = useElementPlusDialog();
 const openDialog = () => {
-  CommandDialog(<DialogContent v-model={formValue.name} count={count.value} />); 
+  CommandDialog(<DialogContent v-model={formValue.name} count={count.value} />);
 };
 
 const openDialog2 = () => {
-  CommandDialog(JSXReactive(()=> <DialogContent v-model={formValue.name} count={count.value} />));
+  CommandDialog(RxRender(() => <DialogContent v-model={formValue.name} count={count.value} />));
 };
 
-const formValue=reactive({
-  name:'panda',
+const formValue = reactive({
+  name: 'panda',
 })
 
 </script>

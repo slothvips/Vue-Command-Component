@@ -4,7 +4,7 @@
 
 ## 兼容性
 
-仅支持`Vue3`,请留意你的vue版本.
+仅支持`Vue 3`,请留意你的vue版本.
 
 建议你为你的项目配置`jsx`支持,这会极大的改善你的开发体验,否则你就需要一路`h`函数了.关于如何为你的项目配置`jsx`支持,`vite`用户参见[@vitejs/plugin-vue-jsx](https://www.npmjs.com/package/@vitejs/plugin-vue-jsx).
 
@@ -15,19 +15,19 @@
 ::: code-group
 
 ```bash [npm]
-$ npm install vue3-command-component
+$ npm install @vue-cmd/core @vue-cmd/element-plus
 ```
 
 ```bash [yarn]
-$ yarn add vue3-command-component
+$ yarn add @vue-cmd/core @vue-cmd/element-plus
 ```
 
 ```bash [pnpm]
-$ pnpm add vue3-command-component
+$ pnpm add @vue-cmd/core @vue-cmd/element-plus
 ```
 
 ```bash [bun]
-$ bun add vue3-command-component
+$ bun add @vue-cmd/core @vue-cmd/element-plus
 ```
 
 :::
@@ -41,7 +41,7 @@ npm i -g @antfu/ni
 
 然后你就可以无视包管理器差异了
 ```bash
-ni vue3-command-component
+ni @vue-cmd/core @vue-cmd/element-plus
 ```
 
 
@@ -51,7 +51,7 @@ ni vue3-command-component
 
 ```jsx
 import { defineComponent, h } from "vue";
-import { useElementPlusDialog } from "vue3-command-component";
+import { useElementPlusDialog } from "@vue-cmd/element-plus";
 
 const CommandDialog=useElementPlusDialog()
 

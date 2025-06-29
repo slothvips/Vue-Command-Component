@@ -1,72 +1,94 @@
 import { merge } from "lodash-es";
-import type { ComponentInternalInstance, Ref, VNode } from "vue";
+import type { VNode } from "vue";
 import { defineComponent, getCurrentInstance, h, ref } from "vue";
-import { CommandProviderWithRender } from "./Core";
+import { CommandProviderWithRender } from "./core";
 import type { ICommandComponentConfig, IConsumer, ICreateCommandComponentConfig, IRenderComponentOptions } from "./type";
 import { isNull } from "./utils";
 
-export abstract class UIComponentAdapter<Config extends ICommandComponentConfig = ICommandComponentConfig> {
-  protected mountNode?: HTMLElement | string;
-  public parentInstance: ComponentInternalInstance | null;
+export type AdapterRenderer<TConfig extends ICommandComponentConfig = ICommandComponentConfig> = (
+  contentVNode: VNode,
+  options: IRenderComponentOptions<TConfig>
+) => VNode;
 
-  constructor() {
-    this.parentInstance = getCurrentInstance();
-  }
+export type AdapterOptions<TConfig extends ICommandComponentConfig = ICommandComponentConfig> = {
+  /** 渲染器函数 */
+  render: AdapterRenderer<TConfig>;
+  /** 默认配置 */
+  defaultConfig?: Partial<TConfig>;
+  /** 挂载节点 */
+  mountNode?: HTMLElement | string;
+  /** 配置转换器 - 在渲染前对配置进行转换 */
+  configTransformer?: (config: TConfig, createConfig: ICreateCommandComponentConfig) => TConfig;
+};
 
-  setMountNode(node: HTMLElement | undefined | string): void {
-    this.mountNode = node;
-  }
+/**
+ * 创建函数式适配器
+ * @param options 适配器选项
+ * @returns 适配器函数
+ */
+export function createAdapter<TConfig extends ICommandComponentConfig = ICommandComponentConfig>(
+  options: AdapterOptions<TConfig>
+) {
+  const { render: renderer, defaultConfig = {}, mountNode, configTransformer } = options;
 
-  createCommand(createConfig: ICreateCommandComponentConfig) {
-    return (ContentVNode: VNode, config: Config = {} as Config): IConsumer => {
+  return function (createConfig: ICreateCommandComponentConfig = {}) {
+    const parentInstance = getCurrentInstance();
+
+    return function commandComponent(contentVNode: VNode, config: TConfig = {} as TConfig): IConsumer {
+      // 合并配置
+      let mergedConfig = merge({}, defaultConfig, config) as TConfig;
+
+      // 应用配置转换器
+      if (configTransformer) {
+        mergedConfig = configTransformer(mergedConfig, createConfig);
+      }
+
       const visible = ref<boolean>(isNull(createConfig.visible) ? true : !!createConfig.visible);
-      const consumer = this.createConsumer(ContentVNode, visible, config, createConfig);
-      return consumer;
-    };
-  }
 
-  protected createConsumer(ContentVNode: VNode, visible: Ref<boolean>, config: Config, createConfig: ICreateCommandComponentConfig): IConsumer {
-    // TODO: need a better idea
-    const consumerRef = {
-      value: null as unknown as IConsumer,
-    };
+      const consumerRef = {
+        value: null as unknown as IConsumer,
+      };
 
-    const Wrapper = defineComponent({
-      setup: () => {
-        const componentRef = ref();
-        const handleMounted = () => {
-          Promise.resolve().then(() => {
-            consumerRef.value!.componentRef = componentRef;
-          });
-        };
+      const Wrapper = defineComponent({
+        setup: () => {
+          const componentRef = ref();
 
-        return () =>
-          this.renderComponent(ContentVNode, {
-            componentRef: componentRef,
+          const onMounted = () => {
+            Promise.resolve().then(() => {
+              consumerRef.value!.componentRef = componentRef;
+            });
+          };
+
+          const renderOptions: IRenderComponentOptions<TConfig> = {
+            componentRef,
             visible,
-            onMounted: handleMounted,
-            config,
+            onMounted,
+            config: mergedConfig,
             consumer: consumerRef!,
-          });
-      },
-    });
+          };
 
-    // 合并配置
-    const mergedConfig = merge(createConfig, config);
-    const finalConfig = {
-      ...mergedConfig,
-      visible,
+          return () => {
+            return renderer(contentVNode, renderOptions);
+          };
+        },
+      });
+
+      // 合并最终配置
+      const finalCreateConfig = merge(createConfig, {
+        appendTo: mountNode || createConfig.appendTo,
+      });
+
+      const finalConfig = {
+        ...finalCreateConfig,
+        ...mergedConfig,
+        visible,
+      };
+
+      consumerRef.value = CommandProviderWithRender(parentInstance, h(Wrapper), finalConfig);
+
+      return consumerRef.value!;
     };
-
-    consumerRef.value = CommandProviderWithRender(this.parentInstance, h(Wrapper), finalConfig);
-
-    return consumerRef.value!;
-  }
-
-  /**
-   * 渲染组件
-   * @param ContentVNode - 内容节点
-   * @param options - 渲染选项
-   */
-  protected abstract renderComponent(ContentVNode: VNode, getOptions: IRenderComponentOptions<Config>): VNode;
+  };
 }
+
+

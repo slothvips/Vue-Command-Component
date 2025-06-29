@@ -1,5 +1,5 @@
 import { VNode } from 'vue';
-import { IConsumer, IOnConfig, EventCallback, IPromiseWithResolvers } from './type';
+import { EventCallback, IConsumer, IOnConfig, IPromiseWithResolvers } from './type';
 /**
  * 基于命令弹窗消费对象的事件注册中心
  */
@@ -34,14 +34,6 @@ export declare const getMaxZIndex: (domNode: HTMLElement) => number;
  * @returns true if the value is null or undefined
  */
 export declare const isNull: (val: unknown) => val is null | undefined;
-/**
- * 深度合并多个对象
- * @param target - 目标对象
- * @param source - 源对象
- * @param args - 额外的合并对象
- * @returns 合并后的新对象
- */
-export declare const deepMerge: (target: Record<string | symbol, unknown>, source: Record<string | symbol, unknown>, ...args: Record<string, unknown>[]) => Record<string, unknown>;
-export declare const JSXReactive: (render: () => VNode) => VNode<import('vue').RendererNode, import('vue').RendererElement, {
+export declare const RxRender: (render: () => VNode) => VNode<import('vue').RendererNode, import('vue').RendererElement, {
     [key: string]: any;
 }>;

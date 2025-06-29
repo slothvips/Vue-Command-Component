@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { ElForm, ElFormItem, ElInput, ElDatePicker } from "element-plus";
-import { useConsumer } from "vue3-command-component";
+import { useConsumer } from "@vue-cmd/core";
 
 interface RowData {
   date: string;

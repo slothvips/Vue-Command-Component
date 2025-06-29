@@ -8,10 +8,10 @@ import { vitepressDemoPlugin } from "vitepress-demo-plugin";
 import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-icons";
 
 export default defineConfig({
-  title: `Vue3命令组件`,
+  title: `Vue命令组件`,
   base: "/Vue3-Command-Component/",
   assetsDir: "/Vue3-Command-Component/assets",
-  description: "轻松实现Vue3组件的命令式调用",
+  description: "轻松实现Vue组件的命令式调用",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/logo.svg" }],
     [
@@ -97,11 +97,10 @@ export default defineConfig({
     },
   },
   vite: {
-    // .vitepress/config.mts
     ssr: {
-      noExternal: ["element-plus"],
+      // noExternal: ["element-plus"],
     },
-
+    resolve: {},
     plugins: [
       Components({
         resolvers: [

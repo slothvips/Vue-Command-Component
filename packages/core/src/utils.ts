@@ -1,5 +1,5 @@
 import { defineComponent, h, type VNode } from "vue";
-import type { IConsumer, IOnConfig, EventCallback, EventMap, EventBusMap, IPromiseWithResolvers, DeepMergeable } from "./type";
+import type { EventBusMap, EventCallback, EventMap, IConsumer, IOnConfig, IPromiseWithResolvers } from "./type";
 
 /**
  * 基于命令弹窗消费对象的事件注册中心
@@ -103,35 +103,9 @@ export const getMaxZIndex = (domNode: HTMLElement): number => {
  */
 export const isNull = (val: unknown): val is null | undefined => val === null || val === void 0;
 
-/**
- * 深度合并多个对象
- * @param target - 目标对象
- * @param source - 源对象
- * @param args - 额外的合并对象
- * @returns 合并后的新对象
- */
-export const deepMerge = (target: Record<string | symbol, unknown>, source: Record<string | symbol, unknown>, ...args: Record<string, unknown>[]): Record<string, unknown> => {
-  const result = { ...target };
-  const merge = (obj: Record<string | symbol, unknown>) => {
-    for (const key in obj) {
-      if (obj[key] && typeof obj[key] === "object") {
-        const targetValue = result[key] && typeof result[key] === "object" ? (result[key] as Record<string | symbol, unknown>) : {};
-        result[key] = deepMerge(targetValue, obj[key] as Record<string | symbol, unknown>);
-      } else {
-        result[key] = obj[key];
-      }
-    }
-  };
-  merge(source);
-  args.forEach(merge);
-  return result;
-};
-
-// 将一个jsx绑定方式的组件变更为响应式组件
-export const JSXReactive = (render: () => VNode) => {
-  return h(defineComponent({
-    setup() {
-      return render;
-    }
-  }))
+// 将一个vnode渲染函数变更为响应式组件
+export const RxRender = (render: () => VNode) => {
+  // 如果不是一个函数,将直接返回内容(或许是一个vnode)
+  if (typeof render !== "function") return render;
+  return h(defineComponent({ render: () => render() }));
 };

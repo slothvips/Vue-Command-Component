@@ -2,8 +2,8 @@
 layout: home
 
 hero:
-  name: "Vue3命令式组件"
-  text: "轻松实现Vue3组件的命令式调用"
+  name: "Vue命令式组件"
+  text: "轻松实现Vue组件的命令式调用"
   tagline: 随用随走,释放完整想象力!
   actions:
     - theme: brand

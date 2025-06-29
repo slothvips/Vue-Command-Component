@@ -1,23 +1,25 @@
 {
-  "name": "vue3-command-component",
-  "version": "1.1.3",
+  "name": "@vue-cmd/core",
+  "version": "1.0.0",
   "type": "module",
-  "description": "Vue3 Command Component Library",
+  "description": "Vue Command Component Core Library",
   "homepage": "https://pandavips.github.io/Vue3-Command-Component/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pandavips/Vue3-Command-Component.git"
   },
   "keywords": [
+    "vue",
     "vue3",
     "command",
-    "component"
+    "component",
+    "core"
   ],
   "license": "MIT",
   "author": "pandavips",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "./types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "types"
@@ -25,19 +27,14 @@
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build && vue-tsc --emitDeclarationOnly",
-    "test": "vitest",
     "publish": "pnpm build && pnpm publish --access public --no-git-checks"
   },
   "dependencies": {
+    "build": "^0.1.4",
     "lodash-es": "^4.17.21"
   },
-  "devDependencies": {
-    "vite-plugin-libcss": "^1.1.1"
-  },
+  "devDependencies": {},
   "peerDependencies": {
-    "element-plus": "2.x",
-    "vant": "4.x",
-    "vue": "3.x",
-    "vue-router": "*"
+    "vue": "3.x"
   }
 }

@@ -1,11 +1,15 @@
 {
-  "name": "vue3-command-component-monorepo",
+  "name": "vue-command-component-monorepo",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "build:watch": "pnpm --filter vue3-command-component build --watch",
-    "build": "pnpm --filter vue3-command-component build",
+    "build:watch": "pnpm --filter '@vue-cmd/*' build --watch",
+    "build": "pnpm --filter '@vue-cmd/*' build",
+    "build:core": "pnpm --filter '@vue-cmd/core' build",
+    "build:element-plus": "pnpm --filter '@vue-cmd/element-plus' build",
+    "build:vant": "pnpm --filter '@vue-cmd/vant' build",
+    "build:naive": "pnpm --filter '@vue-cmd/naive' build",
     "doc:build": "vitepress build packages/docs",
     "doc:dev": "vitepress dev packages/docs --port 3000",
     "doc:preview": "vitepress preview packages/docs --port 3000"
@@ -16,9 +20,13 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@vue-cmd/core": "workspace:*",
+    "@vue-cmd/element-plus": "workspace:*",
+    "@vue-cmd/vant": "workspace:*",
+    "@vue-cmd/naive": "workspace:*",
+    "build": "^0.1.4",
     "viewerjs": "^1.11.7",
-    "vitepress-plugin-image-viewer": "^1.1.6",
-    "vue3-command-component": "workspace:*"
+    "vitepress-plugin-image-viewer": "^1.1.6"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
@@ -39,6 +47,7 @@
     "vant": "~4.9.7",
     "vite": "^5.4.1",
     "vite-plugin-dts": "^4.2.2",
+    "vite-plugin-libcss": "^1.1.1",
     "vitepress": "^1.6.3",
     "vitepress-demo-plugin": "^1.4.1",
     "vitepress-plugin-group-icons": "^1.5.2",

@@ -124,7 +124,3 @@ export interface IPromiseWithResolvers<T = unknown> {
     resolve: (value: T) => void;
     reject: (reason?: unknown) => void;
 }
-/**
- * 深度合并对象类型
- */
-export type DeepMergeable = Record<string, any>;

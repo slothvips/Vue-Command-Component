@@ -6,10 +6,8 @@ import { ElementPlusResolver, VantResolver } from "unplugin-vue-components/resol
 import Components from "unplugin-vue-components/vite";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
-import libCss from 'vite-plugin-libcss';
 export default defineConfig({
   plugins: [
-    libCss(),
     vue(),
     UnoCSS(),
     vueJsx(),
@@ -22,9 +20,7 @@ export default defineConfig({
       ],
     }),
     dts({
-      // root: resolve(__dirname, "src"),
-      entryRoot: resolve(__dirname, "src"),
-      outDir: "types",
+      insertTypesEntry: true,
     }),
   ],
   resolve: {
@@ -36,7 +32,7 @@ export default defineConfig({
     cssCodeSplit: true,
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "Vue3CommandDialog",
+      name: "VueCmdCore",
       fileName: "index",
     },
     minify: "esbuild",

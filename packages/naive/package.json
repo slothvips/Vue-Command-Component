@@ -1,0 +1,48 @@
+{
+  "name": "@vue-cmd/naive",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Naive UI adapters for Vue Command Component",
+  "homepage": "https://pandavips.github.io/Vue3-Command-Component/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandavips/Vue3-Command-Component.git"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "command",
+    "component",
+    "naive-ui"
+  ],
+  "license": "MIT",
+  "author": "pandavips",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "publish": "pnpm build && pnpm publish --access public"
+  },
+  "dependencies": {
+    "@vue-cmd/core": "workspace:*",
+    "build": "^0.1.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^4.0.0",
+    "vue-tsc": "^2.0.0"
+  },
+  "peerDependencies": {
+    "naive-ui": "2.x",
+    "vue": "3.x"
+  }
+}

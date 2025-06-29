@@ -73,6 +73,7 @@ CommandDialog(<div>1</div>,{
   },
 })
 ```
+
 ## 其他UI库组件示例
 
 目前另外的适配:
@@ -81,7 +82,8 @@ CommandDialog(<div>1</div>,{
 
 ## 响应式组件
 
-由于jsx的书写方式,上述所有示例都有一个严重的缺陷,就是`DialogContent`组件的视图是无法根据props数据的变化进行更新的,这个时候你就需要JSXReactive来包裹你的jsx
+由于jsx的书写方式,上述所有示例都有一个严重的缺陷,就是`DialogContent`组件的视图是无法根据props数据的变化进行更新的,这个时候你就需要JSXReactive来包裹你的jsx.其原理是将渲染函数包裹成一个响应式组件,从而实现视图的更新.
+
 <demo vue="../components/reactive-component.vue"></demo>
 
 

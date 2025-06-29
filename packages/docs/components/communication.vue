@@ -5,7 +5,7 @@
 </template>
 
 <script setup name="base-example" lang="tsx">
-import { useElementPlusDialog } from "vue3-command-component";
+import { useElementPlusDialog } from "@vue-cmd/element-plus";
 import DialogContent from "./dialog-content.vue";
 
 const CommandDialog = useElementPlusDialog();
