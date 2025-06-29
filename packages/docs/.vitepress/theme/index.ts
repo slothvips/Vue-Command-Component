@@ -1,8 +1,6 @@
 import DefaultTheme from "vitepress/theme";
 // import { ElMessage } from "element-plus";
-import 'vant/lib/index.css';
-import "element-plus/dist/index.css";
-import "element-plus/theme-chalk/dark/css-vars.css";
+import "./styles.css";
 import "virtual:uno.css";
 
 import "viewerjs/dist/viewer.min.css";

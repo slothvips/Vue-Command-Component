@@ -1,33 +1,33 @@
-name: 部署doc站点
-on:
-  push:
-    branches:
-      - main
-jobs:
-  release-and-deploy:
-    name: 部署doc站点
-    runs-on: ubuntu-latest
-    steps:
-      - name: 检出代码
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: 设置 Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "lts/*"
-      - name: 设置 pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-      - name: 安装依赖
-        run: pnpm install --frozen-lockfile
-      - name: 构建所有包
-        run: pnpm run build
-      - name: 构建文档站点
-        run: pnpm run doc:build
-      - name: 部署到 GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packages/docs/.vitepress/dist
+# name: 部署doc站点
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   release-and-deploy:
+#     name: 部署doc站点
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: 检出代码
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
+#       - name: 设置 Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: "lts/*"
+#       - name: 设置 pnpm
+#         uses: pnpm/action-setup@v2
+#         with:
+#           version: latest
+#       - name: 安装依赖
+#         run: pnpm install --frozen-lockfile
+#       - name: 构建所有包
+#         run: pnpm run build
+#       - name: 构建文档站点
+#         run: pnpm run doc:build
+#       - name: 部署到 GitHub Pages
+#         uses: peaceiris/actions-gh-pages@v3
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           publish_dir: ./packages/docs/.vitepress/dist

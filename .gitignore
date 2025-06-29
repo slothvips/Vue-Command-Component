@@ -23,4 +23,4 @@ node_modules
 
 # VitePress cache
 **/.vitepress/cache/**
-
+**/.vitepress/dist/**

@@ -98,7 +98,7 @@ export default defineConfig({
   },
   vite: {
     ssr: {
-      // noExternal: ["element-plus"],
+      noExternal: ["element-plus", "vant"],
     },
     resolve: {},
     plugins: [
