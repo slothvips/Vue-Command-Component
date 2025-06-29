@@ -27,7 +27,9 @@ import { useRoute } from "vitepress";
 export default {
   ...DefaultTheme,
 
-  async enhanceApp({ Vue, app }) {
+  async enhanceApp(
+    // { Vue, app }
+  ) {
     // app.config.globalProperties.$panda = "Vue3-Command-Component";
   },
   setup() {

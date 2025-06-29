@@ -2,6 +2,7 @@
   <div>
     <div class="flex justify-center items-center">
       <el-button @click="openDialog">打开el-drawer</el-button>
+      <el-divider>以下粗略适配,暂时没时间适配,如果有需求可以自行适配一下(我也会适配的,只是时间问题)</el-divider>
       <el-button @click="openVantPopup">打开vant-popup</el-button>
       <el-button @click="openNaiveModal">打开naive-modal</el-button>
     </div>

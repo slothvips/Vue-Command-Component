@@ -9,8 +9,8 @@ import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-i
 
 export default defineConfig({
   title: `Vue命令组件`,
-  base: "/Vue3-Command-Component/",
-  assetsDir: "/Vue3-Command-Component/assets",
+  base: "/Vue-Command-Component/",
+  assetsDir: "/Vue-Command-Component/assets",
   description: "轻松实现Vue组件的命令式调用",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/logo.svg" }],
@@ -25,7 +25,7 @@ export default defineConfig({
   ],
   themeConfig: {
     logo: "/logo.svg",
-    socialLinks: [{ icon: "github", link: "https://github.com/pandavips/Vue3-Command-Component" }],
+    socialLinks: [{ icon: "github", link: "https://github.com/pandavips/Vue-Command-Component" }],
     footer: {
       message: `Released under the MIT License.`,
       copyright: "Copyright © 2019-present pandavips",
