@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Vue Command Component Core Library",
-  "homepage": "https://pandavips.github.io/Vue3-Command-Component/",
+  "homepage": "https://pandavips.github.io/Vue-Command-Component/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pandavips/Vue3-Command-Component.git"
+    "url": "git+https://github.com/pandavips/Vue-Command-Component.git"
   },
   "keywords": [
     "vue",

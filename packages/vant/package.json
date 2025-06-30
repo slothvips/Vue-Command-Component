@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Vant adapters for Vue Command Component",
-  "homepage": "https://pandavips.github.io/Vue3-Command-Component/",
+  "homepage": "https://pandavips.github.io/Vue-Command-Component/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pandavips/Vue3-Command-Component.git"
+    "url": "git+https://github.com/pandavips/Vue-Command-Component.git"
   },
   "keywords": [
     "vue",
@@ -27,7 +27,7 @@
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build && vue-tsc --emitDeclarationOnly",
-    "publish": "pnpm build && pnpm publish --access public"
+    "publish": "pnpm build && pnpm publish --access public --no-git-checks"
   },
   "dependencies": {
     "@vue-cmd/core": "workspace:*",
