@@ -1,2 +1,2 @@
-export { useNaiveModal, type INaiveModalConfig } from './modal';
-export { useNaiveDrawer, type INaiveDrawerConfig } from './drawer';
+export { useModal, type INaiveModalConfig } from './modal';
+export { useDrawer, type INaiveDrawerConfig } from './drawer';

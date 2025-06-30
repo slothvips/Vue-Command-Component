@@ -1,11 +1,11 @@
 // Element Plus 对话框适配器
 export {
-  useElementPlusDialog,
-  type IElementPlusDialogConfig
+  useDialog,
+  type IDialogConfig
 } from "./dialog";
 
 // Element Plus 抽屉适配器
 export {
-  useElementPlusDrawer,
-  type IElementPlusDrawerConfig
+  useDrawer,
+  type IDrawerConfig
 } from "./drawer"; 

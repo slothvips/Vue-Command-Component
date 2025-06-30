@@ -51,9 +51,9 @@ ni @vue-cmd/core @vue-cmd/element-plus
 
 ```jsx
 import { defineComponent, h } from "vue";
-import { useElementPlusDialog } from "@vue-cmd/element-plus";
+import { useDialog } from "@vue-cmd/element-plus";
 
-const CommandDialog=useElementPlusDialog()
+const CommandDialog=useDialog()
 
 const Content=defineComponent({
   render(){

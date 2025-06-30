@@ -28,7 +28,7 @@ export default {
   async enhanceApp(
     // { Vue, app }
   ) {
-    // app.config.globalProperties.$panda = "Vue3-Command-Component";
+    // app.config.globalProperties.$panda = "Vue-Command-Component";
   },
   setup() {
     const route = useRoute();

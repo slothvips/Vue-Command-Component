@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Vant adapters for Vue Command Component",
-  "homepage": "https://pandavips.github.io/Vue3-Command-Component/",
+  "homepage": "https://pandavips.github.io/Vue-Command-Component/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pandavips/Vue3-Command-Component.git"
+    "url": "git+https://github.com/pandavips/Vue-Command-Component.git"
   },
   "keywords": [
     "vue",
@@ -30,7 +30,6 @@
     "publish": "pnpm build && pnpm publish --access public"
   },
   "dependencies": {
-    "@vue-cmd/core": "workspace:*",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
@@ -43,6 +42,7 @@
   },
   "peerDependencies": {
     "vant": "4.x",
-    "vue": "3.x"
+    "vue": "3.x",
+    "@vue-cmd/core": "workspace:*"
   }
 }

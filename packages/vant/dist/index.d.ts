@@ -1,1 +1,1 @@
-export { useVantPopup, } from './popup';
+export { usePopup, } from './popup';

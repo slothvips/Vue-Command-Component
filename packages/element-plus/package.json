@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Element Plus adapters for Vue Command Component",
-  "homepage": "https://pandavips.github.io/Vue3-Command-Component/",
+  "homepage": "https://pandavips.github.io/Vue-Command-Component/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pandavips/Vue3-Command-Component.git"
+    "url": "git+https://github.com/pandavips/Vue-Command-Component.git"
   },
   "keywords": [
     "vue",
@@ -19,7 +19,7 @@
   "author": "pandavips",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "types"
@@ -30,7 +30,6 @@
     "publish": "pnpm build && pnpm publish --access public"
   },
   "dependencies": {
-    "@vue-cmd/core": "workspace:*"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
@@ -42,6 +41,7 @@
   },
   "peerDependencies": {
     "element-plus": "2.x",
-    "vue": "3.x"
+    "vue": "3.x",
+    "@vue-cmd/core": "workspace:*"
   }
 }

@@ -1,4 +1,3 @@
-// Vant UI 弹出层适配器
 export {
-  useVantPopup,
+  usePopup,
 } from "./popup"; 

@@ -5,18 +5,18 @@ import { CommandProviderWithRender } from "./core";
 import type { ICommandComponentConfig, IConsumer, ICreateCommandComponentConfig, IRenderComponentOptions } from "./type";
 import { isNull } from "./utils";
 
-export type AdapterRenderer<TConfig extends ICommandComponentConfig = ICommandComponentConfig> = (
+export type AdapterRender<TConfig extends ICommandComponentConfig = ICommandComponentConfig> = (
   contentVNode: VNode,
   options: IRenderComponentOptions<TConfig>
 ) => VNode;
 
 export type AdapterOptions<TConfig extends ICommandComponentConfig = ICommandComponentConfig> = {
   /** 渲染器函数 */
-  render: AdapterRenderer<TConfig>;
+  render: AdapterRender<TConfig>;
   /** 默认配置 */
   defaultConfig?: Partial<TConfig>;
   /** 挂载节点 */
-  mountNode?: HTMLElement | string;
+  appendTo?: HTMLElement | string;
   /** 配置转换器 - 在渲染前对配置进行转换 */
   configTransformer?: (config: TConfig, createConfig: ICreateCommandComponentConfig) => TConfig;
 };
@@ -29,7 +29,8 @@ export type AdapterOptions<TConfig extends ICommandComponentConfig = ICommandCom
 export function createAdapter<TConfig extends ICommandComponentConfig = ICommandComponentConfig>(
   options: AdapterOptions<TConfig>
 ) {
-  const { render: renderer, defaultConfig = {}, mountNode, configTransformer } = options;
+
+  const { render, defaultConfig = {}, appendTo, configTransformer } = options;
 
   return function (createConfig: ICreateCommandComponentConfig = {}) {
     const parentInstance = getCurrentInstance();
@@ -52,7 +53,6 @@ export function createAdapter<TConfig extends ICommandComponentConfig = ICommand
       const Wrapper = defineComponent({
         setup: () => {
           const componentRef = ref();
-
           const onMounted = () => {
             Promise.resolve().then(() => {
               consumerRef.value!.componentRef = componentRef;
@@ -68,14 +68,14 @@ export function createAdapter<TConfig extends ICommandComponentConfig = ICommand
           };
 
           return () => {
-            return renderer(contentVNode, renderOptions);
+            return render(contentVNode, renderOptions);
           };
         },
       });
 
       // 合并最终配置
       const finalCreateConfig = merge(createConfig, {
-        appendTo: mountNode || createConfig.appendTo,
+        appendTo: appendTo || createConfig.appendTo,
       });
 
       const finalConfig = {

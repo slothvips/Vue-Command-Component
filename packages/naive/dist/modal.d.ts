@@ -5,4 +5,4 @@ export interface INaiveModalConfig extends ICommandComponentConfig {
     width?: string | number;
     height?: string | number;
 }
-export declare const useNaiveModal: (createConfig?: import('@vue-cmd/core').ICreateCommandComponentConfig) => (contentVNode: VNode, config?: INaiveModalConfig | undefined) => import('@vue-cmd/core').IConsumer;
+export declare const useModal: (createConfig?: import('@vue-cmd/core').IUseCommandComponentConfig) => (contentVNode: VNode, config?: INaiveModalConfig | undefined) => import('@vue-cmd/core').IConsumer;

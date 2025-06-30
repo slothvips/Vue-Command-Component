@@ -44,7 +44,7 @@ export interface ICommandComponentConfig extends ICreateCommandComponentConfig {
 }
 
 export type ICommandComponentProviderConfig = ICommandComponentConfig & {
-  visible: Ref<boolean>;
+  visible: Ref<boolean, boolean>;
 };
 
 export interface IConsumer {

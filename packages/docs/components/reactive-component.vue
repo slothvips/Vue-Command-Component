@@ -12,9 +12,9 @@
   </div>
 </template>
 
-<script setup name="base-example" lang="tsx">
+<script setup lang="tsx">
 import { RxRender } from "@vue-cmd/core";
-import { useElementPlusDialog } from "@vue-cmd/element-plus";
+import { useDialog } from "@vue-cmd/element-plus";
 import DialogContent from "./dialog-content.vue";
 import { ref, reactive } from "vue";
 
@@ -23,7 +23,7 @@ setInterval(() => {
   count.value++
 }, 1000)
 
-const CommandDialog = useElementPlusDialog();
+const CommandDialog = useDialog();
 const openDialog = () => {
   CommandDialog(<DialogContent v-model={formValue.name} count={count.value} />);
 };

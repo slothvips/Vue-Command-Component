@@ -33,7 +33,7 @@ const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, con
   );
 };
 
-export const useVantPopup = createAdapter({
+export const usePopup = createAdapter({
   render: baseRender,
   defaultConfig: {
     attrs: defaultProps,
