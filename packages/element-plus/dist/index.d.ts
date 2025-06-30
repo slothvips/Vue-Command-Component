@@ -1,2 +1,2 @@
-export { useElementPlusDialog, type IElementPlusDialogConfig } from './dialog';
-export { useElementPlusDrawer, type IElementPlusDrawerConfig } from './drawer';
+export { useDialog, type IDialogConfig } from './dialog';
+export { useDrawer, type IDrawerConfig } from './drawer';

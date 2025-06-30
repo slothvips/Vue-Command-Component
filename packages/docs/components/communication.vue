@@ -4,15 +4,16 @@
   </div>
 </template>
 
-<script setup name="base-example" lang="tsx">
-import { useElementPlusDialog } from "@vue-cmd/element-plus";
+<script setup lang="tsx">
+import { useDialog } from "@vue-cmd/element-plus";
 import DialogContent from "./dialog-content.vue";
 
-const CommandDialog = useElementPlusDialog();
+const CommandDialog = useDialog();
 const openDialog = () => {
   CommandDialog(
     <DialogContent
-      onSay={(val) => {
+      // @ts-ignore
+      onSay={(val: string) => {
         console.log(val);
       }}
     />,

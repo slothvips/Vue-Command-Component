@@ -42,12 +42,12 @@ const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, con
   );
 };
 
-export const useNaiveModal = createAdapter({
+export const useModal = createAdapter({
   render: baseRender,
   defaultConfig: {
     attrs: {
       preset: "dialog",
       closable: true,
     }
-  } as Partial<INaiveModalConfig>,
+  }
 }); 

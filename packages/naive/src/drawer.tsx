@@ -36,12 +36,12 @@ const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, con
   );
 };
 
-export const useNaiveDrawer = createAdapter({
+export const useDrawer = createAdapter({
   render: baseRender,
   defaultConfig: {
     attrs: {
       width: 300,
       placement: "right" as const,
     }
-  } as Partial<INaiveDrawerConfig>,
+  }
 }); 

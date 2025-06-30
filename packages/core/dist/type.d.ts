@@ -16,8 +16,9 @@ export type Meta = {
     /** 扩展数据 */
     [key: string]: unknown;
 };
-export type ICreateCommandComponentConfig = {
-    /** 是否立即显示 */
+// use函数时期传递的配置
+export type IUseCommandComponentConfig = {
+    /** 是否调用命令即显示 */
     visible?: boolean;
     /** 元数据 */
     meta?: Meta;
@@ -26,7 +27,7 @@ export type ICreateCommandComponentConfig = {
     /** 自定义类名 */
     customClassName?: string;
 };
-export interface ICommandComponentConfig extends ICreateCommandComponentConfig {
+export interface ICommandComponentConfig extends IUseCommandComponentConfig {
     /** 私有域成员注入 */
     provideProps?: Record<string | symbol, unknown>;
     /** 组件原生属性 */
@@ -34,14 +35,15 @@ export interface ICommandComponentConfig extends ICreateCommandComponentConfig {
     /** 组件插槽 */
     slots?: Record<string, () => VNode | VNode[]>;
 }
+// 命令执行时传递的配置
 export type ICommandComponentProviderConfig = ICommandComponentConfig & {
-    visible: Ref<boolean>;
+    visible: Ref<boolean, boolean>;
 };
 export interface IConsumer {
     /** 组件实例的元数据 */
     meta?: Meta;
     /** 是否可见响应式变量,虽然已经提供了hide以及show方法不需要通过该属性来控制弹窗的显示与隐藏,但是为了方便一些特殊场景,还是提供了该属性,比如你需要watch这个属性来做一些事情 */
-    visible: Ref<boolean>;
+    visible: Ref<boolean, boolean>;
     /** 隐藏 */
     hide: () => void;
     /** 显示 */
@@ -90,7 +92,7 @@ export interface IRenderComponentOptions<Config> {
     /** 组件引用 */
     componentRef: Ref;
     /** 是否可见 */
-    visible: Ref<boolean>;
+    visible: Ref<boolean, boolean>;
     /** 挂载回调 */
     onMounted: () => void;
     /** 组件配置 */

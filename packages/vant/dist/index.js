@@ -10,27 +10,27 @@ const r = {
   visible: e,
   onMounted: n,
   config: o,
-  consumer: a
+  consumer: u
 }) => {
-  const u = () => {
-    a.value.destroy();
+  const a = () => {
+    u.value.destroy();
   };
   return d(f, p({
     ref: s,
     show: e.value,
     "onUpdate:show": (l) => e.value = l,
-    onClickCloseIcon: u,
+    onClickCloseIcon: a,
     onVnodeMounted: n
   }, r, o.attrs), {
     default: () => t,
     ...o.slots
   });
-}, h = c({
+}, i = c({
   render: m,
   defaultConfig: {
     attrs: r
   }
 });
 export {
-  h as useVantPopup
+  i as usePopup
 };

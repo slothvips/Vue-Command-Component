@@ -5,10 +5,10 @@
 </template>
 
 <script setup name="base-example" lang="tsx">
-import { useElementPlusDialog } from "@vue-cmd/element-plus";
+import { useDialog } from "@vue-cmd/element-plus";
 import DialogContent from "./dialog-content.vue";
 
-const CommandDialog = useElementPlusDialog();
+const CommandDialog = useDialog();
 const openDialog = () => {
   CommandDialog(<DialogContent />, {
     title: "hello world",

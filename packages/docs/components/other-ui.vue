@@ -11,13 +11,13 @@
   </div>
 </template>
 
-<script setup name="base-example" lang="tsx">
-import { useElementPlusDrawer } from "@vue-cmd/element-plus";
-import { useVantPopup } from "@vue-cmd/vant";
-import { useNaiveModal } from "@vue-cmd/naive";
+<script setup lang="tsx">
+import { useDrawer } from "@vue-cmd/element-plus";
+import { usePopup } from "@vue-cmd/vant";
+import { useModal } from "@vue-cmd/naive";
 import DialogContent from "./dialog-content.vue";
 
-const CommandDrawer = useElementPlusDrawer();
+const CommandDrawer = useDrawer();
 const openDialog = () => {
   CommandDrawer(<DialogContent />, {
     title: "hello world",
@@ -27,12 +27,12 @@ const openDialog = () => {
   });
 };
 
-const CommandVantPopup = useVantPopup();
+const CommandVantPopup = usePopup();
 const openVantPopup = () => {
   CommandVantPopup(<DialogContent />);
 };
 
-const CommandNaiveModal = useNaiveModal();
+const CommandNaiveModal = useModal();
 const openNaiveModal = () => {
   CommandNaiveModal(<DialogContent />);
 };

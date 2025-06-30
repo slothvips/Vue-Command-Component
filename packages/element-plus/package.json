@@ -19,7 +19,7 @@
   "author": "pandavips",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "types"
@@ -30,7 +30,6 @@
     "publish": "pnpm build && pnpm publish --access public --no-git-checks"
   },
   "dependencies": {
-    "@vue-cmd/core": "workspace:*"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
@@ -42,6 +41,7 @@
   },
   "peerDependencies": {
     "element-plus": "2.x",
-    "vue": "3.x"
+    "vue": "3.x",
+    "@vue-cmd/core": "workspace:*"
   }
 }

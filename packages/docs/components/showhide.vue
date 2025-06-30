@@ -7,12 +7,12 @@
   </div>
 </template>
 
-<script setup name="base-example" lang="tsx">
-import { useElementPlusDialog } from "@vue-cmd/element-plus";
-import { type IConsumer } from "@vue-cmd/core";
+<script setup lang="tsx">
+import { useDialog } from "@vue-cmd/element-plus";
+import type { IConsumer } from "@vue-cmd/core";
 import DialogContent from "./dialog-content.vue";
 
-const CommandDialog = useElementPlusDialog();
+const CommandDialog = useDialog();
 let consumer: IConsumer;
 const newDialog = () => {
   consumer = CommandDialog(<DialogContent />, {

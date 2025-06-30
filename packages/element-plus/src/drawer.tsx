@@ -1,34 +1,31 @@
-import type { ICommandComponentConfig, IRenderComponentOptions } from "@vue-cmd/core";
-import { createAdapter } from "@vue-cmd/core";
-import type { DrawerProps } from "element-plus";
-import { ElDrawer } from "element-plus";
-import type { VNode } from "vue";
+import type { ICommandComponentConfig, IRenderComponentOptions } from '@vue-cmd/core'
+import { createAdapter } from '@vue-cmd/core'
+import type { DrawerProps } from 'element-plus'
+import { ElDrawer } from 'element-plus'
+import type { VNode } from 'vue'
 
-export type IElementPlusDrawerConfig = Partial<DrawerProps> & ICommandComponentConfig;
+export type IDrawerConfig = Partial<DrawerProps> & ICommandComponentConfig
 
-const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<IElementPlusDrawerConfig>) => {
-
+const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<IDrawerConfig>) => {
   const onClosed = () => {
-    consumer.value!.destroy();
-  };
+    consumer.value!.destroy()
+  }
 
   return (
-    <ElDrawer
-      ref={componentRef}
-      modelValue={visible.value}
-      onVnodeMounted={onMounted}
-      {...config.attrs}
-      onClosed={onClosed}
-    >
+    <ElDrawer ref={componentRef} modelValue={visible.value} onVnodeMounted={onMounted} {...config.attrs} onClosed={onClosed}>
       {{
         default: () => contentVNode,
         ...config.slots,
       }}
     </ElDrawer>
-  );
-};
+  )
+}
 
-export const useElementPlusDrawer = createAdapter({
+export const useDrawer = createAdapter({
   render: baseRender,
-  defaultConfig: {},
-});
+  defaultConfig: {
+    meta: {
+      name: 'element-plus-drawer',
+    },
+  },
+})

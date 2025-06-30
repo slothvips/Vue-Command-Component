@@ -1,7 +1,7 @@
 import { ICommandComponentConfig } from '@vue-cmd/core';
 import { VNode } from 'vue';
-export type IElementPlusDialogConfig = ICommandComponentConfig & {
+export type IDialogConfig = ICommandComponentConfig & {
     title?: string;
     width?: string;
 };
-export declare const useElementPlusDialog: (createConfig?: import('@vue-cmd/core').ICreateCommandComponentConfig) => (contentVNode: VNode, config?: IElementPlusDialogConfig | undefined) => import('@vue-cmd/core').IConsumer;
+export declare const useDialog: (createConfig?: import('@vue-cmd/core').IUseCommandComponentConfig) => (contentVNode: VNode, config?: IDialogConfig | undefined) => import('@vue-cmd/core').IConsumer;

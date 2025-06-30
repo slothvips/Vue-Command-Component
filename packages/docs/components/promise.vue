@@ -1,8 +1,8 @@
 <script lang="tsx" setup>
-import { useElementPlusDialog } from "@vue-cmd/element-plus";
+import { useDialog } from "@vue-cmd/element-plus";
 import EditRow from "./edit-row.vue";
 import { ref } from "vue";
-const CommandDialog = useElementPlusDialog();
+const CommandDialog = useDialog();
 
 const loading = ref(false);
 const editRow = async (row: any) => {

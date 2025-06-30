@@ -73,13 +73,25 @@ export default defineConfig({
       "/example/": [
         {
           items: [
+            // {
+            //   text: "基础用法",
+            //   link: "/example/base",
+            // },
+            // {
+            //   text: "进阶用法",
+            //   link: "/example/advanced",
+            // },
             {
-              text: "基础用法",
-              link: "/example/base",
+              text: "element-plus",
+              link: "/example/element-plus",
             },
             {
-              text: "进阶用法",
-              link: "/example/advanced",
+              text: "naive-ui",
+              link: "/example/naive",
+            },
+            {
+              text: "vant-ui",
+              link: "/example/vant",
             },
           ],
         },

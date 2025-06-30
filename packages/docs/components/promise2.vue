@@ -4,12 +4,12 @@
   </div>
 </template>
 
-<script setup name="base-example" lang="tsx">
+<script setup lang="tsx">
 import { useConsumer } from "@vue-cmd/core";
-import { useElementPlusDialog } from "@vue-cmd/element-plus";
+import { useDialog } from "@vue-cmd/element-plus";
 import { defineComponent, ref } from "vue";
 
-const CommandDialog = useElementPlusDialog();
+const CommandDialog = useDialog();
 
 let step = 1;
 const loading = ref(false);

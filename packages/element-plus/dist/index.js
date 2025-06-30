@@ -1,49 +1,49 @@
-import { createVNode as n, mergeProps as a } from "vue";
+import { createVNode as a, mergeProps as n } from "vue";
 import { createAdapter as u } from "@vue-cmd/core";
 import { ElDialog as m, ElDrawer as f } from "element-plus";
-const i = (t, {
-  componentRef: o,
+const i = (o, {
+  componentRef: t,
   visible: r,
-  onMounted: l,
+  onMounted: d,
   config: e,
-  consumer: s
+  consumer: l
 }) => {
-  const d = () => {
-    s.value.destroy();
+  const s = () => {
+    l.value.destroy();
   };
-  return n(m, a({
-    ref: o,
+  return a(m, n({
+    ref: t,
     modelValue: r.value,
-    onVnodeMounted: l,
+    onVnodeMounted: d,
     title: e.title,
     width: e.width
   }, e.attrs, {
-    onClosed: d
+    onClosed: s
   }), {
-    default: () => t,
+    default: () => o,
     ...e.slots
   });
 }, v = u({
   render: i,
   defaultConfig: {}
-}), p = (t, {
-  componentRef: o,
+}), p = (o, {
+  componentRef: t,
   visible: r,
-  onMounted: l,
+  onMounted: d,
   config: e,
-  consumer: s
+  consumer: l
 }) => {
-  const d = () => {
-    s.value.destroy();
+  const s = () => {
+    l.value.destroy();
   };
-  return n(f, a({
-    ref: o,
+  return a(f, n({
+    ref: t,
     modelValue: r.value,
-    onVnodeMounted: l
+    onVnodeMounted: d
   }, e.attrs, {
-    onClosed: d
+    onClosed: s
   }), {
-    default: () => t,
+    default: () => o,
     ...e.slots
   });
 }, w = u({
@@ -51,6 +51,6 @@ const i = (t, {
   defaultConfig: {}
 });
 export {
-  v as useElementPlusDialog,
-  w as useElementPlusDrawer
+  v as useDialog,
+  w as useDrawer
 };

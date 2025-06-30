@@ -1,11 +1,9 @@
-// Naive UI 模态框适配器
 export {
-  useNaiveModal,
+  useModal,
   type INaiveModalConfig
 } from "./modal";
 
-// Naive UI 抽屉适配器
 export {
-  useNaiveDrawer,
+  useDrawer,
   type INaiveDrawerConfig
 } from "./drawer"; 
