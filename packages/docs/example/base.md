@@ -4,19 +4,102 @@
 
 这里展示的所有`api`,在弹窗内部都可以使用`useConsumer`获取到同一个`consumer`来使用;弹窗内部和外部获取到的`consumer`是全等的,换句话说,他们的作用是完全相同的.
 
-因为弹窗对于命令式组件来说,是最能展现它能力的使用场景,所以我将使用弹窗来展示使用示例.
-
-熟悉了弹窗的用法,触类旁通的也会理解其他组件使用方式.
+因为弹窗对于命令式组件来说,是最能展现它能力的使用场景,所以我将使用`element-plus`的`dialog`组件来展示使用示例,通过这些示例,触类旁通的也会理解其他组件使用方式.
 
 那么,我们开始吧.
 
-## DialogContent
+## 前菜
+
+### DialogContent展示
 
 示例中会多次使用弹窗内容组件`dialog-content`,下边是它的样子:
 
+::: warning ☕️☕️☕️别着急进行交互,我们并没有真正的开始,这个组件需要和命令式组件配合使用,所以你点击下边的按钮是没有任何反应的
+:::
+
 <demo vue="../components/dialog-content.vue" />
 
+### consumer对象
+
+consumer是一个重要的对象,它是命令组件内外通信的桥梁,它身上尽可能的多的向我们暴露了我们可能用到的属性和方法.在弹窗内部可以使用`useConsumer`来获取,而在弹窗外部可以调用`useDialog`创建的命令函数来获取,他们是同一个对象,所以你会发现是全等的.
+
+```ts
+// 外部
+const CommandDialog = useDialog();
+const consumer = CommandDialog(<DialogContent />);
+
+// 内部
+const consumer2 = useConsumer();
+
+console.log(consumer === consumer2); // true
+```
+就这样,我们在内外部都有了控制命令式组件的能力.
+
+consumer的定义形状如下:
+```ts
+export interface IConsumer {
+  /** 组件实例的元数据 */
+  meta?: Meta;
+  /** 是否可见响应式变量,虽然已经提供了hide以及show方法不需要通过该属性来控制弹窗的显示与隐藏,但是为了方便一些特殊场景,还是提供了该属性,比如你需要watch这个属性来做一些事情 */
+  visible: Ref<boolean>;
+  /** 隐藏 */
+  hide: () => void;
+  /** 显示 */
+  show: () => void;
+  /** 销毁,但是不继续推进promise的状态改变 */
+  destroy: (external?: boolean) => void;
+  /** promise */
+  promise: Promise<unknown>;
+  /** promise执行器参数resolve */
+  resolve: (val?: unknown) => void;
+  /** promise执行器参数reject */
+  reject: (reason?: unknown) => void;
+  /** 销毁,解决promise */
+  destroyWithResolve: (val?: unknown) => void;
+  /** 销毁,拒绝promise */
+  destroyWithReject: (reason?: unknown) => void;
+  /** 订阅取消 */
+  off: (name: string | symbol, callback: (...args: unknown[]) => void) => void;
+  /** 订阅 */
+  on: (name: string | symbol, callback: (...args: unknown[]) => void, config?: IOnConfig) => void;
+  /** 单次订阅 */
+  once: (name: string | symbol, callback: (...args: unknown[]) => void) => void;
+  /** 发布 */
+  emit: (name: string | symbol, ...args: unknown[]) => void;
+  /** UI库的组件实例引用 */
+  componentRef?: Ref<any>;
+  /** 组件挂载的html元素 */
+  container: HTMLDivElement;
+  /** 组件嵌套堆栈 */
+  stack: IConsumer[];
+  /** 当前在组件嵌套堆栈中的索引 */
+  stackIndex: number;
+  /** 已挂载 */
+  mounted: boolean;
+  /** 已销毁 */
+  destroyed: boolean;
+}
+```
+
+我们挑几个重要的说下吧,其他的属性你可以自行探索.
+
+- `meta` 他可以类比`vue-router`中的meta属性,用于存储组件的相关信息.
+- `visible` 这个属性是一个响应式变量,它的值是一个布尔值,表示组件是否可见,你甚至可以不调用show/hide方法,而是直接通过这个属性来控制组件的显示与隐藏.
+- `hide` 这个方法用于隐藏组件,你可以在需要的时候调用它来控制组件的可见性.
+- `show` 这个方法用于显示组件,你可以在需要的时候调用它来控制组件的可见性.
+- 你可能还注意到貌似还有一个订阅发布系统,是的,的确有一个订阅发布系统.但是你不应该用它来实现你的业务,而是在进行命令式组件增强/封装的时候使用,它也是为此而设计的.
+- `container` 容器元素
+- `stack` 组件嵌套堆栈,它是一个数组,里面存储了当前组件嵌套的所有组件实例,你可以通过这个属性来获取当前组件嵌套的所有组件实例.
+- `stackIndex` 当前在组件嵌套堆栈中的索引,它是一个数字,表示当前组件在组件嵌套堆栈中的索引,你可以通过这个属性来获取当前组件在组件嵌套堆栈中的索引.
+- `componentRef` 这个属性是一个响应式变量,它的值是一个对象,表示组件的实例,你可以通过这个属性来获取组件的实例,然后使用原生组件暴露的属性,但是你在适配原生组件的时候一定要将实例赋值给它才能正常工作.
+
+::: danger 注意
+你可能还注意到了,consumer对象上还实现了一个发布订阅中心,但最好请不要用他们来实现业务,他们是用来进行命令式组件增强/封装的时使用;如果后期有变动,可能会影响到你的业务逻辑.
+:::
+
 ## 创建和销毁
+
+好的,现在我们开始正式的开始我们的命令式组件之旅吧.
 
 弹窗的唤起和销毁
 
@@ -40,7 +123,11 @@
 
 ## 原生组件特性
 
-支持原生组件所有的属性和事件,方法.
+支持原生组件所有的属性和事件,方法.你可以将属性和事件放置到`attrs`中,理论完美兼容支持原生组件的所有属性和事件.
+
+::: tip 响应式
+但是目前这里有一个缺陷,就是`attrs`中的属性即使是响应式数据,视图也无法响应式更新(实际上,命令函数后续的配置都不会响应式更新,但好在弹窗的配置一般比较固定,不会轻易变动),目前正在实验解决方案.
+:::
 
 <demo vue="../components/native-attributes.vue"></demo>
 
@@ -65,7 +152,7 @@
 
 它的使用很简单.
 ```ts
-const CommandDialog = useElementPlusDialog();
+const CommandDialog = useDialog();
 CommandDialog(<div>1</div>,{
   provideProps: {
     a: 1,
@@ -73,17 +160,3 @@ CommandDialog(<div>1</div>,{
   },
 })
 ```
-
-## 其他UI库组件示例
-
-目前另外的适配:
-
-<demo vue="../components/other-ui.vue"></demo>
-
-## 响应式组件
-
-由于jsx的书写方式,上述所有示例都有一个严重的缺陷,就是`DialogContent`组件的视图是无法根据props数据的变化进行更新的,这个时候你就需要JSXReactive来包裹你的jsx.其原理是将渲染函数包裹成一个响应式组件,从而实现视图的更新.
-
-<demo vue="../components/reactive-component.vue"></demo>
-
-

@@ -1,6 +1,7 @@
 // Element Plus 对话框适配器
 export {
   useDialog,
+  useDialogWithDrag,
   type IDialogConfig
 } from "./dialog";
 

@@ -1,12 +1,16 @@
 # 快速开始
 
-让我们开始吧!
+从这里开始你的命令式组件之旅吧!
 
 ## 兼容性
 
-仅支持`Vue 3`,请留意你的vue版本.
+::: warning 重要提醒
+仅支持`Vue 3`,请留意你的vue版本！
+:::
 
-建议你为你的项目配置`jsx`支持,这会极大的改善你的开发体验,否则你就需要一路`h`函数了.关于如何为你的项目配置`jsx`支持,`vite`用户参见[@vitejs/plugin-vue-jsx](https://www.npmjs.com/package/@vitejs/plugin-vue-jsx).
+::: tip JSX配置建议
+如果没有配置JSX支持，你需要使用`h`函数来创建VNode，这会让代码变得繁琐。强烈建议配置JSX支持以获得更好的开发体验。`vite`用户参见[@vitejs/plugin-vue-jsx](https://www.npmjs.com/package/@vitejs/plugin-vue-jsx).
+:::
 
 ## 安装
 
@@ -49,6 +53,10 @@ ni @vue-cmd/core @vue-cmd/element-plus
 
 现在你可以直接使用了。
 
+::: warning 使用注意事项
+`useDialog`之类的适配层hooks,必须在setup顶部同步调用,因为其内部依赖`getCurrentInstance`这个api来捕获当前组件实例。
+:::
+
 ```jsx
 import { defineComponent, h } from "vue";
 import { useDialog } from "@vue-cmd/element-plus";
@@ -67,7 +75,5 @@ CommandDialog(<Content />)
 
 CommandDialog(h(Content))
 ```
-
-值得说明一下，`useElementPlusDialog`之类的适配层hooks,必须在setup顶部调用,因为内部依赖`getCurrentInstance`这个api来捕获当前组件实例。
 
 更多示例请参见[示例](../example/base.md)

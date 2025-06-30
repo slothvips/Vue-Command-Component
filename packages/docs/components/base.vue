@@ -12,6 +12,7 @@ const CommandDialog = useDialog();
 const openDialog = () => {
   CommandDialog(<DialogContent />, {
     title: "hello world",
+    width: "90%",
   });
 };
 </script>

@@ -1,56 +1,76 @@
-import { createVNode as a, mergeProps as n } from "vue";
+import { createVNode as n, mergeProps as d } from "vue";
 import { createAdapter as u } from "@vue-cmd/core";
-import { ElDialog as m, ElDrawer as f } from "element-plus";
-const i = (o, {
-  componentRef: t,
+import { ElDialog as m, ElDrawer as i } from "element-plus";
+const c = (t, {
+  componentRef: o,
   visible: r,
-  onMounted: d,
+  onMounted: l,
   config: e,
-  consumer: l
+  consumer: a
 }) => {
   const s = () => {
-    l.value.destroy();
+    a.value.destroy();
   };
-  return a(m, n({
-    ref: t,
+  return n(m, d({
+    ref: o,
     modelValue: r.value,
-    onVnodeMounted: d,
+    onVnodeMounted: l,
     title: e.title,
     width: e.width
   }, e.attrs, {
     onClosed: s
   }), {
-    default: () => o,
+    default: () => t,
     ...e.slots
   });
-}, v = u({
-  render: i,
-  defaultConfig: {}
-}), p = (o, {
-  componentRef: t,
+}, f = u({
+  render: c,
+  defaultConfig: {
+    meta: {
+      name: "element-plus-dialog"
+    }
+  }
+}), w = () => {
+  const t = f();
+  return (o, r = {}) => t(o, {
+    attrs: {
+      // 可拖拽
+      draggable: !0,
+      closeOnClickModal: !1,
+      closeOnPressEscape: !1
+    },
+    ...r
+  });
+}, p = (t, {
+  componentRef: o,
   visible: r,
-  onMounted: d,
+  onMounted: l,
   config: e,
-  consumer: l
+  consumer: a
 }) => {
   const s = () => {
-    l.value.destroy();
+    a.value.destroy();
   };
-  return a(f, n({
-    ref: t,
+  return n(i, d({
+    ref: o,
     modelValue: r.value,
-    onVnodeMounted: d
+    onVnodeMounted: l
   }, e.attrs, {
     onClosed: s
   }), {
-    default: () => o,
+    default: () => t,
     ...e.slots
   });
-}, w = u({
+}, V = u({
   render: p,
-  defaultConfig: {}
+  defaultConfig: {
+    meta: {
+      name: "element-plus-drawer"
+    }
+  }
 });
 export {
-  v as useDialog,
-  w as useDrawer
+  f as useDialog,
+  w as useDialogWithDrag,
+  V as useDrawer
 };

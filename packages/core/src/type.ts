@@ -1,10 +1,4 @@
-import type { ComponentPublicInstance, Ref, VNode, VNodeRef } from "vue";
-
-/**
- * Represents a function that takes any arguments and returns a value
- * @template T - The return type of the function (defaults to unknown)
- */
-export type AnyFunction<T = unknown> = (...args: any[]) => T;
+import type { Ref, VNode } from "vue";
 
 export enum EVENT_NAME {
   // 销毁
@@ -22,9 +16,7 @@ export type Meta = {
 };
 
 // 创建时配置
-export type ICreateCommandComponentConfig = {
-  /** 是否立即显示 */
-  visible?: boolean;
+export type IUseCommandComponentConfig = {
   /** 元数据 */
   meta?: Meta;
   /** 挂在点 */
@@ -34,7 +26,7 @@ export type ICreateCommandComponentConfig = {
 };
 
 // 调用时配置,在执行命令时依然可以传入配置覆盖创建时配置,实现最大灵活度
-export interface ICommandComponentConfig extends ICreateCommandComponentConfig {
+export interface ICommandComponentConfig extends IUseCommandComponentConfig {
   /** 私有域成员注入 */
   provideProps?: Record<string | symbol, unknown>;
   /** 组件原生属性 */
@@ -44,7 +36,7 @@ export interface ICommandComponentConfig extends ICreateCommandComponentConfig {
 }
 
 export type ICommandComponentProviderConfig = ICommandComponentConfig & {
-  visible: Ref<boolean, boolean>;
+  visible: Ref<boolean>;
 };
 
 export interface IConsumer {

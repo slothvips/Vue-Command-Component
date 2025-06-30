@@ -2,8 +2,7 @@ import { merge } from "lodash-es";
 import type { VNode } from "vue";
 import { defineComponent, getCurrentInstance, h, ref } from "vue";
 import { CommandProviderWithRender } from "./core";
-import type { ICommandComponentConfig, IConsumer, ICreateCommandComponentConfig, IRenderComponentOptions } from "./type";
-import { isNull } from "./utils";
+import type { ICommandComponentConfig, ICommandComponentProviderConfig, IConsumer, IUseCommandComponentConfig, IRenderComponentOptions } from "./type";
 
 export type AdapterRender<TConfig extends ICommandComponentConfig = ICommandComponentConfig> = (
   contentVNode: VNode,
@@ -18,7 +17,7 @@ export type AdapterOptions<TConfig extends ICommandComponentConfig = ICommandCom
   /** 挂载节点 */
   appendTo?: HTMLElement | string;
   /** 配置转换器 - 在渲染前对配置进行转换 */
-  configTransformer?: (config: TConfig, createConfig: ICreateCommandComponentConfig) => TConfig;
+  configTransformer?: (config: ICommandComponentProviderConfig, useConfig: IUseCommandComponentConfig) => ICommandComponentProviderConfig;
 };
 
 /**
@@ -32,19 +31,16 @@ export function createAdapter<TConfig extends ICommandComponentConfig = ICommand
 
   const { render, defaultConfig = {}, appendTo, configTransformer } = options;
 
-  return function (createConfig: ICreateCommandComponentConfig = {}) {
+  return function (useConfig: IUseCommandComponentConfig = {}) {
     const parentInstance = getCurrentInstance();
 
     return function commandComponent(contentVNode: VNode, config: TConfig = {} as TConfig): IConsumer {
       // 合并配置
-      let mergedConfig = merge({}, defaultConfig, config) as TConfig;
+      const mergedConfig = merge({}, defaultConfig, config) as TConfig;
 
-      // 应用配置转换器
-      if (configTransformer) {
-        mergedConfig = configTransformer(mergedConfig, createConfig);
-      }
 
-      const visible = ref<boolean>(isNull(createConfig.visible) ? true : !!createConfig.visible);
+
+      const visible = ref<boolean>(true);
 
       const consumerRef = {
         value: null as unknown as IConsumer,
@@ -74,15 +70,20 @@ export function createAdapter<TConfig extends ICommandComponentConfig = ICommand
       });
 
       // 合并最终配置
-      const finalCreateConfig = merge(createConfig, {
-        appendTo: appendTo || createConfig.appendTo,
+      const finalUseConfig = merge(useConfig, {
+        appendTo: appendTo || useConfig.appendTo,
       });
 
-      const finalConfig = {
-        ...finalCreateConfig,
+      let finalConfig: ICommandComponentProviderConfig = {
+        ...finalUseConfig,
         ...mergedConfig,
         visible,
       };
+      // 应用配置转换器
+      if (configTransformer) {
+        finalConfig = configTransformer(finalConfig, useConfig);
+      }
+
 
       consumerRef.value = CommandProviderWithRender(parentInstance, h(Wrapper), finalConfig);
 

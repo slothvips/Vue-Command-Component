@@ -1,9 +1,4 @@
 import { Ref, VNode } from 'vue';
-/**
- * Represents a function that takes any arguments and returns a value
- * @template T - The return type of the function (defaults to unknown)
- */
-export type AnyFunction<T = unknown> = (...args: any[]) => T;
 export declare enum EVENT_NAME {
     destroy = "destroy"
 }
@@ -16,10 +11,7 @@ export type Meta = {
     /** 扩展数据 */
     [key: string]: unknown;
 };
-// use函数时期传递的配置
 export type IUseCommandComponentConfig = {
-    /** 是否调用命令即显示 */
-    visible?: boolean;
     /** 元数据 */
     meta?: Meta;
     /** 挂在点 */
@@ -35,15 +27,14 @@ export interface ICommandComponentConfig extends IUseCommandComponentConfig {
     /** 组件插槽 */
     slots?: Record<string, () => VNode | VNode[]>;
 }
-// 命令执行时传递的配置
 export type ICommandComponentProviderConfig = ICommandComponentConfig & {
-    visible: Ref<boolean, boolean>;
+    visible: Ref<boolean>;
 };
 export interface IConsumer {
     /** 组件实例的元数据 */
     meta?: Meta;
     /** 是否可见响应式变量,虽然已经提供了hide以及show方法不需要通过该属性来控制弹窗的显示与隐藏,但是为了方便一些特殊场景,还是提供了该属性,比如你需要watch这个属性来做一些事情 */
-    visible: Ref<boolean, boolean>;
+    visible: Ref<boolean>;
     /** 隐藏 */
     hide: () => void;
     /** 显示 */
@@ -92,7 +83,7 @@ export interface IRenderComponentOptions<Config> {
     /** 组件引用 */
     componentRef: Ref;
     /** 是否可见 */
-    visible: Ref<boolean, boolean>;
+    visible: Ref<boolean>;
     /** 挂载回调 */
     onMounted: () => void;
     /** 组件配置 */
