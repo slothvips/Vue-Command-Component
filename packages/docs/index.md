@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "Vue命令式组件"
   text: "轻松实现Vue组件的命令式调用"
-  tagline: 随用随走,释放完整想象力!
+  tagline: 简化组件调用，提升开发效率
   actions:
     - theme: brand
       text: 什么是命令式组件?
@@ -15,7 +15,7 @@ hero:
 
 features:
   - title: 命令式组件
-    details: 随用随走,释放完整想象力!
+    details: 简化组件调用流程，提供更流畅的开发体验
   - title: 易拓展
     details: 核心逻辑解耦,适配任何组件得心应手
   - title: 完整的环境信息

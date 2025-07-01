@@ -1,6 +1,6 @@
 # 快速开始
 
-从这里开始你的命令式组件之旅吧!
+本指南将帮助你快速上手命令式组件的使用。
 
 ## 兼容性
 
@@ -37,13 +37,13 @@ $ bun add @vue-cmd/core @vue-cmd/element-plus
 :::
 
 
-多嘴一句,建议你使用`Anthony Fu`的[`@antfu/ni`](https://www.npmjs.com/package/@antfu/ni)
+推荐使用 `Anthony Fu` 的 [`@antfu/ni`](https://www.npmjs.com/package/@antfu/ni) 来简化包管理器的使用：
 
 ```bash
 npm i -g @antfu/ni
 ```
 
-然后你就可以无视包管理器差异了
+安装后可以忽略包管理器差异：
 ```bash
 ni @vue-cmd/core @vue-cmd/element-plus
 ```
