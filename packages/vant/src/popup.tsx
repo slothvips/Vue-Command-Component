@@ -1,4 +1,4 @@
-import type { ICommandComponentConfig, IRenderComponentOptions } from "@vue-cmd/core";
+import type { ICommandConfig, IRenderComponentOptions } from "@vue-cmd/core";
 import { createAdapter } from "@vue-cmd/core";
 import type { PopupProps } from "vant";
 import { Popup } from "vant";
@@ -10,7 +10,7 @@ const defaultProps: Partial<PopupProps > = {
   closeable: true,
 };
 
-const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<ICommandComponentConfig>) => {
+const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<ICommandConfig>) => {
 
   const onClose = () => {
     consumer.value!.destroy();
@@ -23,11 +23,11 @@ const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, con
       onClickCloseIcon={onClose}
       onVnodeMounted={onMounted}
       {...defaultProps}
-      {...config.attrs}
+      {...config.value.attrs}
     >
       {{
         default: () => contentVNode,
-        ...config.slots,
+        ...config.value.slots,
       }}
     </Popup>
   );
@@ -37,5 +37,5 @@ export const usePopup = createAdapter({
   render: baseRender,
   defaultConfig: {
     attrs: defaultProps,
-  } as Partial<ICommandComponentConfig>,
+  } as Partial<ICommandConfig>,
 });

@@ -77,7 +77,7 @@ const openDrawer = () => {
 **类型定义：**
 
 ```typescript
-interface INaiveModalConfig extends ICommandComponentConfig {
+interface INaiveModalConfig extends ICommandConfig {
   title?: string;
   width?: string | number;
   height?: string | number;
@@ -91,7 +91,7 @@ interface INaiveModalConfig extends ICommandComponentConfig {
 **类型定义：**
 
 ```typescript
-interface INaiveDrawerConfig extends ICommandComponentConfig {
+interface INaiveDrawerConfig extends ICommandConfig {
   title?: string;
   width?: string | number;
   height?: string | number;

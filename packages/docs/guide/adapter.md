@@ -89,9 +89,10 @@ export const useMyComponent = createAdapter({
 ```tsx
 import { createAdapter } from '@vue-cmd/core'
 
-const myComponentRender = (contentVNode, { componentRef, visible, onMounted, config, consumer }) => {
+const myComponentRender = (contentVNode, config) => {
+  const { componentRef, visible, onMounted, config, consumer } = config.value
   return (
-    <MyComponent ref={componentRef} onVnodeMounted={onMounted} {...config.attrs}>
+    <MyComponent ref={componentRef} onVnodeMounted={onMounted} {...config.value.attrs}>
       {contentVNode}
     </MyComponent>
   )
@@ -99,13 +100,13 @@ const myComponentRender = (contentVNode, { componentRef, visible, onMounted, con
 
 export const useMyComponentWithTransformer = createAdapter({
   renderer: myComponentRender,
-  configTransformer: (config, useConfig) => {
+  configTransformer: (config) => {
     return {
-      ...config,
-      customClassName: `${config.customClassName || ''} enhanced-component`.trim(),
+      ...config.value,
+      customClassName: `${config.value.customClassName || ''} enhanced-component`.trim(),
       attrs: {
-        ...config.attrs,
-        theme: config.theme || 'light',
+        ...config.value.attrs,
+        theme: config.value.theme || 'light',
       },
     }
   },
@@ -116,117 +117,10 @@ export const useMyComponentWithTransformer = createAdapter({
 
 当需要对命令式组件进行高度自定义时，如果 `createAdapter` 无法满足灵活性需求，可以使用 `CommandProviderWithRender` 函数进行适配。它提供了对组件渲染过程和逻辑处理的完全控制。
 
-以下是使用 `CommandProviderWithRender` 适配 element-plus dialog 的示例:
-
-```tsx
-import { ElDialog, useGlobalComponentSettings, ElButton, type DialogProps } from "element-plus";
-import type { VNode } from "vue";
-import { getCurrentInstance, h, ref, defineComponent } from "vue";
-import type { ICommandComponentArrtsProviderConfig, IUseCommandComponentConfig } from "./Core";
-import { CommandProvider } from "./Core";
-import { busName2EventName, eventName2BusName, isNull } from "./utils";
-import { EVENT_NAME } from "./type";
-
-export type IElementPlusDialogConfig = {
-  // 目标ui库目标组件的插槽
-  slots?: {
-    [key: string]: () => VNode | VNode[];
-  };
-  // 目标ui库目标组件的属性
-  attrs?: Partial<DialogProps & Record<string, any>>;
-
-  // 其实title和width都是目标组件的属性,所以通过attrs属性也能实现,但是这两个属性实在太常见了,可以单独拎出来,少些一些代码
-  title?: string;
-  width?: string;
-} & ICommandComponentArrtsProviderConfig &
-  Record<string, any>;
-
-// ElementPlusDialog全局挂载点
-let mountNode: HTMLElement | undefined = void 0;
-export const setElementPlusDialogMountNode = (node: HTMLElement | undefined) => {
-  mountNode = node;
-};
-
-export const createElementPlusDialog = (useConfig: IUseCommandComponentConfig = {}) => {
-  // 我们需要捕获使用命令式组件的的组件实例,我们会用它来获取上下文
-  const parentInstance = getCurrentInstance();
-  // 返回一个函数,这个函数接收一个组件节点,以及配置项,返回一个consumer对象
-  const commandDialog = (ContentVNode: VNode, config: IElementPlusDialogConfig = {}) => {
-    // 初始显隐状态
-    const visible = ref<boolean>(isNull(useConfig.immediately) ? true : !!useConfig.immediately);
-
-    // 这里的consumer和弹窗内部通过`getConsumer`接收到的`consumer`是同一个对象
-    const consumer = CommandProvider(
-      parentInstance,
-      h(
-        defineComponent({
-          setup() {
-            // 这里一般建议你在后续赋值为UI库的弹窗组件的ref,以便将来使用它暴露的属性和方法
-            const componentRef = ref();
-            const handleMounted = () => {
-              Promise.resolve().then(() => {
-                // 设置ref,以便将来使用第三方组件暴露的属性和方法
-                consumer.componentRef = componentRef;
-              });
-            };
-
-            const handleClose = (done: () => void) => {
-              done();
-              consumer.destroy();
-            };
-
-            // 包装外部监听的onClosed事件,并触发销毁事件
-            const handleClosed = (...args: any[]) => {
-              consumer.emit(EVENT_NAME.destory);
-              return config.attrs?.onClosed?.(...args);
-            };
-
-            return () => (
-              <ElDialog
-                ref={componentRef}
-                modelValue={visible.value}
-                beforeClose={handleClose}
-                onVnodeMounted={handleMounted}
-                {...{
-                  title: config.title,
-                  width: config.width,
-                  ...config.attrs,
-                }}
-                onClosed={handleClosed}
-              >
-                {{
-                  default: () => ContentVNode,
-                  ...config.slots,
-                }}
-              </ElDialog>
-            );
-          },
-        })
-      ),
-      {
-        provideProps: config.provideProps || {},
-        appendTo: mountNode || config.appendTo,
-        visible,
-        // 优先使用执行动作的meta,其次使用创建时的meta
-        meta: {
-          ...(useConfig?.meta || {
-            name: "command-element-plus-dialog",
-          }),
-          ...(config?.meta || {}),
-        },
-      }
-    );
-
-    return consumer;
-  };
-
-  return commandDialog;
-};
-```
-虽然适配过程相对繁琐，但提供了最大的灵活性。
+你可以查看`createAdapter`的源码,了解它的实现原理,从而拆解它,但是一般来讲不建议这么做,因为需要关注的细节较多,很麻烦.
 
 ## 总结
 
 推荐优先使用 `createAdapter`，它已经能够满足大部分场景的需求。`createAdapter` 封装了通用逻辑，让你专注于组件渲染和交互逻辑。
 
-只有在 `createAdapter` 无法满足特殊定制需求时，才考虑使用 `CommandProviderWithRender`，因为后者需要处理更多的底层细节。
+只有在 `createAdapter` 无法满足特殊定制需求时，才考虑使用 `CommandProviderWithRender`.

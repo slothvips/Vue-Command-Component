@@ -11,7 +11,7 @@ export type Meta = {
     /** 扩展数据 */
     [key: string]: unknown;
 };
-export type IUseCommandComponentConfig = {
+export type IUseConfig = {
     /** 元数据 */
     meta?: Meta;
     /** 挂在点 */
@@ -19,7 +19,7 @@ export type IUseCommandComponentConfig = {
     /** 自定义类名 */
     customClassName?: string;
 };
-export interface ICommandComponentConfig extends IUseCommandComponentConfig {
+export interface ICommandConfig extends IUseConfig {
     /** 私有域成员注入 */
     provideProps?: Record<string | symbol, unknown>;
     /** 组件原生属性 */
@@ -27,7 +27,7 @@ export interface ICommandComponentConfig extends IUseCommandComponentConfig {
     /** 组件插槽 */
     slots?: Record<string, () => VNode | VNode[]>;
 }
-export type ICommandComponentProviderConfig = ICommandComponentConfig & {
+export type ICoreConfig = ICommandConfig & {
     visible: Ref<boolean>;
 };
 export interface IConsumer {
@@ -87,7 +87,7 @@ export interface IRenderComponentOptions<Config> {
     /** 挂载回调 */
     onMounted: () => void;
     /** 组件配置 */
-    config: Config;
+    config: Ref<Config>;
     /** 消费者实例 */
     consumer: {
         value: IConsumer;
@@ -117,3 +117,9 @@ export interface IPromiseWithResolvers<T = unknown> {
     resolve: (value: T) => void;
     reject: (reason?: unknown) => void;
 }
+/**
+ * 返回泛型的函数类型,或者直接返回泛型
+ * @template T 输入类型
+ * @template R 返回类型
+ */
+export type ValueOrGetter<T> = (() => T) | T;

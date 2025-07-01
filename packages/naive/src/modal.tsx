@@ -1,4 +1,4 @@
-import type { ICommandComponentConfig, IRenderComponentOptions } from "@vue-cmd/core";
+import type { ICommandConfig, IRenderComponentOptions } from "@vue-cmd/core";
 import { createAdapter } from "@vue-cmd/core";
 import type { VNode } from "vue";
 
@@ -6,7 +6,7 @@ import type { VNode } from "vue";
 import { NModal } from "naive-ui";
 
 // 类型定义
-export interface INaiveModalConfig extends ICommandComponentConfig {
+export interface INaiveModalConfig extends ICommandConfig {
   title?: string;
   width?: string | number;
   height?: string | number;
@@ -32,11 +32,11 @@ const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, con
       onAfterLeave={onAfterLeave}
       onVnodeMounted={onMounted}
       preset="dialog"
-      {...config.attrs}
+      {...config.value.attrs}
     >
       {{
         default: () => contentVNode,
-        ...config.slots,
+        ...config.value.slots,
       }}
     </NModal>
   );

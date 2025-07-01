@@ -1,7 +1,7 @@
-import { createVNode as f, mergeProps as u } from "vue";
+import { createVNode as u, mergeProps as f } from "vue";
 import { createAdapter as p } from "@vue-cmd/core";
-import { NModal as i, NDrawer as h } from "naive-ui";
-const v = (o, {
+import { NModal as v, NDrawer as i } from "naive-ui";
+const h = (o, {
   componentRef: r,
   visible: a,
   onMounted: d,
@@ -13,19 +13,19 @@ const v = (o, {
   }, s = () => {
     t.value.destroy();
   };
-  return f(i, u({
+  return u(v, f({
     ref: r,
     show: a.value,
     onUpdateShow: n,
     onAfterLeave: s,
     onVnodeMounted: d,
     preset: "dialog"
-  }, e.attrs), {
+  }, e.value.attrs), {
     default: () => o,
-    ...e.slots
+    ...e.value.slots
   });
 }, A = p({
-  render: v,
+  render: h,
   defaultConfig: {
     attrs: {
       preset: "dialog",
@@ -44,7 +44,7 @@ const v = (o, {
   }, s = () => {
     t.value.destroy();
   };
-  return f(h, u({
+  return u(i, f({
     ref: r,
     show: a.value,
     onUpdateShow: n,
@@ -52,9 +52,9 @@ const v = (o, {
     onVnodeMounted: d,
     width: 300,
     placement: "right"
-  }, e.attrs), {
+  }, e.value.attrs), {
     default: () => o,
-    ...e.slots
+    ...e.value.slots
   });
 }, y = p({
   render: w,

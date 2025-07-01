@@ -15,8 +15,8 @@ export type Meta = {
   [key: string]: unknown;
 };
 
-// 创建时配置
-export type IUseCommandComponentConfig = {
+// 创建时(usexxx)配置
+export type IUseConfig = {
   /** 元数据 */
   meta?: Meta;
   /** 挂在点 */
@@ -26,7 +26,7 @@ export type IUseCommandComponentConfig = {
 };
 
 // 调用时配置,在执行命令时依然可以传入配置覆盖创建时配置,实现最大灵活度
-export interface ICommandComponentConfig extends IUseCommandComponentConfig {
+export interface ICommandConfig extends IUseConfig {
   /** 私有域成员注入 */
   provideProps?: Record<string | symbol, unknown>;
   /** 组件原生属性 */
@@ -35,7 +35,8 @@ export interface ICommandComponentConfig extends IUseCommandComponentConfig {
   slots?: Record<string, () => VNode | VNode[]>;
 }
 
-export type ICommandComponentProviderConfig = ICommandComponentConfig & {
+// 最终到达core层的配置
+export type ICoreConfig = ICommandConfig & {
   visible: Ref<boolean>;
 };
 
@@ -99,7 +100,7 @@ export interface IRenderComponentOptions<Config> {
   /** 挂载回调 */
   onMounted: () => void;
   /** 组件配置 */
-  config: Config;
+  config: Ref<Config>;
   /** 消费者实例 */
   consumer: {
     value: IConsumer;
@@ -134,3 +135,10 @@ export interface IPromiseWithResolvers<T = unknown> {
   resolve: (value: T) => void;
   reject: (reason?: unknown) => void;
 }
+
+/**
+ * 返回泛型的函数类型,或者直接返回泛型
+ * @template T 输入类型
+ * @template R 返回类型
+ */
+export type ValueOrGetter<T> = (() => T) | T;

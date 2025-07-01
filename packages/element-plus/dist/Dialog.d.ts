@@ -1,10 +1,10 @@
-import { ICommandComponentConfig } from '@vue-cmd/core';
+import { ICommandConfig } from '@vue-cmd/core';
 import { VNode } from 'vue';
-export type IDialogConfig = ICommandComponentConfig & {
+export type IDialogConfig = ICommandConfig & {
     title?: string;
     width?: string;
 };
-export declare const useDialog: (useConfig?: import('@vue-cmd/core').IUseCommandComponentConfig) => (contentVNode: VNode, config?: IDialogConfig | undefined) => import('@vue-cmd/core').IConsumer;
+export declare const useDialog: (useConfig?: import('@vue-cmd/core').ValueOrGetter<import('@vue-cmd/core').IUseConfig>) => (contentVNode: VNode, commandConfig?: import('@vue-cmd/core').ValueOrGetter<IDialogConfig> | undefined) => import('@vue-cmd/core').IConsumer;
 /**
  * 可拖拽,遮罩无法关闭,按esc无法关闭
  * @returns

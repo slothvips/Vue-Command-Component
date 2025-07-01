@@ -1,10 +1,10 @@
-import type { ICommandComponentConfig, IRenderComponentOptions } from '@vue-cmd/core'
+import type { ICommandConfig, IRenderComponentOptions } from '@vue-cmd/core'
 import { createAdapter } from '@vue-cmd/core'
 import type { DrawerProps } from 'element-plus'
 import { ElDrawer } from 'element-plus'
 import type { VNode } from 'vue'
 
-export type IDrawerConfig = Partial<DrawerProps> & ICommandComponentConfig
+export type IDrawerConfig = Partial<DrawerProps> & ICommandConfig
 
 const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<IDrawerConfig>) => {
   const onClosed = () => {
@@ -12,10 +12,10 @@ const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, con
   }
 
   return (
-    <ElDrawer ref={componentRef} modelValue={visible.value} onVnodeMounted={onMounted} {...config.attrs} onClosed={onClosed}>
+    <ElDrawer ref={componentRef} modelValue={visible.value} onVnodeMounted={onMounted} {...config.value.attrs} onClosed={onClosed}>
       {{
         default: () => contentVNode,
-        ...config.slots,
+        ...config.value.slots,
       }}
     </ElDrawer>
   )

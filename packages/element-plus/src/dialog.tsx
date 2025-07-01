@@ -1,23 +1,27 @@
-import type { ICommandComponentConfig, IRenderComponentOptions } from '@vue-cmd/core'
+import type { ICommandConfig, IRenderComponentOptions } from '@vue-cmd/core'
 import { createAdapter } from '@vue-cmd/core'
 import { ElDialog } from 'element-plus'
-import { type VNode } from 'vue'
+import { type Ref, type VNode } from 'vue'
 
-export type IDialogConfig = ICommandComponentConfig & {
+export type IDialogConfig = ICommandConfig & {
   title?: string
   width?: string
 }
 
-const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<IDialogConfig>) => {
+const baseRender = (contentVNode: VNode,options:IRenderComponentOptions<IDialogConfig>) => {
+  const { componentRef, visible, onMounted, config, consumer } = options
+
+  const { title, width, attrs, slots } = config.value
+
   const onClosed = () => {
     consumer.value!.destroy()
   }
 
   return (
-    <ElDialog ref={componentRef} modelValue={visible.value} onVnodeMounted={onMounted} title={config.title} width={config.width} {...config.attrs} onClosed={onClosed}>
+    <ElDialog ref={componentRef} modelValue={visible.value} onVnodeMounted={onMounted} title={title} width={width} {...attrs} onClosed={onClosed}>
       {{
         default: () => contentVNode,
-        ...config.slots,
+        ...slots,
       }}
     </ElDialog>
   )
@@ -31,8 +35,6 @@ export const useDialog = createAdapter({
     },
   },
 })
-
-
 
 /**
  * 可拖拽,遮罩无法关闭,按esc无法关闭

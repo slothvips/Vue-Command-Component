@@ -1,9 +1,9 @@
-import type { ICommandComponentConfig, IRenderComponentOptions } from "@vue-cmd/core";
+import type { ICommandConfig, IRenderComponentOptions } from "@vue-cmd/core";
 import { createAdapter } from "@vue-cmd/core";
 import type { VNode } from "vue";
 import { NDrawer } from "naive-ui";
 
-export interface INaiveDrawerConfig extends ICommandComponentConfig { }
+export interface INaiveDrawerConfig extends ICommandConfig { }
 
 const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<INaiveDrawerConfig>) => {
 
@@ -26,11 +26,11 @@ const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, con
       onVnodeMounted={onMounted}
       width={300}
       placement="right"
-      {...config.attrs}
+      {...config.value.attrs}
     >
       {{
         default: () => contentVNode,
-        ...config.slots,
+        ...config.value.slots,
       }}
     </NDrawer>
   );

@@ -35,7 +35,7 @@ export default defineConfig({
       name: "VueCmdCore",
       fileName: "index",
     },
-    minify: "esbuild",
+    // minify: "esbuild",
     rollupOptions: {
       external: Object.keys(require("./package.json").peerDependencies || {}),
       output: {

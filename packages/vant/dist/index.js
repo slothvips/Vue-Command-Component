@@ -8,29 +8,29 @@ const r = {
 }, m = (t, {
   componentRef: s,
   visible: e,
-  onMounted: n,
+  onMounted: u,
   config: o,
-  consumer: u
+  consumer: a
 }) => {
-  const a = () => {
-    u.value.destroy();
+  const l = () => {
+    a.value.destroy();
   };
   return d(f, p({
     ref: s,
     show: e.value,
-    "onUpdate:show": (l) => e.value = l,
-    onClickCloseIcon: a,
-    onVnodeMounted: n
-  }, r, o.attrs), {
+    "onUpdate:show": (n) => e.value = n,
+    onClickCloseIcon: l,
+    onVnodeMounted: u
+  }, r, o.value.attrs), {
     default: () => t,
-    ...o.slots
+    ...o.value.slots
   });
-}, i = c({
+}, h = c({
   render: m,
   defaultConfig: {
     attrs: r
   }
 });
 export {
-  i as usePopup
+  h as usePopup
 };

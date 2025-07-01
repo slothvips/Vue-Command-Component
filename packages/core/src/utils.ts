@@ -1,5 +1,6 @@
-import { defineComponent, h, type VNode } from "vue";
-import type { EventBusMap, EventCallback, EventMap, IConsumer, IOnConfig, IPromiseWithResolvers } from "./type";
+import { defineComponent, effectScope, h, type VNode } from "vue";
+import type { EventBusMap, EventCallback, EventMap, ICoreConfig, IConsumer, IOnConfig, IPromiseWithResolvers } from "./type";
+import { watch } from "fs";
 
 /**
  * 基于命令弹窗消费对象的事件注册中心
@@ -108,4 +109,9 @@ export const RxRender = (render: () => VNode) => {
   // 如果不是一个函数,将直接返回内容(或许是一个vnode)
   if (typeof render !== "function") return render;
   return h(defineComponent({ render: () => render() }));
+};
+
+// 创建一个唯一的key
+export const uuid = () => {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 };

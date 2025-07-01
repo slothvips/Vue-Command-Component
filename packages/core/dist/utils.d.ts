@@ -37,3 +37,4 @@ export declare const isNull: (val: unknown) => val is null | undefined;
 export declare const RxRender: (render: () => VNode) => VNode<import('vue').RendererNode, import('vue').RendererElement, {
     [key: string]: any;
 }>;
+export declare const uuid: () => string;

@@ -1,6 +1,6 @@
 import type { Component, ComponentInternalInstance, InjectionKey } from "vue";
 import { defineComponent, h, inject, nextTick, provide, render } from "vue";
-import { EVENT_NAME, type ICommandComponentProviderConfig, type IConsumer, type IOnConfig, type EventCallback } from "./type";
+import { EVENT_NAME, type EventCallback, type IConsumer, type ICoreConfig, type IOnConfig } from "./type";
 import { ConsumerEventBus, PromiseWithResolvers } from "./utils";
 
 export const CommandComponentConsumerInjectKey: InjectionKey<IConsumer> = Symbol("CommandComponentConsumerInjectKey");
@@ -27,7 +27,7 @@ const getProvidesChain = (ins: ComponentInternalInstance): Record<string | symbo
 });
 
 // 注入+渲染
-export function CommandProviderWithRender(parentInstance: ComponentInternalInstance | null, uiComponent: Component, config: ICommandComponentProviderConfig): IConsumer {
+export function CommandProviderWithRender(parentInstance: ComponentInternalInstance | null, uiComponent: Component, config: ICoreConfig): IConsumer {
   const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || (parentInstance as any).vnode.el?.parentElement || document.body;
 
   const containerEl = document.createElement("div");
@@ -129,6 +129,7 @@ export function CommandProviderWithRender(parentInstance: ComponentInternalInsta
       return () => h(uiComponent);
     },
   });
+
   const vnode = <CommandComponentProviderComponent />;
 
   vnode.appContext = parentInstance?.appContext || vnode.appContext;
