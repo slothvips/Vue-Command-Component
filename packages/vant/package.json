@@ -1,6 +1,6 @@
 {
   "name": "@vue-cmd/vant",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Vant adapters for Vue Command Component",
   "homepage": "https://pandavips.github.io/Vue-Command-Component/",

@@ -1,52 +1,50 @@
 # 适配其他组件
 
-本项目已经提供了一些开箱即用的组件，但由于组件库众多，可能你正在使用的组件还没有被适配。本指南将帮助你将自己使用的组件适配为命令式组件。如果你愿意分享你的适配成果，欢迎提交 PR。
+本项目已内置多个UI框架的适配器，但由于组件库生态众多，您可能需要为特定组件实现命令式调用。本指南将指导您完成组件适配流程。如果您愿意分享适配成果，欢迎提交PR。
 
-适配工作的核心目标是与 `core` 层的逻辑进行绑定，例如告知 `core` 层何时执行销毁清理逻辑。适配层的作用是抹平不同组件之间的差异，提供统一的接口。理解这个目标有助于更好地掌握适配过程。
+适配工作的核心是建立第三方组件与`core`层之间的连接桥梁。适配层的主要职责是抹平不同组件之间的差异，将组件和`core`层进行对接。
 
-## 适配器 `createAdapter`
+## 适配器API：`createAdapter`
 
-为了简化适配工作，`createAdapter` 函数封装了通用的逻辑处理，让开发者只需要关注组件之间的差异部分。
+为简化适配工作，我们提供了`createAdapter`函数，它封装了通用逻辑处理，让开发者只需关注组件的特定差异部分。
 
-### 基础用法
+### 基本使用
 
-`createAdapter` 函数可以帮助你快速适配命令式组件。
+`createAdapter`是对底层`CommandProviderWithRender`的高级封装，屏蔽了复杂细节，提供简洁的API。
 
-它是对 `CommandProviderWithRender` 函数的封装，屏蔽了通用逻辑，让你专注于组件的适配工作。
+它接收两个参数：
+- **渲染器**：定义如何渲染组件并关联生命周期管理逻辑
+- **默认配置**：组件属性的默认值，后续可在多处覆盖或合并
 
-它需要两个参数:
+适配实现主要在`render`函数中完成，需要处理以下关键任务：
 
-- 渲染器：决定如何渲染组件，以及如何与 `core` 层的逻辑关联(主要是销毁逻辑)
-- 初始配置：组件属性的默认值，后续可以在多个地方进行修改和覆盖
+1. 返回目标UI组件的渲染VNode（使用JSX或h函数）
+2. 将`visible`状态绑定到组件的显隐控制属性（推荐单向绑定）
+3. 传递组件属性、插槽、事件等（通常通过解构`{...config.attrs}`实现）
+4. 绑定`componentRef`到组件实例，并通过`onVnodeMounted`回调执行`onMounted`
+5. 关联销毁逻辑，在组件关闭时调用`consumer.value!.destroy()`（建议在动画结束回调中执行）
 
-适配工作主要在 `render` 函数中实现，具体需要完成以下任务:
-
-1. 返回目标组件的渲染 vnode，可以使用 jsx 或 h 函数
-2. 将 `visible` 参数绑定到组件上控制显隐，建议使用单向绑定
-3. 传递插槽、属性、事件等，通常直接展开 `{...config.attrs}` 到组件上
-4. 将 `componentRef` 绑定到组件上，通过 `onVnodeMounted` 回调执行 `onMounted`，用于设置组件实例引用
-5. 关联 `core` 层的销毁清理逻辑，在组件关闭回调中调用 `consumer.value!.destroy()`。如果组件有关闭动画结束回调，建议使用该回调进行销毁以保证动画完整播放
-
-下面是一个将 `MyComponent` 组件适配为命令式组件的示例:
+以下是将`MyComponent`适配为命令式组件的示例：
 
 ```tsx
 import { createAdapter } from '@vue-cmd/core'
+
 const myComponentRender = (contentVNode, { componentRef, visible, onMounted, config, consumer }) => {
-  // 对应1. 返回目标组件的渲染 vnode
   return (
     <MyComponent
-    {/* 对应2. 单向绑定 */}
-    modelValue={visible.value}
-    {/* 对应4. 设置 ref 引用 */}
-    ref={componentRef} onVnodeMounted={onMounted}
-    {/* 对应3. 传递属性 */}
-    {...config.attrs}
-    {/* 对应5. 关联销毁清理逻辑 */}
-    onClosed={() => consumer.value!.destroy()}>
-    {/* 命令组件内部渲染内容 */}
+      // 2. 显隐控制绑定
+      modelValue={visible.value}
+      // 4. 组件实例引用绑定
+      ref={componentRef} 
+      onVnodeMounted={onMounted}
+      // 3. 传递组件属性
+      {...config.attrs}
+      // 5. 关联销毁逻辑
+      onClosed={() => consumer.value!.destroy()}>
+      {/* 命令组件内容渲染 */}
       {{
         default: () => contentVNode,
-        {/* 对应3. 传递插槽 */}
+        // 传递其他插槽
         ...config.slots,
       }}
     </MyComponent>
@@ -55,36 +53,31 @@ const myComponentRender = (contentVNode, { componentRef, visible, onMounted, con
 
 export const useMyComponent = createAdapter({
   render: myComponentRender,
-  // 这里可以是一个空对象
   defaultConfig: {
-    title: '基础适配器',
+    title: '基础弹窗',
     width: '400px',
-    // 这里可以设置一些组件的元数据,方便你后续使用
+    // 组件元数据，便于后续扩展
     meta: {
       name: 'my-component',
     },
   },
 })
 ```
-通过这种方式，可以快速完成组件的适配工作。
 
-::: tip 关于销毁函数的选择
-用户行为通常可以分为三类：Commit(提交确认)/Cancel(取消)/Dismiss(关闭忽略)，对应 Promise 的三种状态：fulfilled/rejected/pending。
+::: tip 销毁函数选择指南
+用户交互行为可分为三类：
+- **确认(Commit)**：用户明确提交数据 → `consumer.destroyWithResolve(data)`
+- **取消(Cancel)**：用户明确拒绝操作 → `consumer.destroyWithReject(reason)`
+- **关闭(Dismiss)**：用户未明确表态 → `consumer.destroy()`
 
-销毁逻辑对应的函数分别为:
-- Commit: 推进到 fulfilled 状态 > `consumer.destroyWithResolve()`
-- Cancel: 推进到 rejected 状态 > `consumer.destroyWithReject()`
-- Dismiss: 不推进 Promise 状态 > `consumer.destroy()`
+除非用户明确点击确认/拒绝按钮，否则通常视为Dismiss行为，如点击关闭图标、遮罩层或按ESC键导致的关闭。
 
-除非用户在组件内部明确表态(如点击确认/拒绝按钮)，否则通常认为用户行为是 Dismiss，如点击关闭图标、遮罩层导致的组件销毁等。
-
-在适配层中，通常认为用户行为是 Dismiss，除非有特殊业务需求，否则建议使用 `consumer.destroy()` 来销毁组件。
+在适配层中，默认应使用`consumer.destroy()`处理关闭行为，保持Promise状态不变。
 :::
 
+### 配置转换器：`configTransformer`
 
-### 配置转换器 `configTransformer`
-
-在最终渲染前对配置进行预处理，允许对配置进行修改。它的作用是提供统一的配置拦截和控制点。
+在渲染前对配置进行预处理，允许统一转换或增强配置参数：
 
 ```tsx
 import { createAdapter } from '@vue-cmd/core'
@@ -101,6 +94,7 @@ const myComponentRender = (contentVNode, config) => {
 export const useMyComponentWithTransformer = createAdapter({
   renderer: myComponentRender,
   configTransformer: (config) => {
+    // 在此处统一处理配置
     return {
       ...config.value,
       customClassName: `${config.value.customClassName || ''} enhanced-component`.trim(),
@@ -113,14 +107,12 @@ export const useMyComponentWithTransformer = createAdapter({
 })
 ```
 
-## `CommandProviderWithRender`
+## 高级定制：`CommandProviderWithRender`
 
-当需要对命令式组件进行高度自定义时，如果 `createAdapter` 无法满足灵活性需求，可以使用 `CommandProviderWithRender` 函数进行适配。它提供了对组件渲染过程和逻辑处理的完全控制。
+当`createAdapter`无法满足复杂定制需求时，可使用底层的`CommandProviderWithRender`函数，它提供对整个渲染过程的完全控制权。
 
-你可以查看`createAdapter`的源码,了解它的实现原理,从而拆解它,但是一般来讲不建议这么做,因为需要关注的细节较多,很麻烦.
+建议先查看`createAdapter`的源码实现，理解其内部机制后再考虑直接使用底层API。
 
-## 总结
+## 最佳实践
 
-推荐优先使用 `createAdapter`，它已经能够满足大部分场景的需求。`createAdapter` 封装了通用逻辑，让你专注于组件渲染和交互逻辑。
-
-只有在 `createAdapter` 无法满足特殊定制需求时，才考虑使用 `CommandProviderWithRender`.
+建议优先使用`createAdapter`，它已满足绝大多数场景需求，同时有效降低适配复杂度。只有在特殊情况下才考虑使用底层API。
