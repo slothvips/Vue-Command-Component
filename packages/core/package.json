@@ -30,8 +30,6 @@
     "publish": "pnpm build && pnpm publish --access public --no-git-checks"
   },
   "dependencies": {
-    "build": "^0.1.4",
-    "lodash-es": "^4.17.21"
   },
   "devDependencies": {},
   "peerDependencies": {

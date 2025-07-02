@@ -43,8 +43,11 @@ export class ConsumerEventBus {
       }, config.callImmediatelyAfterDelay || 0);
   }
 
-  once(consumer: IConsumer, name: string | symbol, callback: EventCallback): void {
-    this.on(consumer, name, callback, { once: true });
+  once(consumer: IConsumer, name: string | symbol, callback: EventCallback, config: IOnConfig = {}): void {
+    this.on(consumer, name, callback, {
+      ...config,
+      once: true,
+    });
   }
 
   emit(consumer: IConsumer, name: string | symbol, ...args: unknown[]): void {

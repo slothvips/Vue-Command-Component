@@ -81,6 +81,10 @@ export default defineConfig({
               text: "进阶用法",
               link: "/example/advanced",
             },
+            {
+              text: "NaiveUI",
+              link: "/example/naive",
+            },
           ],
         },
       ],

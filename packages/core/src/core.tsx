@@ -56,7 +56,7 @@ export function CommandProviderWithRender(parentInstance: ComponentInternalInsta
     if (external) {
       hide();
       // Delay destruction to ensure component animation completion (3s is enough.)
-      consumer.on(EVENT_NAME.destroy, unmount, {
+      consumer.once(EVENT_NAME.destroy, unmount, {
         once: true,
         callImmediatelyAfterDelay: DEFAULT_ANIMATION_TIMEOUT,
       });
@@ -91,7 +91,7 @@ export function CommandProviderWithRender(parentInstance: ComponentInternalInsta
     container: containerEl,
     visible: config.visible,
     on: (name: string | symbol, callback: EventCallback, config: IOnConfig = {}) => EB.on(consumer, name, callback, config),
-    once: (name: string | symbol, callback: EventCallback) => EB.once(consumer, name, callback),
+    once: (name: string | symbol, callback: EventCallback, config: IOnConfig = {}) => EB.once(consumer, name, callback, config),
     emit: (name: string | symbol, ...args: unknown[]) => EB.emit(consumer, name, ...args),
     off: (name: string | symbol, callback: EventCallback) => EB.off(consumer, name, callback),
     stack: [] as IConsumer[],

@@ -1,5 +1,6 @@
 export {
   useModal,
+  useDialog,
   type INaiveModalConfig
 } from "./modal";
 

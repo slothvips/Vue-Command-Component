@@ -1,4 +1,5 @@
 <script lang="tsx" setup>
+
 import { useConsumer } from "@vue-cmd/core";
 import { getCurrentInstance, inject, provide, } from "vue";
 import NestedCom from "./nested.vue";
@@ -36,7 +37,8 @@ const model = defineModel<string>();
 </script>
 
 <template>
-  <div class="flex gap-20px flex-wrap">
+  <div class="w-full p-20px" style="background-color: var(--el-bg-color)">
+    <div class="flex gap-20px flex-wrap">
     <el-button @click="consumer.destroy()">destroy</el-button>
     <el-button @click="consumer.destroyWithReject()">destroyWithReject</el-button>
     <el-button @click="consumer.destroyWithResolve()">destroyWithResolve</el-button>
@@ -56,6 +58,8 @@ const model = defineModel<string>();
   <div>
     <el-input v-model="model"></el-input>
   </div>
+  </div>
+
 </template>
 
 <style lang="scss" scoped></style>

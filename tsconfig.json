@@ -20,7 +20,8 @@
     "env.d.ts",
     "./typed-router.d.ts",
     "vite.config.*",
-    "packages/**/*"
+    "packages/**/*",
+    "packages/playground/**/*"
   ],
   "exclude": [
     "src/**/__tests__/*"
