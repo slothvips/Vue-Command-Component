@@ -1,43 +1,47 @@
-import { createVNode as s, mergeProps as d } from "vue";
-import { createAdapter as u } from "@vue-cmd/core";
-import { ElDialog as p, ElDrawer as v } from "element-plus";
-const C = (e, o) => {
+import { createVNode as c, mergeProps as i } from "vue";
+import { createAdapter as m, EVENT_NAME as D } from "@vue-cmd/core";
+import { ElDialog as E, ElDrawer as V } from "element-plus";
+const b = (o, l) => {
   const {
     componentRef: t,
-    visible: l,
-    onMounted: r,
-    config: n,
-    consumer: a
-  } = o, {
-    title: c,
-    width: i,
-    attrs: m,
-    slots: f
-  } = n.value, g = () => {
-    a.value.destroy();
+    visible: s,
+    onMounted: n,
+    config: a,
+    consumer: r
+  } = l, {
+    title: f,
+    width: g,
+    attrs: e,
+    slots: p
+  } = a.value, C = (d) => {
+    d(), r.value.destroy();
+  }, v = (...d) => {
+    var u;
+    return r.value.emit(D.destroy), (u = e == null ? void 0 : e.onClosed) == null ? void 0 : u.call(e, ...d);
   };
-  return s(p, d({
+  return c(E, i({
     ref: t,
-    modelValue: l.value,
-    onVnodeMounted: r,
-    title: c,
-    width: i
-  }, m, {
-    onClosed: g
+    modelValue: s.value,
+    onVnodeMounted: n,
+    title: f,
+    width: g
+  }, e, {
+    beforeClose: C,
+    onClosed: v
   }), {
-    default: () => e,
-    ...f
+    default: () => o,
+    ...p
   });
-}, D = u({
-  render: C,
+}, h = m({
+  render: b,
   defaultConfig: {
     meta: {
       name: "element-plus-dialog"
     }
   }
-}), h = () => {
-  const e = D();
-  return (o, t = {}) => e(o, {
+}), R = () => {
+  const o = h();
+  return (l, t = {}) => o(l, {
     attrs: {
       // 可拖拽
       draggable: !0,
@@ -46,27 +50,27 @@ const C = (e, o) => {
     },
     ...t
   });
-}, w = (e, {
-  componentRef: o,
+}, w = (o, {
+  componentRef: l,
   visible: t,
-  onMounted: l,
-  config: r,
-  consumer: n
+  onMounted: s,
+  config: n,
+  consumer: a
 }) => {
-  const a = () => {
-    n.value.destroy();
+  const r = () => {
+    a.value.destroy();
   };
-  return s(v, d({
-    ref: o,
+  return c(V, i({
+    ref: l,
     modelValue: t.value,
-    onVnodeMounted: l
-  }, r.value.attrs, {
-    onClosed: a
+    onVnodeMounted: s
+  }, n.value.attrs, {
+    onClosed: r
   }), {
-    default: () => e,
-    ...r.value.slots
+    default: () => o,
+    ...n.value.slots
   });
-}, E = u({
+}, A = m({
   render: w,
   defaultConfig: {
     meta: {
@@ -75,7 +79,7 @@ const C = (e, o) => {
   }
 });
 export {
-  D as useDialog,
-  h as useDialogWithDrag,
-  E as useDrawer
+  h as useDialog,
+  R as useDialogWithDrag,
+  A as useDrawer
 };

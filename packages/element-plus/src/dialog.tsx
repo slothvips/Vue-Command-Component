@@ -1,24 +1,32 @@
 import type { ICommandConfig, IRenderComponentOptions } from '@vue-cmd/core'
-import { createAdapter } from '@vue-cmd/core'
+import { createAdapter, EVENT_NAME } from '@vue-cmd/core'
 import { ElDialog } from 'element-plus'
-import { type Ref, type VNode } from 'vue'
+import { type VNode } from 'vue'
 
 export type IDialogConfig = ICommandConfig & {
   title?: string
   width?: string
 }
 
-const baseRender = (contentVNode: VNode,options:IRenderComponentOptions<IDialogConfig>) => {
+const baseRender = (contentVNode: VNode, options: IRenderComponentOptions<IDialogConfig>) => {
   const { componentRef, visible, onMounted, config, consumer } = options
 
   const { title, width, attrs, slots } = config.value
 
-  const onClosed = () => {
-    consumer.value!.destroy()
-  }
+  // 点击遮罩和关闭按钮会触发
+  const handleClose = (done: () => void) => {
+    done();
+    consumer.value!.destroy();
+  };
+
+  // 动画结束时触发
+  const handleClosed = (...args: unknown[]) => {
+    consumer.value!.emit(EVENT_NAME.destroy);
+    return attrs?.onClosed?.(...args);
+  };
 
   return (
-    <ElDialog ref={componentRef} modelValue={visible.value} onVnodeMounted={onMounted} title={title} width={width} {...attrs} onClosed={onClosed}>
+    <ElDialog ref={componentRef} modelValue={visible.value} onVnodeMounted={onMounted} title={title} width={width} {...attrs} beforeClose={handleClose} onClosed={handleClosed}>
       {{
         default: () => contentVNode,
         ...slots,

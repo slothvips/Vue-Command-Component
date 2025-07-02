@@ -51,6 +51,7 @@ export function CommandProviderWithRender(parentInstance: ComponentInternalInsta
 
   const { promise, resolve, reject } = PromiseWithResolvers<unknown>();
   const DEFAULT_ANIMATION_TIMEOUT = 3000;
+
   const destroy = (external = false): void => {
     if (external) {
       hide();
