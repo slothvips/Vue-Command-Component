@@ -6,9 +6,9 @@ import NestedCom from "./nested.vue";
 
 defineEmits(["say"]);
 
-const props = withDefaults(defineProps<{ nested?: boolean,count?:number }>(), {
+const props = withDefaults(defineProps<{ nested?: boolean, count?: number }>(), {
   nested: false,
-  count:0
+  count: 0
 });
 provide("nested", props.nested);
 
@@ -37,27 +37,27 @@ const model = defineModel<string>();
 </script>
 
 <template>
-  <div class="w-full p-20px" style="background-color: var(--el-bg-color)">
+  <div class="w-full p-20px">
     <div class="flex gap-20px flex-wrap">
-    <el-button @click="consumer.destroy()">destroy</el-button>
-    <el-button @click="consumer.destroyWithReject()">destroyWithReject</el-button>
-    <el-button @click="consumer.destroyWithResolve()">destroyWithResolve</el-button>
-    <el-button @click="consumer.hide()">hide</el-button>
-    <el-button @click="consumer.show()">show(😯已经show了)</el-button>
-    <el-button @click="resetOption">弹窗位置复原(用于示例原生组件库暴露属性)</el-button>
-    <el-button @click="$emit('say', 'panda')">emit一个事件,value:'panda'</el-button>
-  </div>
-  <el-divider />
-  <template v-if="nested">
-    <el-divider>来一场无止境的嵌套吧</el-divider>
-    <p>当弹窗嵌套过多页面开始出现闪烁,并不是这个库的问题,element-plus官网也有这个问题😄</p>
-    <p>弹窗深度: {{ depth }}</p>
-    <NestedCom />
-  </template>
-  <el-divider>关于组件响应式 {{ count }}</el-divider>
-  <div>
-    <el-input v-model="model"></el-input>
-  </div>
+      <el-button @click="consumer.destroy()">destroy</el-button>
+      <el-button @click="consumer.destroyWithReject()">destroyWithReject</el-button>
+      <el-button @click="consumer.destroyWithResolve()">destroyWithResolve</el-button>
+      <el-button @click="consumer.hide()">hide</el-button>
+      <el-button @click="consumer.show()">show(😯已经show了)</el-button>
+      <el-button @click="resetOption">弹窗位置复原(用于示例原生组件库暴露属性)</el-button>
+      <el-button @click="$emit('say', 'panda')">emit一个事件,value:'panda'</el-button>
+    </div>
+    <el-divider />
+    <template v-if="nested">
+      <el-divider>来一场无止境的嵌套吧</el-divider>
+      <p>当弹窗嵌套过多页面开始出现闪烁,并不是这个库的问题,element-plus官网也有这个问题😄</p>
+      <p>弹窗深度: {{ depth }}</p>
+      <NestedCom />
+    </template>
+    <el-divider>prop响应式 {{ count }}</el-divider>
+    <div>
+      <el-input v-model="model"></el-input>
+    </div>
   </div>
 
 </template>

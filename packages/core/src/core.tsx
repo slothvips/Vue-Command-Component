@@ -27,7 +27,7 @@ const getProvidesChain = (ins: ComponentInternalInstance): Record<string | symbo
 });
 
 // 注入+渲染
-export function CommandProviderWithRender(parentInstance: ComponentInternalInstance | null, uiComponent: Component, config: ICoreConfig): IConsumer {
+export function commandProviderWithRender(parentInstance: ComponentInternalInstance | null, uiComponent: Component, config: ICoreConfig): IConsumer {
   const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || (parentInstance as any).vnode.el?.parentElement || document.body;
 
   const containerEl = document.createElement("div");
@@ -91,7 +91,7 @@ export function CommandProviderWithRender(parentInstance: ComponentInternalInsta
     container: containerEl,
     visible: config.visible,
     on: (name: string | symbol, callback: EventCallback, config: IOnConfig = {}) => EB.on(consumer, name, callback, config),
-    once: (name: string | symbol, callback: EventCallback, config: IOnConfig = {}) => EB.once(consumer, name, callback, config),
+    once: (name: string | symbol, callback: EventCallback, config: IOnConfig = {}) => EB.on(consumer, name, callback, config),
     emit: (name: string | symbol, ...args: unknown[]) => EB.emit(consumer, name, ...args),
     off: (name: string | symbol, callback: EventCallback) => EB.off(consumer, name, callback),
     stack: [] as IConsumer[],

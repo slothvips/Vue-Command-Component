@@ -4,7 +4,18 @@
 
 弹窗是命令式组件最典型的应用场景，因此示例使用 `element-plus` 的 `dialog` 组件进行演示。通过这些示例，可以举一反三地理解其他组件的使用方式。
 
-要是用`element-plus`的`dialog`组件,需要安装`@vue-cmd/core`和`@vue-cmd/element-plus`两个包.
+要使用`element-plus`的`dialog`组件,需要安装`@vue-cmd/core`和`@vue-cmd/element-plus`两个包.
+
+```bash
+# 使用npm
+npm install @vue-cmd/core @vue-cmd/element-plus element-plus
+
+# 使用pnpm
+pnpm add @vue-cmd/core @vue-cmd/element-plus element-plus
+
+# 使用yarn
+yarn add @vue-cmd/core @vue-cmd/element-plus element-plus
+```
 
 ## 前菜
 
@@ -154,3 +165,51 @@ CommandDialog(<div>1</div>,{
   },
 })
 ```
+## el-drawer
+
+<demo vue="../components/el-drawer.vue"></demo>
+
+
+## 属性说明
+
+更多属性请参考:
+[element-plus dialog文档](https://element-plus.org/zh-CN/component/dialog.html#api)。
+[element-plus drawer  文档](https://element-plus.org/zh-CN/component/drawer.html#api)。
+
+将官网文档中的属性和事件放置到`attrs`中即可.
+
+我们将`title`和`width/size`提到了外层(因为这两个属性太常用了),这样可以少写一个`attrs`🤣,如果attrs里有这些属性将被覆盖.
+
+
+```ts
+const CommandDialog = useDialog();
+CommandDialog(<DialogContent />, {
+    title: "标题",
+    width: "80%",
+    attrs: {
+        // 如果attrs里有这些属性,将被覆盖
+        title: "标题",
+        width: "80%",
+        // 事件
+        onXX: ()=>{},
+    }
+});
+```
+
+当然你可以轻易的进行再封装,将你常用的属性提到上层对象中,下边是一个简单的示例:
+```ts
+export const useDialogExample = ()=>{
+  const dialog = useDialog();
+    return (contentVnode,config:YourConfigInterface)=>{
+        return dialog(contentVnode, {
+            // 你常用的属性
+            title: config?.title,
+            width: config?.width,
+            draggable:config?.draggable,
+            fullscreen:config?.fullscreen,
+            ...config,
+        })
+    }
+}
+```
+

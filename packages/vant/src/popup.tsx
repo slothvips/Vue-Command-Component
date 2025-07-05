@@ -1,29 +1,37 @@
 import type { ICommandConfig, IRenderComponentOptions } from "@vue-cmd/core";
 import { createAdapter } from "@vue-cmd/core";
-import type { PopupProps } from "vant";
+import type { PopupProps, PopupPosition } from "vant";
 import { Popup } from "vant";
-import type { VNode } from "vue";
+import type { CSSProperties, VNode } from "vue";
 
-const defaultProps: Partial<PopupProps > = {
+const defaultProps: Partial<PopupProps> = {
   round: true,
   lockScroll: true,
-  closeable: true,
 };
 
-const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<ICommandConfig>) => {
+export type VantPopupConfig = {
+  position?: PopupPosition;
+  style?: CSSProperties;
+  closeable?: boolean;
+} & ICommandConfig<Partial<PopupProps>>;
+
+const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<VantPopupConfig>) => {
+
+  const { attrs, ...rest } = config.value;
 
   const onClose = () => {
     consumer.value!.destroy();
   };
-  
+
   return (
     <Popup
       ref={componentRef}
-      v-model:show={visible.value}
+      show={visible.value}
       onClickCloseIcon={onClose}
       onVnodeMounted={onMounted}
       {...defaultProps}
-      {...config.value.attrs}
+      {...rest}
+      {...attrs}
     >
       {{
         default: () => contentVNode,
@@ -37,5 +45,5 @@ export const usePopup = createAdapter({
   render: baseRender,
   defaultConfig: {
     attrs: defaultProps,
-  } as Partial<ICommandConfig>,
+  },
 });

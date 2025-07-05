@@ -19,11 +19,13 @@ export type IUseConfig = {
     /** 自定义类名 */
     customClassName?: string;
 };
-export interface ICommandConfig extends IUseConfig {
+export interface ICommandConfig<T = any> extends IUseConfig {
     /** 私有域成员注入 */
     provideProps?: Record<string | symbol, unknown>;
     /** 组件原生属性 */
-    attrs?: Record<string, any>;
+    attrs?: T & {
+        [key: string | symbol | number]: any;
+    };
     /** 组件插槽 */
     slots?: Record<string, () => VNode | VNode[]>;
 }
@@ -56,7 +58,7 @@ export interface IConsumer {
     /** 订阅 */
     on: (name: string | symbol, callback: (...args: unknown[]) => void, config?: IOnConfig) => void;
     /** 单次订阅 */
-    once: (name: string | symbol, callback: (...args: unknown[]) => void) => void;
+    once: (name: string | symbol, callback: (...args: unknown[]) => void, config?: IOnConfig) => void;
     /** 发布 */
     emit: (name: string | symbol, ...args: unknown[]) => void;
     /** UI库的组件实例引用 */

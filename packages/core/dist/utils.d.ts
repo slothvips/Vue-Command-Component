@@ -8,7 +8,7 @@ export declare class ConsumerEventBus {
     private getEventsMapByConsumer;
     private getEventsByConsumer;
     on(consumer: IConsumer, name: string | symbol, callback: EventCallback, config?: IOnConfig): void;
-    once(consumer: IConsumer, name: string | symbol, callback: EventCallback): void;
+    once(consumer: IConsumer, name: string | symbol, callback: EventCallback, config?: IOnConfig): void;
     emit(consumer: IConsumer, name: string | symbol, ...args: unknown[]): void;
     off(consumer: IConsumer, name: string | symbol, callback: EventCallback): void;
 }

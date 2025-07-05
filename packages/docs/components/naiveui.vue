@@ -2,19 +2,23 @@
   <div class="flex justify-center items-center">
     <el-button @click="open">来吧</el-button>
     <el-button @click="open2">来吧(preset: dialog)</el-button>
+    <el-button @click="openDrawer">打开抽屉</el-button>
   </div>
 </template>
 
 <script setup lang="tsx">
-import { useModal, useDialog } from "@vue-cmd/naive";
+import { useModal, useDialog, useDrawer } from "@vue-cmd/naive";
 import DialogContent from "./dialog-content.vue";
+import { NCard } from "naive-ui";
 
 const modal = useModal();
 const open = () => {
-  modal(<DialogContent />, {
+  modal(
+    <NCard>
+      <DialogContent />
+    </NCard>, {
     attrs: {
-      // preset: "dialog",
-      style:{
+      style: {
         width: "600px",
       },
     },
@@ -25,11 +29,31 @@ const dialog = useDialog();
 const open2 = () => {
   dialog(<DialogContent />, {
     attrs: {
-      style:{
+      style: {
         width: "600px",
       },
     },
   });
+};
+
+const drawer = useDrawer();
+const openDrawer = () => {
+  drawer(
+    <NCard>
+      <DialogContent />
+    </NCard>,
+    {
+      attrs: {
+        drawerAttrs: {
+          placement: "right",
+          width: 600,
+        },
+        contentAttrs: {
+          title: "抽屉示例",
+        },
+      },
+    }
+  );
 };
 </script>
 

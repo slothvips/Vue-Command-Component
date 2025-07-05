@@ -26,6 +26,7 @@
     "@vue-cmd/vant": "workspace:*",
     "element-plus": "~2.9.9",
     "lodash-es": "^4.17.21",
+    "naive-ui": "^2.42.0",
     "vant": "~4.9.7",
     "viewerjs": "^1.11.7",
     "vitepress-plugin-image-viewer": "^1.1.6",

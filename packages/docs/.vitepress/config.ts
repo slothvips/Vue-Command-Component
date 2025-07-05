@@ -85,6 +85,10 @@ export default defineConfig({
               text: "NaiveUI",
               link: "/example/naive",
             },
+            {
+              text: "Vant",
+              link: "/example/vant",
+            },
           ],
         },
       ],
@@ -102,13 +106,15 @@ export default defineConfig({
   },
   vite: {
     ssr: {
-      noExternal: ["element-plus", "vant"],
+      noExternal: ["element-plus", "vant", "naive-ui"],
     },
     resolve: {},
     plugins: [
       Components({
         resolvers: [
-          VantResolver({}),
+          VantResolver({
+            importStyle: false,
+          }),
           ElementPlusResolver({
             ssr: false,
           }),

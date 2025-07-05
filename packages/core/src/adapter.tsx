@@ -1,7 +1,7 @@
 import { merge } from 'lodash-es'
 import type { VNode } from 'vue'
 import { computed, defineComponent, getCurrentInstance, h, ref, watchEffect } from 'vue'
-import { CommandProviderWithRender } from './core'
+import { commandProviderWithRender } from './core'
 import type { ICommandConfig, ICoreConfig, IConsumer, IUseConfig, IRenderComponentOptions, ValueOrGetter } from './type'
 import { RxRender, uuid } from './utils'
 
@@ -75,7 +75,7 @@ export function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(o
           return () =>  render(contentVNode, renderOptions)
         },
       })
-      consumerRef.value = CommandProviderWithRender(
+      consumerRef.value = commandProviderWithRender(
         parentInstance,
         <Wrapper />,
         {

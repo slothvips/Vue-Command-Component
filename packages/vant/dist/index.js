@@ -1,36 +1,37 @@
-import { createVNode as d, mergeProps as p } from "vue";
-import { createAdapter as c } from "@vue-cmd/core";
-import { Popup as f } from "vant";
-const r = {
+import { createVNode as p, mergeProps as c } from "vue";
+import { createAdapter as f } from "@vue-cmd/core";
+import { Popup as m } from "vant";
+const o = {
   round: !0,
-  lockScroll: !0,
-  closeable: !0
-}, m = (t, {
-  componentRef: s,
-  visible: e,
-  onMounted: u,
-  config: o,
-  consumer: a
+  lockScroll: !0
+}, i = (r, {
+  componentRef: t,
+  visible: s,
+  onMounted: n,
+  config: e,
+  consumer: u
 }) => {
-  const l = () => {
-    a.value.destroy();
+  const {
+    attrs: l,
+    ...a
+  } = e.value, d = () => {
+    u.value.destroy();
   };
-  return d(f, p({
-    ref: s,
-    show: e.value,
-    "onUpdate:show": (n) => e.value = n,
-    onClickCloseIcon: l,
-    onVnodeMounted: u
-  }, r, o.value.attrs), {
-    default: () => t,
-    ...o.value.slots
+  return p(m, c({
+    ref: t,
+    show: s.value,
+    onClickCloseIcon: d,
+    onVnodeMounted: n
+  }, o, a, l), {
+    default: () => r,
+    ...e.value.slots
   });
-}, h = c({
-  render: m,
+}, k = f({
+  render: i,
   defaultConfig: {
-    attrs: r
+    attrs: o
   }
 });
 export {
-  h as usePopup
+  k as usePopup
 };

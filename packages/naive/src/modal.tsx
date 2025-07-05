@@ -45,6 +45,7 @@ export const useDialog = () => {
       content,
       merge(config, {
         attrs: {
+          title: '接接接接接接接',
           preset: 'dialog',
         },
       })

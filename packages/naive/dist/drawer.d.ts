@@ -1,5 +1,13 @@
 import { ICommandConfig } from '@vue-cmd/core';
 import { VNode } from 'vue';
-export interface INaiveDrawerConfig extends ICommandConfig {
+import { DrawerProps, DrawerContentProps } from 'naive-ui';
+export interface INaiveDrawerConfig extends ICommandConfig<Partial<{
+    drawerAttrs: Partial<DrawerProps>;
+    contentAttrs: Partial<DrawerContentProps>;
+}>> {
+    title?: string;
+    width?: string | number;
+    height?: string | number;
+    placement?: "top" | "right" | "bottom" | "left";
 }
 export declare const useDrawer: (useConfig?: import('@vue-cmd/core').ValueOrGetter<import('@vue-cmd/core').IUseConfig>) => (contentVNode: VNode, commandConfig?: import('@vue-cmd/core').ValueOrGetter<INaiveDrawerConfig> | undefined) => import('@vue-cmd/core').IConsumer;

@@ -1,6 +1,7 @@
 import { ICommandConfig } from '@vue-cmd/core';
+import { DialogProps } from 'element-plus';
 import { VNode } from 'vue';
-export type IDialogConfig = ICommandConfig & {
+export type IDialogConfig = ICommandConfig<Partial<DialogProps>> & {
     title?: string;
     width?: string;
 };

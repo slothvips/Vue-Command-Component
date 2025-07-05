@@ -10,7 +10,7 @@
 
 ### 基本使用
 
-`createAdapter`是对底层`CommandProviderWithRender`的高级封装，屏蔽了复杂细节，提供简洁的API。
+`createAdapter`是对底层`commandProviderWithRender`的高级封装，屏蔽了复杂细节，提供简洁的API。
 
 它接收两个参数：
 - **渲染器**：定义如何渲染组件并关联生命周期管理逻辑
@@ -107,9 +107,9 @@ export const useMyComponentWithTransformer = createAdapter({
 })
 ```
 
-## 高级定制：`CommandProviderWithRender`
+## 高级定制：`commandProviderWithRender`
 
-当`createAdapter`无法满足复杂定制需求时，可使用底层的`CommandProviderWithRender`函数，它提供对整个渲染过程的完全控制权。
+当`createAdapter`无法满足复杂定制需求时，可使用底层的`commandProviderWithRender`函数，它提供对整个渲染过程的完全控制权。
 
 建议先查看`createAdapter`的源码实现，理解其内部机制后再考虑直接使用底层API。
 

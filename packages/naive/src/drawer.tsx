@@ -1,37 +1,42 @@
 import type { ICommandConfig, IRenderComponentOptions } from "@vue-cmd/core";
 import { createAdapter } from "@vue-cmd/core";
 import type { VNode } from "vue";
-import { NDrawer } from "naive-ui";
+import { NDrawer, NDrawerContent } from "naive-ui";
+import type{DrawerProps,DrawerContentProps } from "naive-ui";
 
-export interface INaiveDrawerConfig extends ICommandConfig { }
+// 类型定义
+export interface INaiveDrawerConfig extends ICommandConfig<Partial<{
+  drawerAttrs: Partial<DrawerProps>;
+  contentAttrs: Partial<DrawerContentProps>;
+}>> {
+  title?: string;
+  width?: string | number;
+  height?: string | number;
+  placement?: "top" | "right" | "bottom" | "left";
+}
 
 const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<INaiveDrawerConfig>) => {
-
-  const onUpdateShow = (show: boolean) => {
-    if (!show) {
-      consumer.value!.destroy();
-    }
-  };
-
-  const onAfterLeave = () => {
+  const { attrs, slots } = config.value;
+  const {drawerAttrs,contentAttrs}= attrs||{drawerAttrs:{},contentAttrs:{}}
+  const handleClosed = () => {
     consumer.value!.destroy();
+    attrs?.onAfterLeave?.();
   };
 
   return (
     <NDrawer
       ref={componentRef}
-      show={visible.value}
-      onUpdateShow={onUpdateShow}
-      onAfterLeave={onAfterLeave}
+      v-model:show={visible.value}
+      onAfterLeave={handleClosed}
       onVnodeMounted={onMounted}
-      width={300}
-      placement="right"
-      {...config.value.attrs}
+      {...drawerAttrs}
     >
+      <NDrawerContent {...contentAttrs}>
       {{
         default: () => contentVNode,
-        ...config.value.slots,
+        ...slots,
       }}
+      </NDrawerContent>
     </NDrawer>
   );
 };
@@ -41,7 +46,8 @@ export const useDrawer = createAdapter({
   defaultConfig: {
     attrs: {
       width: 300,
-      placement: "right" as const,
+      placement: "right",
     }
   }
-}); 
+});
+

@@ -25,8 +25,11 @@ class Ke {
       u();
     }, o.callImmediatelyAfterDelay || 0);
   }
-  once(t, r, n) {
-    this.on(t, r, n, { once: !0 });
+  once(t, r, n, o = {}) {
+    this.on(t, r, n, {
+      ...o,
+      once: !0
+    });
   }
   emit(t, r, ...n) {
     this.getEventsByConsumer(t, r).forEach((a) => a(...n));
@@ -78,29 +81,29 @@ function qe(e, t, r) {
     promise: s,
     resolve: d,
     reject: l
-  } = We(), v = 3e3, m = (p = !1) => {
-    p ? (a(), f.on(_e.destroy, i, {
+  } = We(), v = 3e3, b = (p = !1) => {
+    p ? (a(), f.once(_e.destroy, i, {
       once: !0,
       callImmediatelyAfterDelay: v
-    })) : (G.delete(f), f.stack.splice(f.stackIndex).forEach((b) => b.destroy(!0)), f.destroyed = !0);
-  }, y = (p) => {
-    d(p), m();
+    })) : (G.delete(f), f.stack.splice(f.stackIndex).forEach((y) => y.destroy(!0)), f.destroyed = !0);
   }, g = (p) => {
-    l(p), m();
+    d(p), b();
+  }, m = (p) => {
+    l(p), b();
   }, f = {
     meta: r.meta || {},
     promise: s,
     resolve: d,
     reject: l,
-    destroyWithResolve: y,
-    destroyWithReject: g,
+    destroyWithResolve: g,
+    destroyWithReject: m,
     hide: a,
     show: u,
-    destroy: m,
+    destroy: b,
     container: o,
     visible: r.visible,
-    on: (p, h, b = {}) => M.on(f, p, h, b),
-    once: (p, h) => M.once(f, p, h),
+    on: (p, h, y = {}) => M.on(f, p, h, y),
+    once: (p, h, y = {}) => M.on(f, p, h, y),
     emit: (p, ...h) => M.emit(f, p, ...h),
     off: (p, h) => M.off(f, p, h),
     stack: [],
@@ -110,14 +113,14 @@ function qe(e, t, r) {
     destroyed: !1
   }, x = me(/* @__PURE__ */ V({
     setup() {
-      for (const b in r.provideProps)
-        I(b, r.provideProps[b]);
+      for (const y in r.provideProps)
+        I(y, r.provideProps[y]);
       const p = {
         // ...vnode.appContext!.provides,
         ...Ce(e)
       };
-      for (const b in p)
-        I(b, p[b]);
+      for (const y in p)
+        I(y, p[y]);
       I(Te, f);
       const h = be(ne, []);
       return f.stackIndex = h.length, h.push(f), I(ne, h), f.stack = h, () => ge(t);
@@ -625,8 +628,8 @@ function bn(e, t, r, n, o, a, u) {
   }
   var l = a ? a(i, s, r + "", e, t, u) : void 0, v = l === void 0;
   if (v) {
-    var m = L(s), y = !m && $e(s), g = !m && !y && Me(s);
-    l = s, m || y || g ? L(i) ? l = i : gn(i) ? l = Tt(i) : y ? (v = !1, l = ln(s)) : g ? (v = !1, l = dn(s)) : l = [] : rn(s) || K(s) ? (l = i, K(i) ? l = mn(i) : (!C(i) || Z(i)) && (l = hn(s))) : v = !1;
+    var b = L(s), g = !b && $e(s), m = !b && !g && Me(s);
+    l = s, b || g || m ? L(i) ? l = i : gn(i) ? l = Tt(i) : g ? (v = !1, l = ln(s)) : m ? (v = !1, l = dn(s)) : l = [] : rn(s) || K(s) ? (l = i, K(i) ? l = mn(i) : (!C(i) || Z(i)) && (l = hn(s))) : v = !1;
   }
   v && (u.set(s, l), o(l, s, n, a, u), u.delete(s)), W(e, r, l);
 }
@@ -653,32 +656,32 @@ function En(e) {
     const a = Le();
     return function(i, s) {
       const d = te(() => {
-        const y = typeof o == "function" ? o() : o, g = typeof s == "function" ? s() : s;
-        console.log(y, g);
-        const f = ye({}, r, y, g);
+        const g = typeof o == "function" ? o() : o, m = typeof s == "function" ? s() : s;
+        console.log(g, m);
+        const f = ye({}, r, g, m);
         return n ? n(f) : f;
       }), l = re(!0), v = {
         value: null
-      }, m = /* @__PURE__ */ V({
+      }, b = /* @__PURE__ */ V({
         setup: () => {
-          const y = te(() => {
+          const g = te(() => {
             const x = typeof o == "function" ? o() : o, $ = typeof s == "function" ? s() : s, p = ye({}, r, x, $);
             return n ? n(p) : p;
-          }), g = re(), Q = {
-            componentRef: g,
+          }), m = re(), Q = {
+            componentRef: m,
             onMounted: () => {
               Promise.resolve().then(() => {
-                v.value.componentRef = g;
+                v.value.componentRef = m;
               });
             },
-            config: y,
+            config: g,
             consumer: v,
             visible: l
           };
           return () => t(i, Q);
         }
       });
-      return v.value = qe(a, me(m, null, null), {
+      return v.value = qe(a, me(b, null, null), {
         ...d.value,
         visible: l
       }), v.value;
@@ -688,13 +691,13 @@ function En(e) {
 export {
   Te as CommandComponentConsumerInjectKey,
   ne as CommandComponentStackInjectKey,
-  qe as CommandProviderWithRender,
   Ke as ConsumerEventBus,
   _e as EVENT_NAME,
   We as PromiseWithResolvers,
   xn as RxRender,
   G as activeConsumers,
   jn as busName2EventName,
+  qe as commandProviderWithRender,
   En as createAdapter,
   An as destroyAllConsumer,
   Cn as eventName2BusName,
