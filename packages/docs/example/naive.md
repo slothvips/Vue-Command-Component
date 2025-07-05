@@ -1,7 +1,7 @@
 # 常规用法
  `NaiveUI` 的一些组件进行演示。
 
-要是用`naiveui`的`modal`组件,需要安装`@vue-cmd/core`和`@vue-cmd/naive`两个包.
+要是用`naiveui`的命令式组件,需要安装`@vue-cmd/core`和`@vue-cmd/naive`两个包.
 
 ```bash
 # 使用npm

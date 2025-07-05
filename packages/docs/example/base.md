@@ -202,11 +202,13 @@ export const useDialogExample = ()=>{
   const dialog = useDialog();
     return (contentVnode,config:YourConfigInterface)=>{
         return dialog(contentVnode, {
-            // 你常用的属性
-            title: config?.title,
-            width: config?.width,
-            draggable:config?.draggable,
-            fullscreen:config?.fullscreen,
+            attrs:{
+              // 你常用的属性
+              title: config?.title,
+              width: config?.width,
+              draggable:config?.draggable,
+              fullscreen:config?.fullscreen,
+            },
             ...config,
         })
     }
