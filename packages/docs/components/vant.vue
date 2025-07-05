@@ -67,7 +67,7 @@ const openPopup2 = () => {
     />,
     {
       position: 'bottom',
-      // 这个文档引入较多组件库,样式影响太严重,所以我直接把弹窗挂载到body上规避影响,你实际使用时可能并不需要
+      // 这里主要是规避样式干扰,你实际使用时可能并不需要
       appendTo: 'body',
       attrs: {
         round: true,

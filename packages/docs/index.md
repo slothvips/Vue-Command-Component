@@ -5,6 +5,9 @@ hero:
   name: "Vue命令式组件"
   text: "轻松实现Vue组件的命令式调用"
   tagline: 简化组件调用，提升开发效率
+  image:
+    src: "/logo.svg"
+    alt: "Vue命令式组件"
   actions:
     - theme: brand
       text: 什么是命令式组件?

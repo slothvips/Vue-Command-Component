@@ -25,6 +25,7 @@ export default defineConfig({
   ],
   themeConfig: {
     logo: "/logo.svg",
+    logoLink: "/Vue-Command-Component/",
     socialLinks: [{ icon: "github", link: "https://github.com/pandavips/Vue-Command-Component" }],
     footer: {
       message: `Released under the MIT License.`,
