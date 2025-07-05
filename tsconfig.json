@@ -20,6 +20,7 @@
     "env.d.ts",
     "./typed-router.d.ts",
     "vite.config.*",
+    "vite.*.ts",
     "packages/**/*",
     "packages/playground/**/*"
   ],

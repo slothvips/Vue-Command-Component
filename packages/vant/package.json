@@ -1,6 +1,6 @@
 {
   "name": "@vue-cmd/vant",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "type": "module",
   "description": "Vant adapters for Vue Command Component",
   "homepage": "https://pandavips.github.io/Vue-Command-Component/",
@@ -17,12 +17,19 @@
   ],
   "license": "MIT",
   "author": "pandavips",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "sideEffects": false,
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
     "dev": "vite build --watch",

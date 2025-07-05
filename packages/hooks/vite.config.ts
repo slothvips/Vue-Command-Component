@@ -1,21 +1,12 @@
-import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import dts from 'vite-plugin-dts';
+import { createConfig } from "../../vite.config.base";
 
-export default defineConfig({
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'VueCmdHooks',
-      fileName: 'index',
-      formats: ['es', 'umd'],
-    },
-    rollupOptions: {
-      external: ['@vue-cmd/core'],
-      output: {
-        globals: {},
-      },
-    },
-  },
-  plugins: [dts({ rollupTypes: true })],
+export default createConfig({
+  name: 'VueCmdHooks',
+  entry: resolve(__dirname, 'src/index.ts'),
+  external: ['vue', '@vue-cmd/core'],
+  globals: {
+    vue: 'Vue',
+    '@vue-cmd/core': 'VueCmdCore',
+  }
 }); 
