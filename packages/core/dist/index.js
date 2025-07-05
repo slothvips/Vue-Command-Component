@@ -1,11 +1,11 @@
 var Ue = Object.defineProperty;
 var He = (e, t, r) => t in e ? Ue(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r;
-var k = (e, t, r) => He(e, typeof t != "symbol" ? t + "" : t, r);
-import { h as ge, defineComponent as V, createVNode as me, render as ee, inject as be, provide as I, nextTick as Ge, getCurrentInstance as Le, computed as te, ref as re } from "vue";
+var Q = (e, t, r) => He(e, typeof t != "symbol" ? t + "" : t, r);
+import { h as ye, defineComponent as q, createVNode as me, render as k, inject as be, provide as I, nextTick as Ge, getCurrentInstance as Le, computed as ee, ref as te } from "vue";
 var _e = /* @__PURE__ */ ((e) => (e.destroy = "destroy", e))(_e || {});
 class Ke {
   constructor() {
-    k(this, "map", /* @__PURE__ */ new WeakMap());
+    Q(this, "map", /* @__PURE__ */ new WeakMap());
   }
   getEventsMapByConsumer(t) {
     let r = this.map.get(t);
@@ -55,11 +55,7 @@ const Cn = (e = "") => e.slice(2).toLowerCase(), jn = (e = "") => `on${e.charAt(
       !isNaN(a) && a > r && (r = a);
     }
   }), +r;
-}, On = (e) => e == null, xn = (e) => typeof e != "function" ? e : ge(V({ render: () => e() })), Pn = () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15), Te = Symbol("CommandComponentConsumerInjectKey"), ne = Symbol("CommandComponentStackInjectKey"), M = new Ke(), G = /* @__PURE__ */ new Set(), An = () => {
-  G.forEach((e) => {
-    e.destroy();
-  });
-}, Ce = (e) => ({
+}, On = (e) => e == null, xn = (e) => typeof e != "function" ? e : ye(q({ render: () => e() })), Pn = () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15), Te = Symbol("CommandComponentConsumerInjectKey"), re = Symbol("CommandComponentStackInjectKey"), M = new Ke(), ne = /* @__PURE__ */ new Set(), Ce = (e) => ({
   ...e.parent ? Ce(e.parent) : {},
   ...e.provides
 });
@@ -75,7 +71,7 @@ function qe(e, t, r) {
     r.visible.value = !0;
   }, i = () => {
     Ge(() => {
-      ee(null, o), o.remove();
+      k(null, o), o.remove();
     });
   }, {
     promise: s,
@@ -85,8 +81,8 @@ function qe(e, t, r) {
     p ? (a(), f.once(_e.destroy, i, {
       once: !0,
       callImmediatelyAfterDelay: v
-    })) : (G.delete(f), f.stack.splice(f.stackIndex).forEach((y) => y.destroy(!0)), f.destroyed = !0);
-  }, g = (p) => {
+    })) : (ne.delete(f), f.stack.splice(f.stackIndex).forEach((g) => g.destroy(!0)), f.destroyed = !0);
+  }, y = (p) => {
     d(p), b();
   }, m = (p) => {
     l(p), b();
@@ -95,15 +91,15 @@ function qe(e, t, r) {
     promise: s,
     resolve: d,
     reject: l,
-    destroyWithResolve: g,
+    destroyWithResolve: y,
     destroyWithReject: m,
     hide: a,
     show: u,
     destroy: b,
     container: o,
     visible: r.visible,
-    on: (p, h, y = {}) => M.on(f, p, h, y),
-    once: (p, h, y = {}) => M.on(f, p, h, y),
+    on: (p, h, g = {}) => M.on(f, p, h, g),
+    once: (p, h, g = {}) => M.on(f, p, h, g),
     emit: (p, ...h) => M.emit(f, p, ...h),
     off: (p, h) => M.off(f, p, h),
     stack: [],
@@ -111,24 +107,24 @@ function qe(e, t, r) {
     componentRef: void 0,
     mounted: !1,
     destroyed: !1
-  }, x = me(/* @__PURE__ */ V({
+  }, x = me(/* @__PURE__ */ q({
     setup() {
-      for (const y in r.provideProps)
-        I(y, r.provideProps[y]);
+      for (const g in r.provideProps)
+        I(g, r.provideProps[g]);
       const p = {
         // ...vnode.appContext!.provides,
         ...Ce(e)
       };
-      for (const y in p)
-        I(y, p[y]);
+      for (const g in p)
+        I(g, p[g]);
       I(Te, f);
-      const h = be(ne, []);
-      return f.stackIndex = h.length, h.push(f), I(ne, h), f.stack = h, () => ge(t);
+      const h = be(re, []);
+      return f.stackIndex = h.length, h.push(f), I(re, h), f.stack = h, () => ye(t);
     }
   }), null, null);
-  return x.appContext = (e == null ? void 0 : e.appContext) || x.appContext, ee(x, o), f.mounted = !0, G.add(f), f;
+  return x.appContext = (e == null ? void 0 : e.appContext) || x.appContext, k(x, o), f.mounted = !0, ne.add(f), f;
 }
-const Sn = (e = !0) => {
+const An = (e = !0) => {
   const t = () => e && console.warn(`Failed to get Consumer instance. Please note:
     1. This function needs to be called directly in the setup top level.
     2. Make sure to display this component inside a command dialog, or you can ignore this warning message by using warn parameter: useConsumer(false)`);
@@ -159,7 +155,7 @@ function R(e) {
 function E(e) {
   return e != null && typeof e == "object";
 }
-var L = Array.isArray;
+var G = Array.isArray;
 function C(e) {
   var t = typeof e;
   return e != null && (t == "object" || t == "function");
@@ -168,7 +164,7 @@ function Oe(e) {
   return e;
 }
 var rt = "[object AsyncFunction]", nt = "[object Function]", ot = "[object GeneratorFunction]", at = "[object Proxy]";
-function Z(e) {
+function V(e) {
   if (!C(e))
     return !1;
   var t = R(e);
@@ -195,21 +191,21 @@ function ct(e) {
   }
   return "";
 }
-var ft = /[\\^$.*+?()[\]{}|]/g, lt = /^\[object .+?Constructor\]$/, pt = Function.prototype, dt = Object.prototype, ht = pt.toString, vt = dt.hasOwnProperty, yt = RegExp(
+var ft = /[\\^$.*+?()[\]{}|]/g, lt = /^\[object .+?Constructor\]$/, pt = Function.prototype, dt = Object.prototype, ht = pt.toString, vt = dt.hasOwnProperty, gt = RegExp(
   "^" + ht.call(vt).replace(ft, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
 );
-function gt(e) {
+function yt(e) {
   if (!C(e) || it(e))
     return !1;
-  var t = Z(e) ? yt : lt;
+  var t = V(e) ? gt : lt;
   return t.test(ct(e));
 }
 function mt(e, t) {
   return e == null ? void 0 : e[t];
 }
-function X(e, t) {
+function Z(e, t) {
   var r = mt(e, t);
-  return gt(r) ? r : void 0;
+  return yt(r) ? r : void 0;
 }
 var ie = Object.create, bt = /* @__PURE__ */ function() {
   function e() {
@@ -263,7 +259,7 @@ function xt(e) {
 }
 var D = function() {
   try {
-    var e = X(Object, "defineProperty");
+    var e = Z(Object, "defineProperty");
     return e({}, "", {}), e;
   } catch {
   }
@@ -279,7 +275,7 @@ function xe(e, t) {
   var r = typeof e;
   return t = t ?? St, !!t && (r == "number" || r != "symbol" && Et.test(e)) && e > -1 && e % 1 == 0 && e < t;
 }
-function J(e, t, r) {
+function X(e, t, r) {
   t == "__proto__" && D ? D(e, t, {
     configurable: !0,
     enumerable: !0,
@@ -293,14 +289,14 @@ function z(e, t) {
 var $t = Object.prototype, It = $t.hasOwnProperty;
 function Mt(e, t, r) {
   var n = e[t];
-  (!(It.call(e, t) && z(n, r)) || r === void 0 && !(t in e)) && J(e, t, r);
+  (!(It.call(e, t) && z(n, r)) || r === void 0 && !(t in e)) && X(e, t, r);
 }
 function Nt(e, t, r, n) {
   var o = !r;
   r || (r = {});
   for (var a = -1, u = t.length; ++a < u; ) {
     var i = t[a], s = void 0;
-    s === void 0 && (s = e[i]), o ? J(r, i, s) : Mt(r, i, s);
+    s === void 0 && (s = e[i]), o ? X(r, i, s) : Mt(r, i, s);
   }
   return r;
 }
@@ -322,14 +318,14 @@ var zt = 9007199254740991;
 function Pe(e) {
   return typeof e == "number" && e > -1 && e % 1 == 0 && e <= zt;
 }
-function Y(e) {
-  return e != null && Pe(e.length) && !Z(e);
+function J(e) {
+  return e != null && Pe(e.length) && !V(e);
 }
 function Ft(e, t, r) {
   if (!C(r))
     return !1;
   var n = typeof t;
-  return (n == "number" ? Y(r) && xe(t, r.length) : n == "string" && t in r) ? z(r[t], e) : !1;
+  return (n == "number" ? J(r) && xe(t, r.length) : n == "string" && t in r) ? z(r[t], e) : !1;
 }
 function Bt(e) {
   return Rt(function(t, r) {
@@ -355,7 +351,7 @@ var Gt = "[object Arguments]";
 function ue(e) {
   return E(e) && R(e) == Gt;
 }
-var Se = Object.prototype, Lt = Se.hasOwnProperty, Kt = Se.propertyIsEnumerable, K = ue(/* @__PURE__ */ function() {
+var Se = Object.prototype, Lt = Se.hasOwnProperty, Kt = Se.propertyIsEnumerable, L = ue(/* @__PURE__ */ function() {
   return arguments;
 }()) ? ue : function(e) {
   return E(e) && Lt.call(e, "callee") && !Kt.call(e, "callee");
@@ -363,8 +359,8 @@ var Se = Object.prototype, Lt = Se.hasOwnProperty, Kt = Se.propertyIsEnumerable,
 function Wt() {
   return !1;
 }
-var Ee = typeof exports == "object" && exports && !exports.nodeType && exports, ce = Ee && typeof module == "object" && module && !module.nodeType && module, qt = ce && ce.exports === Ee, fe = qt ? j.Buffer : void 0, Vt = fe ? fe.isBuffer : void 0, $e = Vt || Wt, Zt = "[object Arguments]", Xt = "[object Array]", Jt = "[object Boolean]", Yt = "[object Date]", Qt = "[object Error]", kt = "[object Function]", er = "[object Map]", tr = "[object Number]", rr = "[object Object]", nr = "[object RegExp]", or = "[object Set]", ar = "[object String]", ir = "[object WeakMap]", sr = "[object ArrayBuffer]", ur = "[object DataView]", cr = "[object Float32Array]", fr = "[object Float64Array]", lr = "[object Int8Array]", pr = "[object Int16Array]", dr = "[object Int32Array]", hr = "[object Uint8Array]", vr = "[object Uint8ClampedArray]", yr = "[object Uint16Array]", gr = "[object Uint32Array]", c = {};
-c[cr] = c[fr] = c[lr] = c[pr] = c[dr] = c[hr] = c[vr] = c[yr] = c[gr] = !0;
+var Ee = typeof exports == "object" && exports && !exports.nodeType && exports, ce = Ee && typeof module == "object" && module && !module.nodeType && module, qt = ce && ce.exports === Ee, fe = qt ? j.Buffer : void 0, Vt = fe ? fe.isBuffer : void 0, $e = Vt || Wt, Zt = "[object Arguments]", Xt = "[object Array]", Jt = "[object Boolean]", Yt = "[object Date]", Qt = "[object Error]", kt = "[object Function]", er = "[object Map]", tr = "[object Number]", rr = "[object Object]", nr = "[object RegExp]", or = "[object Set]", ar = "[object String]", ir = "[object WeakMap]", sr = "[object ArrayBuffer]", ur = "[object DataView]", cr = "[object Float32Array]", fr = "[object Float64Array]", lr = "[object Int8Array]", pr = "[object Int16Array]", dr = "[object Int32Array]", hr = "[object Uint8Array]", vr = "[object Uint8ClampedArray]", gr = "[object Uint16Array]", yr = "[object Uint32Array]", c = {};
+c[cr] = c[fr] = c[lr] = c[pr] = c[dr] = c[hr] = c[vr] = c[gr] = c[yr] = !0;
 c[Zt] = c[Xt] = c[sr] = c[Jt] = c[ur] = c[Yt] = c[Qt] = c[kt] = c[er] = c[tr] = c[rr] = c[nr] = c[or] = c[ar] = c[ir] = !1;
 function mr(e) {
   return E(e) && Pe(e.length) && !!c[R(e)];
@@ -382,7 +378,7 @@ var Ie = typeof exports == "object" && exports && !exports.nodeType && exports, 
   }
 }(), pe = le && le.isTypedArray, Me = pe ? br(pe) : mr;
 function Tr(e, t) {
-  var r = L(e), n = !r && K(e), o = !r && !n && $e(e), a = !r && !n && !o && Me(e), u = r || n || o || a, i = u ? Ht(e.length, String) : [], s = i.length;
+  var r = G(e), n = !r && L(e), o = !r && !n && $e(e), a = !r && !n && !o && Me(e), u = r || n || o || a, i = u ? Ht(e.length, String) : [], s = i.length;
   for (var d in e)
     u && // Safari 9 has enumerable `arguments.length` in strict mode.
     (d == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
@@ -413,9 +409,9 @@ function xr(e) {
   return r;
 }
 function Ne(e) {
-  return Y(e) ? Tr(e) : xr(e);
+  return J(e) ? Tr(e) : xr(e);
 }
-var S = X(Object, "create");
+var S = Z(Object, "create");
 function Pr() {
   this.__data__ = S ? S(null) : {}, this.size = 0;
 }
@@ -494,7 +490,7 @@ _.prototype.delete = Hr;
 _.prototype.get = Gr;
 _.prototype.has = Lr;
 _.prototype.set = Kr;
-var De = X(j, "Map");
+var De = Z(j, "Map");
 function Wr() {
   this.size = 0, this.__data__ = {
     hash: new T(),
@@ -606,14 +602,14 @@ function vn(e) {
     return t;
   };
 }
-var yn = vn();
-function W(e, t, r) {
-  (r !== void 0 && !z(e[t], r) || r === void 0 && !(t in e)) && J(e, t, r);
+var gn = vn();
+function K(e, t, r) {
+  (r !== void 0 && !z(e[t], r) || r === void 0 && !(t in e)) && X(e, t, r);
 }
-function gn(e) {
-  return E(e) && Y(e);
+function yn(e) {
+  return E(e) && J(e);
 }
-function q(e, t) {
+function W(e, t) {
   if (!(t === "constructor" && typeof e[t] == "function") && t != "__proto__")
     return e[t];
 }
@@ -621,32 +617,32 @@ function mn(e) {
   return Nt(e, Ne(e));
 }
 function bn(e, t, r, n, o, a, u) {
-  var i = q(e, r), s = q(t, r), d = u.get(s);
+  var i = W(e, r), s = W(t, r), d = u.get(s);
   if (d) {
-    W(e, r, d);
+    K(e, r, d);
     return;
   }
   var l = a ? a(i, s, r + "", e, t, u) : void 0, v = l === void 0;
   if (v) {
-    var b = L(s), g = !b && $e(s), m = !b && !g && Me(s);
-    l = s, b || g || m ? L(i) ? l = i : gn(i) ? l = Tt(i) : g ? (v = !1, l = ln(s)) : m ? (v = !1, l = dn(s)) : l = [] : rn(s) || K(s) ? (l = i, K(i) ? l = mn(i) : (!C(i) || Z(i)) && (l = hn(s))) : v = !1;
+    var b = G(s), y = !b && $e(s), m = !b && !y && Me(s);
+    l = s, b || y || m ? G(i) ? l = i : yn(i) ? l = Tt(i) : y ? (v = !1, l = ln(s)) : m ? (v = !1, l = dn(s)) : l = [] : rn(s) || L(s) ? (l = i, L(i) ? l = mn(i) : (!C(i) || V(i)) && (l = hn(s))) : v = !1;
   }
-  v && (u.set(s, l), o(l, s, n, a, u), u.delete(s)), W(e, r, l);
+  v && (u.set(s, l), o(l, s, n, a, u), u.delete(s)), K(e, r, l);
 }
 function Be(e, t, r, n, o) {
-  e !== t && yn(t, function(a, u) {
+  e !== t && gn(t, function(a, u) {
     if (o || (o = new O()), C(a))
       bn(e, t, u, r, Be, n, o);
     else {
-      var i = n ? n(q(e, u), a, u + "", e, t, o) : void 0;
-      i === void 0 && (i = a), W(e, u, i);
+      var i = n ? n(W(e, u), a, u + "", e, t, o) : void 0;
+      i === void 0 && (i = a), K(e, u, i);
     }
   }, Ne);
 }
-var ye = Bt(function(e, t, r) {
+var ge = Bt(function(e, t, r) {
   Be(e, t, r);
 });
-function En(e) {
+function Sn(e) {
   const {
     render: t,
     defaultConfig: r = {},
@@ -655,30 +651,30 @@ function En(e) {
   return function(o) {
     const a = Le();
     return function(i, s) {
-      const d = te(() => {
-        const g = typeof o == "function" ? o() : o, m = typeof s == "function" ? s() : s;
-        console.log(g, m);
-        const f = ye({}, r, g, m);
+      const d = ee(() => {
+        const y = typeof o == "function" ? o() : o, m = typeof s == "function" ? s() : s;
+        console.log(y, m);
+        const f = ge({}, r, y, m);
         return n ? n(f) : f;
-      }), l = re(!0), v = {
+      }), l = te(!0), v = {
         value: null
-      }, b = /* @__PURE__ */ V({
+      }, b = /* @__PURE__ */ q({
         setup: () => {
-          const g = te(() => {
-            const x = typeof o == "function" ? o() : o, $ = typeof s == "function" ? s() : s, p = ye({}, r, x, $);
+          const y = ee(() => {
+            const x = typeof o == "function" ? o() : o, $ = typeof s == "function" ? s() : s, p = ge({}, r, x, $);
             return n ? n(p) : p;
-          }), m = re(), Q = {
+          }), m = te(), Y = {
             componentRef: m,
             onMounted: () => {
               Promise.resolve().then(() => {
                 v.value.componentRef = m;
               });
             },
-            config: g,
+            config: y,
             consumer: v,
             visible: l
           };
-          return () => t(i, Q);
+          return () => t(i, Y);
         }
       });
       return v.value = qe(a, me(b, null, null), {
@@ -690,19 +686,18 @@ function En(e) {
 }
 export {
   Te as CommandComponentConsumerInjectKey,
-  ne as CommandComponentStackInjectKey,
+  re as CommandComponentStackInjectKey,
   Ke as ConsumerEventBus,
   _e as EVENT_NAME,
   We as PromiseWithResolvers,
   xn as RxRender,
-  G as activeConsumers,
+  ne as activeConsumers,
   jn as busName2EventName,
   qe as commandProviderWithRender,
-  En as createAdapter,
-  An as destroyAllConsumer,
+  Sn as createAdapter,
   Cn as eventName2BusName,
   wn as getMaxZIndex,
   On as isNull,
-  Sn as useConsumer,
+  An as useConsumer,
   Pn as uuid
 };

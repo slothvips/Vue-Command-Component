@@ -10,12 +10,6 @@ const EB = new ConsumerEventBus();
 
 export const activeConsumers = new Set<IConsumer>();
 
-export const destroyAllConsumer = (): void => {
-  activeConsumers.forEach((consumer) => {
-    consumer.destroy();
-  });
-};
-
 /**
  * 获取自身以及所有祖先provides链
  * @param ins - 组件实例

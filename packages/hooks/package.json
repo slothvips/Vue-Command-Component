@@ -1,0 +1,36 @@
+{
+  "name": "@vue-cmd/hooks",
+  "version": "0.1.0",
+  "description": "Vue Command Component hooks",
+  "author": "pandavips",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "vue3",
+    "component",
+    "hooks",
+    "command",
+    "dialog"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "unpkg": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "publish": "pnpm build && pnpm publish --access public --no-git-checks"
+  },
+  "peerDependencies": {
+    "@vue-cmd/core": "workspace:*",
+    "vue-router": "^4.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.0.0"
+  }
+}

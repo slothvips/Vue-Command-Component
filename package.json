@@ -4,15 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:watch": "pnpm --filter '@vue-cmd/*' build --watch",
     "build": "pnpm --filter '@vue-cmd/*' build",
-    "build:core": "pnpm --filter '@vue-cmd/core' build",
-    "build:element-plus": "pnpm --filter '@vue-cmd/element-plus' build",
-    "build:vant": "pnpm --filter '@vue-cmd/vant' build",
-    "build:naive": "pnpm --filter '@vue-cmd/naive' build",
+    "dev": "pnpm --parallel --filter '@vue-cmd/*' build --watch",
     "doc:build": "vitepress build packages/docs",
     "doc:dev": "vitepress dev packages/docs --port 3000",
-    "doc:preview": "vitepress preview packages/docs --port 3000"
+    "doc:preview": "vitepress preview packages/docs --port 3000",
+    "publish": "pnpm --filter '@vue-cmd/*' publish --no-git-checks --access public"
   },
   "engines": {
     "node": ">=16",

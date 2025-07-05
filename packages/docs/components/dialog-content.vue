@@ -1,7 +1,7 @@
 <script lang="tsx" setup>
 
 import { useConsumer } from "@vue-cmd/core";
-import { getCurrentInstance, inject, provide, } from "vue";
+import { getCurrentInstance, inject, onMounted, onUnmounted, provide, } from "vue";
 import NestedCom from "./nested.vue";
 
 defineEmits(["say"]);
@@ -18,14 +18,6 @@ provide("depth", depth + 1);
 
 // false 可以忽略警告,当你的组件不需要总是在命令式组件内使用时可以使用这个参数
 const consumer = useConsumer(false);
-// const ins = getCurrentInstance();
-// const provides = ref();
-// Promise.resolve().then(() => {
-//   provides.value = {
-//     ...ins?.appContext.provides,
-//     ...(ins as any).provides,
-//   };
-// });
 
 console.log("来自vue 实例的全局属性", (getCurrentInstance()! as any).appContext.config.globalProperties.$panda);
 
@@ -34,6 +26,13 @@ const resetOption = () => {
 };
 
 const model = defineModel<string>();
+
+onMounted(() => {
+  console.log("生命周期测试 onMounted");
+});
+onUnmounted(() => {
+  console.log("生命周期测试 onUnmounted");
+});
 </script>
 
 <template>

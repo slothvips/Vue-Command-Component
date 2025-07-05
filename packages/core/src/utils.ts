@@ -1,6 +1,5 @@
-import { defineComponent, effectScope, h, type VNode } from "vue";
-import type { EventBusMap, EventCallback, EventMap, ICoreConfig, IConsumer, IOnConfig, IPromiseWithResolvers } from "./type";
-import { watch } from "fs";
+import { defineComponent, h, type VNode } from "vue";
+import type { EventBusMap, EventCallback, EventMap, IConsumer, IOnConfig, IPromiseWithResolvers } from "./type";
 
 /**
  * 基于命令弹窗消费对象的事件注册中心
