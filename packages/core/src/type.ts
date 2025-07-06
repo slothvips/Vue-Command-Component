@@ -37,7 +37,9 @@ export interface ICommandConfig<ATTRS = Record<string | symbol | number, any>> e
   /** 组件插槽 */
   slots?: Record<string, () => VNode | VNode[]>;
   /** 组件原生属性 */
-  attrs?: ATTRS;
+  attrs?: ATTRS & {
+    [key: string | symbol | number]: any;
+  };
 }
 
 // 最终到达core层的配置

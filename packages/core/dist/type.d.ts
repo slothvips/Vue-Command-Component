@@ -31,7 +31,7 @@ export interface ICommandConfig<ATTRS = Record<string | symbol | number, any>> e
     slots?: Record<string, () => VNode | VNode[]>;
     /** 组件原生属性 */
     attrs?: ATTRS & {
-        [key: string]: any;
+        [key: string | symbol | number]: any;
     };
 }
 export type ICoreConfig = ICommandConfig & {
