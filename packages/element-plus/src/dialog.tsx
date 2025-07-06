@@ -1,4 +1,4 @@
-import type { ICommandConfig, IRenderComponentOptions } from '@vue-cmd/core'
+import type { ICommandConfig, IRenderComponentOptions, IUseConfig, IUseConfigOrGetter } from '@vue-cmd/core'
 import { createAdapter, EVENT_NAME } from '@vue-cmd/core'
 import { ElDialog, type DialogProps } from 'element-plus'
 import { type VNode } from 'vue'
@@ -49,8 +49,8 @@ export const useDialog = createAdapter({
  * 可拖拽,遮罩无法关闭,按esc无法关闭
  * @returns 
  */
-export const useDialogWithDrag = () => {
-  const dialog = useDialog()
+export const useDialogWithDrag = (useConfig?: IUseConfigOrGetter) => {
+  const dialog = useDialog(useConfig)
   return (contentVNode: VNode, config: IDialogConfig = {}) => {
     return dialog(contentVNode, {
       attrs: {
@@ -63,25 +63,3 @@ export const useDialogWithDrag = () => {
     })
   }
 }
-
-/**
- * 全屏切换,自由拉伸
- * @returns
- */
-// export const useDialogPro = () => {
-//   const dialog = useDialog()
-//   return (contentVNode: VNode, config: IDialogConfig = {}) => {
-//     const fullScreen = ref(true)
-//     return dialog(contentVNode, {
-//       attrs: {
-//         // 可拖拽
-//         draggable: true,
-//         closeOnClickModal: false,
-//         closeOnPressEscape: false,
-//         // 全屏
-//         fullscreen: fullScreen.value,
-//       },
-//       ...config,
-//     })
-//   }
-// }

@@ -16,25 +16,28 @@ export type Meta = {
 };
 
 // 创建时(usexxx)配置
-export type IUseConfig = {
+export type IUseConfig<T = Record<string | symbol | number, unknown>> = {
   /** 元数据 */
   meta?: Meta;
   /** 挂在点 */
   appendTo?: string | HTMLElement;
   /** 自定义类名 */
   customClassName?: string;
-};
+  /** 是否立即渲染 */
+  immediate?: boolean;
+  /** 默认false,将为你的组件创建一个容器;如果为true将直接渲染到父节点 */
+  fragment?: boolean;
+} & T;
+export type IUseConfigOrGetter = ValueOrGetter<IUseConfig>;
 
 // 调用时配置,在执行命令时依然可以传入配置覆盖创建时配置,实现最大灵活度
-export interface ICommandConfig<T = any> extends IUseConfig {
+export interface ICommandConfig<ATTRS = Record<string | symbol | number, any>> extends IUseConfig {
   /** 私有域成员注入 */
   provideProps?: Record<string | symbol, unknown>;
-  /** 组件原生属性 */
-  attrs?: T & {
-    [key: string | symbol | number]: any;
-  };
   /** 组件插槽 */
   slots?: Record<string, () => VNode | VNode[]>;
+  /** 组件原生属性 */
+  attrs?: ATTRS;
 }
 
 // 最终到达core层的配置

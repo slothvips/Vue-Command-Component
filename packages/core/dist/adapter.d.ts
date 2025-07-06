@@ -1,5 +1,5 @@
 import { VNode } from 'vue';
-import { ICommandConfig, IConsumer, IUseConfig, IRenderComponentOptions, ValueOrGetter } from './type';
+import { ICommandConfig, IConsumer, IRenderComponentOptions, ValueOrGetter, IUseConfigOrGetter } from './type';
 export type AdapterRender<TConfig extends ICommandConfig = ICommandConfig> = (contentVNode: VNode, options: IRenderComponentOptions<TConfig>) => VNode;
 export type AdapterOptions<TConfig extends ICommandConfig = ICommandConfig> = {
     /** 渲染器函数 */
@@ -16,4 +16,4 @@ export type AdapterOptions<TConfig extends ICommandConfig = ICommandConfig> = {
  * @param options 适配器选项
  * @returns 适配器函数
  */
-export declare function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(options: AdapterOptions<TConfig>): (useConfig?: ValueOrGetter<IUseConfig>) => (contentVNode: VNode, commandConfig?: ValueOrGetter<TConfig>) => IConsumer;
+export declare function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(options: AdapterOptions<TConfig>): (useConfig?: IUseConfigOrGetter) => (contentVNode: VNode, commandConfig?: ValueOrGetter<TConfig>) => IConsumer;

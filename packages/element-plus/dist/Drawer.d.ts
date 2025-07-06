@@ -5,4 +5,4 @@ export type IDrawerConfig = {
     size?: string;
     title?: string;
 } & ICommandConfig<Partial<DrawerProps>>;
-export declare const useDrawer: (useConfig?: import('@vue-cmd/core').ValueOrGetter<import('@vue-cmd/core').IUseConfig>) => (contentVNode: VNode, commandConfig?: import('@vue-cmd/core').ValueOrGetter<IDrawerConfig> | undefined) => import('@vue-cmd/core').IConsumer;
+export declare const useDrawer: (useConfig?: import('@vue-cmd/core').IUseConfigOrGetter) => (contentVNode: VNode, commandConfig?: import('@vue-cmd/core').ValueOrGetter<IDrawerConfig> | undefined) => import('@vue-cmd/core').IConsumer;

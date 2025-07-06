@@ -1,4 +1,5 @@
-import { IConsumer } from '@vue-cmd/core';
+import { IConsumer, ICoreConfig, IUseConfig } from '@vue-cmd/core';
+import { VNode } from 'vue';
 /**
  * 获取所有弹窗consumer管理
  * @returns
@@ -24,3 +25,13 @@ export declare const useConsumersManager: () => {
  * @returns 停止监听的函数
  */
 export declare const useDestroyAllOnRouteChange: () => (() => void);
+/**
+ * 仅借用命令组件的能力,无需适配任何UI库,可以用于一些特殊场景,比如需要函数展示内容
+ */
+export declare const useRawCommand: (useConfig: IUseConfig<{
+    displayDirective?: "if" | "show";
+    onShow?: (el: HTMLElement, consumer: IConsumer) => void;
+    onHide?: (el: HTMLElement, consumer: IConsumer) => void;
+    outer?: (slot: VNode | null) => VNode;
+    sayhello?: string;
+}>) => (vnode: VNode, config?: ICoreConfig) => IConsumer;

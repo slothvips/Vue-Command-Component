@@ -1,7 +1,7 @@
 var b = Object.defineProperty;
 var g = Object.getOwnPropertySymbols;
 var h = Object.prototype.hasOwnProperty, w = Object.prototype.propertyIsEnumerable;
-var C = (l, e, o) => e in l ? b(l, e, { enumerable: !0, configurable: !0, writable: !0, value: o }) : l[e] = o, a = (l, e) => {
+var C = (l, e, o) => e in l ? b(l, e, { enumerable: !0, configurable: !0, writable: !0, value: o }) : l[e] = o, d = (l, e) => {
   for (var o in e || (e = {}))
     h.call(e, o) && C(l, o, e[o]);
   if (g)
@@ -15,32 +15,32 @@ import { ElDialog as y, ElDrawer as N } from "element-plus";
 const R = (l, e) => {
   const {
     componentRef: o,
-    visible: d,
+    visible: t,
     onMounted: u,
     config: i,
-    consumer: r
+    consumer: s
   } = e, {
     title: c,
     width: m,
     attrs: n,
     slots: f
-  } = i.value, E = (s) => {
-    var t;
-    r.value.destroy(), (t = n == null ? void 0 : n.onBeforeClose) == null || t.call(n, s), s();
-  }, V = (...s) => {
-    var t;
-    return r.value.emit(M.destroy), (t = n == null ? void 0 : n.onClosed) == null ? void 0 : t.call(n, ...s);
+  } = i.value, E = (a) => {
+    var r;
+    s.value.destroy(), (r = n == null ? void 0 : n.onBeforeClose) == null || r.call(n, a), a();
+  }, V = (...a) => {
+    var r;
+    return s.value.emit(M.destroy), (r = n == null ? void 0 : n.onClosed) == null ? void 0 : r.call(n, ...a);
   };
   return p(y, v({
     ref: o,
-    modelValue: d.value,
+    modelValue: t.value,
     onVnodeMounted: u,
     title: c,
     width: m
   }, n, {
     beforeClose: E,
     onClosed: V
-  }), a({
+  }), d({
     default: () => l
   }, f));
 }, z = D({
@@ -50,25 +50,25 @@ const R = (l, e) => {
       name: "element-plus-dialog"
     }
   }
-}), B = () => {
-  const l = z();
-  return (e, o = {}) => l(e, a({
+}), B = (l) => {
+  const e = z(l);
+  return (o, t = {}) => e(o, d({
     attrs: {
       // 可拖拽
       draggable: !0,
       closeOnClickModal: !1,
       closeOnPressEscape: !1
     }
-  }, o));
+  }, t));
 }, A = (l, {
   componentRef: e,
   visible: o,
-  onMounted: d,
+  onMounted: t,
   config: u,
   consumer: i
 }) => {
   const {
-    attrs: r,
+    attrs: s,
     slots: c,
     title: m,
     size: n
@@ -78,12 +78,12 @@ const R = (l, e) => {
   return p(N, v({
     ref: e,
     modelValue: o.value,
-    onVnodeMounted: d,
+    onVnodeMounted: t,
     title: m,
     size: n
-  }, r, {
+  }, s, {
     onClosed: f
-  }), a({
+  }), d({
     default: () => l
   }, c));
 }, T = D({

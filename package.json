@@ -19,6 +19,7 @@
     "@element-plus/icons-vue": "^2.3.1",
     "@vue-cmd/core": "workspace:*",
     "@vue-cmd/element-plus": "workspace:*",
+    "@vue-cmd/hooks": "workspace:*",
     "@vue-cmd/naive": "workspace:*",
     "@vue-cmd/vant": "workspace:*",
     "element-plus": "~2.9.9",

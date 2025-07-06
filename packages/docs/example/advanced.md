@@ -18,6 +18,11 @@ Promise是使用命令式组件后获得的最大优势之一，它使我们与�
 
 <demo vue="../components/promise2.vue"></demo>
 
+### 案例三：整点花活儿(🤪)
+
+命令组件其实不仅仅是用于弹窗这类场景...
+<demo vue="../components/flower.vue"></demo>
+
 ## 响应式组件
 
 命令式组件存在一个固有限制：`DialogContent`组件的视图无法自动响应props数据变化。此时可通过`RxRender`包装渲染函数，将VNode生成延迟到Vue组件的渲染函数内部执行。其核心原理是将渲染函数封装为响应式组件，从而实现视图的动态更新。

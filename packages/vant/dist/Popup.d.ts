@@ -6,4 +6,4 @@ export type VantPopupConfig = {
     style?: CSSProperties;
     closeable?: boolean;
 } & ICommandConfig<Partial<PopupProps>>;
-export declare const usePopup: (useConfig?: import('@vue-cmd/core').ValueOrGetter<import('@vue-cmd/core').IUseConfig>) => (contentVNode: VNode, commandConfig?: import('@vue-cmd/core').ValueOrGetter<VantPopupConfig> | undefined) => import('@vue-cmd/core').IConsumer;
+export declare const usePopup: (useConfig?: import('@vue-cmd/core').IUseConfigOrGetter) => (contentVNode: VNode, commandConfig?: import('@vue-cmd/core').ValueOrGetter<VantPopupConfig> | undefined) => import('@vue-cmd/core').IConsumer;

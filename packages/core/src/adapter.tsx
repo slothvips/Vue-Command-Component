@@ -1,9 +1,8 @@
 import { merge } from 'lodash-es'
 import type { VNode } from 'vue'
-import { computed, defineComponent, getCurrentInstance, h, ref, watchEffect } from 'vue'
+import { computed, defineComponent, getCurrentInstance, ref } from 'vue'
 import { commandProviderWithRender } from './core'
-import type { ICommandConfig, ICoreConfig, IConsumer, IUseConfig, IRenderComponentOptions, ValueOrGetter } from './type'
-import { RxRender, uuid } from './utils'
+import type { ICommandConfig, IConsumer, IRenderComponentOptions, IUseConfigOrGetter, ValueOrGetter } from './type'
 
 export type AdapterRender<TConfig extends ICommandConfig = ICommandConfig> = (contentVNode: VNode, options: IRenderComponentOptions<TConfig>) => VNode
 
@@ -26,21 +25,19 @@ export type AdapterOptions<TConfig extends ICommandConfig = ICommandConfig> = {
 export function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(options: AdapterOptions<TConfig>) {
   const { render, defaultConfig = {}, configTransformer } = options
 
-  return function (useConfig?: ValueOrGetter<IUseConfig>) {
+  return function (useConfig?: IUseConfigOrGetter) {
     const parentInstance = getCurrentInstance()
     return function commandComponent(contentVNode: VNode, commandConfig?: ValueOrGetter<TConfig>): IConsumer {
       const mergedConfig = computed(() => {
         const useConfigData = typeof useConfig === 'function' ? useConfig() : useConfig
         const commandConfigData = typeof commandConfig === 'function' ? commandConfig() : commandConfig
 
-        console.log(useConfigData, commandConfigData)
-
         const mergedConfig = merge({}, defaultConfig, useConfigData, commandConfigData)
 
         return configTransformer ? configTransformer(mergedConfig) : mergedConfig
       })
 
-      const visible = ref<boolean>(true)
+      const visible = ref<boolean>(mergedConfig.value.immediate ?? true)
 
       const consumerRef = {
         value: null as unknown as IConsumer,
@@ -72,7 +69,7 @@ export function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(o
             visible,
           }
 
-          return () =>  render(contentVNode, renderOptions)
+          return () => render(contentVNode, renderOptions)
         },
       })
       consumerRef.value = commandProviderWithRender(

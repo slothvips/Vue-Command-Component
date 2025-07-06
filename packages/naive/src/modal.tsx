@@ -1,4 +1,4 @@
-import type { ICommandConfig, IRenderComponentOptions } from '@vue-cmd/core'
+import type { ICommandConfig, IRenderComponentOptions, IUseConfig, IUseConfigOrGetter, ValueOrGetter } from '@vue-cmd/core'
 import { createAdapter } from '@vue-cmd/core'
 import type { VNode } from 'vue'
 import { merge } from 'lodash-es'
@@ -38,17 +38,17 @@ export const useModal = createAdapter({
   },
 })
 
-export const useDialog = () => {
-  const dialog = useModal()
+export const useDialog = (useConfig?: IUseConfigOrGetter) => {
+  const dialog = useModal(useConfig)
   return (content: VNode, config: INaiveModalConfig) => {
-    dialog(
+    return dialog(
       content,
       merge(config, {
         attrs: {
           title: '接接接接接接接',
           preset: 'dialog',
         },
-      })
+    })
     )
   }
 }

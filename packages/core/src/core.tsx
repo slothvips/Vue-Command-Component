@@ -1,5 +1,5 @@
-import type { Component, ComponentInternalInstance, InjectionKey } from "vue";
-import { defineComponent, h, inject, nextTick, provide, render } from "vue";
+import type { ComponentInternalInstance, InjectionKey, VNode } from "vue";
+import { defineComponent, h, inject, nextTick, provide, render, Teleport } from "vue";
 import { EVENT_NAME, type EventCallback, type IConsumer, type ICoreConfig, type IOnConfig } from "./type";
 import { ConsumerEventBus, PromiseWithResolvers } from "./utils";
 
@@ -21,12 +21,11 @@ const getProvidesChain = (ins: ComponentInternalInstance): Record<string | symbo
 });
 
 // 注入+渲染
-export function commandProviderWithRender(parentInstance: ComponentInternalInstance | null, uiComponent: Component, config: ICoreConfig): IConsumer {
+export function commandProviderWithRender(parentInstance: ComponentInternalInstance | null, uiComponent: VNode, config: ICoreConfig): IConsumer {
   const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || (parentInstance as any).vnode.el?.parentElement || document.body;
 
   const containerEl = document.createElement("div");
   containerEl.className = config.customClassName || "command-component-container";
-  appendToElement.appendChild(containerEl);
 
   const hide = () => {
     if (consumer.destroyed) throw new Error("Consumer has been destroyed");
@@ -129,9 +128,28 @@ export function commandProviderWithRender(parentInstance: ComponentInternalInsta
 
   vnode.appContext = parentInstance?.appContext || vnode.appContext;
 
-  render(vnode, containerEl);
-  consumer.mounted = true;
 
+  if (config.fragment) {
+    // 设置容器元素为完全隐藏，确保不会影响任何布局（包括flex布局）
+    Object.assign(containerEl.style, {
+      display: 'none',
+      position: 'absolute',
+      pointerEvents: 'none',
+    });
+    // 一头扎进head，确保不会影响任何布局
+    document.head.appendChild(containerEl);
+    render(h(Teleport, {
+      to: appendToElement,
+    }, vnode), containerEl)
+  } else {
+    appendToElement.appendChild(containerEl);
+    render(vnode, containerEl);
+  }
+
+
+
+
+  consumer.mounted = true;
   activeConsumers.add(consumer);
 
   return consumer;

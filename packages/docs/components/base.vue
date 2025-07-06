@@ -15,6 +15,7 @@ const openDialog = () => {
     width: "90%",
   });
 };
+
 </script>
 
 <style lang="scss" scoped></style>

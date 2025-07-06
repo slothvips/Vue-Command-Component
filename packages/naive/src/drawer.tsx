@@ -20,7 +20,8 @@ const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, con
   const {drawerAttrs,contentAttrs}= attrs||{drawerAttrs:{},contentAttrs:{}}
   const handleClosed = () => {
     consumer.value!.destroy();
-    attrs?.onAfterLeave?.();
+    // attrs?.onAfterLeave?.();
+    attrs?.drawerAttrs?.onAfterLeave?.();
   };
 
   return (
@@ -45,8 +46,10 @@ export const useDrawer = createAdapter({
   render: baseRender,
   defaultConfig: {
     attrs: {
-      width: 300,
-      placement: "right",
+      drawerAttrs: {
+        width: 300,
+        placement: "right",
+      }
     }
   }
 });

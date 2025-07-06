@@ -10,4 +10,4 @@ export interface INaiveDrawerConfig extends ICommandConfig<Partial<{
     height?: string | number;
     placement?: "top" | "right" | "bottom" | "left";
 }
-export declare const useDrawer: (useConfig?: import('@vue-cmd/core').ValueOrGetter<import('@vue-cmd/core').IUseConfig>) => (contentVNode: VNode, commandConfig?: import('@vue-cmd/core').ValueOrGetter<INaiveDrawerConfig> | undefined) => import('@vue-cmd/core').IConsumer;
+export declare const useDrawer: (useConfig?: import('@vue-cmd/core').IUseConfigOrGetter) => (contentVNode: VNode, commandConfig?: import('@vue-cmd/core').ValueOrGetter<INaiveDrawerConfig> | undefined) => import('@vue-cmd/core').IConsumer;

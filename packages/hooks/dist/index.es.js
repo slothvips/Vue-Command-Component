@@ -1,65 +1,109 @@
-import { activeConsumers as e } from "@vue-cmd/core";
-import { inject as n, watch as l } from "vue";
+var O = Object.defineProperty;
+var f = Object.getOwnPropertySymbols;
+var S = Object.prototype.hasOwnProperty, A = Object.prototype.propertyIsEnumerable;
+var v = (e, t, r) => t in e ? O(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, d = (e, t) => {
+  for (var r in t || (t = {}))
+    S.call(t, r) && v(e, r, t[r]);
+  if (f)
+    for (var r of f(t))
+      A.call(t, r) && v(e, r, t[r]);
+  return e;
+};
+import { activeConsumers as c, commandProviderWithRender as R } from "@vue-cmd/core";
+import { inject as N, watch as b, getCurrentInstance as _, ref as k, h as W, defineComponent as j, nextTick as C } from "vue";
 /*!
 * vue-router v4.5.1
 * (c) 2025 Eduardo San Martin Morote
 * @license MIT
 */
-var r;
-(function(o) {
-  o.pop = "pop", o.push = "push";
-})(r || (r = {}));
-var c;
-(function(o) {
-  o.back = "back", o.forward = "forward", o.unknown = "";
-})(c || (c = {}));
+var y;
+(function(e) {
+  e.pop = "pop", e.push = "push";
+})(y || (y = {}));
+var E;
+(function(e) {
+  e.back = "back", e.forward = "forward", e.unknown = "";
+})(E || (E = {}));
 Symbol(process.env.NODE_ENV !== "production" ? "navigation failure" : "");
-var s;
-(function(o) {
-  o[o.aborted = 4] = "aborted", o[o.cancelled = 8] = "cancelled", o[o.duplicated = 16] = "duplicated";
-})(s || (s = {}));
+var w;
+(function(e) {
+  e[e.aborted = 4] = "aborted", e[e.cancelled = 8] = "cancelled", e[e.duplicated = 16] = "duplicated";
+})(w || (w = {}));
 Symbol(process.env.NODE_ENV !== "production" ? "router view location matched" : "");
 Symbol(process.env.NODE_ENV !== "production" ? "router view depth" : "");
 Symbol(process.env.NODE_ENV !== "production" ? "router" : "");
-const d = Symbol(process.env.NODE_ENV !== "production" ? "route location" : "");
+const H = Symbol(process.env.NODE_ENV !== "production" ? "route location" : "");
 Symbol(process.env.NODE_ENV !== "production" ? "router view location" : "");
-function u(o) {
-  return n(d);
+function x(e) {
+  return N(H);
 }
-const h = () => ({
-  activeConsumers: e,
+const I = () => ({
+  activeConsumers: c,
   hideAll: () => {
-    e.forEach((o) => o.hide());
+    c.forEach((e) => e.hide());
   },
   showAll: () => {
-    e.forEach((o) => o.show());
+    c.forEach((e) => e.show());
   },
   toggleAll: () => {
-    e.forEach((o) => {
-      const { visible: t } = o;
-      t.value ? o.hide() : o.show();
+    c.forEach((e) => {
+      const { visible: t } = e;
+      t.value ? e.hide() : e.show();
     });
   },
   destroyAll: () => {
-    e.forEach((o) => {
-      o.destroy();
+    c.forEach((e) => {
+      e.destroy();
     });
   },
   destroyAllWithResolve: () => {
-    e.forEach((o) => {
-      o.destroyWithResolve();
+    c.forEach((e) => {
+      e.destroyWithResolve();
     });
   },
   destroyAllWithReject: () => {
-    e.forEach((o) => {
-      o.destroyWithReject();
+    c.forEach((e) => {
+      e.destroyWithReject();
     });
   }
-}), p = () => {
-  const { destroyAll: o } = h(), t = u();
-  return l(() => t.path, () => o(), { immediate: !0 });
+}), M = () => {
+  const { destroyAll: e } = I(), t = x();
+  return b(() => t.path, () => e(), { immediate: !0 });
+}, P = (e) => {
+  const t = _();
+  return (r, D = {}) => {
+    var h, p;
+    const o = d(d({}, e), D);
+    o.displayDirective = (h = o.displayDirective) != null ? h : "if", o.onShow = o.onShow || ((n) => {
+      n.style.display = "block";
+    }), o.onHide = o.onHide || ((n) => {
+      n.style.display = "none";
+    });
+    const l = k((p = o.immediate) != null ? p : !0);
+    o.visible = l;
+    const u = R(t, W(j({
+      setup() {
+        return o.displayDirective === "show" && b(() => l.value, () => {
+          C().then(() => {
+            const n = (s) => s.shapeFlag === 1 ? [s.el] : s.shapeFlag === 16 ? s.children.map((i) => n(i)) : (console.warn("TODO:wait implement", s), []);
+            n(r).flat(1 / 0).forEach((s) => {
+              var i, m;
+              l.value ? (i = o.onShow) == null || i.call(o, s, u) : (m = o.onHide) == null || m.call(o, s, u);
+            });
+          });
+        }, {
+          immediate: !0
+        }), () => {
+          const n = o.displayDirective, a = o.outer;
+          return a ? a(n === "if" ? l.value ? r : null : r) : n === "if" ? l.value ? r : null : r;
+        };
+      }
+    })), o);
+    return u;
+  };
 };
 export {
-  h as useConsumersManager,
-  p as useDestroyAllOnRouteChange
+  I as useConsumersManager,
+  M as useDestroyAllOnRouteChange,
+  P as useRawCommand
 };
