@@ -119,7 +119,7 @@ Consumer 对象包含事件系统，但建议不要用于业务逻辑实现。�
 
 ## 显示和隐藏
 
-隐藏`hide`只会隐藏掉组件,不会进行真正的销毁.
+隐藏`hide`只会隐藏掉组件,不会进行真正的销毁.某些组件关闭事件过于单一可能不支持这个功能,`element-plus`支持是因为我抓住了一个timing😄.
 
 <demo vue="../components/showhide.vue"></demo>
 
