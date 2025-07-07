@@ -74,10 +74,10 @@ const I = () => ({
   return (r, D = {}) => {
     var h, p;
     const o = d(d({}, e), D);
-    o.displayDirective = (h = o.displayDirective) != null ? h : "if", o.onShow = o.onShow || ((n) => {
-      n.style.display = "block";
-    }), o.onHide = o.onHide || ((n) => {
-      n.style.display = "none";
+    o.displayDirective = (h = o.displayDirective) != null ? h : "if", o.onShow = o.onShow || ((s) => {
+      s.style.display = "block";
+    }), o.onHide = o.onHide || ((s) => {
+      s.style.display = "none";
     });
     const l = k((p = o.immediate) != null ? p : !0);
     o.visible = l;
@@ -85,17 +85,17 @@ const I = () => ({
       setup() {
         return o.displayDirective === "show" && b(() => l.value, () => {
           C().then(() => {
-            const n = (s) => s.shapeFlag === 1 ? [s.el] : s.shapeFlag === 16 ? s.children.map((i) => n(i)) : (console.warn("TODO:wait implement", s), []);
-            n(r).flat(1 / 0).forEach((s) => {
+            const s = (n) => n.shapeFlag === 1 ? [n.el] : n.shapeFlag === 16 ? n.children.map((i) => s(i)) : (console.warn("TODO:other case wait implement", n), []);
+            s(r).flat(1 / 0).forEach((n) => {
               var i, m;
-              l.value ? (i = o.onShow) == null || i.call(o, s, u) : (m = o.onHide) == null || m.call(o, s, u);
+              l.value ? (i = o.onShow) == null || i.call(o, n, u) : (m = o.onHide) == null || m.call(o, n, u);
             });
           });
         }, {
           immediate: !0
         }), () => {
-          const n = o.displayDirective, a = o.outer;
-          return a ? a(n === "if" ? l.value ? r : null : r) : n === "if" ? l.value ? r : null : r;
+          const s = o.displayDirective, a = o.outer;
+          return a ? a(s === "if" ? l.value ? r : null : r) : s === "if" ? l.value ? r : null : r;
         };
       }
     })), o);

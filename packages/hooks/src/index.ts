@@ -103,16 +103,15 @@ export const useRawCommand = (useConfig: IUseConfig<{
       setup() {
         finalConfig.displayDirective === 'show' && watch(() => visible.value, () => {
           nextTick().then(() => {
-            const collect = (targetVnode: VNode): HTMLElement[] => {
+            const collect = (targetVnode: VNode):any[] => {
               if (targetVnode.shapeFlag === 1) {
                 return [targetVnode.el as HTMLElement];
               } else if (targetVnode.shapeFlag === 16) {
-                // @ts-ignore
-                return targetVnode.children.map((child: VNode) => {
+                return (targetVnode.children as VNode[]).map((child: VNode) => {
                   return collect(child)
                 })
               } else {
-                console.warn('TODO:wait implement', targetVnode)
+                console.warn('TODO:other case wait implement', targetVnode)
                 return []
               }
             }

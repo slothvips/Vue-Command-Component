@@ -37,7 +37,8 @@ export function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(o
         return configTransformer ? configTransformer(mergedConfig) : mergedConfig
       })
 
-      const visible = ref<boolean>(mergedConfig.value.immediate ?? true)
+      // 默认不显示,否则组件进入动画可能不正常,后续将在core中根据情况显示
+      const visible = ref<boolean>(false)
 
       const consumerRef = {
         value: null as unknown as IConsumer,
@@ -72,14 +73,10 @@ export function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(o
           return () => render(contentVNode, renderOptions)
         },
       })
-      consumerRef.value = commandProviderWithRender(
-        parentInstance,
-        <Wrapper />,
-        {
-          ...mergedConfig.value,
-          visible,
-        }
-      )
+      consumerRef.value = commandProviderWithRender(parentInstance, <Wrapper />, {
+        ...mergedConfig.value,
+        visible,
+      })
 
       return consumerRef.value!
     }

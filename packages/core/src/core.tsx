@@ -146,8 +146,10 @@ export function commandProviderWithRender(parentInstance: ComponentInternalInsta
     render(vnode, containerEl);
   }
 
-
-
+  // 如果immediate为undefined，则默认立即渲染
+  if (config.immediate === undefined || config.immediate) {
+    consumer.show();
+  }
 
   consumer.mounted = true;
   activeConsumers.add(consumer);

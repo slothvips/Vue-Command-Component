@@ -11,10 +11,7 @@ import { useModal, useDialog, useDrawer } from "@vue-cmd/naive";
 import DialogContent from "./dialog-content.vue";
 import { NCard } from "naive-ui";
 
-const modal = useModal({
-  // 保证弹出动画正常
-  immediate: false,
-});
+const modal = useModal();
 const open = () => {
   modal(
     <NCard>
@@ -25,12 +22,10 @@ const open = () => {
         width: "600px",
       },
     },
-  }).show();
+  })
 };
 
-const dialog = useDialog({
-  immediate: false
-});
+const dialog = useDialog();
 const open2 = () => {
   dialog(<DialogContent />, {
     attrs: {
@@ -38,12 +33,10 @@ const open2 = () => {
         width: "600px",
       },
     },
-  }).show();
+  })
 };
 
-const drawer = useDrawer({
-  immediate: false,
-});
+const drawer = useDrawer();
 const openDrawer = () => {
   drawer(
     <NCard>
@@ -60,7 +53,7 @@ const openDrawer = () => {
         },
       },
     }
-  ).show();
+  )
 };
 </script>
 
