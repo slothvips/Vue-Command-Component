@@ -5,6 +5,7 @@
 ## 核心挑战
 
 实现命令式组件需要解决以下关键技术挑战：
+
 - 组件渲染与挂载管理
 - 组件显隐状态控制
 - 组件嵌套关系处理
@@ -23,13 +24,14 @@
 import { render } from "vue";
 
 // 创建虚拟节点
-const vnode = <div>hello</div>
+const vnode = <div>hello</div>;
 
 // 将节点渲染到指定挂载点
 render(vnode, document.body);
 ```
 
 组件的卸载同样简单：
+
 ```jsx
 // 传入null即可卸载
 render(null, document.body);
@@ -45,26 +47,26 @@ render(null, document.body);
 
 ```jsx
 // 使用示例
-const dialog = CmdDialog(<div />)
-dialog.show()
-dialog.hide()
+const dialog = CmdDialog(<div />);
+dialog.show();
+dialog.hide();
 ```
 
 为支持组件内部控制显隐，我们通过依赖注入将控制器传递给内部组件：
 
 ```jsx
 const dialog = CmdDialog({
-    setup() {
-        // 注入控制器
-        const consumer = useConsumer()
-        // 定义关闭方法
-        const close = () => consumer.destroyWithResolve('操作成功')
-        
-        return () => {
-            return <button onClick={close}>关闭</button>
-        }
-    }
-})
+  setup() {
+    // 注入控制器
+    const consumer = useConsumer();
+    // 定义关闭方法
+    const close = () => consumer.destroyWithResolve("操作成功");
+
+    return () => {
+      return <button onClick={close}>关闭</button>;
+    };
+  },
+});
 ```
 
 `useConsumer`实际上是对`inject(CommandComponentConsumerInjectKey)`的封装，增加了类型安全和边界处理。
@@ -74,10 +76,10 @@ const dialog = CmdDialog({
 弹窗嵌套是常见场景，需要一个栈结构来管理组件层级关系。每个命令式组件实例都包含`stack`和`stackIndex`属性，分别表示当前嵌套堆栈和组件在堆栈中的位置索引。
 
 ```jsx
-const dialog = CmdDialog(<div />)
+const dialog = CmdDialog(<div />);
 // 访问嵌套信息
-console.log(dialog.stack)      // 嵌套堆栈
-console.log(dialog.stackIndex) // 当前索引
+console.log(dialog.stack); // 嵌套堆栈
+console.log(dialog.stackIndex); // 当前索引
 ```
 
 ## 上下文环境继承
@@ -92,34 +94,36 @@ Promise支持是命令式组件的核心优势，它将组件交互模式转变�
 
 ```jsx
 const dialog = CmdDialog({
-    setup() {
-        const consumer = useConsumer()
-        return () => {
-            return <el-button onClick={
-                () => consumer.destroyWithResolve('操作成功')
-            }>确认</el-button>
-        }
-    }
-})
+  setup() {
+    const consumer = useConsumer();
+    return () => {
+      return (
+        <el-button onClick={() => consumer.destroyWithResolve("操作成功")}>
+          确认
+        </el-button>
+      );
+    };
+  },
+});
 
 // 等待用户操作结果
 dialog.promise.then((result) => {
-    console.log(result) // '操作成功'
-})
+  console.log(result); // '操作成功'
+});
 ```
 
 实现原理是在组件创建时返回一个Promise对象，并在适当时机（如用户点击确认按钮）调用resolve或reject：
 
 ```js
 function createCommandComponent() {
-    return new Promise((resolve) => {
-        const close = (result) => {
-            // 销毁组件
-            // ...
-            resolve(result)
-        }
-        // 渲染组件，绑定close方法
-    })
+  return new Promise((resolve) => {
+    const close = (result) => {
+      // 销毁组件
+      // ...
+      resolve(result);
+    };
+    // 渲染组件，绑定close方法
+  });
 }
 ```
 

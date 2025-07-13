@@ -7,7 +7,7 @@
 
 <script setup lang="tsx">
 import { useDrawer } from "@vue-cmd/element-plus";
-import DialogContent from "./dialog-content.vue";
+import DialogContent from "./shared/DialogContent.vue";
 
 const CommandDrawer = useDrawer();
 
@@ -17,9 +17,8 @@ const openDrawer = () => {
     title: "抽屉示例",
     size: "50%",
     attrs: {
-      
       direction: "rtl",
-    }
+    },
   });
 };
 
@@ -42,12 +41,15 @@ const openCustomDrawer = () => {
           <el-button onClick={() => consumer.destroyWithReject("取消")}>
             取消
           </el-button>
-          <el-button type="primary" onClick={() => consumer.destroyWithResolve("确认")}>
+          <el-button
+            type="primary"
+            onClick={() => consumer.destroyWithResolve("确认")}
+          >
             确认
           </el-button>
         </div>
       ),
-    }
+    },
   });
 };
 </script>

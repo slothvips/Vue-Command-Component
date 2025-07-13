@@ -1,14 +1,13 @@
-import fs from 'fs';
-import { minify } from 'terser';
-import { glob } from 'glob';
-
+import fs from "fs";
+import { minify } from "terser";
+import { glob } from "glob";
 
 async function minifyFile(filePath) {
   console.log(`Processing file: ${filePath}`);
 
   try {
     // 读取文件内容
-    const code = fs.readFileSync(filePath, 'utf8');
+    const code = fs.readFileSync(filePath, "utf8");
 
     // 使用Terser进行极致压缩
     const result = await minify(code, {
@@ -25,12 +24,12 @@ async function minifyFile(filePath) {
         unsafe_undefined: true,
         drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug']
+        pure_funcs: ["console.log", "console.info", "console.debug"],
       },
       mangle: {
         properties: {
-          regex: /^_/  // 仅处理下划线开头的私有属性
-        }
+          regex: /^_/, // 仅处理下划线开头的私有属性
+        },
       },
       format: {
         comments: false,
@@ -39,10 +38,10 @@ async function minifyFile(filePath) {
         indent_level: 0,
         ascii_only: false,
         braces: false,
-        semicolons: true
+        semicolons: true,
       },
       ecma: 2020,
-      module: true
+      module: true,
     });
 
     if (result.code) {
@@ -59,14 +58,14 @@ async function minifyFile(filePath) {
 
 // 处理所有包的dist目录下的js文件
 async function processAllFiles() {
-  const files = await glob('packages/*/dist/**/*.js');
+  const files = await glob("packages/*/dist/**/*.js");
 
   for (const file of files) {
     await minifyFile(file);
   }
 
-  console.log('All files have been processed!');
+  console.log("All files have been processed!");
 }
 
 // 执行
-processAllFiles(); 
+processAllFiles();

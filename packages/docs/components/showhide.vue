@@ -10,7 +10,7 @@
 <script setup lang="tsx">
 import { useDialog } from "@vue-cmd/element-plus";
 import type { IConsumer } from "@vue-cmd/core";
-import DialogContent from "./dialog-content.vue";
+import DialogContent from "./shared/DialogContent.vue";
 
 const CommandDialog = useDialog();
 let consumer: IConsumer;

@@ -1,9 +1,9 @@
-import { ConfigProvider } from 'vant';
+import { ConfigProvider } from "vant";
 import "virtual:uno.css";
 import { useRoute } from "vitepress";
 import imageViewer from "vitepress-plugin-image-viewer";
 import DefaultTheme from "vitepress/theme";
-import Layout from './components/Layout.vue';
+import Layout from "./components/Layout.vue";
 import "./styles.css";
 
 export default {

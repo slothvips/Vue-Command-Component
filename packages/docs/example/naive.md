@@ -1,5 +1,6 @@
 # 常规用法
- `NaiveUI` 的一些组件进行演示。
+
+`NaiveUI` 的一些组件进行演示。
 
 要是用`naiveui`的命令式组件,需要安装`@vue-cmd/core`和`@vue-cmd/naive`两个包.
 
@@ -23,4 +24,3 @@ yarn add @vue-cmd/core @vue-cmd/naive naive-ui
 更多属性请参考:
 [naive-ui modal文档](https://www.naiveui.com/zh-CN/os-theme/components/modal#API)。
 [naive-ui drawer文档](https://www.naiveui.com/zh-CN/os-theme/components/drawer#API)。
-

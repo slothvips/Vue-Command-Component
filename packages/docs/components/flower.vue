@@ -1,9 +1,7 @@
 <template>
   <div class="flower-container">
     <div class="flower-stage">
-      <div id="flower" class="flower">
-
-      </div>
+      <div id="flower" class="flower"></div>
     </div>
     <div class="stage-info">
       <h3>{{ stages[currentStage].title }}</h3>
@@ -11,14 +9,27 @@
     </div>
 
     <div class="controls">
-      <button class="step-btn" :disabled="currentStage === 0" @click="prevStage">
+      <button
+        class="step-btn"
+        :disabled="currentStage === 0"
+        @click="prevStage"
+      >
         上一步
       </button>
       <div class="step-indicators">
-        <div v-for="(_, index) in stages" :key="index" class="step-dot" :class="{ active: index === currentStage }"
-          @click="goToStage(index)"></div>
+        <div
+          v-for="(_, index) in stages"
+          :key="index"
+          class="step-dot"
+          :class="{ active: index === currentStage }"
+          @click="goToStage(index)"
+        ></div>
       </div>
-      <button class="step-btn" :disabled="currentStage === stages.length - 1" @click="nextStage">
+      <button
+        class="step-btn"
+        :disabled="currentStage === stages.length - 1"
+        @click="nextStage"
+      >
         下一步
       </button>
     </div>
@@ -26,116 +37,122 @@
 </template>
 
 <script setup lang="tsx">
-import type { IConsumer } from '@vue-cmd/core'
-import { useRawCommand } from '@vue-cmd/hooks'
-import { onMounted, reactive, ref, Transition, TransitionGroup } from 'vue'
+import type { IConsumer } from "@vue-cmd/core";
+import { useRawCommand } from "@vue-cmd/hooks";
+import { onMounted, reactive, ref, Transition, TransitionGroup } from "vue";
 
 const rawCommand = useRawCommand({
   immediate: false,
   fragment: true,
-  appendTo: '#flower',
-  customClassName: 'flower-stage',
-  displayDirective: 'show',
+  appendTo: "#flower",
+  customClassName: "flower-stage",
+  displayDirective: "show",
   onShow: (el) => {
-    el.style.opacity = '1'
+    el.style.opacity = "1";
   },
   onHide: (el) => {
-    el.style.opacity = '0'
+    el.style.opacity = "0";
   },
-})
+});
 
 // 定义在 reactive 中使用的 IConsumer 类型
 // Vue 3 的 reactive 会自动解包 Ref 类型，并且会递归处理嵌套的对象和数组
-type ReactiveIConsumer = Omit<IConsumer, 'visible' | 'componentRef' | 'stack'> & {
+type ReactiveIConsumer = Omit<
+  IConsumer,
+  "visible" | "componentRef" | "stack"
+> & {
   visible: boolean;
   componentRef?: any;
   stack: ReactiveIConsumer[];
-}
+};
 interface StageItem {
-  title: string
-  description: string
-  consumer?: ReactiveIConsumer
+  title: string;
+  description: string;
+  consumer?: ReactiveIConsumer;
 }
 
 const stages = reactive<StageItem[]>([
   {
-    title: '种子阶段',
-    description: '这是一粒小小的种子，蕴含着生命的潜力，等待着发芽的时机。'
+    title: "种子阶段",
+    description: "这是一粒小小的种子，蕴含着生命的潜力，等待着发芽的时机。",
   },
   {
-    title: '发芽阶段',
-    description: '种子吸收了水分和养分，开始萌发出嫩绿的新芽。'
+    title: "发芽阶段",
+    description: "种子吸收了水分和养分，开始萌发出嫩绿的新芽。",
   },
   {
-    title: '生长阶段',
-    description: '幼苗逐渐长高，茎干变得更加挺拔，开始长出叶子。'
+    title: "生长阶段",
+    description: "幼苗逐渐长高，茎干变得更加挺拔，开始长出叶子。",
   },
   {
-    title: '花蕾阶段',
-    description: '植株顶端出现了花蕾，这是开花的前兆。'
+    title: "花蕾阶段",
+    description: "植株顶端出现了花蕾，这是开花的前兆。",
   },
   {
-    title: '绽放阶段',
-    description: '花蕾逐渐打开，美丽的花瓣舒展开来，展现出绚丽的色彩。'
-  }
-])
+    title: "绽放阶段",
+    description: "花蕾逐渐打开，美丽的花瓣舒展开来，展现出绚丽的色彩。",
+  },
+]);
 
 onMounted(() => {
-  const seed = rawCommand(<div class="seed"></div>)
-  const stem = rawCommand(<div class="stem"></div>)
-  const leaf = rawCommand(<>
-    <div class="leaf left-leaf"></div>
-    <div class="leaf right-leaf"></div>
-  </>)
-  const bud = rawCommand(<div class="bud"></div>)
-  const petal = rawCommand(<>
-    {new Array(8).fill(0).map((_, i) => (
-      <div key={i + 1} class={'petal' + ` petal-${i + 1}`}></div>
-    ))}
-  </>)
+  const seed = rawCommand(<div class="seed"></div>);
+  const stem = rawCommand(<div class="stem"></div>);
+  const leaf = rawCommand(
+    <>
+      <div class="leaf left-leaf"></div>
+      <div class="leaf right-leaf"></div>
+    </>,
+  );
+  const bud = rawCommand(<div class="bud"></div>);
+  const petal = rawCommand(
+    <>
+      {new Array(8).fill(0).map((_, i) => (
+        <div key={i + 1} class={"petal" + ` petal-${i + 1}`}></div>
+      ))}
+    </>,
+  );
 
-  stages[0].consumer = seed as unknown as ReactiveIConsumer
-  stages[1].consumer = stem as unknown as ReactiveIConsumer
-  stages[2].consumer = leaf as unknown as ReactiveIConsumer
-  stages[3].consumer = bud as unknown as ReactiveIConsumer
-  stages[4].consumer = petal as unknown as ReactiveIConsumer
-  goToStage(0)
-})
+  stages[0].consumer = seed as unknown as ReactiveIConsumer;
+  stages[1].consumer = stem as unknown as ReactiveIConsumer;
+  stages[2].consumer = leaf as unknown as ReactiveIConsumer;
+  stages[3].consumer = bud as unknown as ReactiveIConsumer;
+  stages[4].consumer = petal as unknown as ReactiveIConsumer;
+  goToStage(0);
+});
 
 // 当前所处的阶段
-const currentStage = ref(0)
+const currentStage = ref(0);
 
 // 切换到下一个阶段
 const nextStage = () => {
   if (currentStage.value < stages.length - 1) {
-    currentStage.value++
-    goToStage(currentStage.value)
+    currentStage.value++;
+    goToStage(currentStage.value);
   }
-}
+};
 
 // 切换到上一个阶段
 const prevStage = () => {
   if (currentStage.value > 0) {
-    currentStage.value--
-    goToStage(currentStage.value)
+    currentStage.value--;
+    goToStage(currentStage.value);
   }
-}
+};
 
 // 跳转到指定阶段
 const goToStage = (stage: number) => {
   if (stage >= 0 && stage < stages.length) {
-    currentStage.value = stage
+    currentStage.value = stage;
     stages.forEach((item, index) => {
       if (index <= currentStage.value) {
-        item.consumer?.show()
+        item.consumer?.show();
       } else {
-        item.consumer?.hide()
+        item.consumer?.hide();
       }
-    })
+    });
   }
-}
+};
 </script>
-
 
 <style>
 .flower-container {
@@ -178,13 +195,12 @@ const goToStage = (stage: number) => {
   margin-left: -8px;
   width: 16px;
   height: 10px;
-  background-color: #8B4513;
+  background-color: #8b4513;
   border-radius: 50% 50% 50% 50%;
   transition: all 0.8s ease;
   z-index: 1;
   transform: rotate(45deg) scale(1);
 }
-
 
 /* 茎 */
 .stem {
@@ -337,7 +353,9 @@ const goToStage = (stage: number) => {
   border-radius: 50%;
   background-color: #ddd;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
 }
 
 .step-dot.active {
@@ -348,7 +366,6 @@ const goToStage = (stage: number) => {
 .step-dot:hover:not(.active) {
   background-color: #bbb;
 }
-
 
 .v-enter-active,
 .v-leave-active {

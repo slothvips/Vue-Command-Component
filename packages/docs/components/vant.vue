@@ -5,49 +5,51 @@
     <el-divider />
     {{ fieldValue }}
     {{ cascaderValue }}
-    <van-field v-model="fieldValue" is-link readonly label="地区" placeholder="请选择所在地区" @click="openPopup2" />
+    <van-field
+      v-model="fieldValue"
+      is-link
+      readonly
+      label="地区"
+      placeholder="请选择所在地区"
+      @click="openPopup2"
+    />
   </div>
 </template>
 
 <script setup lang="tsx">
 import { usePopup } from "@vue-cmd/vant";
-import DialogContent from "./dialog-content.vue";
+import DialogContent from "./shared/DialogContent.vue";
 import { ref } from "vue";
 
-const popup = usePopup({
-});
+const popup = usePopup({});
 
 const openPopup = () => {
-  popup(
-    <DialogContent />,
-    {
-      attrs: {
-        position: 'center',
-        round: true,
-        closeable: true,
-        style: {
-          width: '375px',
-          height: '667px',
-        }
+  popup(<DialogContent />, {
+    attrs: {
+      position: "center",
+      round: true,
+      closeable: true,
+      style: {
+        width: "375px",
+        height: "667px",
       },
-    }
-  );
+    },
+  });
 };
 
-
-const fieldValue = ref('');
-const cascaderValue = ref('');
+const fieldValue = ref("");
+const cascaderValue = ref("");
 // 选项列表，children 代表子选项，支持多级嵌套
 const options = [
   {
-    text: '浙江省',
-    value: '330000',
-    children: [{ text: '杭州市', value: '330100' }],
+    text: "浙江省",
+    value: "330000",
+    children: [{ text: "杭州市", value: "330100" }],
   },
   {
-    text: '江苏省',
-    value: '320000',
-    children: [{ text: '南京市', value: '320100' }],
+    text: "江苏省",
+    value: "320000",
+    children: [{ text: "南京市", value: "320100" }],
   },
 ];
 
@@ -61,22 +63,24 @@ const openPopup2 = () => {
         consumer!.destroy();
       }}
       onFinish={({ selectedOptions }: any) => {
-        fieldValue.value = selectedOptions.map((option: any) => option.text).join('/');
+        fieldValue.value = selectedOptions
+          .map((option: any) => option.text)
+          .join("/");
         consumer!.destroy();
       }}
     />,
     {
-      position: 'bottom',
+      position: "bottom",
       // 这里主要是规避样式干扰,你实际使用时可能并不需要
-      appendTo: 'body',
+      appendTo: "body",
       attrs: {
         round: true,
         style: {
-          width: '375px',
-          height: '667px',
-        }
+          width: "375px",
+          height: "667px",
+        },
       },
-    }
+    },
   );
 };
 </script>

@@ -21,12 +21,12 @@ yarn add @vue-cmd/core @vue-cmd/element-plus element-plus
 
 ### DialogContent展示
 
-示例中会多次使用弹窗内容组件`dialog-content`,下边是它的样子:
+示例中会多次使用弹窗内容组件`DialogContent`,下边是它的样子:
 
 ::: warning ☕️☕️☕️别着急进行交互,我们并没有真正的开始,这个组件需要和命令式组件配合使用,点击下边的按钮是没有任何反应的.
 :::
 
-<demo vue="../components/dialog-content.vue" />
+<demo vue="../components/shared/DialogContent.vue" />
 
 ### consumer对象
 
@@ -42,9 +42,11 @@ const consumer2 = useConsumer();
 
 console.log(consumer === consumer2); // true
 ```
+
 就这样,我们在内外部都有了控制命令式组件的能力.
 
 consumer的定义形状如下:
+
 ```ts
 export interface IConsumer {
   /** 组件实例的元数据 */
@@ -70,7 +72,11 @@ export interface IConsumer {
   /** 订阅取消 */
   off: (name: string | symbol, callback: (...args: unknown[]) => void) => void;
   /** 订阅 */
-  on: (name: string | symbol, callback: (...args: unknown[]) => void, config?: IOnConfig) => void;
+  on: (
+    name: string | symbol,
+    callback: (...args: unknown[]) => void,
+    config?: IOnConfig,
+  ) => void;
   /** 单次订阅 */
   once: (name: string | symbol, callback: (...args: unknown[]) => void) => void;
   /** 发布 */
@@ -135,7 +141,6 @@ Consumer 对象包含事件系统，但建议不要用于业务逻辑实现。�
 
 <demo vue="../components/native-attributes.vue"></demo>
 
-
 ## 原生组件插槽
 
 支持原生组件所有的插槽,包括具名插槽和作用域插槽.
@@ -155,6 +160,7 @@ Consumer 对象包含事件系统，但建议不要用于业务逻辑实现。�
 这一块和vue的provide和inject是一样的,没有任何区别.不过你可以用`provideProps`来实现私有的注入,这样做的好处是,注入会被限制在命令组件内部,命令组件之外的组件不会被污染注入域.
 
 它的使用很简单.
+
 ```ts
 const CommandDialog = useDialog();
 CommandDialog(<div>1</div>,{
@@ -164,21 +170,20 @@ CommandDialog(<div>1</div>,{
   },
 })
 ```
+
 ## el-drawer
 
 <demo vue="../components/el-drawer.vue"></demo>
-
 
 ## 属性说明
 
 更多属性请参考:
 [element-plus dialog文档](https://element-plus.org/zh-CN/component/dialog.html#api)。
-[element-plus drawer  文档](https://element-plus.org/zh-CN/component/drawer.html#api)。
+[element-plus drawer 文档](https://element-plus.org/zh-CN/component/drawer.html#api)。
 
 将官网文档中的属性和事件放置到`attrs`中即可.
 
 我们将`title`和`width/size`提到了外层(因为这两个属性太常用了),这样可以少写一个`attrs`🤣,如果attrs里有这些属性将被覆盖.
-
 
 ```ts
 const CommandDialog = useDialog();
@@ -196,21 +201,21 @@ CommandDialog(<DialogContent />, {
 ```
 
 当然你可以轻易的进行再封装,将你常用的属性提到上层对象中,下边是一个简单的示例:
-```ts
-export const useDialogExample = ()=>{
-  const dialog = useDialog();
-    return (contentVnode,config:YourConfigInterface)=>{
-        return dialog(contentVnode, {
-            attrs:{
-              // 你常用的属性
-              title: config?.title,
-              width: config?.width,
-              draggable:config?.draggable,
-              fullscreen:config?.fullscreen,
-            },
-            ...config,
-        })
-    }
-}
-```
 
+```ts
+export const useDialogExample = () => {
+  const dialog = useDialog();
+  return (contentVnode, config: YourConfigInterface) => {
+    return dialog(contentVnode, {
+      attrs: {
+        // 你常用的属性
+        title: config?.title,
+        width: config?.width,
+        draggable: config?.draggable,
+        fullscreen: config?.fullscreen,
+      },
+      ...config,
+    });
+  };
+};
+```

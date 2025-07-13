@@ -36,7 +36,13 @@ const handleCancel = () => {
 <template>
   <ElForm v-loading="loading">
     <ElFormItem label="日期">
-      <ElDatePicker v-model="formData.date" type="date" placeholder="选择日期" format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
+      <ElDatePicker
+        v-model="formData.date"
+        type="date"
+        placeholder="选择日期"
+        format="YYYY-MM-DD"
+        value-format="YYYY-MM-DD"
+      />
     </ElFormItem>
     <ElFormItem label="姓名">
       <ElInput v-model="formData.name" placeholder="请输入姓名" />

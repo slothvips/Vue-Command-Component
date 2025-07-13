@@ -12,5 +12,5 @@ export default createConfig({
     "element-plus": "ElementPlus",
     "@element-plus/icons-vue": "ElementPlusIconsVue",
     "@vue-cmd/core": "VueCmdCore",
-  }
-}); 
+  },
+});

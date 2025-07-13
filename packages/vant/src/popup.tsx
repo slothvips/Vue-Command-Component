@@ -15,8 +15,16 @@ export type VantPopupConfig = {
   closeable?: boolean;
 } & ICommandConfig<Partial<PopupProps>>;
 
-const baseRender = (contentVNode: VNode, { componentRef, visible, onMounted, config, consumer }: IRenderComponentOptions<VantPopupConfig>) => {
-
+const baseRender = (
+  contentVNode: VNode,
+  {
+    componentRef,
+    visible,
+    onMounted,
+    config,
+    consumer,
+  }: IRenderComponentOptions<VantPopupConfig>,
+) => {
   const { attrs, ...rest } = config.value;
 
   const onClose = () => {

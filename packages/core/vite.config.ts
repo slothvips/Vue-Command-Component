@@ -8,6 +8,6 @@ export default createConfig({
   plugins: getCorePlugins(),
   external: ["vue"],
   globals: {
-    vue: "Vue"
-  }
+    vue: "Vue",
+  },
 });

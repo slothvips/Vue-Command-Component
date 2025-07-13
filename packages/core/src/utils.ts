@@ -1,5 +1,12 @@
 import { defineComponent, h, type VNode } from "vue";
-import type { EventBusMap, EventCallback, EventMap, IConsumer, IOnConfig, IPromiseWithResolvers } from "./type";
+import type {
+  EventBusMap,
+  EventCallback,
+  EventMap,
+  IConsumer,
+  IOnConfig,
+  IPromiseWithResolvers,
+} from "./type";
 
 /**
  * 基于命令弹窗消费对象的事件注册中心
@@ -16,7 +23,10 @@ export class ConsumerEventBus {
     return eventsMap;
   }
 
-  private getEventsByConsumer(consumer: IConsumer, name: string | symbol): Set<EventCallback> {
+  private getEventsByConsumer(
+    consumer: IConsumer,
+    name: string | symbol,
+  ): Set<EventCallback> {
     const eventsMap = this.getEventsMapByConsumer(consumer);
     let events = eventsMap.get(name);
     if (!events) {
@@ -26,7 +36,12 @@ export class ConsumerEventBus {
     return events;
   }
 
-  on(consumer: IConsumer, name: string | symbol, callback: EventCallback, config: IOnConfig = {}): void {
+  on(
+    consumer: IConsumer,
+    name: string | symbol,
+    callback: EventCallback,
+    config: IOnConfig = {},
+  ): void {
     const events = this.getEventsByConsumer(consumer, name);
     let finalCallback = callback;
     if (config.once) {
@@ -42,7 +57,12 @@ export class ConsumerEventBus {
       }, config.callImmediatelyAfterDelay || 0);
   }
 
-  once(consumer: IConsumer, name: string | symbol, callback: EventCallback, config: IOnConfig = {}): void {
+  once(
+    consumer: IConsumer,
+    name: string | symbol,
+    callback: EventCallback,
+    config: IOnConfig = {},
+  ): void {
     this.on(consumer, name, callback, {
       ...config,
       once: true,
@@ -54,7 +74,11 @@ export class ConsumerEventBus {
     events.forEach((callback) => callback(...args));
   }
 
-  off(consumer: IConsumer, name: string | symbol, callback: EventCallback): void {
+  off(
+    consumer: IConsumer,
+    name: string | symbol,
+    callback: EventCallback,
+  ): void {
     this.getEventsByConsumer(consumer, name).delete(callback);
   }
 }
@@ -62,17 +86,21 @@ export class ConsumerEventBus {
 /**
  * 将事件名转换为总线名称
  */
-export const eventName2BusName = (name = ""): string => name.slice(2).toLowerCase();
+export const eventName2BusName = (name = ""): string =>
+  name.slice(2).toLowerCase();
 
 /**
  * 将总线名称转换为事件名
  */
-export const busName2EventName = (name = ""): string => `on${name.charAt(0).toUpperCase()}${name.slice(1)}`;
+export const busName2EventName = (name = ""): string =>
+  `on${name.charAt(0).toUpperCase()}${name.slice(1)}`;
 
 /**
  * 创建一个Promise和它的处理器
  */
-export const PromiseWithResolvers = <T = unknown>(): IPromiseWithResolvers<T> => {
+export const PromiseWithResolvers = <
+  T = unknown,
+>(): IPromiseWithResolvers<T> => {
   let resolve: (value: T) => void = () => void 0;
   let reject: (reason?: unknown) => void = () => void 0;
   const promise = new Promise<T>((res, rej) => {
@@ -104,7 +132,8 @@ export const getMaxZIndex = (domNode: HTMLElement): number => {
  * @param val - The value to check
  * @returns true if the value is null or undefined
  */
-export const isNull = (val: unknown): val is null | undefined => val === null || val === void 0;
+export const isNull = (val: unknown): val is null | undefined =>
+  val === null || val === void 0;
 
 // 将一个vnode渲染函数变更为响应式组件
 export const RxRender = (render: () => VNode) => {
@@ -115,5 +144,8 @@ export const RxRender = (render: () => VNode) => {
 
 // 创建一个唯一的key
 export const uuid = () => {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  return (
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15)
+  );
 };

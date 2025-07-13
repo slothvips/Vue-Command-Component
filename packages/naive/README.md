@@ -22,21 +22,18 @@ yarn add @vue-cmd/naive
 </template>
 
 <script setup>
-import { useNaiveModal } from '@vue-cmd/naive';
+import { useNaiveModal } from "@vue-cmd/naive";
 
 const modal = useNaiveModal();
 
 const openModal = () => {
-  modal(
-    <div>这是模态框内容</div>,
-    {
-      title: "示例模态框",
-      attrs: {
-        preset: "dialog",
-        closable: true,
-      }
-    }
-  );
+  modal(<div>这是模态框内容</div>, {
+    title: "示例模态框",
+    attrs: {
+      preset: "dialog",
+      closable: true,
+    },
+  });
 };
 </script>
 ```
@@ -49,21 +46,18 @@ const openModal = () => {
 </template>
 
 <script setup>
-import { useNaiveDrawer } from '@vue-cmd/naive';
+import { useNaiveDrawer } from "@vue-cmd/naive";
 
 const drawer = useNaiveDrawer();
 
 const openDrawer = () => {
-  drawer(
-    <div>这是抽屉内容</div>,
-    {
-      attrs: {
-        title: "示例抽屉",
-        width: 400,
-        placement: "right",
-      }
-    }
-  );
+  drawer(<div>这是抽屉内容</div>, {
+    attrs: {
+      title: "示例抽屉",
+      width: 400,
+      placement: "right",
+    },
+  });
 };
 </script>
 ```
@@ -101,4 +95,4 @@ interface INaiveDrawerConfig extends ICommandConfig {
 
 ## 许可证
 
-MIT 
+MIT

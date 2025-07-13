@@ -14,13 +14,13 @@ export type Meta = {
 export type IUseConfig<T = Record<string | symbol | number, unknown>> = {
     /** 元数据 */
     meta?: Meta;
-    /** 挂在点 */
+    /** 挂载点 */
     appendTo?: string | HTMLElement;
     /** 自定义类名 */
     customClassName?: string;
     /** 是否立即渲染 */
     immediate?: boolean;
-    /** 默认false,将为你的组件创建一个容器;如果为true将直接渲染到父节点 */
+    /** 默认false,将为你的组件创建一个容器;如果为true将直接渲染到挂载点 */
     fragment?: boolean;
 } & T;
 export type IUseConfigOrGetter = ValueOrGetter<IUseConfig>;

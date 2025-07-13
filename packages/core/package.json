@@ -36,8 +36,7 @@
     "build": "vite build && vue-tsc --emitDeclarationOnly",
     "publish": "pnpm build && pnpm publish --access public --no-git-checks"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {},
   "peerDependencies": {
     "vue": "3.x"

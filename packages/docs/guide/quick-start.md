@@ -36,7 +36,6 @@ $ bun add @vue-cmd/core @vue-cmd/element-plus
 
 :::
 
-
 推荐使用 Anthony Fu 的 [`@antfu/ni`](https://www.npmjs.com/package/@antfu/ni) 简化包管理器操作：
 
 ```bash
@@ -44,10 +43,10 @@ npm i -g @antfu/ni
 ```
 
 安装后可统一使用以下命令：
+
 ```bash
 ni @vue-cmd/core @vue-cmd/element-plus
 ```
-
 
 ## 基本用法
 
@@ -60,21 +59,21 @@ import { defineComponent, h } from "vue";
 import { useDialog } from "@vue-cmd/element-plus";
 
 // 初始化命令式组件
-const CommandDialog = useDialog()
+const CommandDialog = useDialog();
 
 // 定义弹窗内容组件
 const Content = defineComponent({
   render() {
-    return <div>弹窗内容</div>
-  }
-})
+    return <div>弹窗内容</div>;
+  },
+});
 
 // 调用命令式组件
-CommandDialog(<Content />)
+CommandDialog(<Content />);
 
 // 如果未使用JSX，可以使用h函数替代
 // 关于JSX和h函数的更多资料请参见 Vue 官方文档：https://vuejs.org/guide/extras/render-function.html#the-h-function
-CommandDialog(h(Content))
+CommandDialog(h(Content));
 ```
 
 更多示例请参阅[基础示例](../example/base.md)

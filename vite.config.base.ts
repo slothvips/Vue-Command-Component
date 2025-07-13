@@ -1,15 +1,15 @@
-import { resolve } from 'path';
-import { defineConfig, mergeConfig } from 'vite';
-import type { UserConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
-import dts from 'vite-plugin-dts';
+import { resolve } from "path";
+import { defineConfig, mergeConfig } from "vite";
+import type { UserConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import dts from "vite-plugin-dts";
 
 export interface LibOptions {
   name: string;
   entry?: string;
   fileName?: string | ((format: string) => string);
-  formats?: ('es' | 'cjs')[];
+  formats?: ("es" | "cjs")[];
   external?: string[];
   globals?: Record<string, string>;
   plugins?: any[];
@@ -18,12 +18,12 @@ export interface LibOptions {
 export function createBaseConfig(options: LibOptions): UserConfig {
   const {
     name,
-    entry = 'src/index.ts',
+    entry = "src/index.ts",
     fileName = (format) => `index.${format}.js`,
-    formats = ['es', 'cjs'],
-    external = ['vue'],
-    globals = { vue: 'Vue' },
-    plugins = []
+    formats = ["es", "cjs"],
+    external = ["vue"],
+    globals = { vue: "Vue" },
+    plugins = [],
   } = options;
 
   return defineConfig({
@@ -37,8 +37,8 @@ export function createBaseConfig(options: LibOptions): UserConfig {
       ...plugins,
     ],
     build: {
-      minify: 'esbuild',
-      target: 'es2015',
+      minify: "esbuild",
+      target: "es2015",
       sourcemap: false,
       lib: {
         entry: resolve(process.cwd(), entry),
@@ -54,29 +54,32 @@ export function createBaseConfig(options: LibOptions): UserConfig {
           inlineDynamicImports: true,
           preserveModules: false,
           compact: true,
-          minifyInternalExports: true
+          minifyInternalExports: true,
         },
         treeshake: {
           moduleSideEffects: false,
           propertyReadSideEffects: false,
-          tryCatchDeoptimization: false
-        }
+          tryCatchDeoptimization: false,
+        },
       },
       commonjsOptions: {
-        sourceMap: false
+        sourceMap: false,
       },
       chunkSizeWarningLimit: 1000,
-      assetsInlineLimit: 4096
-    }
+      assetsInlineLimit: 4096,
+    },
   });
 }
 
-export function createConfig(baseOptions: LibOptions, extraConfig?: UserConfig): UserConfig {
+export function createConfig(
+  baseOptions: LibOptions,
+  extraConfig?: UserConfig,
+): UserConfig {
   const baseConfig = createBaseConfig(baseOptions);
-  
+
   if (!extraConfig) {
     return baseConfig;
   }
-  
+
   return mergeConfig(baseConfig, extraConfig);
-} 
+}

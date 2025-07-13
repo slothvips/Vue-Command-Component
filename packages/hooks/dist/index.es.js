@@ -68,7 +68,11 @@ const I = () => ({
   }
 }), M = () => {
   const { destroyAll: e } = I(), t = x();
-  return b(() => t.path, () => e(), { immediate: !0 });
+  return b(
+    () => t.path,
+    () => e(),
+    { immediate: !0 }
+  );
 }, P = (e) => {
   const t = _();
   return (r, D = {}) => {
@@ -81,24 +85,41 @@ const I = () => ({
     });
     const l = k((p = o.immediate) != null ? p : !0);
     o.visible = l;
-    const u = R(t, W(j({
-      setup() {
-        return o.displayDirective === "show" && b(() => l.value, () => {
-          C().then(() => {
-            const s = (n) => n.shapeFlag === 1 ? [n.el] : n.shapeFlag === 16 ? n.children.map((i) => s(i)) : (console.warn("TODO:other case wait implement", n), []);
-            s(r).flat(1 / 0).forEach((n) => {
-              var i, m;
-              l.value ? (i = o.onShow) == null || i.call(o, n, u) : (m = o.onHide) == null || m.call(o, n, u);
-            });
-          });
-        }, {
-          immediate: !0
-        }), () => {
-          const s = o.displayDirective, a = o.outer;
-          return a ? a(s === "if" ? l.value ? r : null : r) : s === "if" ? l.value ? r : null : r;
-        };
-      }
-    })), o);
+    const u = R(
+      t,
+      W(
+        j({
+          setup() {
+            return o.displayDirective === "show" && b(
+              () => l.value,
+              () => {
+                C().then(() => {
+                  const s = (n) => n.shapeFlag === 1 ? [n.el] : n.shapeFlag === 16 ? n.children.map(
+                    (i) => s(i)
+                  ) : (console.warn(
+                    "TODO:other case wait implement",
+                    n
+                  ), []);
+                  s(r).flat(1 / 0).forEach((n) => {
+                    var i, m;
+                    l.value ? (i = o.onShow) == null || i.call(o, n, u) : (m = o.onHide) == null || m.call(o, n, u);
+                  });
+                });
+              },
+              {
+                immediate: !0
+              }
+            ), () => {
+              const s = o.displayDirective, a = o.outer;
+              return a ? a(
+                s === "if" ? l.value ? r : null : r
+              ) : s === "if" ? l.value ? r : null : r;
+            };
+          }
+        })
+      ),
+      o
+    );
     return u;
   };
 };

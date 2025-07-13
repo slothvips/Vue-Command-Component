@@ -36,8 +36,7 @@
     "build": "vite build && vue-tsc --emitDeclarationOnly",
     "publish": "pnpm build && pnpm publish --access public --no-git-checks"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
     "@vitejs/plugin-vue-jsx": "^4.0.0",

@@ -6,7 +6,7 @@
 
 <script setup lang="tsx">
 import { useDialog } from "@vue-cmd/element-plus";
-import DialogContent from "./dialog-content.vue";
+import DialogContent from "./shared/DialogContent.vue";
 
 const CommandDialog = useDialog();
 const openDialog = () => {
@@ -19,7 +19,7 @@ const openDialog = () => {
     />,
     {
       title: "hello world",
-    }
+    },
   );
 };
 </script>

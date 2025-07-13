@@ -15,13 +15,15 @@
 如果你希望路由跳转后销毁所有弹窗,请使用`useDestroyAllOnRouteChange`hooks.它的作用就是监听路由变化,然后销毁所有弹窗。
 
 安装:
+
 ```shell
   npm i @vue-cmd/hooks
 ```
 
 使用:
+
 ```ts
-import { useDestroyAllOnRouteChange } from '@vue-cmd/hooks';
+import { useDestroyAllOnRouteChange } from "@vue-cmd/hooks";
 // 尽量提前调用,比如在App.vue中调用
 const stop = useDestroyAllOnRouteChange();
 // stop();

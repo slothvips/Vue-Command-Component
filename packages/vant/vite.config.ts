@@ -12,5 +12,5 @@ export default createConfig({
     vant: "Vant",
     "lodash-es": "LodashEs",
     "@vue-cmd/core": "VueCmdCore",
-  }
-}); 
+  },
+});

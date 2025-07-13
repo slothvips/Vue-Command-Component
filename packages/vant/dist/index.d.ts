@@ -1,1 +1,2 @@
-export { usePopup, } from './popup';
+export * from '@vue-cmd/core';
+export { usePopup } from './popup';

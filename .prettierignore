@@ -1,0 +1,28 @@
+# Build outputs
+**/dist/
+
+# Dependencies
+node_modules/
+
+# Minified files
+*.min.js
+*.min.css
+
+# Generated files
+*.d.ts
+
+# Logs
+*.log
+
+# Cache directories
+.cache/
+.temp/
+.tmp/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

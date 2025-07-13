@@ -1,16 +1,17 @@
 var b = Object.defineProperty;
 var g = Object.getOwnPropertySymbols;
 var h = Object.prototype.hasOwnProperty, w = Object.prototype.propertyIsEnumerable;
-var C = (l, e, o) => e in l ? b(l, e, { enumerable: !0, configurable: !0, writable: !0, value: o }) : l[e] = o, d = (l, e) => {
+var p = (l, e, o) => e in l ? b(l, e, { enumerable: !0, configurable: !0, writable: !0, value: o }) : l[e] = o, d = (l, e) => {
   for (var o in e || (e = {}))
-    h.call(e, o) && C(l, o, e[o]);
+    h.call(e, o) && p(l, o, e[o]);
   if (g)
     for (var o of g(e))
-      w.call(e, o) && C(l, o, e[o]);
+      w.call(e, o) && p(l, o, e[o]);
   return l;
 };
-import { createVNode as p, mergeProps as v } from "vue";
-import { createAdapter as D, EVENT_NAME as M } from "@vue-cmd/core";
+import { createAdapter as C, EVENT_NAME as M } from "@vue-cmd/core";
+export * from "@vue-cmd/core";
+import { createVNode as v, mergeProps as D } from "vue";
 import { ElDialog as y, ElDrawer as N } from "element-plus";
 const R = (l, e) => {
   const {
@@ -31,7 +32,7 @@ const R = (l, e) => {
     var r;
     return s.value.emit(M.destroy), (r = n == null ? void 0 : n.onClosed) == null ? void 0 : r.call(n, ...a);
   };
-  return p(y, v({
+  return v(y, D({
     ref: o,
     modelValue: t.value,
     onVnodeMounted: u,
@@ -43,7 +44,7 @@ const R = (l, e) => {
   }), d({
     default: () => l
   }, f));
-}, z = D({
+}, x = C({
   render: R,
   defaultConfig: {
     meta: {
@@ -51,7 +52,7 @@ const R = (l, e) => {
     }
   }
 }), B = (l) => {
-  const e = z(l);
+  const e = x(l);
   return (o, t = {}) => e(o, d({
     attrs: {
       // 可拖拽
@@ -60,7 +61,7 @@ const R = (l, e) => {
       closeOnPressEscape: !1
     }
   }, t));
-}, A = (l, {
+}, z = (l, {
   componentRef: e,
   visible: o,
   onMounted: t,
@@ -75,7 +76,7 @@ const R = (l, e) => {
   } = u.value, f = () => {
     i.value.destroy();
   };
-  return p(N, v({
+  return v(N, D({
     ref: e,
     modelValue: o.value,
     onVnodeMounted: t,
@@ -86,8 +87,8 @@ const R = (l, e) => {
   }), d({
     default: () => l
   }, c));
-}, T = D({
-  render: A,
+}, T = C({
+  render: z,
   defaultConfig: {
     meta: {
       name: "element-plus-drawer"
@@ -95,7 +96,7 @@ const R = (l, e) => {
   }
 });
 export {
-  z as useDialog,
+  x as useDialog,
   B as useDialogWithDrag,
   T as useDrawer
 };

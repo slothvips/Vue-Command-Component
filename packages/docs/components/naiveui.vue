@@ -8,7 +8,7 @@
 
 <script setup lang="tsx">
 import { useModal, useDialog, useDrawer } from "@vue-cmd/naive";
-import DialogContent from "./dialog-content.vue";
+import DialogContent from "./shared/DialogContent.vue";
 import { NCard } from "naive-ui";
 
 const modal = useModal();
@@ -16,13 +16,15 @@ const open = () => {
   modal(
     <NCard>
       <DialogContent />
-    </NCard>, {
-    attrs: {
-      style: {
-        width: "600px",
+    </NCard>,
+    {
+      attrs: {
+        style: {
+          width: "600px",
+        },
       },
     },
-  })
+  );
 };
 
 const dialog = useDialog();
@@ -33,7 +35,7 @@ const open2 = () => {
         width: "600px",
       },
     },
-  })
+  });
 };
 
 const drawer = useDrawer();
@@ -52,8 +54,8 @@ const openDrawer = () => {
           title: "抽屉示例",
         },
       },
-    }
-  )
+    },
+  );
 };
 </script>
 

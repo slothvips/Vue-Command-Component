@@ -1,15 +1,14 @@
-@import 'vant/lib/index.css';
-@import 'element-plus/dist/index.css';
-@import 'element-plus/theme-chalk/dark/css-vars.css';
+@import "vant/lib/index.css";
+@import "element-plus/dist/index.css";
+@import "element-plus/theme-chalk/dark/css-vars.css";
 @import "viewerjs/dist/viewer.min.css";
-@import 'vant/lib/index.css';
+@import "vant/lib/index.css";
 
 /* 自定义样式 */
 :root {
   --vp-home-hero-image-width: 450px;
   --vp-home-hero-image-height: 450px;
 }
-
 
 /* 响应式调整 */
 @media (min-width: 640px) {

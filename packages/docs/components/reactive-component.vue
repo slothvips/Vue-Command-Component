@@ -15,13 +15,13 @@
 <script setup lang="tsx">
 import { RxRender } from "@vue-cmd/core";
 import { useDialog } from "@vue-cmd/element-plus";
-import DialogContent from "./dialog-content.vue";
+import DialogContent from "./shared/DialogContent.vue";
 import { ref, reactive } from "vue";
 
-const count = ref(0)
+const count = ref(0);
 setInterval(() => {
-  count.value++
-}, 1000)
+  count.value++;
+}, 1000);
 
 const CommandDialog = useDialog();
 const openDialog = () => {
@@ -29,13 +29,16 @@ const openDialog = () => {
 };
 
 const openDialog2 = () => {
-  CommandDialog(RxRender(() => <DialogContent v-model={formValue.name} count={count.value} />));
+  CommandDialog(
+    RxRender(() => (
+      <DialogContent v-model={formValue.name} count={count.value} />
+    )),
+  );
 };
 
 const formValue = reactive({
-  name: 'panda',
-})
-
+  name: "panda",
+});
 </script>
 
 <style lang="scss" scoped></style>

@@ -1,10 +1,28 @@
 import type { ComponentInternalInstance, InjectionKey, VNode } from "vue";
-import { defineComponent, h, inject, nextTick, provide, render, Teleport } from "vue";
-import { EVENT_NAME, type EventCallback, type IConsumer, type ICoreConfig, type IOnConfig } from "./type";
+import {
+  defineComponent,
+  getCurrentInstance,
+  h,
+  inject,
+  nextTick,
+  provide,
+  render,
+  Teleport,
+} from "vue";
+import {
+  EVENT_NAME,
+  type EventCallback,
+  type IConsumer,
+  type ICoreConfig,
+  type IOnConfig,
+} from "./type";
 import { ConsumerEventBus, PromiseWithResolvers } from "./utils";
 
-export const CommandComponentConsumerInjectKey: InjectionKey<IConsumer> = Symbol("CommandComponentConsumerInjectKey");
-export const CommandComponentStackInjectKey: InjectionKey<IConsumer[]> = Symbol("CommandComponentStackInjectKey");
+export const CommandComponentConsumerInjectKey: InjectionKey<IConsumer> =
+  Symbol("CommandComponentConsumerInjectKey");
+export const CommandComponentStackInjectKey: InjectionKey<IConsumer[]> = Symbol(
+  "CommandComponentStackInjectKey",
+);
 
 const EB = new ConsumerEventBus();
 
@@ -15,17 +33,29 @@ export const activeConsumers = new Set<IConsumer>();
  * @param ins - 组件实例
  * @returns provides链上的所有注入内容
  */
-const getProvidesChain = (ins: ComponentInternalInstance): Record<string | symbol, unknown> => ({
+const getProvidesChain = (
+  ins: ComponentInternalInstance,
+): Record<string | symbol, unknown> => ({
   ...(ins.parent ? getProvidesChain(ins.parent) : {}),
   ...(ins as any).provides,
 });
 
 // 注入+渲染
-export function commandProviderWithRender(parentInstance: ComponentInternalInstance | null, uiComponent: VNode, config: ICoreConfig): IConsumer {
-  const appendToElement = (typeof config.appendTo === "string" ? document.querySelector(config.appendTo) : config.appendTo) || (parentInstance as any).vnode.el?.parentElement || document.body;
+export function commandProviderWithRender(
+  parentInstance: ComponentInternalInstance | null,
+  uiComponent: VNode,
+  config: ICoreConfig,
+): IConsumer {
+  const appendToElement =
+    (typeof config.appendTo === "string"
+      ? document.querySelector(config.appendTo)
+      : config.appendTo) ||
+    (parentInstance as any).vnode.el?.parentElement ||
+    document.body;
 
   const containerEl = document.createElement("div");
-  containerEl.className = config.customClassName || "command-component-container";
+  containerEl.className =
+    config.customClassName || "command-component-container";
 
   const hide = () => {
     if (consumer.destroyed) throw new Error("Consumer has been destroyed");
@@ -83,10 +113,20 @@ export function commandProviderWithRender(parentInstance: ComponentInternalInsta
     destroy,
     container: containerEl,
     visible: config.visible,
-    on: (name: string | symbol, callback: EventCallback, config: IOnConfig = {}) => EB.on(consumer, name, callback, config),
-    once: (name: string | symbol, callback: EventCallback, config: IOnConfig = {}) => EB.on(consumer, name, callback, config),
-    emit: (name: string | symbol, ...args: unknown[]) => EB.emit(consumer, name, ...args),
-    off: (name: string | symbol, callback: EventCallback) => EB.off(consumer, name, callback),
+    on: (
+      name: string | symbol,
+      callback: EventCallback,
+      config: IOnConfig = {},
+    ) => EB.on(consumer, name, callback, config),
+    once: (
+      name: string | symbol,
+      callback: EventCallback,
+      config: IOnConfig = {},
+    ) => EB.on(consumer, name, callback, config),
+    emit: (name: string | symbol, ...args: unknown[]) =>
+      EB.emit(consumer, name, ...args),
+    off: (name: string | symbol, callback: EventCallback) =>
+      EB.off(consumer, name, callback),
     stack: [] as IConsumer[],
     stackIndex: -1,
     componentRef: void 0,
@@ -96,6 +136,8 @@ export function commandProviderWithRender(parentInstance: ComponentInternalInsta
 
   const CommandComponentProviderComponent = defineComponent({
     setup() {
+      const commandInstance = getCurrentInstance();
+
       // 注入私有域成员
       for (const key in config.provideProps) {
         provide(key, config.provideProps[key]);
@@ -103,7 +145,7 @@ export function commandProviderWithRender(parentInstance: ComponentInternalInsta
 
       // 上游注入
       const upStreamProvides = {
-        // ...vnode.appContext!.provides,
+        ...getProvidesChain(commandInstance!),
         ...getProvidesChain(parentInstance!),
       };
       for (const key in upStreamProvides) {
@@ -128,19 +170,25 @@ export function commandProviderWithRender(parentInstance: ComponentInternalInsta
 
   vnode.appContext = parentInstance?.appContext || vnode.appContext;
 
-
   if (config.fragment) {
     // 设置容器元素为完全隐藏，确保不会影响任何布局（包括flex布局）
     Object.assign(containerEl.style, {
-      display: 'none',
-      position: 'absolute',
-      pointerEvents: 'none',
+      display: "none",
+      position: "absolute",
+      pointerEvents: "none",
     });
     // 一头扎进head，确保不会影响任何布局
     document.head.appendChild(containerEl);
-    render(h(Teleport, {
-      to: appendToElement,
-    }, vnode), containerEl)
+    render(
+      h(
+        Teleport,
+        {
+          to: appendToElement,
+        },
+        vnode,
+      ),
+      containerEl,
+    );
   } else {
     appendToElement.appendChild(containerEl);
     render(vnode, containerEl);
@@ -170,6 +218,6 @@ export const useConsumer = (warn: boolean = true): IConsumer => {
         get: () => showWarningMessage,
         apply: showWarningMessage,
       }),
-    true
+    true,
   )!;
 };

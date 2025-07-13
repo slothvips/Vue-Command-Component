@@ -1,10 +1,5 @@
-export {
-  useModal,
-  useDialog,
-  type INaiveModalConfig
-} from "./modal";
+export * from "@vue-cmd/core";
 
-export {
-  useDrawer,
-  type INaiveDrawerConfig
-} from "./drawer"; 
+export { useModal, useDialog, type INaiveModalConfig } from "./modal";
+
+export { useDrawer, type INaiveDrawerConfig } from "./drawer";

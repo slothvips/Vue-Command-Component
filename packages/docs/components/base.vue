@@ -6,7 +6,7 @@
 
 <script setup name="base-example" lang="tsx">
 import { useDialog } from "@vue-cmd/element-plus";
-import DialogContent from "./dialog-content.vue";
+import DialogContent from "./shared/DialogContent.vue";
 
 const CommandDialog = useDialog();
 const openDialog = () => {
@@ -15,7 +15,6 @@ const openDialog = () => {
     width: "90%",
   });
 };
-
 </script>
 
 <style lang="scss" scoped></style>

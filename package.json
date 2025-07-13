@@ -9,7 +9,8 @@
     "doc:build": "vitepress build packages/docs",
     "doc:dev": "vitepress dev packages/docs --port 3000",
     "doc:preview": "vitepress preview packages/docs --port 3000",
-    "publish": "pnpm --filter '@vue-cmd/*' publish --no-git-checks --access public"
+    "publish": "pnpm --filter '@vue-cmd/*' publish --no-git-checks --access public",
+    "format": "prettier --write ."
   },
   "engines": {
     "node": ">=16",
@@ -42,6 +43,7 @@
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "@vue/tsconfig": "^0.5.1",
     "glob": "^11.0.3",
+    "prettier": "^3.6.2",
     "sass": "^1.79.4",
     "semantic-release": "^21.0.1",
     "terser": "^5.43.1",

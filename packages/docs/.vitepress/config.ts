@@ -1,11 +1,17 @@
 import { transformerTwoslash } from "@shikijs/vitepress-twoslash";
 import UnoCSS from "unocss/vite";
-import { ElementPlusResolver, VantResolver } from "unplugin-vue-components/resolvers";
+import {
+  ElementPlusResolver,
+  VantResolver,
+} from "unplugin-vue-components/resolvers";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import Components from "unplugin-vue-components/vite";
 import { defineConfig } from "vitepress";
 import { vitepressDemoPlugin } from "vitepress-demo-plugin";
-import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-icons";
+import {
+  groupIconMdPlugin,
+  groupIconVitePlugin,
+} from "vitepress-plugin-group-icons";
 
 export default defineConfig({
   title: `Vue命令组件`,
@@ -26,7 +32,12 @@ export default defineConfig({
   themeConfig: {
     logo: "/logo.svg",
     logoLink: "/Vue-Command-Component/",
-    socialLinks: [{ icon: "github", link: "https://github.com/pandavips/Vue-Command-Component" }],
+    socialLinks: [
+      {
+        icon: "github",
+        link: "https://github.com/pandavips/Vue-Command-Component",
+      },
+    ],
     footer: {
       message: `Released under the MIT License.`,
       copyright: "Copyright © 2019-present pandavips",
@@ -50,6 +61,10 @@ export default defineConfig({
             {
               text: "快速开始",
               link: "/guide/quick-start",
+            },
+            {
+              text: "命令式 vs 传统方式对比",
+              link: "/guide/comparison",
             },
           ],
         },
