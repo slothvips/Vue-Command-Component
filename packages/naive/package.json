@@ -1,6 +1,6 @@
 {
   "name": "@vue-cmd/naive",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "type": "module",
   "description": "Naive UI adapters for Vue Command Component",
   "homepage": "https://pandavips.github.io/Vue-Command-Component/",

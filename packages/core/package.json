@@ -1,6 +1,6 @@
 {
   "name": "@vue-cmd/core",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "description": "Vue Command Component Core Library",
   "homepage": "https://pandavips.github.io/Vue-Command-Component/",

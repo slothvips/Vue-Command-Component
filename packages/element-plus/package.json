@@ -1,6 +1,6 @@
 {
   "name": "@vue-cmd/element-plus",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "module",
   "description": "Element Plus adapters for Vue Command Component",
   "homepage": "https://pandavips.github.io/Vue-Command-Component/",
