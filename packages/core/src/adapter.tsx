@@ -40,6 +40,7 @@ export function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(
 
   return function (useConfig?: IUseConfigOrGetter) {
     const parentInstance = getCurrentInstance();
+
     return function commandComponent(
       contentVNode: VNode,
       commandConfig?: ValueOrGetter<TConfig>,

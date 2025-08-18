@@ -7,7 +7,7 @@ import {
   nextTick,
   provide,
   render,
-  Teleport,
+  Teleport
 } from "vue";
 import {
   EVENT_NAME,
@@ -46,6 +46,18 @@ export function commandProviderWithRender(
   uiComponent: VNode,
   config: ICoreConfig,
 ): IConsumer {
+
+  // 某些情况下,我们可能需要在vue组件树之外的地方使用命令式组件,这个时候无法补货到组件实例,可以创建一个空的组件实例来代替,以免后续流程受到影响
+  if (!parentInstance) {
+    render(h({
+      setup() {
+        parentInstance = getCurrentInstance();
+        return () => null
+      }
+    }), document.body);
+  }
+
+  // 挂在点
   const appendToElement =
     (typeof config.appendTo === "string"
       ? document.querySelector(config.appendTo)
@@ -170,6 +182,7 @@ export function commandProviderWithRender(
 
   vnode.appContext = parentInstance?.appContext || vnode.appContext;
 
+  // 如果启用了fragment模式
   if (config.fragment) {
     // 设置容器元素为完全隐藏，确保不会影响任何布局（包括flex布局）
     Object.assign(containerEl.style, {
@@ -177,7 +190,6 @@ export function commandProviderWithRender(
       position: "absolute",
       pointerEvents: "none",
     });
-    // 一头扎进head，确保不会影响任何布局
     document.head.appendChild(containerEl);
     render(
       h(
