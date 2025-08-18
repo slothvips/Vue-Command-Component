@@ -2,7 +2,7 @@
   "name": "@vue-cmd/element-plus",
   "version": "1.0.8",
   "type": "module",
-  "description": "Element Plus adapters for Vue Command Component",
+  "description": "Element Plus命令式组件适配器 - 让Element Plus的Dialog、Drawer等组件支持命令式调用",
   "homepage": "https://pandavips.github.io/Vue-Command-Component/",
   "repository": {
     "type": "git",
@@ -11,9 +11,22 @@
   "keywords": [
     "vue",
     "vue3",
+    "element-plus",
     "command",
     "component",
-    "element-plus"
+    "dialog",
+    "drawer",
+    "modal",
+    "popup",
+    "弹窗",
+    "抽屉",
+    "命令式",
+    "imperative",
+    "el-dialog",
+    "el-drawer",
+    "promise",
+    "async",
+    "adapter"
   ],
   "license": "MIT",
   "author": "pandavips",

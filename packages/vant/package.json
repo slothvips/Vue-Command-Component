@@ -2,7 +2,7 @@
   "name": "@vue-cmd/vant",
   "version": "1.0.5",
   "type": "module",
-  "description": "Vant adapters for Vue Command Component",
+  "description": "Vant命令式组件适配器 - 让Vant的Popup、Dialog等组件支持命令式调用，专为移动端优化",
   "homepage": "https://pandavips.github.io/Vue-Command-Component/",
   "repository": {
     "type": "git",
@@ -11,9 +11,23 @@
   "keywords": [
     "vue",
     "vue3",
+    "vant",
     "command",
     "component",
-    "vant"
+    "popup",
+    "dialog",
+    "mobile",
+    "移动端",
+    "弹窗",
+    "对话框",
+    "命令式",
+    "imperative",
+    "van-popup",
+    "van-dialog",
+    "promise",
+    "async",
+    "adapter",
+    "h5"
   ],
   "license": "MIT",
   "author": "pandavips",
