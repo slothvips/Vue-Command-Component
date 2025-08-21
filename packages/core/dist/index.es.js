@@ -67,7 +67,7 @@ const Ar = (e = "") => e.slice(2).toLowerCase(), Sr = (e = "") => `on${e.charAt(
 }, $r = (e) => e == null, Ir = (e) => typeof e != "function" ? e : z(ee({ render: () => e() })), Mr = () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15), xe = Symbol("CommandComponentConsumerInjectKey"), fe = Symbol("CommandComponentStackInjectKey"), R = new Je(), le = /* @__PURE__ */ new Set(), X = (e) => T(T({}, e.parent ? X(e.parent) : {}), e.provides);
 function Qe(e, t, n) {
   var M;
-  e || N(z({
+  console.log(99999), e || N(z({
     setup() {
       return e = Z(), () => null;
     }

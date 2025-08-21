@@ -7,7 +7,7 @@ import {
   nextTick,
   provide,
   render,
-  Teleport
+  Teleport,
 } from "vue";
 import {
   EVENT_NAME,
@@ -46,15 +46,19 @@ export function commandProviderWithRender(
   uiComponent: VNode,
   config: ICoreConfig,
 ): IConsumer {
+  console.log(99999);
 
   // 某些情况下,我们可能需要在vue组件树之外的地方使用命令式组件,这个时候无法补货到组件实例,可以创建一个空的组件实例来代替,以免后续流程受到影响
   if (!parentInstance) {
-    render(h({
-      setup() {
-        parentInstance = getCurrentInstance();
-        return () => null
-      }
-    }), document.body);
+    render(
+      h({
+        setup() {
+          parentInstance = getCurrentInstance();
+          return () => null;
+        },
+      }),
+      document.body,
+    );
   }
 
   // 挂在点
@@ -160,6 +164,7 @@ export function commandProviderWithRender(
         ...getProvidesChain(commandInstance!),
         ...getProvidesChain(parentInstance!),
       };
+
       for (const key in upStreamProvides) {
         provide(key, upStreamProvides[key]);
       }
