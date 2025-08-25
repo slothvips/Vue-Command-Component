@@ -1,4 +1,4 @@
-import{k as f,q as se,j as De,C as le,G as ue,J as w,B as v,r as Be,X as Pe,aY as ze,t as Ee,P as k,v as Se,u as T}from"./chunks/framework.Cdqz12yZ.js";import{D as ce,_ as N,O as Te,E as Ne}from"./chunks/index.CaOQXx-Z.js";import{j as Ve,w as Ie,A as Me,a as $e,N as Y}from"./chunks/theme.B-R_-AgB.js";const Ue=`<template>
+import{k as f,q as se,j as De,C as le,G as ue,J as w,B as v,r as Be,X as Pe,aY as ze,t as Ee,P as k,v as Se,u as T}from"./chunks/framework.Cdqz12yZ.js";import{D as ce,_ as N,O as Te,E as Ne}from"./chunks/index.Bv9V6kn_.js";import{j as Ve,w as Ie,A as Me,a as $e,N as Y}from"./chunks/theme.B-R_-AgB.js";const Ue=`<template>
   <div class="flex justify-center items-center">
     <el-button @click="open">来吧</el-button>
     <el-button @click="open2">来吧(preset: dialog)</el-button>
