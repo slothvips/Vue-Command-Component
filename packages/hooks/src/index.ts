@@ -5,11 +5,9 @@ import {
   getCurrentInstance,
   h,
   nextTick,
-  onMounted,
   ref,
   watch,
-  watchEffect,
-  type VNode,
+  type VNode
 } from "vue";
 import { useRoute } from "vue-router";
 
@@ -57,14 +55,20 @@ export const useConsumersManager = (): {
       });
     },
     destroyAllWithResolve: () => {
-      activeConsumers.forEach((consumer) => {
+      const promises = [...activeConsumers].map((consumer) => {
         consumer.destroyWithResolve();
+        return consumer.promise;
       });
+
+      return Promise.allSettled(promises);
     },
     destroyAllWithReject: () => {
-      activeConsumers.forEach((consumer) => {
+      const promises = [...activeConsumers].map((consumer) => {
         consumer.destroyWithReject();
+        return consumer.promise;
       });
+
+      return Promise.allSettled(promises);
     },
   };
 };
@@ -164,12 +168,12 @@ export const useRawCommand = (
               const outer = finalConfig.outer;
               return outer
                 ? outer(
-                    finalDisplayDirective === "if"
-                      ? visible.value
-                        ? vnode
-                        : null
-                      : vnode,
-                  )
+                  finalDisplayDirective === "if"
+                    ? visible.value
+                      ? vnode
+                      : null
+                    : vnode,
+                )
                 : finalDisplayDirective === "if"
                   ? visible.value
                     ? vnode
