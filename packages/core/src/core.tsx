@@ -16,7 +16,11 @@ import {
   type ICoreConfig,
   type IOnConfig,
 } from "./type";
-import { ConsumerEventBus, PromiseWithResolvers } from "./utils";
+import {
+  ConsumerEventBus,
+  isVue3OrHigher,
+  PromiseWithResolvers,
+} from "./utils";
 
 export const CommandComponentConsumerInjectKey: InjectionKey<IConsumer> =
   Symbol("CommandComponentConsumerInjectKey");
@@ -46,6 +50,9 @@ export function commandProviderWithRender(
   uiComponent: VNode,
   config: ICoreConfig,
 ): IConsumer {
+  if (!isVue3OrHigher()) {
+    throw new Error("Vue 3.0 or higher is required");
+  }
   // 某些情况下,我们可能需要在vue组件树之外的地方使用命令式组件,这个时候无法捕获到组件实例,可以创建一个空的组件实例来代替,以免后续流程受到影响
   if (!parentInstance) {
     render(

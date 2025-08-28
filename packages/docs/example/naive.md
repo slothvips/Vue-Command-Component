@@ -2,17 +2,17 @@
 
 `NaiveUI` 的一些组件进行演示。
 
-要是用`naiveui`的命令式组件,需要安装`@vue-cmd/core`和`@vue-cmd/naive`两个包.
+要是用`naiveui`的命令式组件,需要安装`@vue-cmd/naive`包.
 
 ```bash
 # 使用npm
-npm install @vue-cmd/core @vue-cmd/naive naive-ui
+npm install @vue-cmd/naive naive-ui
 
 # 使用pnpm
-pnpm add @vue-cmd/core @vue-cmd/naive naive-ui
+pnpm add @vue-cmd/naive naive-ui
 
 # 使用yarn
-yarn add @vue-cmd/core @vue-cmd/naive naive-ui
+yarn add @vue-cmd/naive naive-ui
 ```
 
 ## 基础使用

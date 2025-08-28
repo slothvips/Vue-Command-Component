@@ -2,17 +2,17 @@
 
 本页面展示如何使用Vant UI组件库的适配器。
 
-要使用Vant的命令式组件，需要安装`@vue-cmd/core`和`@vue-cmd/vant`两个包：
+要使用Vant的命令式组件，需要安装`@vue-cmd/vant`包：
 
 ```bash
 # 使用npm
-npm install @vue-cmd/core @vue-cmd/vant vant
+npm install @vue-cmd/vant vant
 
 # 使用pnpm
-pnpm add @vue-cmd/core @vue-cmd/vant vant
+pnpm add @vue-cmd/vant vant
 
 # 使用yarn
-yarn add @vue-cmd/core @vue-cmd/vant vant
+yarn add @vue-cmd/vant vant
 ```
 
 ## 基础使用

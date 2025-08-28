@@ -1,4 +1,4 @@
-import { IConsumer, ICoreConfig, IUseConfig } from '@vue-cmd/core';
+import { IConsumer, ICoreConfig, IUseConfig, activeConsumers } from '@vue-cmd/core';
 import { VNode } from 'vue';
 /**
  * 获取所有弹窗consumer管理
@@ -12,7 +12,7 @@ import { VNode } from 'vue';
  *  destroyAllWithReject: 销毁所有弹窗,并拒绝promise
  */
 export declare const useConsumersManager: () => {
-    activeConsumers: Set<IConsumer>;
+    activeConsumers: typeof activeConsumers;
     hideAll: () => void;
     showAll: () => void;
     toggleAll: () => void;

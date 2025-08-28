@@ -38,3 +38,8 @@ export declare const RxRender: (render: () => VNode) => VNode<import('vue').Rend
     [key: string]: any;
 }>;
 export declare const uuid: () => string;
+/**
+ * 检测当前是否为Vue 3.0以上版本
+ * @returns true if Vue version is 3.0 or higher
+ */
+export declare const isVue3OrHigher: () => boolean;

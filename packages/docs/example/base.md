@@ -4,17 +4,17 @@
 
 弹窗是命令式组件最典型的应用场景，因此示例使用 `element-plus` 的 `dialog` 组件进行演示。通过这些示例，可以举一反三地理解其他组件的使用方式。
 
-要使用`element-plus`的`dialog`组件,需要安装`@vue-cmd/core`和`@vue-cmd/element-plus`两个包.
+要使用`element-plus`的`dialog`组件,需要安装`@vue-cmd/element-plus`包.
 
 ```bash
 # 使用npm
-npm install @vue-cmd/core @vue-cmd/element-plus element-plus
+npm install @vue-cmd/element-plus element-plus
 
 # 使用pnpm
-pnpm add @vue-cmd/core @vue-cmd/element-plus element-plus
+pnpm add @vue-cmd/element-plus element-plus
 
 # 使用yarn
-yarn add @vue-cmd/core @vue-cmd/element-plus element-plus
+yarn add @vue-cmd/element-plus element-plus
 ```
 
 ## 前菜
@@ -24,7 +24,10 @@ yarn add @vue-cmd/core @vue-cmd/element-plus element-plus
 示例中会多次使用弹窗内容组件`DialogContent`,下边是它的样子:
 
 ::: warning ☕️☕️☕️别着急进行交互,我们并没有真正的开始,这个组件需要和命令式组件配合使用,点击下边的按钮是没有任何反应的.
+
+另外,我使用`import { useConsumer } from "@vue-cmd/core";`是为了方便所有组件库进行演示,当你实际使用的时候应该从你使用的具体的包中导入,例如`import { useConsumer } from "@vue-cmd/element-plus";`
 :::
+
 
 <demo vue="../components/shared/DialogContent.vue" />
 

@@ -51,6 +51,6 @@
   "dependencies": {},
   "devDependencies": {},
   "peerDependencies": {
-    "vue": "3.x"
+    "vue": "*"
   }
 }

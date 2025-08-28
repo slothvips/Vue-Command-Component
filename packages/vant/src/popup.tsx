@@ -1,5 +1,10 @@
-import type { ICommandConfig, IRenderComponentOptions } from "@vue-cmd/core";
+import type {
+  ICommandConfig,
+  IRenderComponentOptions,
+  IUseConfig,
+} from "@vue-cmd/core";
 import { createAdapter } from "@vue-cmd/core";
+import { merge } from "lodash-es";
 import type { PopupProps, PopupPosition } from "vant";
 import { Popup } from "vant";
 import type { CSSProperties, VNode } from "vue";
@@ -55,3 +60,18 @@ export const usePopup = createAdapter({
     attrs: defaultProps,
   },
 });
+
+export const usePopupOnBottom = (createConfig: IUseConfig = {}) => {
+  const popup = usePopup(createConfig);
+  return (ContentVNode: VNode, config: ICommandConfig = {}) => {
+    const mergedConfig: ICommandConfig = merge({}, config, {
+      attrs: {
+        position: "bottom",
+        style: {
+          width: "100vw",
+        },
+      },
+    });
+    return popup(ContentVNode, mergedConfig);
+  };
+};

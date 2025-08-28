@@ -1,6 +1,6 @@
 {
   "name": "@vue-cmd/vant",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "type": "module",
   "description": "Vant命令式组件适配器 - 让Vant的Popup、Dialog等组件支持命令式调用，专为移动端优化",
   "homepage": "https://pandavips.github.io/Vue-Command-Component/",
@@ -62,8 +62,8 @@
     "vue-tsc": "^2.0.0"
   },
   "peerDependencies": {
-    "vant": "4.x",
-    "vue": "3.x",
+    "vant": "*",
+    "vue": "*",
     "@vue-cmd/core": "workspace:*"
   }
 }

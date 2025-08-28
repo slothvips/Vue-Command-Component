@@ -59,8 +59,8 @@
     "vue-tsc": "^2.0.0"
   },
   "peerDependencies": {
-    "element-plus": "2.x",
-    "vue": "3.x",
+    "element-plus": "*",
+    "vue": "*",
     "@vue-cmd/core": "workspace:*"
   }
 }

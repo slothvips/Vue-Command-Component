@@ -19,19 +19,19 @@
 ::: code-group
 
 ```bash [npm]
-$ npm install @vue-cmd/core @vue-cmd/element-plus
+$ npm install @vue-cmd/element-plus
 ```
 
 ```bash [yarn]
-$ yarn add @vue-cmd/core @vue-cmd/element-plus
+$ yarn add @vue-cmd/element-plus
 ```
 
 ```bash [pnpm]
-$ pnpm add @vue-cmd/core @vue-cmd/element-plus
+$ pnpm add @vue-cmd/element-plus
 ```
 
 ```bash [bun]
-$ bun add @vue-cmd/core @vue-cmd/element-plus
+$ bun add @vue-cmd/element-plus
 ```
 
 :::
@@ -45,7 +45,7 @@ npm i -g @antfu/ni
 安装后可统一使用以下命令：
 
 ```bash
-ni @vue-cmd/core @vue-cmd/element-plus
+ni @vue-cmd/element-plus
 ```
 
 ## 基本用法

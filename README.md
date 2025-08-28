@@ -99,10 +99,7 @@ const openUserDialog = async () => {
 ## 📦 安装
 
 ```bash
-# 核心库（必须）
-npm install @vue-cmd/core
-
-# UI库适配器（选择你使用的UI库）
+# 选择你使用的UI库
 npm install @vue-cmd/element-plus  # Element Plus
 npm install @vue-cmd/naive         # Naive UI  
 npm install @vue-cmd/vant          # Vant

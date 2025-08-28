@@ -9,6 +9,7 @@ import type {
   IUseConfigOrGetter,
   ValueOrGetter,
 } from "./type";
+import { isVue3OrHigher } from "./utils";
 
 export type AdapterRender<TConfig extends ICommandConfig = ICommandConfig> = (
   contentVNode: VNode,
@@ -36,6 +37,9 @@ export type AdapterOptions<TConfig extends ICommandConfig = ICommandConfig> = {
 export function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(
   options: AdapterOptions<TConfig>,
 ) {
+  if (!isVue3OrHigher()) {
+    throw new Error("Vue 3.0 or higher is required");
+  }
   const { render, defaultConfig = {}, configTransformer } = options;
 
   return function (useConfig?: IUseConfigOrGetter) {

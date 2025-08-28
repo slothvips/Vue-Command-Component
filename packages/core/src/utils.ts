@@ -1,4 +1,4 @@
-import { defineComponent, h, type VNode } from "vue";
+import { defineComponent, h, type VNode, version } from "vue";
 import type {
   EventBusMap,
   EventCallback,
@@ -148,4 +148,13 @@ export const uuid = () => {
     Math.random().toString(36).substring(2, 15) +
     Math.random().toString(36).substring(2, 15)
   );
+};
+
+/**
+ * 检测当前是否为Vue 3.0以上版本
+ * @returns true if Vue version is 3.0 or higher
+ */
+export const isVue3OrHigher = (): boolean => {
+  const majorVersion = parseInt(version.split('.')[0]);
+  return majorVersion >= 3;
 };

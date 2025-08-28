@@ -23,7 +23,7 @@ import { useRoute } from "vue-router";
  *  destroyAllWithReject: 销毁所有弹窗,并拒绝promise
  */
 export const useConsumersManager = (): {
-  activeConsumers: Set<IConsumer>;
+  activeConsumers: typeof activeConsumers;
   hideAll: () => void;
   showAll: () => void;
   toggleAll: () => void;

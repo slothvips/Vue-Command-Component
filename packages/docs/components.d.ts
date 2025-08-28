@@ -26,6 +26,7 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VanButton: typeof import('vant/es')['Button']
     VanCascader: typeof import('vant/es')['Cascader']
     VanField: typeof import('vant/es')['Field']
   }

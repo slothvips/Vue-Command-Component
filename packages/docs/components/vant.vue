@@ -3,25 +3,23 @@
     <el-button @click="openPopup">打开Vant弹窗</el-button>
     <!-- 分割线 -->
     <el-divider />
+    <el-divider>底部弹窗</el-divider>
+    <el-button @click="openBottomPopup">打开底部弹窗</el-button>
+    <el-divider>示例:地区选择</el-divider>
     {{ fieldValue }}
     {{ cascaderValue }}
-    <van-field
-      v-model="fieldValue"
-      is-link
-      readonly
-      label="地区"
-      placeholder="请选择所在地区"
-      @click="openPopup2"
-    />
+    <van-field v-model="fieldValue" is-link readonly label="地区" placeholder="请选择所在地区" @click="openPopup2" />
   </div>
 </template>
 
 <script setup lang="tsx">
-import { usePopup } from "@vue-cmd/vant";
+import { usePopup, usePopupOnBottom } from "@vue-cmd/vant";
 import DialogContent from "./shared/DialogContent.vue";
 import { ref } from "vue";
 
 const popup = usePopup({});
+const popupOnBottom = usePopupOnBottom();
+
 
 const openPopup = () => {
   popup(<DialogContent />, {
@@ -53,8 +51,28 @@ const options = [
   },
 ];
 
+
+
+const openBottomPopup = () => {
+  const consumer = popupOnBottom(
+    <div style="padding: 20px;">
+      <h3>底部弹出示例</h3>
+      <p>这是一个从底部弹出的弹窗</p>
+      <van-button
+        type="primary"
+        onClick={() => {
+          consumer!.destroy();
+        }}
+        style="margin-top: 20px; width: 100%;"
+      >
+        关闭
+      </van-button>
+    </div>
+  );
+};
+
 const openPopup2 = () => {
-  const consumer = popup(
+  const consumer = popupOnBottom(
     <van-cascader
       v-model={cascaderValue.value}
       title="请选择所在地区"
@@ -70,14 +88,11 @@ const openPopup2 = () => {
       }}
     />,
     {
-      position: "bottom",
       // 这里主要是规避样式干扰,你实际使用时可能并不需要
       appendTo: "body",
       attrs: {
         round: true,
         style: {
-          width: "375px",
-          height: "667px",
         },
       },
     },
