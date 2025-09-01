@@ -39,10 +39,12 @@ export const activeConsumers = new Set<IConsumer>();
  */
 const getProvidesChain = (
   ins: ComponentInternalInstance,
-): Record<string | symbol, unknown> => ({
-  ...(ins.parent ? getProvidesChain(ins.parent) : {}),
-  ...(ins as any).provides,
-});
+): Record<string | symbol, unknown> => {
+  return {
+    ...(ins.parent ? getProvidesChain(ins.parent) : {}),
+    ...(ins as any).provides,
+  };
+};
 
 // 注入+渲染
 export function commandProviderWithRender(
@@ -169,8 +171,11 @@ export function commandProviderWithRender(
         ...getProvidesChain(commandInstance!),
         ...getProvidesChain(parentInstance!),
       };
-
-      for (const key in upStreamProvides) {
+      const provideKeys = [
+        ...Object.getOwnPropertySymbols(upStreamProvides),
+        ...Object.keys(upStreamProvides),
+      ];
+      for (const key of provideKeys) {
         provide(key, upStreamProvides[key]);
       }
 

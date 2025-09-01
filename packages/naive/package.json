@@ -1,8 +1,8 @@
 {
   "name": "@vue-cmd/naive",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
-  "description": "Naive UI命令式组件适配器 - 让Naive UI的Modal、Drawer等组件支持命令式调用",
+  "description": "Naive UI adapters for Vue Command Component",
   "homepage": "https://pandavips.github.io/Vue-Command-Component/",
   "repository": {
     "type": "git",
@@ -11,23 +11,9 @@
   "keywords": [
     "vue",
     "vue3",
-    "naive-ui",
-    "naiveui",
     "command",
     "component",
-    "modal",
-    "drawer",
-    "dialog",
-    "popup",
-    "弹窗",
-    "抽屉",
-    "命令式",
-    "imperative",
-    "n-modal",
-    "n-drawer",
-    "promise",
-    "async",
-    "adapter"
+    "naive-ui"
   ],
   "license": "MIT",
   "author": "pandavips",
@@ -60,8 +46,8 @@
     "vue-tsc": "^2.0.0"
   },
   "peerDependencies": {
-    "naive-ui": "*",
-    "vue": "*",
+    "naive-ui": "2.x",
+    "vue": "3.x",
     "@vue-cmd/core": "workspace:*"
   }
 }
