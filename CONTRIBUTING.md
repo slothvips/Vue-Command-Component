@@ -13,7 +13,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/pandavips/Vue-Command-Component.git
+git clone https://github.com/slothvips/Vue-Command-Component.git
 cd Vue-Command-Component
 
 # 安装依赖

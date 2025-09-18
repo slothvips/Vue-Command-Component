@@ -3,10 +3,10 @@
   "version": "1.0.10",
   "type": "module",
   "description": "Element Plus命令式组件适配器 - 让Element Plus的Dialog、Drawer等组件支持命令式调用",
-  "homepage": "https://pandavips.github.io/Vue-Command-Component/",
+  "homepage": "https://slothvips.github.io/Vue-Command-Component/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pandavips/Vue-Command-Component.git"
+    "url": "git+https://github.com/slothvips/Vue-Command-Component.git"
   },
   "keywords": [
     "vue",
@@ -29,7 +29,7 @@
     "adapter"
   ],
   "license": "MIT",
-  "author": "pandavips",
+  "author": "slothvips",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",

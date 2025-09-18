@@ -3,10 +3,10 @@
   "version": "1.1.1",
   "type": "module",
   "description": "Vant命令式组件适配器 - 让Vant的Popup、Dialog等组件支持命令式调用，专为移动端优化",
-  "homepage": "https://pandavips.github.io/Vue-Command-Component/",
+  "homepage": "https://slothvips.github.io/Vue-Command-Component/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pandavips/Vue-Command-Component.git"
+    "url": "git+https://github.com/slothvips/Vue-Command-Component.git"
   },
   "keywords": [
     "vue",
@@ -30,7 +30,7 @@
     "h5"
   ],
   "license": "MIT",
-  "author": "pandavips",
+  "author": "slothvips",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "./dist/index.d.ts",

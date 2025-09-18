@@ -6,10 +6,10 @@
 
 [![npm version](https://badge.fury.io/js/@vue-cmd%2Fcore.svg)](https://www.npmjs.com/package/@vue-cmd/core)
 [![npm downloads](https://img.shields.io/npm/dm/@vue-cmd/core.svg)](https://www.npmjs.com/package/@vue-cmd/core)
-[![GitHub stars](https://img.shields.io/github/stars/pandavips/Vue-Command-Component.svg)](https://github.com/pandavips/Vue-Command-Component/stargazers)
-[![License](https://img.shields.io/github/license/pandavips/Vue-Command-Component.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/slothvips/Vue-Command-Component.svg)](https://github.com/slothvips/Vue-Command-Component/stargazers)
+[![License](https://img.shields.io/github/license/slothvips/Vue-Command-Component.svg)](LICENSE)
 
-[文档网站](https://pandavips.github.io/Vue-Command-Component/) | [快速开始](https://pandavips.github.io/Vue-Command-Component/guide/quick-start.html) | [在线演示](https://pandavips.github.io/Vue-Command-Component/example/base.html)
+[文档网站](https://slothvips.github.io/Vue-Command-Component/) | [快速开始](https://slothvips.github.io/Vue-Command-Component/guide/quick-start.html) | [在线演示](https://slothvips.github.io/Vue-Command-Component/example/base.html)
 
 </div>
 
@@ -156,9 +156,9 @@ const openNestedDialogs = async () => {
 
 ## 📚 文档
 
-- [完整文档](https://pandavips.github.io/Vue-Command-Component/)
-- [快速开始](https://pandavips.github.io/Vue-Command-Component/guide/quick-start.html)
-- [示例演示](https://pandavips.github.io/Vue-Command-Component/example/base.html)
+- [完整文档](https://slothvips.github.io/Vue-Command-Component/)
+- [快速开始](https://slothvips.github.io/Vue-Command-Component/guide/quick-start.html)
+- [示例演示](https://slothvips.github.io/Vue-Command-Component/example/base.html)
 
 ## 🛠️ 支持的UI库
 
