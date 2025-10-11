@@ -52,6 +52,13 @@ ni @vue-cmd/element-plus
 
 ::: warning 使用注意事项
 `useDialog`等适配层hooks必须在setup顶部同步调用，因为其内部依赖`getCurrentInstance`API来获取当前组件实例。
+
+对于采用按需加载（或使用自动导入插件）的项目，可能需要您手动导入目标组件的样式文件，否则组件样式将无法正确呈现。建议在项目初始化时提前导入所需的组件样式，例如在 `main.ts` 中添加：
+
+```ts
+// main.ts
+import 'element-plus/theme-chalk/el-dialog.css'
+```
 :::
 
 ```jsx
