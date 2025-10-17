@@ -40,7 +40,7 @@ const baseRender = (
     <Popup
       ref={componentRef}
       v-model:show={visible.value}
-      onClickCloseIcon={onClose}
+      onClosed={onClose}
       onVnodeMounted={onMounted}
       {...defaultProps}
       {...rest}
