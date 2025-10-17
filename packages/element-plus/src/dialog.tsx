@@ -37,7 +37,7 @@ const baseRender = (
   return (
     <ElDialog
       ref={componentRef}
-      modelValue={visible.value}
+      v-model={visible.value}
       onVnodeMounted={onMounted}
       title={title}
       width={width}

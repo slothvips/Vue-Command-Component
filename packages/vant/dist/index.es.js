@@ -1,32 +1,32 @@
-var P = Object.defineProperty;
+var g = Object.defineProperty;
 var n = Object.getOwnPropertySymbols;
-var l = Object.prototype.hasOwnProperty, a = Object.prototype.propertyIsEnumerable;
-var p = (o, e, t) => e in o ? P(o, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : o[e] = t, m = (o, e) => {
+var a = Object.prototype.hasOwnProperty, l = Object.prototype.propertyIsEnumerable;
+var p = (o, e, t) => e in o ? g(o, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : o[e] = t, d = (o, e) => {
   for (var t in e || (e = {}))
-    l.call(e, t) && p(o, t, e[t]);
+    a.call(e, t) && p(o, t, e[t]);
   if (n)
     for (var t of n(e))
-      a.call(e, t) && p(o, t, e[t]);
+      l.call(e, t) && p(o, t, e[t]);
   return o;
 };
-var c = (o, e) => {
+var m = (o, e) => {
   var t = {};
   for (var r in o)
-    l.call(o, r) && e.indexOf(r) < 0 && (t[r] = o[r]);
+    a.call(o, r) && e.indexOf(r) < 0 && (t[r] = o[r]);
   if (o != null && n)
     for (var r of n(o))
-      e.indexOf(r) < 0 && a.call(o, r) && (t[r] = o[r]);
+      e.indexOf(r) < 0 && l.call(o, r) && (t[r] = o[r]);
   return t;
 };
-import { createAdapter as g } from "@vue-cmd/core";
+import { createAdapter as w } from "@vue-cmd/core";
 export * from "@vue-cmd/core";
-import { createVNode as w, mergeProps as b } from "vue";
-import { merge as h } from "lodash-es";
-import { Popup as k } from "vant";
-const d = {
+import { createVNode as h, mergeProps as k } from "vue";
+import { merge as x } from "lodash-es";
+import { Popup as y } from "vant";
+const c = {
   round: !0,
   lockScroll: !0
-}, x = (o, {
+}, V = (o, {
   componentRef: e,
   visible: t,
   onMounted: r,
@@ -35,28 +35,29 @@ const d = {
 }) => {
   const u = s.value, {
     attrs: i
-  } = u, v = c(u, [
+  } = u, v = m(u, [
     "attrs"
   ]), C = () => {
     f.value.destroy();
   };
-  return w(k, b({
+  return h(y, k({
     ref: e,
     show: t.value,
+    "onUpdate:show": (P) => t.value = P,
     onClickCloseIcon: C,
     onVnodeMounted: r
-  }, d, v, i), m({
+  }, c, v, i), d({
     default: () => o
   }, s.value.slots));
-}, y = g({
-  render: x,
+}, b = w({
+  render: V,
   defaultConfig: {
-    attrs: d
+    attrs: c
   }
-}), N = (o = {}) => {
-  const e = y(o);
+}), O = (o = {}) => {
+  const e = b(o);
   return (t, r = {}) => {
-    const s = h({}, r, {
+    const s = x({}, r, {
       attrs: {
         position: "bottom",
         style: {
@@ -68,6 +69,6 @@ const d = {
   };
 };
 export {
-  y as usePopup,
-  N as usePopupOnBottom
+  b as usePopup,
+  O as usePopupOnBottom
 };

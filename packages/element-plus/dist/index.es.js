@@ -1,59 +1,60 @@
-var b = Object.defineProperty;
+var h = Object.defineProperty;
 var g = Object.getOwnPropertySymbols;
-var h = Object.prototype.hasOwnProperty, w = Object.prototype.propertyIsEnumerable;
-var p = (l, e, o) => e in l ? b(l, e, { enumerable: !0, configurable: !0, writable: !0, value: o }) : l[e] = o, d = (l, e) => {
-  for (var o in e || (e = {}))
-    h.call(e, o) && p(l, o, e[o]);
+var w = Object.prototype.hasOwnProperty, M = Object.prototype.propertyIsEnumerable;
+var C = (l, o, e) => o in l ? h(l, o, { enumerable: !0, configurable: !0, writable: !0, value: e }) : l[o] = e, d = (l, o) => {
+  for (var e in o || (o = {}))
+    w.call(o, e) && C(l, e, o[e]);
   if (g)
-    for (var o of g(e))
-      w.call(e, o) && p(l, o, e[o]);
+    for (var e of g(o))
+      M.call(o, e) && C(l, e, o[e]);
   return l;
 };
-import { createAdapter as C, EVENT_NAME as M } from "@vue-cmd/core";
+import { createAdapter as v, EVENT_NAME as b } from "@vue-cmd/core";
 export * from "@vue-cmd/core";
-import { createVNode as v, mergeProps as D } from "vue";
+import { createVNode as V, mergeProps as D } from "vue";
 import { ElDialog as y, ElDrawer as N } from "element-plus";
-const R = (l, e) => {
+const R = (l, o) => {
   const {
-    componentRef: o,
+    componentRef: e,
     visible: t,
     onMounted: u,
     config: i,
     consumer: s
-  } = e, {
+  } = o, {
     title: c,
     width: m,
     attrs: n,
     slots: f
-  } = i.value, E = (a) => {
-    var r;
-    s.value.destroy(), (r = n == null ? void 0 : n.onBeforeClose) == null || r.call(n, a), a();
-  }, V = (...a) => {
-    var r;
-    return s.value.emit(M.destroy), (r = n == null ? void 0 : n.onClosed) == null ? void 0 : r.call(n, ...a);
+  } = i.value, p = (r) => {
+    var a;
+    s.value.destroy(), (a = n == null ? void 0 : n.onBeforeClose) == null || a.call(n, r), r();
+  }, E = (...r) => {
+    var a;
+    return s.value.emit(b.destroy), (a = n == null ? void 0 : n.onClosed) == null ? void 0 : a.call(n, ...r);
   };
-  return v(y, D({
-    ref: o,
+  return V(y, D({
+    ref: e,
     modelValue: t.value,
+    "onUpdate:modelValue": (r) => t.value = r,
     onVnodeMounted: u,
     title: c,
     width: m
   }, n, {
-    beforeClose: E,
-    onClosed: V
+    beforeClose: p,
+    onClosed: E
   }), d({
     default: () => l
   }, f));
-}, x = C({
+}, x = v({
   render: R,
   defaultConfig: {
     meta: {
       name: "element-plus-dialog"
     }
   }
-}), B = (l) => {
-  const e = x(l);
-  return (o, t = {}) => e(o, d({
+}), k = (l) => {
+  const o = x(l);
+  return (e, t = {}) => o(e, d({
     attrs: {
       // 可拖拽
       draggable: !0,
@@ -62,8 +63,8 @@ const R = (l, e) => {
     }
   }, t));
 }, z = (l, {
-  componentRef: e,
-  visible: o,
+  componentRef: o,
+  visible: e,
   onMounted: t,
   config: u,
   consumer: i
@@ -76,9 +77,10 @@ const R = (l, e) => {
   } = u.value, f = () => {
     i.value.destroy();
   };
-  return v(N, D({
-    ref: e,
-    modelValue: o.value,
+  return V(N, D({
+    ref: o,
+    modelValue: e.value,
+    "onUpdate:modelValue": (p) => e.value = p,
     onVnodeMounted: t,
     title: m,
     size: n
@@ -87,7 +89,7 @@ const R = (l, e) => {
   }), d({
     default: () => l
   }, c));
-}, T = C({
+}, B = v({
   render: z,
   defaultConfig: {
     meta: {
@@ -97,6 +99,6 @@ const R = (l, e) => {
 });
 export {
   x as useDialog,
-  B as useDialogWithDrag,
-  T as useDrawer
+  k as useDialogWithDrag,
+  B as useDrawer
 };

@@ -21,7 +21,7 @@
 适配实现主要在`render`函数中完成，需要处理以下关键任务：
 
 1. 返回目标UI组件的渲染VNode（使用JSX或h函数）
-2. 将`visible`状态绑定到组件的显隐控制属性（推荐单向绑定）
+2. 将`visible`状态绑定到组件的显隐控制属性
 3. 传递组件属性、插槽、事件等（通常通过解构`{...config.attrs}`实现）
 4. 绑定`componentRef`到组件实例，并通过`onVnodeMounted`回调执行`onMounted`
 5. 关联销毁逻辑，在组件关闭时调用`consumer.value!.destroy()`（建议在动画结束回调中执行）
@@ -38,7 +38,7 @@ const myComponentRender = (
   return (
     <MyComponent
       // 2. 显隐控制绑定
-      modelValue={visible.value}
+      v-model={visible.value}
       // 4. 组件实例引用绑定
       ref={componentRef}
       onVnodeMounted={onMounted}

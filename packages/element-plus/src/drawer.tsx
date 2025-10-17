@@ -25,7 +25,7 @@ const baseRender = (
   return (
     <ElDrawer
       ref={componentRef}
-      modelValue={visible.value}
+      v-model={visible.value}
       onVnodeMounted={onMounted}
       title={title}
       size={size}
