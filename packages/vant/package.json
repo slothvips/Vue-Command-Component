@@ -31,14 +31,19 @@
   ],
   "license": "MIT",
   "author": "slothvips",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js",
-      "types": "./dist/index.d.ts"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "sideEffects": false,
@@ -46,8 +51,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite build --watch",
-    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "dev": "tsdown --watch",
+    "build": "tsdown",
     "publish": "pnpm build && pnpm publish --access public --no-git-checks"
   },
   "dependencies": {

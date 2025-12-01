@@ -8,6 +8,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import Components from "unplugin-vue-components/vite";
 import { defineConfig } from "vitepress";
 import { vitepressDemoPlugin } from "vitepress-demo-plugin";
+import libCss from "vite-plugin-libcss";
 import {
   groupIconMdPlugin,
   groupIconVitePlugin,
@@ -144,6 +145,7 @@ export default defineConfig({
           ".gitlab-ci.yml": "vscode-icons:file-type-gitlab",
         },
       }),
+      libCss(),
     ],
   },
 });
