@@ -8,7 +8,14 @@ import{k as s,q as x,j as E,r as k,C as F,E as P,B as i,I as u,G as g,W as w,aW 
     <el-divider>示例:地区选择</el-divider>
     {{ fieldValue }}
     {{ cascaderValue }}
-    <van-field v-model="fieldValue" is-link readonly label="地区" placeholder="请选择所在地区" @click="openPopup2" />
+    <van-field
+      v-model="fieldValue"
+      is-link
+      readonly
+      label="地区"
+      placeholder="请选择所在地区"
+      @click="openPopup2"
+    />
   </div>
 </template>
 
@@ -19,7 +26,6 @@ import { ref } from "vue";
 
 const popup = usePopup({});
 const popupOnBottom = usePopupOnBottom();
-
 
 const openPopup = () => {
   popup(<DialogContent />, {
@@ -51,8 +57,6 @@ const options = [
   },
 ];
 
-
-
 const openBottomPopup = () => {
   const consumer = popupOnBottom(
     <div style="padding: 20px;">
@@ -67,7 +71,7 @@ const openBottomPopup = () => {
       >
         关闭
       </van-button>
-    </div>
+    </div>,
   );
 };
 
@@ -92,8 +96,7 @@ const openPopup2 = () => {
       appendTo: "body",
       attrs: {
         round: true,
-        style: {
-        },
+        style: {},
       },
     },
   );
