@@ -25,10 +25,10 @@ const run = () => {
 };
 run();
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 const openDialog = () => {
   width.value = 450;
-  const consumer = CommandDialog(<DialogContent />, () => ({
+  const consumer = dialog(<DialogContent />, () => ({
     title: `当前宽度: ${width.value}px`,
     width: `${width.value}px`,
   }));

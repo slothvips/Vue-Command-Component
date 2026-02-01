@@ -158,7 +158,7 @@ type AdapterOptions<TConfig extends ICommandConfig = ICommandConfig> = {
  * @param options 适配器选项
  * @returns 适配器函数
  */
-declare function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(options: AdapterOptions<TConfig>): (useConfig?: IUseConfigOrGetter) => (contentVNode: VNode, commandConfig?: ValueOrGetter<TConfig>) => IConsumer;
+declare function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(options: AdapterOptions<TConfig>): (useConfig?: IUseConfigOrGetter) => (contentVNode: VNode | (() => VNode), commandConfig?: ValueOrGetter<TConfig>) => IConsumer;
 //#endregion
 //#region src/utils.d.ts
 /**
@@ -195,6 +195,10 @@ declare const getMaxZIndex: (domNode: HTMLElement) => number;
  * @returns true if the value is null or undefined
  */
 declare const isNull: (val: unknown) => val is null | undefined;
+/**
+ * 将一个vnode渲染函数变更为响应式组件
+ * @deprecated RxRender is deprecated and will be removed in future versions.
+ */
 declare const RxRender: (render: () => VNode) => VNode<vue0.RendererNode, vue0.RendererElement, {
   [key: string]: any;
 }>;

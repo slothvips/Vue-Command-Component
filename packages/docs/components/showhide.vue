@@ -12,10 +12,10 @@ import { useDialog } from "@vue-cmd/element-plus";
 import type { IConsumer } from "@vue-cmd/core";
 import DialogContent from "./shared/DialogContent.vue";
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 let consumer: IConsumer;
 const newDialog = () => {
-  consumer = CommandDialog(<DialogContent />, {
+  consumer = dialog(<DialogContent />, {
     title: "hello world",
     attrs: {
       "close-on-click-modal": false,

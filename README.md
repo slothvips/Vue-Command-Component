@@ -30,10 +30,10 @@
 <template>
   <div>
     <el-button @click="showDialog = true">打开弹窗</el-button>
-    
+
     <!-- 需要在模板中定义弹窗 -->
-    <el-dialog 
-      v-model="showDialog" 
+    <el-dialog
+      v-model="showDialog"
       title="用户信息"
       @confirm="handleConfirm"
       @cancel="handleCancel"
@@ -77,11 +77,11 @@ const handleSubmit = (userData) => {
 <script setup>
 import { useDialog } from '@vue-cmd/element-plus'
 
-const CommandDialog = useDialog()
+const dialog = useDialog()
 
 const openUserDialog = async () => {
   try {
-    const userData = await CommandDialog(
+    const userData = await dialog(
       <UserForm user={currentUser} />,
       { title: '用户信息' }
     ).promise
@@ -101,7 +101,7 @@ const openUserDialog = async () => {
 ```bash
 # 选择你使用的UI库
 npm install @vue-cmd/element-plus  # Element Plus
-npm install @vue-cmd/naive         # Naive UI  
+npm install @vue-cmd/naive         # Naive UI
 npm install @vue-cmd/vant          # Vant
 ```
 
@@ -112,13 +112,13 @@ npm install @vue-cmd/vant          # Vant
 ```js
 import { useDialog } from '@vue-cmd/element-plus'
 
-const CommandDialog = useDialog()
+const dialog = useDialog()
 
 // 简单调用
-CommandDialog(<div>Hello World!</div>)
+dialog(<div>Hello World!</div>)
 
 // 带配置
-CommandDialog(<UserForm />, {
+dialog(<UserForm />, {
   title: '编辑用户',
   width: '500px'
 })
@@ -127,7 +127,7 @@ CommandDialog(<UserForm />, {
 ### 2. Promise支持
 
 ```js
-const result = await CommandDialog(<UserForm />, {
+const result = await dialog(<UserForm />, {
   title: '新增用户'
 }).promise
 
@@ -138,10 +138,10 @@ console.log('用户提交的数据：', result)
 
 ```js
 const openNestedDialogs = async () => {
-  const step1 = await CommandDialog(<Step1 />).promise
-  const step2 = await CommandDialog(<Step2 data={step1} />).promise
-  const step3 = await CommandDialog(<Step3 data={step2} />).promise
-  
+  const step1 = await dialog(<Step1 />).promise
+  const step2 = await dialog(<Step2 data={step1} />).promise
+  const step3 = await dialog(<Step3 data={step2} />).promise
+
   console.log('完成所有步骤：', step3)
 }
 ```

@@ -15,25 +15,25 @@ import { useDialog } from "@vue-cmd/element-plus";
 import { ElMessage } from "element-plus";
 import ManagerComponents from "./shared/ManagerComponents.vue";
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 
 // 弹窗打开方法
 const openUserDialog = () => {
-  CommandDialog(<ManagerComponents type="user" showButtons={false} />, {
+  dialog(<ManagerComponents type="user" showButtons={false} />, {
     title: "用户管理",
     width: "600px",
   });
 };
 
 const openOrderDialog = () => {
-  CommandDialog(<ManagerComponents type="order" showButtons={false} />, {
+  dialog(<ManagerComponents type="order" showButtons={false} />, {
     title: "订单管理",
     width: "700px",
   });
 };
 
 const openProductDialog = () => {
-  CommandDialog(<ManagerComponents type="product" showButtons={false} />, {
+  dialog(<ManagerComponents type="product" showButtons={false} />, {
     title: "商品管理",
     width: "650px",
   });
@@ -41,7 +41,7 @@ const openProductDialog = () => {
 
 const openSettingsDialog = async () => {
   try {
-    const result = await CommandDialog(
+    const result = await dialog(
       <ManagerComponents type="settings" showButtons={true} />,
       {
         title: "系统设置",

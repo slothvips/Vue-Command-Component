@@ -10,7 +10,7 @@ interface INaiveModalConfig extends ICommandConfig {
   width?: string | number;
   height?: string | number;
 }
-declare const useModal: (useConfig?: IUseConfigOrGetter) => (contentVNode: VNode, commandConfig?: ValueOrGetter<INaiveModalConfig> | undefined) => _vue_cmd_core2.IConsumer;
+declare const useModal: (useConfig?: IUseConfigOrGetter) => (contentVNode: VNode | (() => VNode), commandConfig?: ValueOrGetter<INaiveModalConfig> | undefined) => _vue_cmd_core2.IConsumer;
 declare const useDialog: (useConfig?: IUseConfigOrGetter) => (content: VNode, config: INaiveModalConfig) => _vue_cmd_core2.IConsumer;
 //#endregion
 //#region src/drawer.d.ts
@@ -23,6 +23,6 @@ interface INaiveDrawerConfig extends ICommandConfig<Partial<{
   height?: string | number;
   placement?: "top" | "right" | "bottom" | "left";
 }
-declare const useDrawer: (useConfig?: _vue_cmd_core2.IUseConfigOrGetter) => (contentVNode: VNode, commandConfig?: _vue_cmd_core2.ValueOrGetter<INaiveDrawerConfig> | undefined) => _vue_cmd_core2.IConsumer;
+declare const useDrawer: (useConfig?: _vue_cmd_core2.IUseConfigOrGetter) => (contentVNode: VNode | (() => VNode), commandConfig?: _vue_cmd_core2.ValueOrGetter<INaiveDrawerConfig> | undefined) => _vue_cmd_core2.IConsumer;
 //#endregion
 export { type INaiveDrawerConfig, type INaiveModalConfig, useDialog, useDrawer, useModal };

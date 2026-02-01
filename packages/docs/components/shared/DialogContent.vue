@@ -44,6 +44,13 @@ onMounted(() => {
 onUnmounted(() => {
   console.log("生命周期测试 onUnmounted");
 });
+
+defineExpose({
+  msg: "panda",
+  sayHello: () => {
+    alert("hello");
+  },
+});
 </script>
 
 <template>

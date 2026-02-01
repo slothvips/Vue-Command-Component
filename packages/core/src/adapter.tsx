@@ -1,6 +1,6 @@
 import { merge } from "lodash-es";
 import type { VNode } from "vue";
-import { computed, defineComponent, getCurrentInstance, ref } from "vue";
+import { computed, defineComponent, getCurrentInstance, ref, h } from "vue";
 import { commandProviderWithRender } from "./core";
 import type {
   ICommandConfig,
@@ -46,7 +46,7 @@ export function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(
     const parentInstance = getCurrentInstance();
 
     return function commandComponent(
-      contentVNode: VNode,
+      contentVNode: VNode | (() => VNode),
       commandConfig?: ValueOrGetter<TConfig>,
     ): IConsumer {
       const mergedConfig = computed(() => {
@@ -73,6 +73,11 @@ export function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(
       const consumerRef = {
         value: null as unknown as IConsumer,
       };
+
+      const finalContentVNode =
+        typeof contentVNode === "function"
+          ? h(defineComponent({ render: contentVNode }))
+          : contentVNode;
 
       const Wrapper = defineComponent({
         setup: () => {
@@ -111,7 +116,7 @@ export function createAdapter<TConfig extends ICommandConfig = ICommandConfig>(
             visible,
           };
 
-          return () => render(contentVNode, renderOptions);
+          return () => render(finalContentVNode, renderOptions);
         },
       });
       consumerRef.value = commandProviderWithRender(

@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="tsx">
-import { RxRender } from "@vue-cmd/core";
 import { useDialog } from "@vue-cmd/element-plus";
 import DialogContent from "./shared/DialogContent.vue";
 import { ref, reactive } from "vue";
@@ -23,17 +22,13 @@ setInterval(() => {
   count.value++;
 }, 1000);
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 const openDialog = () => {
-  CommandDialog(<DialogContent v-model={formValue.name} count={count.value} />);
+  dialog(<DialogContent v-model={formValue.name} count={count.value} />);
 };
 
 const openDialog2 = () => {
-  CommandDialog(
-    RxRender(() => (
-      <DialogContent v-model={formValue.name} count={count.value} />
-    )),
-  );
+  dialog(() => <DialogContent v-model={formValue.name} count={count.value} />);
 };
 
 const formValue = reactive({

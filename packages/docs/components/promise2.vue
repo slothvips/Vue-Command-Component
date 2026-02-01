@@ -9,7 +9,7 @@ import { useConsumer } from "@vue-cmd/core";
 import { useDialog } from "@vue-cmd/element-plus";
 import { defineComponent, ref } from "vue";
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 
 let step = 1;
 const loading = ref(false);
@@ -46,17 +46,17 @@ const attrs = {
 
 const openDialog = async () => {
   step = 1;
-  await CommandDialog(<StepView />, {
+  await dialog(<StepView />, {
     title: "步骤" + step,
     attrs,
   }).promise;
   step++;
-  await CommandDialog(<StepView />, {
+  await dialog(<StepView />, {
     title: "步骤" + step,
     attrs,
   }).promise;
   step++;
-  await CommandDialog(<StepView />, {
+  await dialog(<StepView />, {
     title: "步骤" + step,
     attrs,
   }).promise;

@@ -37,8 +37,8 @@ consumer是一个重要的对象,它是命令组件内外通信的桥梁,它身�
 
 ```ts
 // 外部
-const CommandDialog = useDialog();
-const consumer = CommandDialog(<DialogContent />);
+const dialog = useDialog();
+const consumer = dialog(<DialogContent />);
 
 // 内部
 const consumer2 = useConsumer();
@@ -124,6 +124,30 @@ Consumer 对象包含事件系统，但建议不要用于业务逻辑实现。�
 
 `destroyWithResolve`和`destroyWithReject`会将promise的状态推进到resolve和reject,而`destroy`只是销毁弹窗,不会推进promise的状态(你可能会担心一个永远不会被推进到终态的promise会不会内存泄漏,那么你可以参见这篇文章:[一个永远不会完成的 Promise 是否会造成存储泄漏](https://juejin.cn/post/7419297143788470282?searchId=20250502235657363591F19D1773229FA7).
 
+
+::: info tips
+dialog的第一个参数是支持两种写法的:
+- 直接传递 Vnode,简短有力.
+```tsx
+const dialog = useDialog();
+  dialog(<DialogContent />, {
+  // dialog(<DialogContent />, {
+    title: "hello world",
+    width: "90%",
+  });
+```
+- 传递一个返回 VNode 的函数,当你需要 props 的响应式或者遇到一些奇怪的问题,只能使用这个了.
+```tsx
+const dialog = useDialog();
+  dialog(()=><DialogContent />, {
+  // dialog(<DialogContent />, {
+    title: "hello world",
+    width: "90%",
+  });
+```
+:::
+
+
 <demo vue="../components/base.vue"></demo>
 
 ## 显示和隐藏
@@ -150,6 +174,11 @@ Consumer 对象包含事件系统，但建议不要用于业务逻辑实现。�
 
 <demo vue="../components/native-slots.vue"></demo>
 
+## 组件Ref引用
+
+使用传递`返回 VNode的函数`即可.
+<demo vue="../components/component-ref.vue"></demo>
+
 ## 通信
 
 你可以像往常一样,使用传统的emit来进行单向数据流的方式来进行通信.
@@ -165,8 +194,8 @@ Consumer 对象包含事件系统，但建议不要用于业务逻辑实现。�
 它的使用很简单.
 
 ```ts
-const CommandDialog = useDialog();
-CommandDialog(<div>1</div>,{
+const dialog = useDialog();
+dialog(<div>1</div>,{
   provideProps: {
     a: 1,
     b: 2,
@@ -189,8 +218,8 @@ CommandDialog(<div>1</div>,{
 我们将`title`和`width/size`提到了外层(因为这两个属性太常用了),这样可以少写一个`attrs`🤣,如果attrs里有这些属性将被覆盖.
 
 ```ts
-const CommandDialog = useDialog();
-CommandDialog(<DialogContent />, {
+const dialog = useDialog();
+dialog(<DialogContent />, {
     title: "标题",
     width: "80%",
     attrs: {

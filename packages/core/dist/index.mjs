@@ -164,7 +164,12 @@ const getMaxZIndex = (domNode) => {
 * @returns true if the value is null or undefined
 */
 const isNull = (val) => val === null || val === void 0;
+/**
+* 将一个vnode渲染函数变更为响应式组件
+* @deprecated RxRender is deprecated and will be removed in future versions.
+*/
 const RxRender = (render$1) => {
+	console.warn("[VueCommandComponent] RxRender is deprecated. Please use functional component or plain VNode directly.");
 	if (typeof render$1 !== "function") return render$1;
 	return h(defineComponent({ render: () => render$1() }));
 };
@@ -2340,6 +2345,7 @@ function createAdapter(options) {
 			});
 			const visible = ref(false);
 			const consumerRef = { value: null };
+			const finalContentVNode = typeof contentVNode === "function" ? h(/* @__PURE__ */ defineComponent({ render: contentVNode })) : contentVNode;
 			consumerRef.value = commandProviderWithRender(parentInstance, createVNode(/* @__PURE__ */ defineComponent({ setup: () => {
 				const mergedConfig$1 = computed(() => {
 					const mergedConfig$2 = merge_default({}, defaultConfig, typeof useConfig === "function" ? useConfig() : useConfig, typeof commandConfig === "function" ? commandConfig() : commandConfig);
@@ -2358,7 +2364,7 @@ function createAdapter(options) {
 					consumer: consumerRef,
 					visible
 				};
-				return () => render$1(contentVNode, renderOptions);
+				return () => render$1(finalContentVNode, renderOptions);
 			} }), null, null), _objectSpread2(_objectSpread2({}, mergedConfig.value), {}, { visible }));
 			return consumerRef.value;
 		};

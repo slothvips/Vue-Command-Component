@@ -10,11 +10,11 @@ import { useDialog } from "@vue-cmd/element-plus";
 import UserEditForm from "./shared/UserEditForm.vue";
 import { defaultUser } from "./shared/mockData.js";
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 
 const openDialog = async () => {
   try {
-    const result = await CommandDialog(<UserEditForm user={defaultUser} />, {
+    const result = await dialog(<UserEditForm user={defaultUser} />, {
       title: "编辑用户",
       width: "500px",
     }).promise;

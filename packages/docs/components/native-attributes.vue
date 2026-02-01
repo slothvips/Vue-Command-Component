@@ -8,9 +8,9 @@
 import { useDialog } from "@vue-cmd/element-plus";
 import DialogContent from "./shared/DialogContent.vue";
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 const openDialog = () => {
-  CommandDialog(<DialogContent />, {
+  dialog(<DialogContent />, {
     title: "组件原生属性(尝试拖拽我试试)",
     attrs: {
       modal: true,

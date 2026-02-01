@@ -8,9 +8,9 @@
 import { useDialog } from "@vue-cmd/element-plus";
 import DialogContent from "./shared/DialogContent.vue";
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 const openDialog = () => {
-  CommandDialog(
+  dialog(
     <DialogContent
       // @ts-ignore
       onSay={(val: string) => {

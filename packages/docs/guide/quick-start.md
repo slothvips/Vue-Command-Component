@@ -66,7 +66,7 @@ import { defineComponent, h } from "vue";
 import { useDialog } from "@vue-cmd/element-plus";
 
 // 初始化命令式组件
-const CommandDialog = useDialog();
+const dialog = useDialog();
 
 // 定义弹窗内容组件
 const Content = defineComponent({
@@ -76,11 +76,11 @@ const Content = defineComponent({
 });
 
 // 调用命令式组件
-CommandDialog(<Content />);
+dialog(<Content />);
 
 // 如果未使用JSX，可以使用h函数替代
 // 关于JSX和h函数的更多资料请参见 Vue 官方文档：https://vuejs.org/guide/extras/render-function.html#the-h-function
-CommandDialog(h(Content));
+dialog(h(Content));
 ```
 
 更多示例请参阅[基础示例](../example/base.md)

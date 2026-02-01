@@ -135,8 +135,14 @@ export const getMaxZIndex = (domNode: HTMLElement): number => {
 export const isNull = (val: unknown): val is null | undefined =>
   val === null || val === void 0;
 
-// 将一个vnode渲染函数变更为响应式组件
+/**
+ * 将一个vnode渲染函数变更为响应式组件
+ * @deprecated RxRender is deprecated and will be removed in future versions.
+ */
 export const RxRender = (render: () => VNode) => {
+  console.warn(
+    "[VueCommandComponent] RxRender is deprecated. Please use functional component or plain VNode directly.",
+  );
   // 如果不是一个函数,将直接返回内容(或许是一个vnode)
   if (typeof render !== "function") return render;
   return h(defineComponent({ render: () => render() }));
@@ -155,6 +161,6 @@ export const uuid = () => {
  * @returns true if Vue version is 3.0 or higher
  */
 export const isVue3OrHigher = (): boolean => {
-  const majorVersion = parseInt(version.split('.')[0]);
+  const majorVersion = parseInt(version.split(".")[0]);
   return majorVersion >= 3;
 };

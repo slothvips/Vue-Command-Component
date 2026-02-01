@@ -2,12 +2,12 @@
 import { useDialog } from "@vue-cmd/element-plus";
 import EditRow from "./edit-row.vue";
 import { ref } from "vue";
-const CommandDialog = useDialog();
+const dialog = useDialog();
 
 const loading = ref(false);
 const editRow = async (row: any) => {
   try {
-    await CommandDialog(<EditRow row={row} />, { title: "编辑列" }).promise;
+    await dialog(<EditRow row={row} />, { title: "编辑列" }).promise;
   } catch {
   } finally {
     loading.value = true;

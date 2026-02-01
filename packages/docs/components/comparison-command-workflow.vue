@@ -11,12 +11,12 @@ import WorkflowStep1 from "./shared/WorkflowStep1.vue";
 import WorkflowStep2 from "./shared/WorkflowStep2.vue";
 import WorkflowStep3 from "./shared/WorkflowStep3.vue";
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 
 const handleWorkflow = async () => {
   try {
     // 步骤1：选择数据
-    const selectedDataType = await CommandDialog(<WorkflowStep1 />, {
+    const selectedDataType = await dialog(<WorkflowStep1 />, {
       title: "步骤1: 选择数据",
       width: "500px",
     }).promise;
@@ -24,13 +24,10 @@ const handleWorkflow = async () => {
     // 步骤2：编辑内容 (支持返回上一步)
     let editData;
     try {
-      editData = await CommandDialog(
-        <WorkflowStep2 dataType={selectedDataType} />,
-        {
-          title: "步骤2: 编辑内容",
-          width: "600px",
-        },
-      ).promise;
+      editData = await dialog(<WorkflowStep2 dataType={selectedDataType} />, {
+        title: "步骤2: 编辑内容",
+        width: "600px",
+      }).promise;
     } catch (error) {
       if (error === "back") {
         // 用户点击了上一步，重新开始流程
@@ -42,7 +39,7 @@ const handleWorkflow = async () => {
     }
 
     try {
-      const result = await CommandDialog(
+      const result = await dialog(
         <WorkflowStep3 dataType={selectedDataType} editData={editData} />,
         { title: "步骤3: 确认提交", width: "500px" },
       ).promise;
@@ -53,7 +50,7 @@ const handleWorkflow = async () => {
       if (error === "back") {
         // 用户点击了上一步，回到步骤2
         try {
-          editData = await CommandDialog(
+          editData = await dialog(
             <WorkflowStep2 dataType={selectedDataType} />,
             {
               title: "步骤2: 编辑内容",

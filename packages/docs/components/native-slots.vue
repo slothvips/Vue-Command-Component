@@ -8,9 +8,9 @@
 import { useDialog } from "@vue-cmd/element-plus";
 import DialogContent from "./shared/DialogContent.vue";
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 const openDialog = () => {
-  const consumer = CommandDialog(<DialogContent />, {
+  const consumer = dialog(<DialogContent />, {
     title: "",
     slots: {
       header: () => <div class="text-red text-30px">自定义头部</div>,

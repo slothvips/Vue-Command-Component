@@ -19,18 +19,15 @@ import UserEditForm from "./shared/UserEditForm.vue";
 import DeleteConfirm from "./shared/DeleteConfirm.vue";
 import { userData } from "./shared/mockData.js";
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 const tableData = ref([...userData]);
 
 const editRow = async (row) => {
   try {
-    const result = await CommandDialog(
-      <UserEditForm user={row} showRole={true} />,
-      {
-        title: "编辑用户",
-        width: "500px",
-      },
-    ).promise;
+    const result = await dialog(<UserEditForm user={row} showRole={true} />, {
+      title: "编辑用户",
+      width: "500px",
+    }).promise;
 
     // 更新表格数据
     const index = tableData.value.findIndex((item) => item.id === row.id);
@@ -46,7 +43,7 @@ const editRow = async (row) => {
 
 const deleteRow = async (row) => {
   try {
-    await CommandDialog(<DeleteConfirm user={row} />, {
+    await dialog(<DeleteConfirm user={row} />, {
       title: "确认删除",
       width: "400px",
     }).promise;

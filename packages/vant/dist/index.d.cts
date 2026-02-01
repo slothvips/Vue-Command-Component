@@ -10,7 +10,7 @@ type VantPopupConfig = {
   style?: CSSProperties;
   closeable?: boolean;
 } & ICommandConfig<Partial<PopupProps>>;
-declare const usePopup: (useConfig?: _vue_cmd_core0.IUseConfigOrGetter) => (contentVNode: VNode, commandConfig?: _vue_cmd_core0.ValueOrGetter<VantPopupConfig> | undefined) => _vue_cmd_core0.IConsumer;
+declare const usePopup: (useConfig?: _vue_cmd_core0.IUseConfigOrGetter) => (contentVNode: VNode | (() => VNode), commandConfig?: _vue_cmd_core0.ValueOrGetter<VantPopupConfig> | undefined) => _vue_cmd_core0.IConsumer;
 declare const usePopupOnBottom: (createConfig?: IUseConfig) => (ContentVNode: VNode, config?: ICommandConfig) => _vue_cmd_core0.IConsumer;
 //#endregion
 export { usePopup, usePopupOnBottom };
