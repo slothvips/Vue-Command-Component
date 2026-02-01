@@ -5,6 +5,7 @@
 ## 🚀 快速开始
 
 ### 环境要求
+
 - Node.js >= 16
 - pnpm >= 8
 - Git
@@ -44,21 +45,25 @@ Vue-Command-Component/
 ## 🛠️ 贡献类型
 
 ### 1. Bug修复
+
 - 在GitHub Issues中报告bug
 - 提供复现步骤
 - 提交修复PR
 
 ### 2. 新功能开发
+
 - 先在Issues中讨论功能需求
 - 获得maintainer确认后开始开发
 - 遵循项目代码规范
 
 ### 3. 文档改进
+
 - 修复文档错误
 - 添加使用示例
 - 翻译文档内容
 
 ### 4. 新UI库适配
+
 - 参考现有适配器实现
 - 提供完整的测试用例
 - 更新相关文档
@@ -66,11 +71,13 @@ Vue-Command-Component/
 ## 📝 开发规范
 
 ### 代码风格
+
 - 使用TypeScript
 - 遵循ESLint规则
 - 使用Prettier格式化
 
 ### 提交规范
+
 使用[Conventional Commits](https://conventionalcommits.org/)格式：
 
 ```
@@ -84,6 +91,7 @@ chore: 构建工具或依赖更新
 ```
 
 ### 分支管理
+
 - `main`: 主分支，稳定版本
 <!-- - `develop`: 开发分支
 - `feature/xxx`: 功能分支
@@ -111,14 +119,3 @@ chore: 构建工具或依赖更新
 ---
 
 再次感谢您的贡献！每一个贡献都让这个项目变得更好。
-
-
-
-
-
-
-
-
-
-
-

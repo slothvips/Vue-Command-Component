@@ -57,8 +57,9 @@ ni @vue-cmd/element-plus
 
 ```ts
 // main.ts
-import 'element-plus/theme-chalk/el-dialog.css'
+import "element-plus/theme-chalk/el-dialog.css";
 ```
+
 :::
 
 ```jsx

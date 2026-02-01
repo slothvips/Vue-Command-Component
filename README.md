@@ -26,6 +26,7 @@
 ## 🤔 为什么需要命令式组件？
 
 ### 传统方式 😰
+
 ```vue
 <template>
   <div>
@@ -44,29 +45,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 // 需要管理状态
-const showDialog = ref(false)
-const currentUser = ref(null)
+const showDialog = ref(false);
+const currentUser = ref(null);
 
 // 需要多个事件处理函数
 const handleConfirm = () => {
-  showDialog.value = false
-}
+  showDialog.value = false;
+};
 
 const handleCancel = () => {
-  showDialog.value = false
-}
+  showDialog.value = false;
+};
 
 const handleSubmit = (userData) => {
   // 处理提交逻辑
-  showDialog.value = false
-}
+  showDialog.value = false;
+};
 </script>
 ```
 
 ### 命令式方式 🎉
+
 ```vue
 <template>
   <div>
@@ -75,22 +77,21 @@ const handleSubmit = (userData) => {
 </template>
 
 <script setup>
-import { useDialog } from '@vue-cmd/element-plus'
+import { useDialog } from "@vue-cmd/element-plus";
 
-const dialog = useDialog()
+const dialog = useDialog();
 
 const openUserDialog = async () => {
   try {
-    const userData = await dialog(
-      <UserForm user={currentUser} />,
-      { title: '用户信息' }
-    ).promise
+    const userData = await dialog(<UserForm user={currentUser} />, {
+      title: "用户信息",
+    }).promise;
     // 直接获取结果，无需额外状态管理
-    console.log('用户数据：', userData)
+    console.log("用户数据：", userData);
   } catch (error) {
-    console.log('用户取消了操作')
+    console.log("用户取消了操作");
   }
-}
+};
 </script>
 ```
 
@@ -110,40 +111,40 @@ npm install @vue-cmd/vant          # Vant
 ### 1. 基础用法
 
 ```js
-import { useDialog } from '@vue-cmd/element-plus'
+import { useDialog } from "@vue-cmd/element-plus";
 
-const dialog = useDialog()
+const dialog = useDialog();
 
 // 简单调用
-dialog(<div>Hello World!</div>)
+dialog(<div>Hello World!</div>);
 
 // 带配置
 dialog(<UserForm />, {
-  title: '编辑用户',
-  width: '500px'
-})
+  title: "编辑用户",
+  width: "500px",
+});
 ```
 
 ### 2. Promise支持
 
 ```js
 const result = await dialog(<UserForm />, {
-  title: '新增用户'
-}).promise
+  title: "新增用户",
+}).promise;
 
-console.log('用户提交的数据：', result)
+console.log("用户提交的数据：", result);
 ```
 
 ### 3. 工作流弹窗
 
 ```js
 const openNestedDialogs = async () => {
-  const step1 = await dialog(<Step1 />).promise
-  const step2 = await dialog(<Step2 data={step1} />).promise
-  const step3 = await dialog(<Step3 data={step2} />).promise
+  const step1 = await dialog(<Step1 />).promise;
+  const step2 = await dialog(<Step2 data={step1} />).promise;
+  const step3 = await dialog(<Step3 data={step2} />).promise;
 
-  console.log('完成所有步骤：', step3)
-}
+  console.log("完成所有步骤：", step3);
+};
 ```
 
 ## 🎯 适用场景
@@ -162,8 +163,8 @@ const openNestedDialogs = async () => {
 
 ## 🛠️ 支持的UI库
 
-| UI库           | 包名                    | 状态     |
-| -------------- | ----------------------- | -------- |
+| UI库           | 包名                    | 状态      |
+| -------------- | ----------------------- | --------- |
 | Element Plus   | `@vue-cmd/element-plus` | ✅ 已支持 |
 | Naive UI       | `@vue-cmd/naive`        | ✅ 已支持 |
 | Vant           | `@vue-cmd/vant`         | ✅ 已支持 |

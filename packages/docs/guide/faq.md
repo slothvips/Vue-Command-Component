@@ -28,11 +28,13 @@ import { useDestroyAllOnRouteChange } from "@vue-cmd/hooks";
 const stop = useDestroyAllOnRouteChange();
 // stop();
 ```
+
 ## 低版本element-plus出现ElConfigProvider注入配置失效问题
 
 最新版本的element-plus不会出现这个问题,可以自行手动注入一遍
 
 可以抽离配置注入组件,然后在你原先注入的地方使用这个组件:
+
 ```tsx
 import { ElConfigProvider } from "element-plus";
 import { computed, defineComponent, getCurrentInstance } from "vue";
@@ -41,21 +43,19 @@ import en from "element-plus/lib/locale/lang/en";
 
 export default defineComponent({
   setup(_, { slots }) {
-    return () => (
-      <ElConfigProvider locale={zh}>
-        {slots}
-      </ElConfigProvider>
-    );
-  }
+    return () => <ElConfigProvider locale={zh}>{slots}</ElConfigProvider>;
+  },
 });
 ```
+
 然后使用这个组件对命令组件进行包裹,所以我们需要稍微封装一下:
+
 ```tsx
 import ElConfigProvider from "./ElConfigProvider";
 
 import {
   useDrawer as useDrawerRaw,
-  useDialog as useDialogRaw
+  useDialog as useDialogRaw,
 } from "@vue-cmd/element-plus";
 
 export function useDrawer(config = {}) {
@@ -72,6 +72,7 @@ export function useDialog(config) {
   };
 }
 ```
+
 使用方式没有任何改变,改变的只是导入的地方:
 
 ```tsx
@@ -79,5 +80,5 @@ import { useDrawer } from "@/components/VueCmd";
 
 const drawer = useDrawer();
 
-drawer(<div>hello</div>)
+drawer(<div>hello</div>);
 ```

@@ -7,7 +7,7 @@ import {
   nextTick,
   ref,
   watch,
-  type VNode
+  type VNode,
 } from "vue";
 import { useRoute } from "vue-router";
 
@@ -168,12 +168,12 @@ export const useRawCommand = (
               const outer = finalConfig.outer;
               return outer
                 ? outer(
-                  finalDisplayDirective === "if"
-                    ? visible.value
-                      ? vnode
-                      : null
-                    : vnode,
-                )
+                    finalDisplayDirective === "if"
+                      ? visible.value
+                        ? vnode
+                        : null
+                      : vnode,
+                  )
                 : finalDisplayDirective === "if"
                   ? visible.value
                     ? vnode

@@ -28,7 +28,6 @@ yarn add @vue-cmd/element-plus element-plus
 另外,我使用`import { useConsumer } from "@vue-cmd/core";`是为了方便所有组件库进行演示,当你实际使用的时候应该从你使用的具体的包中导入,例如`import { useConsumer } from "@vue-cmd/element-plus";`
 :::
 
-
 <demo vue="../components/shared/DialogContent.vue" />
 
 ### consumer对象
@@ -124,29 +123,32 @@ Consumer 对象包含事件系统，但建议不要用于业务逻辑实现。�
 
 `destroyWithResolve`和`destroyWithReject`会将promise的状态推进到resolve和reject,而`destroy`只是销毁弹窗,不会推进promise的状态(你可能会担心一个永远不会被推进到终态的promise会不会内存泄漏,那么你可以参见这篇文章:[一个永远不会完成的 Promise 是否会造成存储泄漏](https://juejin.cn/post/7419297143788470282?searchId=20250502235657363591F19D1773229FA7).
 
-
 ::: info tips
 dialog的第一个参数是支持两种写法的:
-- 直接传递 Vnode,简短有力.
-```tsx
-const dialog = useDialog();
-  dialog(<DialogContent />, {
-  // dialog(<DialogContent />, {
-    title: "hello world",
-    width: "90%",
-  });
-```
-- 传递一个返回 VNode 的函数,当你需要 props 的响应式或者遇到一些奇怪的问题,只能使用这个了.
-```tsx
-const dialog = useDialog();
-  dialog(()=><DialogContent />, {
-  // dialog(<DialogContent />, {
-    title: "hello world",
-    width: "90%",
-  });
-```
-:::
 
+- 直接传递 Vnode,简短有力.
+
+```tsx
+const dialog = useDialog();
+dialog(<DialogContent />, {
+  // dialog(<DialogContent />, {
+  title: "hello world",
+  width: "90%",
+});
+```
+
+- 传递一个返回 VNode 的函数,当你需要 props 的响应式或者遇到一些奇怪的问题,只能使用这个了.
+
+```tsx
+const dialog = useDialog();
+dialog(() => <DialogContent />, {
+  // dialog(<DialogContent />, {
+  title: "hello world",
+  width: "90%",
+});
+```
+
+:::
 
 <demo vue="../components/base.vue"></demo>
 
