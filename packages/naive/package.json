@@ -1,6 +1,6 @@
 {
   "name": "@vue-cmd/naive",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "module",
   "description": "Naive UI adapters for Vue Command Component",
   "homepage": "https://slothvips.github.io/Vue-Command-Component/",

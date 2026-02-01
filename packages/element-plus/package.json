@@ -1,6 +1,6 @@
 {
   "name": "@vue-cmd/element-plus",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "type": "module",
   "description": "Element Plus命令式组件适配器 - 让Element Plus的Dialog、Drawer等组件支持命令式调用",
   "homepage": "https://slothvips.github.io/Vue-Command-Component/",
