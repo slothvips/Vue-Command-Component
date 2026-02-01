@@ -8,9 +8,9 @@ const t=`<template>
 import { useDialog } from "@vue-cmd/element-plus";
 import DialogContent from "./shared/DialogContent.vue";
 
-const CommandDialog = useDialog();
+const dialog = useDialog();
 const openDialog = () => {
-  CommandDialog(<DialogContent nested={true} />, {
+  dialog(<DialogContent nested={true} />, {
     title: "嵌套嵌套,还是嵌套",
   });
 };
