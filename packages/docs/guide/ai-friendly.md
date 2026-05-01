@@ -162,7 +162,7 @@ export default defineComponent({
 
 ```text
 请参考 @vue-cmd 现有适配模式，帮我为某个 Vue 3 UI 组件做命令式二次封装。
-要求：保留 useDialog 这类调用方式；不要发明底层能力；组件原生属性和事件统一透传到 attrs；确认场景使用 destroyWithResolve；取消场景使用 destroyWithReject；代码风格尽量接近 @vue-cmd 现有适配器和文档示例。
+要求：保留 useDialog 这类调用方式；不要发明底层能力；组件原生属性和事件统一透传到 attrs；确认场景使用 destroyWithResolve；取消或拒绝场景使用 destroyWithReject；关闭图标、遮罩、ESC 等未明确确认或拒绝的 Dismiss 场景使用 consumer.destroy()；代码风格尽量接近 @vue-cmd 现有适配器和文档示例。
 ```
 
 ## 延伸阅读
