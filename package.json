@@ -56,5 +56,6 @@
     "vitepress": "^1.6.3",
     "vitepress-demo-plugin": "^1.4.1",
     "vitepress-plugin-group-icons": "^1.5.2"
-  }
+  },
+  "packageManager": "pnpm@10.33.2"
 }
