@@ -92,7 +92,7 @@ const openPopup2 = () => {
       }}
     />,
     {
-      // 这里主要是规避样式干扰,你实际使用时可能并不需要
+      // This mainly avoids style interference; you may not need it in real usage
       appendTo: "body",
       attrs: {
         round: true,
