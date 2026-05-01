@@ -64,6 +64,10 @@ export default defineConfig({
               link: "/guide/quick-start",
             },
             {
+              text: "AI 友好接入指南",
+              link: "/guide/ai-friendly",
+            },
+            {
               text: "命令式 vs 传统方式对比",
               link: "/guide/comparison",
             },
